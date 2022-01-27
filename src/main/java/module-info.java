@@ -5,6 +5,6 @@ module com.example.handlethatpos {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
 
-    opens com.example.handlethatpos to javafx.fxml;
-    exports com.example.handlethatpos;
+    opens view to javafx.fxml;
+    exports view;
 }
