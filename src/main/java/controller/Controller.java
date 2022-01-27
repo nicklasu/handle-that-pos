@@ -1,4 +1,4 @@
 package controller;
 
-public class Controller {
+public class Controller implements IController{
 }
