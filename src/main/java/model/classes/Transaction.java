@@ -10,9 +10,12 @@ public class Transaction implements ITransaction {
     private PaymentMethod paymentMethod;
 
     public Transaction() {
-        //order = new Order();
+        order = new Order();
 
     }
 
-
+    @Override
+    public IOrder getOrder() {
+        return order;
+    }
 }
