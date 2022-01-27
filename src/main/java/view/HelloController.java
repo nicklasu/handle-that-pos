@@ -1,4 +1,4 @@
-package com.example.handlethatpos;
+package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
