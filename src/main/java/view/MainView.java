@@ -21,7 +21,10 @@ public class MainView {
     private Label usernameLabel;
 
     public void loadTransactionView(ActionEvent event) throws IOException {
-        new ViewLoader(mainAnchorPane, FXMLLoader.load(getClass().getResource("transaction-view.fxml")));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transaction-view.fxml"));
+        new ViewLoader(mainAnchorPane, fxmlLoader.load());
+        ((TransactionView)fxmlLoader.getController()).setMainApp(this.mainApp);
+        //new ViewLoader(mainAnchorPane, FXMLLoader.load(getClass().getResource("transaction-view.fxml")));
     }
 
     @FXML
