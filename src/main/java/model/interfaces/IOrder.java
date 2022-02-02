@@ -11,6 +11,7 @@ public interface IOrder {
      * @return true if success
      */
     boolean addProductToOrder(Product product);
-
+    boolean removeProductFromOrder(Product product);
     ArrayList<Product> getProductList();
+    float getTotalPrice();
 }
