@@ -2,7 +2,6 @@ package model.classes;
 
 import model.interfaces.IPOSEngine;
 import model.interfaces.ITransaction;
-import model.interfaces.IUser;
 
 public class POSEngine implements IPOSEngine {
 
@@ -11,14 +10,6 @@ public class POSEngine implements IPOSEngine {
 
     // constructor
     public POSEngine() {}
-
-    @Override
-    public boolean createTransaction() {
-        if (transaction == null) {
-            transaction = new Transaction();
-            return true;
-        } else return false;
-    }
 
     @Override
     public boolean login(String username, String password) {
@@ -42,5 +33,24 @@ public class POSEngine implements IPOSEngine {
     @Override
     public User getUser() {
         return this.user;
+    }
+
+    @Override
+    public ITransaction getTransaction() { return this.transaction; }
+
+    @Override
+    public Product scanProduct(int id) {
+        if (this.transaction == null) {
+            this.transaction = new Transaction();
+        }
+
+        /**
+         * HAETAAN DATABASESTA ID:llä
+         */
+        Product product = new Product(id, "testi tuote", "tätä tuotetta käytetään testaamiseen", 60.20f, 90); // Luodaan uusi product databasesta haettujen tietojen perusteella
+
+        this.transaction.getOrder().addProductToOrder(product);
+
+        return product;
     }
 }

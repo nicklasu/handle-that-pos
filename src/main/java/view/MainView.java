@@ -8,8 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import model.classes.Product;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainView {
 
@@ -39,7 +41,12 @@ public class MainView {
 
     @FXML
     private void readBarcode() {
-        items.add(barcodeTextField.getText());
+        //items.add(barcodeTextField.getText());
+        //barcodeTextField.clear();
+
+        int productId = Integer.parseInt(barcodeTextField.getText());
+        Product product = this.mainApp.getEngine().scanProduct(productId);
+        items.add(product.getName());
         barcodeTextField.clear();
     }
 
@@ -57,6 +64,18 @@ public class MainView {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
         this.usernameLabel.setText(mainApp.getEngine().getUser().getUsername());
+
+        // Populate listView with already existing products from open Transaction
+        if (this.mainApp.getEngine().getTransaction() != null) {
+            ArrayList<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
+            ArrayList<String> productNames = new ArrayList<>();
+
+            for (Product product : products) {
+                productNames.add(product.getName());
+            }
+            items = FXCollections.observableArrayList(productNames);
+        }
+
         scanListView.setItems(items);
 
         //Pressing enter runs readBarcode()
