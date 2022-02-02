@@ -10,12 +10,25 @@ public class Transaction implements ITransaction {
     private PaymentMethod paymentMethod;
 
     public Transaction() {
-        order = new Order();
-
+        this.order = new Order();
+        this.paymentMethod = PaymentMethod.CREDIT_CARD; // Oletuksena maksukortti maksutapana
+        this.customer = null; // Ei Bonsuasiakkuutta oletuksena
     }
 
     @Override
     public IOrder getOrder() {
-        return order;
+        return this.order;
     }
+
+    @Override
+    public Customer getCustomer() { return this.customer; }
+
+    @Override
+    public void setCustomer(Customer customer) { this.customer = customer; }
+
+    @Override
+    public PaymentMethod getPaymentMethod() { return this.paymentMethod; }
+
+    @Override
+    public void setPaymentMethod(PaymentMethod paymentMethod) { this.paymentMethod = paymentMethod; }
 }
