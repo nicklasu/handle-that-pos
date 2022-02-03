@@ -47,11 +47,13 @@ public class MainView {
     @FXML
     private void readBarcode() {
         try {
+
             int productId = Integer.parseInt(barcodeTextField.getText());
             Product product = this.mainApp.getEngine().scanProduct(productId);
             items.add(product);
             barcodeTextField.clear();
         } catch(Exception e){
+            System.out.println(e);
             Alert alert = new Alert(Alert.AlertType.ERROR, "Tuotetta ei löytynyt tietokannasta!", ButtonType.CLOSE);
             alert.showAndWait();
         }

@@ -30,5 +30,6 @@
 
         <!-- Mapping to hibernate mapping files -->
         <mapping class="model.classes.User" />
+        <mapping class="model.classes.Product" />
     </session-factory>
 </hibernate-configuration>
