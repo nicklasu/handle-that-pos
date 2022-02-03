@@ -31,7 +31,7 @@ public class UserDAO {
     public User getUserById(int id) {
         Transaction transaction = null;
         User user = null;
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.getCurrentSession()) {
 
             transaction = session.beginTransaction();
 
@@ -40,7 +40,9 @@ public class UserDAO {
 
             transaction.commit();
         } catch (Exception e) {
+            System.out.println("VIRHE: "+ e);
             if (transaction != null) {
+
                 transaction.rollback();
             }
 
@@ -51,13 +53,14 @@ public class UserDAO {
     public User getUser(String username) {
         Transaction transaction = null;
         User user = null;
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.getCurrentSession()) {
 
             transaction = session.beginTransaction();
             Query query = session.createQuery("from User where username=:username");
             query.setParameter("username", username);
             List list = query.list();
             if(list.isEmpty()){
+                System.out.println("Käyttäjää ei löytynyt tietokannasta.");
                 return null;
 
             }
@@ -82,7 +85,7 @@ public class UserDAO {
     public List<User> getAllUsers() {
         Transaction transaction = null;
         List <User> users = null;
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.getCurrentSession()) {
 
             transaction = session.beginTransaction();
 
@@ -96,6 +99,24 @@ public class UserDAO {
             }
         }
         return users;
+    }
+
+    public void createUser(User user) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            // start the transaction
+            transaction = session.beginTransaction();
+
+            // save student object
+            session.save(user);
+
+            // commit the transaction
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
     }
 
 }

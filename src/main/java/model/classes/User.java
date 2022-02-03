@@ -5,25 +5,31 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 public class User{
+    public User() {
+    }
+
 
     public User(String name, String username){
         this.name = name;
         this.username = username;
     }
-    public User() {
+    public User(String name, String username, String password){
+        this.name = name;
+        this.username = username;
+        this.password = password;
     }
-
     @Id
-    @Column(name="id", unique=true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
     private int id;
 
-    @Column(name="username", nullable = false)
+    @Column(name="username", unique = true)
     private String username;
 
-    @Column(name="password", nullable = false)
+    @Column(name="password")
     private String password;
 
-    @Column(name="name", nullable = false)
+    @Column(name="name")
     private String name;
 
     public int getId() {
