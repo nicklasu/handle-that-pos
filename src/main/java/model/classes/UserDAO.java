@@ -43,6 +43,7 @@ public class UserDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
+
         }
 
         return user;
@@ -56,13 +57,19 @@ public class UserDAO {
             Query query = session.createQuery("from User where username=:username");
             query.setParameter("username", username);
             List list = query.list();
-            System.out.println();
+            if(list.isEmpty()){
+                return null;
+
+            }
+
             user = (User) list.get(0);
+
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
 
                 transaction.rollback();
+
             }
 
         }

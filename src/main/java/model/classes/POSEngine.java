@@ -19,12 +19,12 @@ public class POSEngine implements IPOSEngine {
 //        System.out.println("Tulostetaan kaikki käyttäjät tietokannasta: " + userDAO.getAllUsers());
 //        System.out.println("Tulostetaan yksi käyttäjä tietokannasta: " + testi.toString());
             User user = userDAO.getUser(username);
-        System.out.println(user.toString());
+
 
         /**
          * TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
          */
-        if (true /*JOS SALIKSET TÄSMÄÄ*/) {
+        if (user != null /*JOS SALIKSET TÄSMÄÄ*/) {
             this.user = new User("test", username);
             return true;
         }
