@@ -1,5 +1,6 @@
 package view;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import model.classes.Product;
 import model.interfaces.IOrder;
 
 import java.io.IOException;
+import java.util.Collections;
 
 public class ProductListViewCell extends ListCell<Product> {
 
@@ -36,8 +38,13 @@ public class ProductListViewCell extends ListCell<Product> {
 
     private IOrder order;
 
-    public ProductListViewCell(IOrder order) {
+    private ObservableList<Product> items;
+
+    private int productAmount;
+
+    public ProductListViewCell(IOrder order, ObservableList<Product> items) {
         this.order = order;
+        this.items = items;
     }
 
 
@@ -64,14 +71,26 @@ public class ProductListViewCell extends ListCell<Product> {
             }
 
             this.productNameLabel.setText(product.getName());
-            this.productAmountLabel.setText(String.valueOf(60));
+            productAmount = Collections.frequency(this.order.getProductList(), product);
+            this.productAmountLabel.setText(String.valueOf(productAmount));
+
+
             this.minusButton.setOnAction(event -> {
                 this.order.removeProductFromOrder(product);
+
+                productAmount = Collections.frequency(this.order.getProductList(), product);
+                if (productAmount > 0) {
+                    this.productAmountLabel.setText(String.valueOf(productAmount));
+                } else {
+                    this.items.remove(product);
+                }
             });
 
             this.plusButton.setOnAction(event -> {
                 this.order.addProductToOrder(product);
-                System.out.println("test");
+
+                productAmount = Collections.frequency(this.order.getProductList(), product);
+                this.productAmountLabel.setText(String.valueOf(productAmount));
             });
 
             setText(null);
