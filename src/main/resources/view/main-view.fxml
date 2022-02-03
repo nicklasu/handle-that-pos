@@ -80,7 +80,7 @@
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Summa: " />
                 <Label text="€" GridPane.columnIndex="1" />
             </GridPane>
-            <Button mnemonicParsing="false" text="Asetukset" GridPane.rowIndex="1">
+            <Button fx:id="optionsBtn" mnemonicParsing="false" onAction="#loadOptionsView" text="Asetukset" GridPane.rowIndex="1">
             <graphic>
                <ImageView fitHeight="99.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                   <image>
