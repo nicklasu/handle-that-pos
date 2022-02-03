@@ -49,7 +49,7 @@ public class TransactionView {
         selectPaymentMethod(PaymentMethod.CARD, cardToggleButton, cashToggleButton);
     }
 
-    public void selectPaymentMethod(PaymentMethod paymentMethod, ToggleButton disabledButton, ToggleButton enabledButton) {
+    private void selectPaymentMethod(PaymentMethod paymentMethod, ToggleButton disabledButton, ToggleButton enabledButton) {
         if (this.mainApp.getEngine().getTransaction() != null) {
             this.mainApp.getEngine().getTransaction().setPaymentMethod(paymentMethod);
             System.out.println(this.mainApp.getEngine().getTransaction().getPaymentMethod());
