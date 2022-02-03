@@ -3,20 +3,35 @@ package model.classes;
 import model.interfaces.IPOSEngine;
 import model.interfaces.ITransaction;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 public class POSEngine implements IPOSEngine {
 
     private ITransaction transaction = null;
     private User user = null;
-
+    private UserDAO userDAO;
     // constructor
-    public POSEngine() {}
+    public POSEngine() {
+        this.userDAO = new UserDAO();
+    }
 
     @Override
     public boolean login(String username, String password) {
+//        User testi = userDAO.getUser("testuser");
+//        System.out.println("Tulostetaan kaikki käyttäjät tietokannasta: " + userDAO.getAllUsers());
+//        System.out.println("Tulostetaan yksi käyttäjä tietokannasta: " + testi.toString());
+
+        //User testi = new User("Heikki Harju", "heikha", "enkerro");
+          //  userDAO.createUser(testi);
+        User user = userDAO.getUser(username);
+        System.out.println(user.getPassword() + ", " + password);
+
+
         /**
          * TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
          */
-        if (true /*JOS SALIKSET TÄSMÄÄ*/) {
+        if (user != null && password.equals(user.getPassword()) /*JOS SALIKSET TÄSMÄÄ*/) {
             this.user = new User("test", username);
             return true;
         }
@@ -52,5 +67,10 @@ public class POSEngine implements IPOSEngine {
         this.transaction.getOrder().addProductToOrder(product);
 
         return product;
+    }
+    @Override
+    public void confirmTransaction(){
+
+        transaction = null;
     }
 }
