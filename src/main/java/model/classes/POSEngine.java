@@ -7,12 +7,20 @@ public class POSEngine implements IPOSEngine {
 
     private ITransaction transaction = null;
     private User user = null;
-
+    private UserDAO userDAO;
     // constructor
-    public POSEngine() {}
+    public POSEngine() {
+        this.userDAO = new UserDAO();
+    }
 
     @Override
     public boolean login(String username, String password) {
+//        User testi = userDAO.getUser("testuser");
+//        System.out.println("Tulostetaan kaikki käyttäjät tietokannasta: " + userDAO.getAllUsers());
+//        System.out.println("Tulostetaan yksi käyttäjä tietokannasta: " + testi.toString());
+            User user = userDAO.getUser(username);
+        System.out.println(user.toString());
+
         /**
          * TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
          */
