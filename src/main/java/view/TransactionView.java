@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import model.classes.Product;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,14 +15,19 @@ public class TransactionView {
     @FXML
     private AnchorPane transactionAnchorPane;
     @FXML
-    private ListView scanListView;
+    private ListView<Product> scanListView;
     private ObservableList<Product> items = FXCollections.observableArrayList();
     @FXML
     public void loadMainView() throws IOException {
-        //new ViewLoader(transactionAnchorPane, FXMLLoader.load(getClass().getResource("main-view.fxml")));
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-view.fxml"));
         new ViewLoader(transactionAnchorPane, fxmlLoader.load());
         ((MainView) fxmlLoader.getController()).setMainApp(this.mainApp);
+    }
+
+    @FXML
+    public void confirmPayment() throws IOException {
+        this.mainApp.getEngine().confirmTransaction();
+        loadMainView();
     }
 
     public void setMainApp(MainApp mainApp) {
