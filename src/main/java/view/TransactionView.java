@@ -4,12 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import model.classes.PaymentMethod;
 import model.classes.Product;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -23,6 +22,12 @@ public class TransactionView {
     private ToggleButton cardToggleButton;
     @FXML
     private ToggleButton cashToggleButton;
+    @FXML
+    private CheckBox receiptCheckBox;
+    @FXML
+    private TextField receiptEmailTextField;
+    private boolean printReceipt = false;
+    private boolean sendReceiptEmail = false;
     private ToggleGroup paymentButtonGroup = new ToggleGroup();
     private ObservableList<Product> items = FXCollections.observableArrayList();
 
@@ -37,6 +42,27 @@ public class TransactionView {
     public void confirmPayment() throws IOException {
         this.mainApp.getEngine().confirmTransaction();
         loadMainView();
+    }
+
+    @FXML
+    private void confirmReceipt() {
+        if (receiptCheckBox.isSelected()) {
+            printReceipt = true;
+        } else {
+            printReceipt = false;
+        }
+        System.out.println(printReceipt);
+    }
+
+    @FXML
+    private void sendReceiptEmail() {
+        if (receiptEmailTextField.getText() != "") {
+            sendReceiptEmail = true;
+            System.out.println(receiptEmailTextField.getText());
+        } else {
+            sendReceiptEmail = false;
+        }
+        System.out.println(sendReceiptEmail);
     }
 
     @FXML
