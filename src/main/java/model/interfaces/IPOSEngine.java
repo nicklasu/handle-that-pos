@@ -9,4 +9,6 @@ public interface IPOSEngine {
     User getUser();
     ITransaction getTransaction();
     Product scanProduct(int id);
-}
+    void confirmTransaction();
+
+    }

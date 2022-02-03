@@ -53,4 +53,8 @@ public class POSEngine implements IPOSEngine {
 
         return product;
     }
+    @Override
+    public void confirmTransaction(){
+        transaction = null;
+    }
 }
