@@ -1,6 +1,8 @@
 package view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -24,6 +26,12 @@ public class LoginView {
             this.mainApp.showMainView();
         } else {
             // alert, wrong username or password
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Väärä käyttäjänimi tai salasana!", ButtonType.OK);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
         }
     }
 

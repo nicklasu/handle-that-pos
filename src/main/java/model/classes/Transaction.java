@@ -11,7 +11,7 @@ public class Transaction implements ITransaction {
 
     public Transaction() {
         this.order = new Order();
-        this.paymentMethod = PaymentMethod.CREDIT_CARD; // Oletuksena maksukortti maksutapana
+        this.paymentMethod = PaymentMethod.CARD; // Oletuksena maksukortti maksutapana
         this.customer = null; // Ei Bonsuasiakkuutta oletuksena
     }
 
@@ -21,14 +21,22 @@ public class Transaction implements ITransaction {
     }
 
     @Override
-    public Customer getCustomer() { return this.customer; }
+    public Customer getCustomer() {
+        return this.customer;
+    }
 
     @Override
-    public void setCustomer(Customer customer) { this.customer = customer; }
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     @Override
-    public PaymentMethod getPaymentMethod() { return this.paymentMethod; }
+    public PaymentMethod getPaymentMethod() {
+        return this.paymentMethod;
+    }
 
     @Override
-    public void setPaymentMethod(PaymentMethod paymentMethod) { this.paymentMethod = paymentMethod; }
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
 }
