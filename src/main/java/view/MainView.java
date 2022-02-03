@@ -1,6 +1,7 @@
 package view;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,30 +25,33 @@ public class MainView {
     private Label usernameLabel;
 
     @FXML
-    private ListView<String> scanListView;
+    private Label totalPriceLabel;
+
+    @FXML
+    private ListView<Product> scanListView;
 
     @FXML
     private TextField barcodeTextField;
 
-    private ObservableList<String> items = FXCollections.observableArrayList();
+    private ObservableList<Product> items = FXCollections.observableArrayList();
 
     //Could try to remove (ActionEvent event) from this function and see if it still works.
     public void loadTransactionView(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transaction-view.fxml"));
         new ViewLoader(mainAnchorPane, fxmlLoader.load());
         ((TransactionView) fxmlLoader.getController()).setMainApp(this.mainApp);
-        //new ViewLoader(mainAnchorPane, FXMLLoader.load(getClass().getResource("transaction-view.fxml")));
     }
 
     @FXML
     private void readBarcode() {
-        //items.add(barcodeTextField.getText());
-        //barcodeTextField.clear();
-
         int productId = Integer.parseInt(barcodeTextField.getText());
         Product product = this.mainApp.getEngine().scanProduct(productId);
-        items.add(product.getName());
+        items.add(product);
         barcodeTextField.clear();
+    }
+
+    private void setTotalPrice() {
+        this.totalPriceLabel.setText(Float.toString(this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice()));
     }
 
     @FXML
@@ -68,12 +72,7 @@ public class MainView {
         // Populate listView with already existing products from open Transaction
         if (this.mainApp.getEngine().getTransaction() != null) {
             ArrayList<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
-            ArrayList<String> productNames = new ArrayList<>();
-
-            for (Product product : products) {
-                productNames.add(product.getName());
-            }
-            items = FXCollections.observableArrayList(productNames);
+            items.addAll(products);
         }
 
         scanListView.setItems(items);
@@ -83,5 +82,7 @@ public class MainView {
             if (e.getCode() == KeyCode.ENTER)
                 readBarcode();
         });
+
+        items.addListener((ListChangeListener<Product>) change -> setTotalPrice());
     }
 }

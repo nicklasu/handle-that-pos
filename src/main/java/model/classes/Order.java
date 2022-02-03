@@ -5,24 +5,34 @@ import java.util.ArrayList;
 
 public class Order implements IOrder {
     private ArrayList<Product> productList = new ArrayList<>();
+    private float totalPrice = 0f;
 
     @Override
-    public ArrayList<Product> getProductList() {
-        return this.productList;
-    }
+    public ArrayList<Product> getProductList() { return this.productList; }
 
-    /*public void setArrayList(ArrayList<Product> newOrder) {
-        order = newOrder;
-    }*/
+    @Override
+    public float getTotalPrice() { return this.totalPrice; }
 
     @Override
     public boolean addProductToOrder(Product product) {
         try{
             productList.add(product);
+            totalPrice += product.getPrice();
             return true;
         }catch(Exception e){
             System.out.println("Error adding a product to the order " + e);
         }
         return false;
     }
+
+    @Override
+    public boolean removeProductFromOrder(Product product) {
+        if (this.productList.contains(product)) {
+            this.productList.remove(product);
+            this.totalPrice -= product.getPrice();
+            return true;
+        } else return false;
+    }
+
+
 }
