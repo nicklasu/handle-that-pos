@@ -90,7 +90,6 @@ public class MainView {
 
         scanListView.setItems(items);
 
-        //testi
         scanListView.setCellFactory(productListView -> new ProductListViewCell(this.mainApp.getEngine().getTransaction().getOrder(), this.items));
 
 
