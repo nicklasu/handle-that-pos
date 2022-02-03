@@ -70,6 +70,7 @@ public class POSEngine implements IPOSEngine {
     }
     @Override
     public void confirmTransaction(){
+
         transaction = null;
     }
 }

@@ -49,11 +49,14 @@
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kuitin tulostus" GridPane.rowIndex="1" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Asiakas on bonusasiakas" />
                 <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" />
-                <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <CheckBox fx:id="receiptCheckBox" mnemonicParsing="false" onAction="#confirmReceipt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kuitin lähetys sähköpostiin" GridPane.rowIndex="2" />
+            <TextField fx:id="receiptEmailTextField" onKeyReleased="#sendReceiptEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             </GridPane>
         </GridPane>
         <GridPane>
