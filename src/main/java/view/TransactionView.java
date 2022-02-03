@@ -20,7 +20,6 @@ public class TransactionView {
     private ObservableList<Product> items = FXCollections.observableArrayList();
     @FXML
     public void loadMainView() throws IOException {
-        //new ViewLoader(transactionAnchorPane, FXMLLoader.load(getClass().getResource("main-view.fxml")));
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-view.fxml"));
         new ViewLoader(transactionAnchorPane, fxmlLoader.load());
         ((MainView) fxmlLoader.getController()).setMainApp(this.mainApp);

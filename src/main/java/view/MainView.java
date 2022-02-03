@@ -77,6 +77,10 @@ public class MainView {
 
         scanListView.setItems(items);
 
+        //testi
+        scanListView.setCellFactory(productListView -> new ProductListViewCell(this.mainApp.getEngine().getTransaction().getOrder()));
+
+
         //Pressing enter runs readBarcode()
         barcodeTextField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)
