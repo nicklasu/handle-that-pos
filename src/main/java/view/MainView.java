@@ -44,6 +44,12 @@ public class MainView {
         ((TransactionView) fxmlLoader.getController()).setMainApp(this.mainApp);
     }
 
+    public void loadOptionsView(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("options-view.fxml"));
+        new ViewLoader(mainAnchorPane, fxmlLoader.load());
+        ((OptionsView) fxmlLoader.getController()).setMainApp(this.mainApp);
+    }
+
     @FXML
     private void readBarcode() {
         try {
@@ -91,6 +97,9 @@ public class MainView {
         }
 
         scanListView.setItems(items);
+
+        scanListView.setCellFactory(productListView -> new ProductListViewCell(this.mainApp.getEngine().getTransaction().getOrder(), this.items));
+
 
         //Pressing enter runs readBarcode()
         barcodeTextField.setOnKeyPressed(e -> {
