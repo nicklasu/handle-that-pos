@@ -89,8 +89,8 @@
                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nimi:" />
                       <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sukunimi:" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nimi" GridPane.columnIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sukunimi" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Text fx:id="fName" strokeType="OUTSIDE" strokeWidth="0.0" text="Nimi" GridPane.columnIndex="1" />
+                  <Text fx:id="lName" strokeType="OUTSIDE" strokeWidth="0.0" text="Sukunimi" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <GridPane.margin>
                      <Insets left="20.0" right="20.0" />
                   </GridPane.margin>
