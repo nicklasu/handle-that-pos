@@ -40,7 +40,6 @@ public class UserDAO {
 
             transaction.commit();
         } catch (Exception e) {
-            System.out.println("VIRHE: "+ e);
             if (transaction != null) {
 
                 transaction.rollback();

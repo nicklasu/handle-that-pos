@@ -1,5 +1,6 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import model.classes.Product;
 
@@ -50,14 +52,22 @@ public class MainView {
         ((OptionsView) fxmlLoader.getController()).setMainApp(this.mainApp);
     }
 
+
+
     @FXML
     private void readBarcode() {
         try {
 
             int productId = Integer.parseInt(barcodeTextField.getText());
+
             Product product = this.mainApp.getEngine().scanProduct(productId);
+
             items.add(product);
+
             barcodeTextField.clear();
+
+
+            barcodeTextField.requestFocus();
         } catch(Exception e){
             System.out.println(e);
             Alert alert = new Alert(Alert.AlertType.ERROR, "Tuotetta ei löytynyt tietokannasta!", ButtonType.CLOSE);
@@ -80,6 +90,8 @@ public class MainView {
         }
     }
 
+
+
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
         this.usernameLabel.setText(mainApp.getEngine().getUser().getUsername());
@@ -88,6 +100,7 @@ public class MainView {
             if (!newValue.matches("\\d*")) {
                 barcodeTextField.setText(newValue.replaceAll("[^\\d]", ""));
             }
+
         });
 
         // Populate listView with already existing products from open Transaction
@@ -108,5 +121,13 @@ public class MainView {
         });
 
         items.addListener((ListChangeListener<Product>) change -> setTotalPrice());
+    barcodeTextField.requestFocus();
+
+    }
+@FXML
+    private void handleInputChange() {
+        if(barcodeTextField.getText().length() == 8){
+            readBarcode();
+        }
     }
 }

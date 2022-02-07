@@ -3,24 +3,23 @@ package model.classes;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "products")
+@Table(name = "Tuote")
 public class Product{
 public Product(){
 
 }
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private int     id;
+    @Column(name = "ID", updatable = false, nullable = false)
+    private int id;
 
-    @Column(name="name")
+    @Column(name="Nimi")
     private String  name;
-    @Column(name="desc")
-    private String  description;
-    @Column(name="price")
+    @Column(name="Kuvaus")
+    private String description;
+    @Column(name="Hinta")
     private float   price;
-    @Column(name="stock")
-    private int     stock;
+    @Column(name="Varastomäärä")
+    private int stock;
 
 
     public Product(int id, String name, String description, float price, int stock) {

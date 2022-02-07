@@ -3,34 +3,38 @@ package model.classes;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "Käyttäjä")
 public class User{
     public User() {
     }
 
 
-    public User(String name, String username){
-        this.name = name;
+    public User(String fName, String lName, String username){
+        this.fName = fName;
+        this.lName = lName;
         this.username = username;
     }
-    public User(String name, String username, String password){
-        this.name = name;
+    public User(String fName, String lName, String username, String password){
+        this.fName = fName;
+        this.lName = lName;
         this.username = username;
         this.password = password;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "ID", updatable = false, nullable = false)
     private int id;
 
-    @Column(name="username", unique = true)
+    @Column(name="Käyttäjätunnus", unique = true)
     private String username;
 
-    @Column(name="password")
+    @Column(name="Salasana")
     private String password;
 
-    @Column(name="name")
-    private String name;
+    @Column(name="Etunimi")
+    private String fName;
+    @Column(name="Sukunimi")
+    private String lName;
 
     public int getId() {
         return id;
@@ -56,12 +60,19 @@ public class User{
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getfName() {
+        return fName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setfName(String name) {
+        this.fName = fName;
+    }
+    public String getlName() {
+        return lName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
     }
 
     @Override
@@ -70,7 +81,12 @@ public class User{
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
+                ", fName='" + fName + '\'' +
+                ", lName='" + lName + '\'' +
                 '}';
+    }
+
+    public String getFullName() {
+        return fName + " " + lName;
     }
 }
