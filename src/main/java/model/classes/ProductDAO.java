@@ -51,6 +51,23 @@ public class ProductDAO {
 
         return product;
     }
+    public void addProduct(Product product) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            // start the transaction
+            transaction = session.beginTransaction();
+
+            // save student object
+            session.save(product);
+
+            // commit the transaction
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
 
 
 }
