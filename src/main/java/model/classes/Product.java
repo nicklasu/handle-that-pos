@@ -70,4 +70,14 @@ public Product(){
     public String toString() {
         return this.name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) { return false; }
+        if (o.getClass() != this.getClass()) { return false; }
+
+        final Product product = (Product) o;
+
+        return this.id == product.id;
+    }
 }
