@@ -62,7 +62,10 @@ public class MainView {
 
             Product product = this.mainApp.getEngine().scanProduct(productId);
 
-            items.add(product);
+            if (!items.contains(product)) {
+                items.add(product);
+            }
+            scanListView.refresh();
 
             barcodeTextField.clear();
 
@@ -106,7 +109,11 @@ public class MainView {
         // Populate listView with already existing products from open Transaction
         if (this.mainApp.getEngine().getTransaction() != null) {
             ArrayList<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
-            items.addAll(products);
+            for (Product product : products) {
+                if (!items.contains(product)) {
+                    items.add(product);
+                }
+            }
         }
 
         scanListView.setItems(items);
