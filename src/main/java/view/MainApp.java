@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.classes.POSEngine;
+import model.classes.UserDAO;
 import model.interfaces.IPOSEngine;
 
 import java.io.IOException;
@@ -82,5 +83,6 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
         launch();
+
     }
 }

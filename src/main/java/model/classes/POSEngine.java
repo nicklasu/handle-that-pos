@@ -11,9 +11,11 @@ public class POSEngine implements IPOSEngine {
     private ITransaction transaction = null;
     private User user = null;
     private UserDAO userDAO;
+    private ProductDAO productDAO;
     // constructor
     public POSEngine() {
         this.userDAO = new UserDAO();
+        this.productDAO = new ProductDAO();
     }
 
     @Override
@@ -62,7 +64,10 @@ public class POSEngine implements IPOSEngine {
         /**
          * HAETAAN DATABASESTA ID:llä
          */
-        Product product = new Product(id, "testi tuote", "tätä tuotetta käytetään testaamiseen", 60.20f, 90); // Luodaan uusi product databasesta haettujen tietojen perusteella
+        Product product = productDAO.getProduct(id);
+
+        System.out.println(product.getName());
+        //Product product = new Product(id, "testi tuote", "tätä tuotetta käytetään testaamiseen", 60.20f, 90); // Luodaan uusi product databasesta haettujen tietojen perusteella
 
         this.transaction.getOrder().addProductToOrder(product);
 
