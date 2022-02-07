@@ -27,6 +27,7 @@ public class POSEngine implements IPOSEngine {
         //User testi = new User("Heikki Harju", "heikha", "enkerro");
           //  userDAO.createUser(testi);
         User user = userDAO.getUser(username);
+        System.out.println(user);
         System.out.println(user.getPassword() + ", " + password);
 
 
@@ -34,7 +35,7 @@ public class POSEngine implements IPOSEngine {
          * TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
          */
         if (user != null && password.equals(user.getPassword()) /*JOS SALIKSET TÄSMÄÄ*/) {
-            this.user = new User("test", username);
+            this.user = user;
             return true;
         }
 
