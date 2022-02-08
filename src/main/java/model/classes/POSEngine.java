@@ -20,15 +20,8 @@ public class POSEngine implements IPOSEngine {
 
     @Override
     public boolean login(String username, String password) {
-//        User testi = userDAO.getUser("testuser");
-//        System.out.println("Tulostetaan kaikki käyttäjät tietokannasta: " + userDAO.getAllUsers());
-//        System.out.println("Tulostetaan yksi käyttäjä tietokannasta: " + testi.toString());
 
-        //User testi = new User("Heikki Harju", "heikha", "enkerro");
-          //  userDAO.createUser(testi);
         User user = userDAO.getUser(username);
-        System.out.println(user);
-        System.out.println(user.getPassword() + ", " + password);
 
 
         /**
