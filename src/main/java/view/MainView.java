@@ -71,6 +71,7 @@ public class MainView {
 
 
             barcodeTextField.requestFocus();
+
         } catch(Exception e){
             System.out.println(e);
             Alert alert = new Alert(Alert.AlertType.ERROR, "Tuotetta ei löytynyt tietokannasta!", ButtonType.CLOSE);

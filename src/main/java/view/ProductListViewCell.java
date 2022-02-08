@@ -81,6 +81,7 @@ public class ProductListViewCell extends ListCell<Product> {
                 productAmount = Collections.frequency(this.order.getProductList(), product);
                 if (productAmount > 0) {
                     this.productAmountLabel.setText(String.valueOf(productAmount));
+
                 } else {
                     this.items.remove(product);
                 }
@@ -90,6 +91,7 @@ public class ProductListViewCell extends ListCell<Product> {
                 this.order.addProductToOrder(product);
 
                 productAmount = Collections.frequency(this.order.getProductList(), product);
+
                 this.productAmountLabel.setText(String.valueOf(productAmount));
             });
 

@@ -35,9 +35,7 @@ public class ProductDAO {
 
             transaction = session.beginTransaction();
 
-
             product = session.get(Product.class, id);
-
 
             transaction.commit();
         } catch (Exception e) {
@@ -54,13 +52,46 @@ public class ProductDAO {
     public void addProduct(Product product) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
-            // start the transaction
             transaction = session.beginTransaction();
 
-            // save student object
             session.save(product);
 
-            // commit the transaction
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public void updateProduct(Product product){
+        Transaction transaction = null;
+
+        try (Session session = sessionFactory.getCurrentSession()){
+
+           transaction = session.beginTransaction();
+
+            session.saveOrUpdate(product);
+
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+    public void deleteProduct(int id){
+        Transaction transaction = null;
+
+        try (Session session = sessionFactory.getCurrentSession()){
+
+            transaction = session.beginTransaction();
+            Product product = session.get(Product.class, id);
+            if(product != null) {
+                session.delete(product);
+            }
+
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

@@ -103,13 +103,10 @@ public class UserDAO {
     public void createUser(User user) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
-            // start the transaction
             transaction = session.beginTransaction();
 
-            // save student object
             session.save(user);
 
-            // commit the transaction
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
