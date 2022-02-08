@@ -11,7 +11,7 @@ public class Order implements IOrder {
     public ArrayList<Product> getProductList() { return this.productList; }
 
     @Override
-    public float getTotalPrice() { return this.totalPrice; }
+    public float getTotalPrice() {return totalPrice;}
 
     @Override
     public boolean addProductToOrder(Product product) {
