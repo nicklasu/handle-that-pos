@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TransactionTest {
     private Order testOrder;
     private Transaction testTransaction;
+    private User testUser;
 
     private void createTestOrder(){
         Product[] testProducts = {new Product(0, "Suola", "Kananmunan päälle naminami", 200, 100), new Product(1, "Sokeri", "Kahviin slurps", 100, 100)};
@@ -25,7 +26,8 @@ class TransactionTest {
 
     @BeforeEach
     void setUp() {
-        testTransaction = new Transaction();
+        testUser = new User(1, "testi", "käyttäjä", "testuser", "salis", 1);
+        testTransaction = new Transaction(testUser);
     }
 
     @Test
