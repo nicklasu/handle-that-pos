@@ -72,4 +72,18 @@ public class POSEngine implements IPOSEngine {
 
         transaction = null;
     }
+
+    public void setTransaction(Transaction testTransaction) {
+        this.transaction = testTransaction;
+    }
+
+    @Override
+    public String toString() {
+        return "POSEngine{" +
+                "transaction=" + transaction +
+                ", user=" + user +
+                ", userDAO=" + userDAO +
+                ", productDAO=" + productDAO +
+                '}';
+    }
 }

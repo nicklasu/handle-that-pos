@@ -40,4 +40,11 @@ public class Order implements IOrder {
     }
 
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "productList=" + productList +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }
