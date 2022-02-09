@@ -10,5 +10,5 @@ public interface IPOSEngine {
     ITransaction getTransaction();
     Product scanProduct(int id);
     void confirmTransaction();
-
+    void saveProduct(Product product);
     }

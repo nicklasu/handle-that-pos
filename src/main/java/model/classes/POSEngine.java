@@ -73,6 +73,11 @@ public class POSEngine implements IPOSEngine {
         transaction = null;
     }
 
+    @Override
+    public void saveProduct(Product product) {
+        productDAO.addProduct(product);
+    }
+
     private String hashPassword(String password){
         return BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }
