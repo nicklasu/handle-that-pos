@@ -5,6 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 
 public class LoginView {
 
@@ -18,6 +19,14 @@ public class LoginView {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+        passwordPasswordField.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER)
+                handleLoginButton();
+        });
+        usernameTextField.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER)
+                handleLoginButton();
+        });
     }
 
     @FXML
