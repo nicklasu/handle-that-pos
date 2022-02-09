@@ -6,9 +6,6 @@ import org.junit.jupiter.api.*;
 class POSEngineTest extends TestParent {
     private static POSEngine testEngine;
 
-    POSEngineTest() {
-    }
-
     @BeforeAll
     static void beforeAll() {
         System.out.println("POSEngine test...");
@@ -17,12 +14,12 @@ class POSEngineTest extends TestParent {
 
     @BeforeEach
     void setUp() {
-        testEngine.login("testuser", "$2a$12$QHOXCl8u2OzUpMWRM5oV3eB4rRHTvtyZhgEppjJSJKK2OFKAeN0va");
+        testEngine.login("testuser", "123");
     }
 
     @Test
     void login() {
-        Assertions.assertTrue(testEngine.login("testuser", "$2a$12$QHOXCl8u2OzUpMWRM5oV3eB4rRHTvtyZhgEppjJSJKK2OFKAeN0va"), "logging in to testuser doesn't work properly");
+        Assertions.assertTrue(testEngine.login("testuser", "123"), "logging in to testuser doesn't work properly");
         Assertions.assertFalse(testEngine.login("testuser", "asd"), "logging in with wrong password works");
     }
 
