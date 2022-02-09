@@ -54,6 +54,9 @@
                     </HBox.margin>
                 </Label>
             </HBox>
+         <GridPane.margin>
+            <Insets left="15.0" />
+         </GridPane.margin>
         </GridPane>
         <GridPane prefWidth="665.0" GridPane.rowIndex="1">
             <columnConstraints>
