@@ -28,18 +28,25 @@ public class User{
     }
 
 
-    public User(String fName, String lName, String username, int activity){
-        this.fName = fName;
-        this.lName = lName;
-        this.username = username;
-        this.activity = activity;
-    }
-    public User(String fName, String lName, String username, String password){
+    public User(int id, String fName, String lName, String username, String password, int activity){
+        this.id = id;
         this.fName = fName;
         this.lName = lName;
         this.username = username;
         this.password = password;
+        this.activity = activity;
+
     }
+
+    public User(String fName, String lName, String username, String password, int activity){
+        this.fName = fName;
+        this.lName = lName;
+        this.username = username;
+        this.password = password;
+        this.activity = activity;
+
+    }
+
 
 
     public int getId() {
