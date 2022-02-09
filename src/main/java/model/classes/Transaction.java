@@ -8,11 +8,13 @@ public class Transaction implements ITransaction {
     private IOrder order;
     private Customer customer;
     private PaymentMethod paymentMethod;
+    private User user;
 
-    public Transaction() {
+    public Transaction(User user) {
         this.order = new Order();
         this.paymentMethod = PaymentMethod.CARD; // Oletuksena maksukortti maksutapana
         this.customer = null; // Ei Bonsuasiakkuutta oletuksena
+        this.user = user;
     }
 
     @Override
