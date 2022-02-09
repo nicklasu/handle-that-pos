@@ -13,7 +13,7 @@ class ProductTest {
 
     @BeforeEach
     void setUp() {
-        test = new Product(1,"asd","asd", 1.0F, 100);
+        test = new Product(1,"asd","asd", 200, 100);
     }
 
     @Test

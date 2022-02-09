@@ -17,12 +17,12 @@ public Product(){
     @Column(name="Kuvaus")
     private String description;
     @Column(name="Hinta")
-    private float   price;
+    private int price;
     @Column(name="Varastomäärä")
     private int stock;
 
 
-    public Product(int id, String name, String description, float price, int stock) {
+    public Product(int id, String name, String description, int price, int stock) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -50,11 +50,11 @@ public Product(){
         this.description = description;
     }
 
-    public float    getPrice() {
+    public int    getPrice() {
         return price;
     }
 
-    public void     setPrice(float price) {
+    public void     setPrice(int price) {
         this.price = price;
     }
 
