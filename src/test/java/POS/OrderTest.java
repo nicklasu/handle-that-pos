@@ -10,11 +10,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class OrderTest {
-    Order testOrder;
+    private Order testOrder;
 
     @BeforeAll
     static void beforeAll() {
-        System.out.println("Ordertest...");
+        System.out.println("Order test...");
     }
 
     @BeforeEach

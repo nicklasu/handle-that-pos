@@ -21,6 +21,11 @@ public class Transaction implements ITransaction {
     }
 
     @Override
+    public void setOrder(IOrder order) {
+        this.order = order;
+    }
+
+    @Override
     public Customer getCustomer() {
         return this.customer;
     }
