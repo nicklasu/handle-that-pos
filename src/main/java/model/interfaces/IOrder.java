@@ -13,5 +13,5 @@ public interface IOrder {
     boolean addProductToOrder(Product product);
     boolean removeProductFromOrder(Product product);
     ArrayList<Product> getProductList();
-    float getTotalPrice();
+    int getTotalPrice();
 }
