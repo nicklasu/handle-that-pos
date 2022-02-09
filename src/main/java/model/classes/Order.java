@@ -8,7 +8,12 @@ public class Order implements IOrder {
     private int totalPrice = 0;
 
     @Override
-    public ArrayList<Product> getProductList() { return this.productList; }
+    public ArrayList<Product> getProductList() {
+        if(productList.size()==0){
+            throw new RuntimeException("No products in the order");
+        }
+        return this.productList;
+    }
 
     @Override
     public int getTotalPrice() {return totalPrice;}
