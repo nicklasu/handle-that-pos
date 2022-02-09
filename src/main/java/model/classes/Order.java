@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 public class Order implements IOrder {
     private ArrayList<Product> productList = new ArrayList<>();
-    private float totalPrice = 0f;
+    private int totalPrice = 0;
 
     @Override
     public ArrayList<Product> getProductList() { return this.productList; }
 
     @Override
-    public float getTotalPrice() {return totalPrice;}
+    public int getTotalPrice() {return totalPrice;}
 
     @Override
     public boolean addProductToOrder(Product product) {

@@ -81,7 +81,8 @@ public class MainView {
     }
 
     public void setTotalPrice() {
-        this.totalPriceLabel.setText(Float.toString(this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice()));
+        float priceInEuros = this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100.0f;
+        this.totalPriceLabel.setText(Float.toString(priceInEuros));
     }
 
     @FXML
