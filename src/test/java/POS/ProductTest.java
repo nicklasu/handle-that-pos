@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class ProductTest {
@@ -74,5 +75,17 @@ class ProductTest {
     @Test
     void testToString() {
         assertEquals(test.toString(), "Runebergin torttu", "ToString problem");
+    }
+
+    @Test
+    void testNegativePrice(){
+        RuntimeException poikkeus = assertThrows(RuntimeException.class, () -> test.setPrice(-1));
+        assertEquals("Negative price for a product is not accepted", poikkeus.getMessage());
+    }
+
+    @Test
+    void testNegativeStock(){
+        RuntimeException poikkeus = assertThrows(RuntimeException.class, () -> test.setStock(-1));
+        assertEquals("Negative stock for a product is not accepted", poikkeus.getMessage());
     }
 }
