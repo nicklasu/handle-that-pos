@@ -87,6 +87,7 @@ public class User{
 
     public void setActivity(int activity) {
         this.activity = activity;
+
     }
 
     @Override
