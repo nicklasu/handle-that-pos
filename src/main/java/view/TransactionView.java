@@ -95,3 +95,4 @@ public class TransactionView {
         scanListView.setItems(items);
     }
 }
+
