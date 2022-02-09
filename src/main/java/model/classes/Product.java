@@ -5,9 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Tuote")
 public class Product{
-public Product(){
 
-}
     @Id
     @Column(name = "ID", updatable = false, nullable = false)
     private int id;
@@ -21,7 +19,9 @@ public Product(){
     @Column(name="Varastomäärä")
     private int stock;
 
+    public Product(){
 
+    }
     public Product(int id, String name, String description, int price, int stock) {
         this.id = id;
         this.name = name;

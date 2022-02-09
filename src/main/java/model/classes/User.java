@@ -5,21 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "Käyttäjä")
 public class User{
-    public User() {
-    }
 
-
-    public User(String fName, String lName, String username){
-        this.fName = fName;
-        this.lName = lName;
-        this.username = username;
-    }
-    public User(String fName, String lName, String username, String password){
-        this.fName = fName;
-        this.lName = lName;
-        this.username = username;
-        this.password = password;
-    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", updatable = false, nullable = false)
@@ -35,6 +21,26 @@ public class User{
     private String fName;
     @Column(name="Sukunimi")
     private String lName;
+    @Column(name="Aktiivisuus")
+    private int activity;
+
+    public User() {
+    }
+
+
+    public User(String fName, String lName, String username, int activity){
+        this.fName = fName;
+        this.lName = lName;
+        this.username = username;
+        this.activity = activity;
+    }
+    public User(String fName, String lName, String username, String password){
+        this.fName = fName;
+        this.lName = lName;
+        this.username = username;
+        this.password = password;
+    }
+
 
     public int getId() {
         return id;
@@ -75,6 +81,14 @@ public class User{
         this.lName = lName;
     }
 
+    public int getActivity() {
+        return activity;
+    }
+
+    public void setActivity(int activity) {
+        this.activity = activity;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -83,6 +97,7 @@ public class User{
                 ", password='" + password + '\'' +
                 ", fName='" + fName + '\'' +
                 ", lName='" + lName + '\'' +
+                ", activity=" + activity +
                 '}';
     }
 
