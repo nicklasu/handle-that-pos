@@ -3,9 +3,6 @@ package model.classes;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import model.interfaces.IPOSEngine;
 import model.interfaces.ITransaction;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
 
 public class POSEngine implements IPOSEngine {
 
