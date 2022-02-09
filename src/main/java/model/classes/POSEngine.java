@@ -52,7 +52,7 @@ public class POSEngine implements IPOSEngine {
     @Override
     public Product scanProduct(int id) {
         if (this.transaction == null) {
-            this.transaction = new Transaction();
+            this.transaction = new Transaction(this.user);
         }
 
         /**
