@@ -1,10 +1,11 @@
 package model.classes;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import model.interfaces.IPOSEngine;
 import model.interfaces.ITransaction;
-
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
 
 public class POSEngine implements IPOSEngine {
 
@@ -12,22 +13,25 @@ public class POSEngine implements IPOSEngine {
     private User user = null;
     private UserDAO userDAO;
     private ProductDAO productDAO;
+
     // constructor
     public POSEngine() {
         this.userDAO = new UserDAO();
         this.productDAO = new ProductDAO();
+
     }
 
     @Override
     public boolean login(String username, String password) {
 
+
         User user = userDAO.getUser(username);
 
-
+        BCrypt.Result result = compare(password, user.getPassword());
         /**
          * TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
          */
-        if (user != null && password.equals(user.getPassword()) /*JOS SALIKSET TÄSMÄÄ*/) {
+        if (user != null && result.verified /*JOS SALIKSET TÄSMÄÄ*/) {
             this.user = user;
             return true;
         }
@@ -71,5 +75,12 @@ public class POSEngine implements IPOSEngine {
     public void confirmTransaction(){
 
         transaction = null;
+    }
+
+    private String hashPassword(String password){
+        return BCrypt.withDefaults().hashToString(12, password.toCharArray());
+    }
+    private BCrypt.Result compare(String password, String hashedPassword){
+        return BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
     }
 }

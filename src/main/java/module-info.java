@@ -8,6 +8,7 @@ module com.example.handlethatpos {
     requires org.hibernate.orm.core;
     requires java.sql;
     requires java.xml.bind;
+    requires bcrypt;
 
     exports view;
     opens model.classes;
