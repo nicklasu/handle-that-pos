@@ -1,22 +1,17 @@
 package POS;
 
 import model.classes.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TransactionTest {
-    private Order testOrder;
+class TransactionTest extends TestParent {
     private Transaction testTransaction;
-    private User testUser;
 
-    private void createTestOrder(){
-        Product[] testProducts = {new Product(0, "Suola", "Kananmunan päälle naminami", 200, 100), new Product(1, "Sokeri", "Kahviin slurps", 100, 100)};
-        testOrder = new Order();
-        testOrder.addProductToOrder(testProducts[0]);
-        testOrder.addProductToOrder(testProducts[1]);
+    TransactionTest() {
     }
 
     @BeforeAll
@@ -26,28 +21,26 @@ class TransactionTest {
 
     @BeforeEach
     void setUp() {
-        testUser = new User(1, "testi", "käyttäjä", "testuser", "salis", 1);
-        testTransaction = new Transaction(testUser);
+        this.testTransaction = new Transaction(new User());
     }
 
     @Test
     void getAndSetOrder() {
-        createTestOrder();
-        testTransaction.setOrder(testOrder);
-        assertEquals(testTransaction.getOrder().getProductList().toString(), "[Suola, Sokeri]", "Error in linking order to transaction");
+        Order testOrder = this.createTestOrder();
+        this.testTransaction.setOrder(testOrder);
+        Assertions.assertEquals(this.testTransaction.getOrder().getProductList().toString(), "[Suola, Sokeri]", "Error in linking order to transaction");
     }
 
     @Test
     void getAndSetCustomer() {
-        Customer testCustomer = new Customer(3992,CustomerLevel.NONE);
-        testTransaction.setCustomer(testCustomer);
-        assertEquals(testTransaction.getCustomer().toString(),"Customer{id=3992, customerLevel=NONE}", "Error in handling customers with a transaction");
+        Customer testCustomer = new Customer(3992, CustomerLevel.NONE);
+        this.testTransaction.setCustomer(testCustomer);
+        Assertions.assertEquals(this.testTransaction.getCustomer().toString(), "Customer{id=3992, customerLevel=NONE}", "Error in handling customers with a transaction");
     }
-
 
     @Test
     void getAndSetPaymentMethod() {
-        testTransaction.setPaymentMethod(PaymentMethod.CASH);
-        assertEquals(testTransaction.getPaymentMethod(), PaymentMethod.CASH, "Error handling basic paymentmethods in transaction");
+        this.testTransaction.setPaymentMethod(PaymentMethod.CASH);
+        Assertions.assertEquals(this.testTransaction.getPaymentMethod(), PaymentMethod.CASH, "Error handling basic paymentmethods in transaction");
     }
 }

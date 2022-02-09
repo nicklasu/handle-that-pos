@@ -1,6 +1,7 @@
 package POS;
 
 import model.classes.Product;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,8 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-class ProductTest {
-
+class ProductTest extends TestParent {
     Product test;
 
     @BeforeAll
@@ -20,78 +20,82 @@ class ProductTest {
 
     @BeforeEach
     void setUp() {
-        test = new Product(1, "Runebergin torttu", "Bergin Rune nautti näitä joka päivä aamiaiseksi", 200, 100);
+        this.test = new Product(1, "Runebergin torttu", "Bergin Rune nautti näitä joka päivä aamiaiseksi", 200, 100);
     }
 
     @Test
     void getId() {
-        assertEquals(test.getId(), 1, "Getting ID does not work");
+        Assertions.assertEquals(1, this.test.getId(), "Getting ID does not work");
     }
 
     @Test
     void setId() {
-        test.setId(4);
-        assertEquals(test.getId(), 4, "Setting ID does not work");
+        this.test.setId(4);
+        Assertions.assertEquals(4, this.test.getId(), "Setting ID does not work");
     }
 
     @Test
     void getName() {
-        assertEquals(test.getName(), "Runebergin torttu", "Getting name does not work");
+        Assertions.assertEquals("Runebergin torttu", this.test.getName(), "Getting name does not work");
     }
 
     @Test
     void setName() {
-        test.setName("Testinimi");
-        assertEquals(test.getName(), "Testinimi", "Setting name does not work");
+        this.test.setName("Testinimi");
+        Assertions.assertEquals("Testinimi", this.test.getName(), "Setting name does not work");
     }
 
     @Test
     void getDescription() {
-        assertEquals(test.getDescription(), "Bergin Rune nautti näitä joka päivä aamiaiseksi", "Getting description does not work");
+        Assertions.assertEquals("Bergin Rune nautti näitä joka päivä aamiaiseksi", this.test.getDescription(), "Getting description does not work");
     }
 
     @Test
     void setDescription() {
-        test.setDescription("Test description");
-        assertEquals(test.getDescription(), "Test description", "Setting description does not work");
+        this.test.setDescription("Test description");
+        Assertions.assertEquals("Test description", this.test.getDescription(), "Setting description does not work");
     }
 
     @Test
     void getPrice() {
-        assertEquals(test.getPrice(), 200, "Getting price does not work");
+        Assertions.assertEquals(200, this.test.getPrice(), "Getting price does not work");
     }
 
     @Test
     void setPrice() {
-        test.setPrice(900);
-        assertEquals(test.getPrice(), 900, "Setting price does not work");
+        this.test.setPrice(900);
+        Assertions.assertEquals(900, this.test.getPrice(), "Setting price does not work");
     }
 
     @Test
     void getStock() {
-        assertEquals(test.getStock(), 100, "Getting stock does not work");
+        Assertions.assertEquals(100, this.test.getStock(), "Getting stock does not work");
     }
 
     @Test
     void setStock() {
-        test.setStock(3);
-        assertEquals(test.getStock(), 3, "Setting stock does not work");
+        this.test.setStock(3);
+        Assertions.assertEquals(3, this.test.getStock(), "Setting stock does not work");
     }
 
     @Test
     void testToString() {
-        assertEquals(test.toString(), "Runebergin torttu", "ToString problem");
+        Assertions.assertEquals("Runebergin torttu", this.test.toString(), "ToString problem");
     }
 
     @Test
-    void testNegativePrice(){
-        RuntimeException poikkeus = assertThrows(RuntimeException.class, () -> test.setPrice(-1));
-        assertEquals("Negative price for a product is not accepted", poikkeus.getMessage());
+    void testNegativePrice() {
+        RuntimeException poikkeus = (RuntimeException) Assertions.assertThrows(RuntimeException.class, () -> {
+            this.test.setPrice(-1);
+        });
+        Assertions.assertEquals("Negative price for a product is not accepted", poikkeus.getMessage());
     }
 
     @Test
-    void testNegativeStock(){
-        RuntimeException poikkeus = assertThrows(RuntimeException.class, () -> test.setStock(-1));
-        assertEquals("Negative stock for a product is not accepted", poikkeus.getMessage());
+    void testNegativeStock() {
+        RuntimeException poikkeus = (RuntimeException) Assertions.assertThrows(RuntimeException.class, () -> {
+            this.test.setStock(-1);
+        });
+        Assertions.assertEquals("Negative stock for a product is not accepted", poikkeus.getMessage());
     }
 }
