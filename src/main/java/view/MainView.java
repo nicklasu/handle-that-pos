@@ -66,6 +66,7 @@ public class MainView {
                 items.add(product);
             }
             scanListView.refresh();
+            setTotalPrice();
 
             barcodeTextField.clear();
 
@@ -79,7 +80,7 @@ public class MainView {
         }
     }
 
-    private void setTotalPrice() {
+    public void setTotalPrice() {
         this.totalPriceLabel.setText(Float.toString(this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice()));
     }
 
@@ -119,7 +120,7 @@ public class MainView {
 
         scanListView.setItems(items);
 
-        scanListView.setCellFactory(productListView -> new ProductListViewCell(this.mainApp.getEngine().getTransaction().getOrder(), this.items));
+        scanListView.setCellFactory(productListView -> new ProductListViewCell(this, this.mainApp.getEngine().getTransaction().getOrder(), this.items));
 
 
         //Pressing enter runs readBarcode()
