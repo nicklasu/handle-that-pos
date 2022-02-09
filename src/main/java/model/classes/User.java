@@ -70,7 +70,7 @@ public class User{
         return fName;
     }
 
-    public void setfName(String name) {
+    public void setfName(String fName) {
         this.fName = fName;
     }
     public String getlName() {
