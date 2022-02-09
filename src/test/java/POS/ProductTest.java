@@ -46,7 +46,7 @@ class ProductTest {
     @Test
     void setDescription() {
         test.setDescription("Test description");
-        assertEquals(test.getDescription(),"Test description", "Setting description does not work");
+        assertEquals(test.getDescription(), "Test description", "Setting description does not work");
     }
 
     @Test
@@ -62,17 +62,17 @@ class ProductTest {
 
     @Test
     void getStock() {
-        assertEquals(test.getStock(),100, "Getting stock does not work");
+        assertEquals(test.getStock(), 100, "Getting stock does not work");
     }
 
     @Test
     void setStock() {
         test.setStock(3);
-        assertEquals(test.getStock(),3,"Setting stock does not work");
+        assertEquals(test.getStock(), 3, "Setting stock does not work");
     }
 
     @Test
     void testToString() {
-        assertEquals(test.toString(),"Runebergin torttu", "ToString problem");
+        assertEquals(test.toString(), "Runebergin torttu", "ToString problem");
     }
 }
