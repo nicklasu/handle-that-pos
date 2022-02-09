@@ -27,24 +27,17 @@ public class User{
     public User() {
     }
 
-
-    public User(int id, String fName, String lName, String username, String password, int activity){
-        this.id = id;
-        this.fName = fName;
-        this.lName = lName;
-        this.username = username;
-        this.password = password;
-        this.activity = activity;
-
-    }
-
     public User(String fName, String lName, String username, String password, int activity){
         this.fName = fName;
         this.lName = lName;
         this.username = username;
         this.password = password;
         this.activity = activity;
+    }
 
+    public User(int id, String fName, String lName, String username, String password, int activity){
+        this(fName, lName, username, password, activity);
+        this.id = id;
     }
 
 
