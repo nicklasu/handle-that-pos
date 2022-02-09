@@ -115,4 +115,22 @@ public class UserDAO {
         }
     }
 
+    public void updateUser(User user){
+        Transaction transaction = null;
+
+        try (Session session = sessionFactory.getCurrentSession()){
+
+            transaction = session.beginTransaction();
+
+            session.saveOrUpdate(user);
+
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
 }
