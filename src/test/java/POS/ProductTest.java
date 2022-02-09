@@ -1,6 +1,7 @@
 package POS;
 
 import model.classes.Product;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ProductTest {
 
     Product test;
+
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("Product test...");
+    }
 
     @BeforeEach
     void setUp() {
