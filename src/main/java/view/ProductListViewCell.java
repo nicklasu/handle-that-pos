@@ -36,15 +36,18 @@ public class ProductListViewCell extends ListCell<Product> {
 
     private FXMLLoader fxmlLoader;
 
+    private MainView mainView;
+
     private IOrder order;
 
     private ObservableList<Product> items;
 
     private int productAmount;
 
-    public ProductListViewCell(IOrder order, ObservableList<Product> items) {
-        this.order = order;
-        this.items = items;
+    public ProductListViewCell(MainView mainView, IOrder order, ObservableList<Product> items) {
+        this.mainView   = mainView;
+        this.order      = order;
+        this.items      = items;
     }
 
 
@@ -84,6 +87,8 @@ public class ProductListViewCell extends ListCell<Product> {
                 } else {
                     this.items.remove(product);
                 }
+
+                this.mainView.setTotalPrice();
             });
 
             this.plusButton.setOnAction(event -> {
@@ -91,6 +96,8 @@ public class ProductListViewCell extends ListCell<Product> {
 
                 productAmount = Collections.frequency(this.order.getProductList(), product);
                 this.productAmountLabel.setText(String.valueOf(productAmount));
+
+                this.mainView.setTotalPrice();
             });
 
             setText(null);
