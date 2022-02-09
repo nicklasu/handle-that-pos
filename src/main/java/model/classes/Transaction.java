@@ -46,4 +46,14 @@ public class Transaction implements ITransaction {
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "order=" + order +
+                ", customer=" + customer +
+                ", paymentMethod=" + paymentMethod +
+                ", user=" + user +
+                '}';
+    }
 }

@@ -24,7 +24,6 @@ public class POSEngine implements IPOSEngine {
     @Override
     public boolean login(String username, String password) {
 
-
         User user = userDAO.getUser(username);
 
         BCrypt.Result result = compare(password, user.getPassword());
@@ -82,5 +81,19 @@ public class POSEngine implements IPOSEngine {
     }
     private BCrypt.Result compare(String password, String hashedPassword){
         return BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
+    }
+
+    public void setTransaction(Transaction testTransaction) {
+        this.transaction = testTransaction;
+    }
+
+    @Override
+    public String toString() {
+        return "POSEngine{" +
+                "transaction=" + transaction +
+                ", user=" + user +
+                ", userDAO=" + userDAO +
+                ", productDAO=" + productDAO +
+                '}';
     }
 }
