@@ -2,15 +2,19 @@ package view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Pair;
 import model.classes.PaymentMethod;
 import model.classes.Product;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class TransactionView {
     private MainApp mainApp;
@@ -93,6 +97,21 @@ public class TransactionView {
             items.addAll(products);
         }
         scanListView.setItems(items);
+
+        scanListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                Product product = scanListView.getSelectionModel().getSelectedItem();
+                Dialog<Void> dialog = new Dialog<>();
+                dialog.setTitle(product.getName());
+                dialog.setHeaderText("ID: " + product.getId() + "\n" +  "Kuvaus: " + product.getDescription() + "\nHinta: " + product.getPrice() + " per kpl" + "\nVarastomäärä: " + product.getStock());
+
+                dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+                dialog.showAndWait();
+
+            }
+        });
     }
 }
 
