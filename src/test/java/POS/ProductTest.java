@@ -20,18 +20,18 @@ class ProductTest extends TestParent {
 
     @BeforeEach
     void setUp() {
-        this.test = new Product(1, "Runebergin torttu", "Bergin Rune nautti näitä joka päivä aamiaiseksi", 200, 100);
+        this.test = new Product("1a", "Runebergin torttu", "Bergin Rune nautti näitä joka päivä aamiaiseksi", 200, 100);
     }
 
     @Test
     void getId() {
-        Assertions.assertEquals(1, this.test.getId(), "Getting ID does not work");
+        Assertions.assertEquals("1a", this.test.getId(), "Getting ID does not work");
     }
 
     @Test
     void setId() {
-        this.test.setId(4);
-        Assertions.assertEquals(4, this.test.getId(), "Setting ID does not work");
+        this.test.setId("4ab2");
+        Assertions.assertEquals("4ab2", this.test.getId(), "Setting ID does not work");
     }
 
     @Test
