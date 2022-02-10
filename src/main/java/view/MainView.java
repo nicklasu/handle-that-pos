@@ -15,6 +15,7 @@ import model.classes.ProductDAO;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainView {
     private MainApp mainApp;
@@ -32,7 +33,8 @@ public class MainView {
     private Button hotkeyButton0;
     @FXML
     private Button hotkeyButton1;
-
+    @FXML
+    private ProgressBar feedbackProgressBar;
     private ObservableList<Product> items = FXCollections.observableArrayList();
     private String productId;
     private String hotkeyProductIds[] = new String[2];
@@ -59,6 +61,7 @@ public class MainView {
             barcodeTextField.clear();
             barcodeTextField.requestFocus();
         } catch (Exception e) {
+            productId = null;
             Alert alert = new Alert(Alert.AlertType.ERROR, "Tuotetta ei löytynyt tietokannasta!", ButtonType.CLOSE);
             alert.showAndWait();
         }
@@ -108,13 +111,22 @@ public class MainView {
      */
     private void setHotkeyButton(Button button) {
         int buttonId = Integer.parseInt(button.getId().replace("hotkeyButton", ""));
+
         button.addEventFilter(MouseEvent.ANY, new EventHandler<>() {
             long startTime;
+            AtomicBoolean running = new AtomicBoolean(false);
 
             @Override
             public void handle(MouseEvent event) {
                 if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
                     startTime = System.currentTimeMillis();
+                    Thread thread = new Thread(() -> {
+                        running.set(true);
+                        while (running.get()) {
+                            feedbackProgressBar.setProgress(Long.valueOf(System.currentTimeMillis() - startTime).doubleValue() / 2000);
+                        }
+                    });
+                    thread.start();
                 } else if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
                     if (System.currentTimeMillis() - startTime > 2000) {
                         if (productId != null) {
@@ -133,6 +145,9 @@ public class MainView {
                             alert.showAndWait();
                         }
                     }
+                    running.set(false);
+                    startTime = 0;
+                    feedbackProgressBar.setProgress(0);
                 }
             }
         });
