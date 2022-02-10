@@ -8,7 +8,7 @@ public class Product {
 
     @Id
     @Column(name = "ID", updatable = false, nullable = false)
-    private int id;
+    private String id;
 
     @Column(name = "Nimi")
     private String name;
@@ -23,7 +23,7 @@ public class Product {
 
     }
 
-    public Product(int id, String name, String description, int price, int stock) {
+    public Product(String id, String name, String description, int price, int stock) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -31,11 +31,11 @@ public class Product {
         this.stock = stock;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

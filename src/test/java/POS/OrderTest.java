@@ -25,7 +25,7 @@ class OrderTest extends TestParent {
 
     @BeforeEach
     void beforeEach() {
-        Product[] testProducts = new Product[]{new Product(0, "Suola", "Kananmunan päälle naminami", 200, 100), new Product(1, "Sokeri", "Kahviin slurps", 100, 100)};
+        Product[] testProducts = new Product[]{new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100), new Product("0", "Sokeri", "Kahviin slurps", 100, 100)};
         this.testOrder = new Order();
         this.testOrder.addProductToOrder(testProducts[0]);
         this.testOrder.addProductToOrder(testProducts[1]);
@@ -43,35 +43,35 @@ class OrderTest extends TestParent {
 
     @Test
     void addProductToOrder() {
-        this.testOrder.addProductToOrder(new Product(6, "Sinaappi", "Makkaran päälle jes", 300, 5));
+        this.testOrder.addProductToOrder(new Product("6", "Sinaappi", "Makkaran päälle jes", 300, 5));
         Assertions.assertEquals("[Suola, Sokeri, Sinaappi]", this.testOrder.getProductList().toString(), "Problem adding a product to an order");
     }
 
     @Test
     void removeProductFromOrder() {
-        this.testOrder.removeProductFromOrder(new Product(0, "Suola", "Kananmunan päälle naminami", 200, 100));
+        this.testOrder.removeProductFromOrder(new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100));
         Assertions.assertEquals("[Sokeri]", this.testOrder.getProductList().toString(), "removing a product from order did not work");
     }
 
     @Test
     void CombinationTestForOrder1() {
-        this.testOrder.addProductToOrder(new Product(6, "Sinaappi", "Makkaran päälle jes", 300, 5));
-        this.testOrder.removeProductFromOrder(new Product(0, "Suola", "Kananmunan päälle naminami", 200, 100));
+        this.testOrder.addProductToOrder(new Product("6", "Sinaappi", "Makkaran päälle jes", 300, 5));
+        this.testOrder.removeProductFromOrder(new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100));
         Assertions.assertEquals("[Sokeri, Sinaappi]", this.testOrder.getProductList().toString(), "Listing order of products in an order has problems");
     }
 
     @Test
     void CombinationTestForOrder2() {
-        this.testOrder.addProductToOrder(new Product(6, "Sinaappi", "Makkaran päälle jes", 300, 5));
-        this.testOrder.addProductToOrder(new Product(6, "Sinaappi", "Makkaran päälle jes", 300, 5));
-        this.testOrder.removeProductFromOrder(new Product(0, "Suola", "Kananmunan päälle naminami", 200, 100));
-        this.testOrder.removeProductFromOrder(new Product(6, "Sinaappi", "Makkaran päälle jes", 300, 5));
+        this.testOrder.addProductToOrder(new Product("6", "Sinaappi", "Makkaran päälle jes", 300, 5));
+        this.testOrder.addProductToOrder(new Product("6", "Sinaappi", "Makkaran päälle jes", 300, 5));
+        this.testOrder.removeProductFromOrder(new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100));
+        this.testOrder.removeProductFromOrder(new Product("6", "Sinaappi", "Makkaran päälle jes", 300, 5));
         Assertions.assertEquals(400, this.testOrder.getTotalPrice(), "Problem in getting total price of order after toying with it");
     }
 
     @Test
     void PriceOfLots() {
-        Product[] testProducts = new Product[]{new Product(0, "Suola", "Kananmunan päälle naminami", 200, 100)};
+        Product[] testProducts = new Product[]{new Product("0b", "Suola", "Kananmunan päälle naminami", 200, 100)};
         this.testOrder = new Order();
 
         for (int i = 0; i < 100; ++i) {
