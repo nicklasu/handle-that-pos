@@ -55,7 +55,7 @@ public class MainView {
     private void readBarcode() {
         try {
             productId = barcodeTextField.getText();
-            addProduct(Integer.parseInt(productId));
+            addProduct(productId);
             barcodeTextField.clear();
             barcodeTextField.requestFocus();
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public class MainView {
         }
     }
 
-    private void addProduct(int productId) {
+    private void addProduct(String productId) {
         Product product = this.mainApp.getEngine().scanProduct(productId);
         if (!items.contains(product)) {
             items.add(product);
@@ -93,7 +93,7 @@ public class MainView {
         for (int i = 0; i < hotkeys.size(); i++) {
             setHotkeyButton(hotkeys.get(i));
             try {
-                hotkeys.get(i).setText(productDAO.getProduct(Integer.parseInt(hotkeyProductIds[i])).getName());
+                hotkeys.get(i).setText(productDAO.getProduct(hotkeyProductIds[i]).getName());
             } catch (Exception e) {
 
             }
@@ -127,7 +127,7 @@ public class MainView {
                         }
                     } else {
                         try {
-                            addProduct(Integer.parseInt(hotkeyProductIds[buttonId]));
+                            addProduct(hotkeyProductIds[buttonId]);
                         } catch (Exception e) {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Pikanäppäintä ei ole asetettu.", ButtonType.CLOSE);
                             alert.showAndWait();

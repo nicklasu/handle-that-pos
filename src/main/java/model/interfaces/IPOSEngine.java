@@ -8,7 +8,7 @@ public interface IPOSEngine {
     void logout();
     User getUser();
     ITransaction getTransaction();
-    Product scanProduct(int id);
+    Product scanProduct(String id);
     void confirmTransaction();
     void saveProduct(Product product);
     }

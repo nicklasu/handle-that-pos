@@ -28,7 +28,7 @@ public class ProductDAO {
 
     }
 
-    public Product getProduct(int id) {
+    public Product getProduct(String id) {
         Transaction transaction = null;
         Product product = null;
         try (Session session = sessionFactory.getCurrentSession()) {
@@ -81,7 +81,7 @@ public class ProductDAO {
             }
         }
     }
-    public void deleteProduct(int id){
+    public void deleteProduct(String id){
         Transaction transaction = null;
 
         try (Session session = sessionFactory.getCurrentSession()){

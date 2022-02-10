@@ -43,8 +43,8 @@ class POSEngineTest extends TestParent {
     @Test
     @Disabled("Test skipped, implementable after some products exist in the DB")
     void scanProduct() {
-        testEngine.scanProduct(1);
-        testEngine.scanProduct(2);
+        testEngine.scanProduct("1");
+        testEngine.scanProduct("2");
         Assertions.assertEquals("asd", testEngine.getTransaction().toString(), "problems with scanning products");
     }
 
