@@ -2,19 +2,15 @@ package view;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Pair;
 import model.classes.PaymentMethod;
 import model.classes.Product;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class TransactionView {
     private MainApp mainApp;
@@ -34,6 +30,7 @@ public class TransactionView {
     private boolean sendReceiptEmail = false;
     private final ToggleGroup paymentButtonGroup = new ToggleGroup();
     private final ObservableList<Product> items = FXCollections.observableArrayList();
+
     @FXML
     public void loadMainView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-view.fxml"));
@@ -43,7 +40,7 @@ public class TransactionView {
 
     @FXML
     private void confirmPayment() throws IOException {
-        if(printReceipt){
+        if (printReceipt) {
             new ReceiptPrinter().actionPerformed();
         }
         this.mainApp.getEngine().confirmTransaction();
@@ -79,9 +76,10 @@ public class TransactionView {
 
     /**
      * If you want to test this method, add products to order beforehand.
-     * @param paymentMethod PaymentMethod enum.
+     *
+     * @param paymentMethod  PaymentMethod enum.
      * @param disabledButton Button to be disabled.
-     * @param enabledButton Button to be enabled.
+     * @param enabledButton  Button to be enabled.
      */
     private void selectPaymentMethod(PaymentMethod paymentMethod, ToggleButton disabledButton, ToggleButton enabledButton) {
         if (this.mainApp.getEngine().getTransaction() != null) {
@@ -101,15 +99,13 @@ public class TransactionView {
             items.addAll(products);
         }
         scanListView.setItems(items);
-
         scanListView.setOnMouseClicked(event -> {
             Product product = scanListView.getSelectionModel().getSelectedItem();
             Dialog<Void> dialog = new Dialog<>();
             dialog.setTitle(product.getName());
-            dialog.setHeaderText("ID: " + product.getId() + "\n" +  "Kuvaus: " + product.getDescription() + "\nHinta: " + product.getPrice() + " per kpl" + "\nVarastomäärä: " + product.getStock());
+            dialog.setHeaderText("ID: " + product.getId() + "\n" + "Kuvaus: " + product.getDescription() + "\nHinta: " + product.getPrice() + " per kpl" + "\nVarastomäärä: " + product.getStock());
             dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
             dialog.showAndWait();
-
         });
     }
 }
