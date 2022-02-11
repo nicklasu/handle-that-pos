@@ -9,6 +9,7 @@ module com.example.handlethatpos {
     requires java.sql;
     requires java.xml.bind;
     requires bcrypt;
+    requires java.desktop;
 
     exports view;
     opens model.classes;
