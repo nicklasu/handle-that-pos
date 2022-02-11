@@ -32,9 +32,8 @@ public class TransactionView {
     private TextField receiptEmailTextField;
     private boolean printReceipt = false;
     private boolean sendReceiptEmail = false;
-    private ToggleGroup paymentButtonGroup = new ToggleGroup();
-    private ObservableList<Product> items = FXCollections.observableArrayList();
-
+    private final ToggleGroup paymentButtonGroup = new ToggleGroup();
+    private final ObservableList<Product> items = FXCollections.observableArrayList();
     @FXML
     public void loadMainView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-view.fxml"));
@@ -43,24 +42,23 @@ public class TransactionView {
     }
 
     @FXML
-    public void confirmPayment() throws IOException {
+    private void confirmPayment() throws IOException {
+        if(printReceipt){
+            new ReceiptPrinter().actionPerformed();
+        }
         this.mainApp.getEngine().confirmTransaction();
         loadMainView();
     }
 
     @FXML
     private void confirmReceipt() {
-        if (receiptCheckBox.isSelected()) {
-            printReceipt = true;
-        } else {
-            printReceipt = false;
-        }
+        printReceipt = receiptCheckBox.isSelected();
         System.out.println(printReceipt);
     }
 
     @FXML
     private void sendReceiptEmail() {
-        if (receiptEmailTextField.getText() != "") {
+        if (!receiptEmailTextField.getText().equals("")) {
             sendReceiptEmail = true;
             System.out.println(receiptEmailTextField.getText());
         } else {
@@ -70,15 +68,21 @@ public class TransactionView {
     }
 
     @FXML
-    public void selectCash() {
+    private void selectCash() {
         selectPaymentMethod(PaymentMethod.CASH, cashToggleButton, cardToggleButton);
     }
 
     @FXML
-    public void selectCard() {
+    private void selectCard() {
         selectPaymentMethod(PaymentMethod.CARD, cardToggleButton, cashToggleButton);
     }
 
+    /**
+     * If you want to test this method, add products to order beforehand.
+     * @param paymentMethod PaymentMethod enum.
+     * @param disabledButton Button to be disabled.
+     * @param enabledButton Button to be enabled.
+     */
     private void selectPaymentMethod(PaymentMethod paymentMethod, ToggleButton disabledButton, ToggleButton enabledButton) {
         if (this.mainApp.getEngine().getTransaction() != null) {
             this.mainApp.getEngine().getTransaction().setPaymentMethod(paymentMethod);
@@ -98,19 +102,14 @@ public class TransactionView {
         }
         scanListView.setItems(items);
 
-        scanListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        scanListView.setOnMouseClicked(event -> {
+            Product product = scanListView.getSelectionModel().getSelectedItem();
+            Dialog<Void> dialog = new Dialog<>();
+            dialog.setTitle(product.getName());
+            dialog.setHeaderText("ID: " + product.getId() + "\n" +  "Kuvaus: " + product.getDescription() + "\nHinta: " + product.getPrice() + " per kpl" + "\nVarastomäärä: " + product.getStock());
+            dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+            dialog.showAndWait();
 
-            @Override
-            public void handle(MouseEvent event) {
-                Product product = scanListView.getSelectionModel().getSelectedItem();
-                Dialog<Void> dialog = new Dialog<>();
-                dialog.setTitle(product.getName());
-                dialog.setHeaderText("ID: " + product.getId() + "\n" +  "Kuvaus: " + product.getDescription() + "\nHinta: " + product.getPrice() + " per kpl" + "\nVarastomäärä: " + product.getStock());
-
-                dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
-                dialog.showAndWait();
-
-            }
         });
     }
 }
