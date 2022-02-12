@@ -29,9 +29,15 @@ public class OptionsView {
     @FXML
     private Button btn2;
     @FXML
+    private Button btn3;
+    @FXML
+    private Button btn4;
+    //@FXML
+    //private Button addProductBtn;
+    @FXML
     Pane wrapperPane = new Pane();
-
-    //private ObservableList<String> optionsList = FXCollections.observableArrayList();
+    //@FXML
+    //Pane wrapperPaneProducts = new Pane();
 
     public void loadMainView(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-view.fxml"));
@@ -40,11 +46,8 @@ public class OptionsView {
     }
 
     public void setMainApp(MainApp mainApp) throws IOException {
-        //optionsList.add("Tuotteet");
-        //optionsList.add("Käyttäjät");
-        //listView.setItems(optionsList);
 
-        /* Change views: */
+        /** Change views: */
         btn1.setOnAction(e -> {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane = null;
@@ -57,6 +60,28 @@ public class OptionsView {
         });
 
         btn2.setOnAction(e -> {
+            wrapperPane.getChildren().clear();
+            Pane newLoadedPane2 = null;
+            try {
+                newLoadedPane2 = FXMLLoader.load(getClass().getResource("products-view.fxml"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            wrapperPane.getChildren().add(newLoadedPane2);
+        });
+
+        btn3.setOnAction(e -> {
+            wrapperPane.getChildren().clear();
+            Pane newLoadedPane2 = null;
+            try {
+                newLoadedPane2 = FXMLLoader.load(getClass().getResource("add-user-view.fxml"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            wrapperPane.getChildren().add(newLoadedPane2);
+        });
+
+        btn4.setOnAction(e -> {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane2 = null;
             try {
