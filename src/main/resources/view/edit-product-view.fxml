@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" >
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane layoutX="14.0" layoutY="19.0" prefHeight="363.0" prefWidth="377.0">
             <columnConstraints>
@@ -29,14 +29,13 @@
                 <Label text="Tuotteen kuvaus" GridPane.rowIndex="2" />
                 <Label text="Tuotteen hinta" GridPane.rowIndex="3" />
                 <Label text="Varastomäärä" GridPane.rowIndex="4" />
-                <TextField  GridPane.columnIndex="1" />
-                <TextField  GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField GridPane.columnIndex="1" />
+                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField  GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <TextField  GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Button mnemonicParsing="false" text="Tallenna" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Button mnemonicParsing="false" text="Muokkaa" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             </children>
         </GridPane>
     </children>
 </Pane>
-
