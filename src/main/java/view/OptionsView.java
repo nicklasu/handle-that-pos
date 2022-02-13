@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import model.classes.Product;
 import model.classes.User;
 
 import java.io.IOException;
@@ -38,11 +39,12 @@ public class OptionsView {
     Pane wrapperPane = new Pane();
     //@FXML
     //Pane wrapperPaneProducts = new Pane();
+    private FXMLLoader loader;
 
     public void loadMainView(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-view.fxml"));
-        new ViewLoader(transactionAnchorPane, fxmlLoader.load());
-        ((MainView) fxmlLoader.getController()).setMainApp(this.mainApp);
+        this.loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
+        new ViewLoader(transactionAnchorPane, this.loader.load());
+        ((MainView) this.loader.getController()).setMainApp(this.mainApp);
     }
 
     public void setMainApp(MainApp mainApp) throws IOException {
@@ -52,7 +54,12 @@ public class OptionsView {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane = null;
             try {
-                newLoadedPane = FXMLLoader.load(getClass().getResource("users-view.fxml"));
+                this.loader = new FXMLLoader();
+                this.loader.setLocation(getClass().getResource("products-view.fxml"));
+                newLoadedPane = this.loader.load();
+                ProductManagementView view = this.loader.getController();
+                view.setMainApp(mainApp);
+                //newLoadedPane = FXMLLoader.load(getClass().getResource("users-view.fxml"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -63,7 +70,14 @@ public class OptionsView {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane2 = null;
             try {
-                newLoadedPane2 = FXMLLoader.load(getClass().getResource("products-view.fxml"));
+                this.loader = new FXMLLoader();
+                this.loader.setLocation(getClass().getResource("products-view.fxml"));
+                newLoadedPane2 = this.loader.load();
+                ProductManagementView view = this.loader.getController();
+                view.setMainApp(mainApp);
+
+
+                //newLoadedPane2 = FXMLLoader.load(getClass().getResource("products-view.fxml"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -72,25 +86,30 @@ public class OptionsView {
 
         btn3.setOnAction(e -> {
             wrapperPane.getChildren().clear();
-            Pane newLoadedPane2 = null;
+            Pane newLoadedPane3 = null;
             try {
-                newLoadedPane2 = FXMLLoader.load(getClass().getResource("add-user-view.fxml"));
+                this.loader = new FXMLLoader();
+                this.loader.setLocation(getClass().getResource("add-user-view.fxml"));
+                newLoadedPane3 = this.loader.load();
+                AddUserView view = this.loader.getController();
+                view.setMainApp(mainApp);
+                //newLoadedPane2 = FXMLLoader.load(getClass().getResource("add-user-view.fxml"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            wrapperPane.getChildren().add(newLoadedPane2);
+            wrapperPane.getChildren().add(newLoadedPane3);
         });
 
-        btn4.setOnAction(e -> {
-            wrapperPane.getChildren().clear();
-            Pane newLoadedPane2 = null;
-            try {
-                newLoadedPane2 = FXMLLoader.load(getClass().getResource("add-product-view.fxml"));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            wrapperPane.getChildren().add(newLoadedPane2);
-        });
+//        btn4.setOnAction(e -> {
+//            wrapperPane.getChildren().clear();
+//            Pane newLoadedPane2 = null;
+//            try {
+//                newLoadedPane2 = FXMLLoader.load(getClass().getResource("add-product-view.fxml"));
+//            } catch (IOException ex) {
+//                ex.printStackTrace();
+//            }
+//            wrapperPane.getChildren().add(newLoadedPane2);
+//        });
 
         this.mainApp = mainApp;
         User user = this.mainApp.getEngine().getUser();

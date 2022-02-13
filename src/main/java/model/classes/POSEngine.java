@@ -74,9 +74,7 @@ public class POSEngine implements IPOSEngine {
     }
 
     @Override
-    public void saveProduct(Product product) {
-        productDAO.addProduct(product);
-    }
+    public ProductDAO productDao() { return this.productDAO;  }
 
     private String hashPassword(String password){
         return BCrypt.withDefaults().hashToString(12, password.toCharArray());
@@ -87,6 +85,12 @@ public class POSEngine implements IPOSEngine {
 
     public void setTransaction(Transaction testTransaction) {
         this.transaction = testTransaction;
+    }
+
+    @Override
+    public void addUser(User user) {
+        user.setPassword(hashPassword(user.getPassword()));
+        userDAO.createUser(user);
     }
 
     @Override

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DeleteProductView">
     <children>
         <GridPane layoutX="14.0" layoutY="19.0" prefHeight="363.0" prefWidth="377.0">
             <columnConstraints>
@@ -25,8 +25,8 @@
             </rowConstraints>
             <children>
                 <Label text="Tuotteen viivakoodi" />
-                <TextField GridPane.columnIndex="1" />
-                <Button mnemonicParsing="false" text="Poistaa" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="productBarcode" GridPane.columnIndex="1" />
+                <Button mnemonicParsing="false" onAction="#deleteProduct" text="Poistaa" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             </children>
         </GridPane>
     </children>

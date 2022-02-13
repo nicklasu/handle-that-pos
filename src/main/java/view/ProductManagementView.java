@@ -15,7 +15,12 @@ import model.classes.User;
 import java.io.IOException;
 
 public class ProductManagementView {
-    //@FXML
+    private MainApp mainApp;
+    private FXMLLoader loader;
+    public void setMainApp(MainApp mainApp) throws IOException {
+        this.mainApp = mainApp;
+    }
+        //@FXML
     //private Button addProductBtn;
     @FXML
     Pane wrapperPaneProducts = new Pane();
@@ -27,7 +32,12 @@ public class ProductManagementView {
         wrapperPaneProducts.getChildren().clear();
         Pane newLoadedPane3 = null;
         try {
-            newLoadedPane3 = FXMLLoader.load(getClass().getResource("add-product-view.fxml"));
+            this.loader = new FXMLLoader();
+            this.loader.setLocation(getClass().getResource("add-product-view.fxml"));
+            newLoadedPane3 = this.loader.load();
+            AddProductView view = this.loader.getController();
+            view.setMainApp(mainApp);
+            //newLoadedPane3 = FXMLLoader.load(getClass().getResource("add-product-view.fxml"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -41,7 +51,12 @@ public class ProductManagementView {
         wrapperPaneProducts.getChildren().clear();
         Pane newLoadedPane3 = null;
         try {
-            newLoadedPane3 = FXMLLoader.load(getClass().getResource("delete-product-view.fxml"));
+            this.loader = new FXMLLoader();
+            this.loader.setLocation(getClass().getResource("delete-product-view.fxml"));
+            newLoadedPane3 = this.loader.load();
+            DeleteProductView view = this.loader.getController();
+            view.setMainApp(mainApp);
+            //newLoadedPane3 = FXMLLoader.load(getClass().getResource("delete-product-view.fxml"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -55,7 +70,12 @@ public class ProductManagementView {
         wrapperPaneProducts.getChildren().clear();
         Pane newLoadedPane3 = null;
         try {
-            newLoadedPane3 = FXMLLoader.load(getClass().getResource("edit-product-view.fxml"));
+            this.loader = new FXMLLoader();
+            this.loader.setLocation(getClass().getResource("edit-product-view.fxml"));
+            newLoadedPane3 = this.loader.load();
+            EditProductView view = this.loader.getController();
+            view.setMainApp(mainApp);
+            //newLoadedPane3 = FXMLLoader.load(getClass().getResource("edit-product-view.fxml"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

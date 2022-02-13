@@ -1,6 +1,7 @@
 package model.interfaces;
 
 import model.classes.Product;
+import model.classes.ProductDAO;
 import model.classes.User;
 
 public interface IPOSEngine {
@@ -10,5 +11,6 @@ public interface IPOSEngine {
     ITransaction getTransaction();
     Product scanProduct(String id);
     void confirmTransaction();
-    void saveProduct(Product product);
+    ProductDAO productDao();
+    void addUser(User user);
     }
