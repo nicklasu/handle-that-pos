@@ -4,6 +4,9 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import model.interfaces.IPOSEngine;
 import model.interfaces.ITransaction;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 public class POSEngine implements IPOSEngine {
 
     private ITransaction transaction = null;
@@ -69,6 +72,10 @@ public class POSEngine implements IPOSEngine {
     }
     @Override
     public void confirmTransaction(){
+
+        Date date = new Date();
+        Timestamp ts = new Timestamp(date.getTime());
+        transaction.setTimestamp(ts);
 
         transaction = null;
     }
