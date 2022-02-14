@@ -2,6 +2,9 @@ package model.interfaces;
 
 import model.classes.Customer;
 import model.classes.PaymentMethod;
+import model.classes.User;
+
+import java.sql.Timestamp;
 
 public interface ITransaction {
     IOrder getOrder();
@@ -15,4 +18,12 @@ public interface ITransaction {
     PaymentMethod getPaymentMethod();
 
     void setPaymentMethod(PaymentMethod paymentMethod);
+
+    User getUser();
+
+    void setUser(User user);
+
+    Timestamp getTimestamp();
+
+    void setTimestamp(Timestamp timestamp);
 }

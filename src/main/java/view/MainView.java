@@ -169,11 +169,16 @@ public class MainView {
         addHotkeys(hotkeyButtons);
         // Populate listView with already existing products from open Transaction
         if (this.mainApp.getEngine().getTransaction() != null) {
-            ArrayList<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
-            for (Product product : products) {
-                if (!items.contains(product)) {
-                    items.add(product);
+            try {
+                ArrayList<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
+
+                for (Product product : products) {
+                    if (!items.contains(product)) {
+                        items.add(product);
+                    }
                 }
+            } catch (Exception e) {
+                System.out.println("No products in order");
             }
         }
         scanListView.setItems(items);
