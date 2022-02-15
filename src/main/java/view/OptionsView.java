@@ -55,9 +55,9 @@ public class OptionsView {
             Pane newLoadedPane = null;
             try {
                 this.loader = new FXMLLoader();
-                this.loader.setLocation(getClass().getResource("products-view.fxml"));
+                this.loader.setLocation(getClass().getResource("users-view.fxml"));
                 newLoadedPane = this.loader.load();
-                ProductManagementView view = this.loader.getController();
+                UsersView view = this.loader.getController();
                 view.setMainApp(mainApp);
                 //newLoadedPane = FXMLLoader.load(getClass().getResource("users-view.fxml"));
             } catch (IOException ex) {
