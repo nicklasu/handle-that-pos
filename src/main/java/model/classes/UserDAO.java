@@ -13,17 +13,11 @@ public class UserDAO {
     public UserDAO() {
 
         try {
-
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-
-        } catch (Exception e) {
-
-            System.err.println("Istuntotehtaan luominen ei onnistunut.");
-
+            sessionFactory = HibernateUtil.getSessionFactory();
+        }
+        catch (Exception e){
+            System.out.println("Virhe istuntotehtaan luomisessa");
             e.printStackTrace();
-
-            System.exit(-1);
-
         }
 
     }

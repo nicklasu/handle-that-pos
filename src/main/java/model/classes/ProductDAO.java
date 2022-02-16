@@ -10,22 +10,15 @@ import java.util.List;
 
 public class ProductDAO {
     private SessionFactory sessionFactory = null;
-    public ProductDAO() {
 
+    public ProductDAO(){
         try {
-
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-
-        } catch (Exception e) {
-
-            System.err.println("Istuntotehtaan luominen ei onnistunut.");
-
-            e.printStackTrace();
-
-            System.exit(-1);
-
+            sessionFactory = HibernateUtil.getSessionFactory();
         }
-
+        catch (Exception e){
+            System.out.println("Virhe istuntotehtaan luomisessa");
+            e.printStackTrace();
+        }
     }
 
     public Product getProduct(String id) {
