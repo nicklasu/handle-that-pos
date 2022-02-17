@@ -11,7 +11,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.classes.Product;
-import model.classes.ProductDAO;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -78,8 +77,11 @@ public class MainView {
     }
 
     public void setTotalPrice() {
-        float priceInEuros = this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100.0f;
-        this.totalPriceLabel.setText(Float.toString(priceInEuros));
+        try {
+            float priceInEuros = this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100.0f;
+            this.totalPriceLabel.setText(Float.toString(priceInEuros));
+        } catch (NullPointerException ignored) {
+        }
     }
 
     @FXML
@@ -93,14 +95,10 @@ public class MainView {
     }
 
     private void addHotkeys(ArrayList<Button> hotkeys) {
-        ProductDAO productDAO = new ProductDAO();
+        String hotkeyProductNames[] = mainApp.getHotkeyButtonNames(hotkeyProductIds);
         for (int i = 0; i < hotkeys.size(); i++) {
             setHotkeyButton(hotkeys.get(i));
-            try {
-                hotkeys.get(i).setText(productDAO.getProduct(hotkeyProductIds[i]).getName());
-            } catch (Exception e) {
-
-            }
+            hotkeys.get(i).setText(hotkeyProductNames[i]);
         }
     }
 
@@ -133,6 +131,7 @@ public class MainView {
                         if (productId != null) {
                             hotkeyProductIds[buttonId] = productId;
                             hotkeyFileHandler.saveHotkeys(hotkeyProductIds);
+                            mainApp.setHotkeyButtonNames(hotkeyProductIds);
                             hotkeyButtons.get(buttonId).setText(items.get(items.size() - 1).getName());
                         } else {
                             Alert alert = new Alert(Alert.AlertType.ERROR, "Skannaa tuote ennen kuin yrität tallentaa sitä pikanäppäimeen!", ButtonType.CLOSE);
@@ -157,12 +156,6 @@ public class MainView {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
         this.usernameLabel.setText(mainApp.getEngine().getUser().getUsername());
-        //Make barcodeTextField accept only numbers
-        barcodeTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*")) {
-                barcodeTextField.setText(newValue.replaceAll("[^\\d]", ""));
-            }
-        });
         hotkeyFileHandler = new HotkeyFileHandler();
         hotkeyFileHandler.loadHotkeys(hotkeyProductIds);
         hotkeyButtons.add(hotkeyButton0);
@@ -184,6 +177,7 @@ public class MainView {
         }
         scanListView.setItems(items);
         scanListView.setCellFactory(productListView -> new ProductListViewCell(this, this.mainApp.getEngine().getTransaction().getOrder(), this.items));
+        setTotalPrice();
         //Pressing enter runs readBarcode()
         barcodeTextField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)
@@ -191,12 +185,5 @@ public class MainView {
         });
         items.addListener((ListChangeListener<Product>) change -> setTotalPrice());
         barcodeTextField.requestFocus();
-    }
-
-    @FXML
-    private void handleInputChange() {
-        if (barcodeTextField.getText().length() == 8) {
-            readBarcode();
-        }
     }
 }

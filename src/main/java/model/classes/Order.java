@@ -53,7 +53,6 @@ public class Order implements IOrder {
         this.transaction = transaction;
     }
 
-    //@OneToMany(mappedBy = "primaryKey.order", cascade = CascadeType.ALL)
     public Set<OrderProduct> getOrderProducts() {
         return orderProducts;
     }
@@ -67,10 +66,10 @@ public class Order implements IOrder {
     }
 
     @Override
-    public List<Product> getProductList() throws RuntimeException {
-        if(productList.size()==0){
+    public List<Product> getProductList() {
+       /* if(productList.size()==0){
             throw new RuntimeException("No products in the order");
-        }
+        }*/
         return this.productList;
     }
 
