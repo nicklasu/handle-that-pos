@@ -4,11 +4,12 @@ import model.interfaces.IOrder;
 import java.util.ArrayList;
 
 public class Order implements IOrder {
+    private int id;
     private ArrayList<Product> productList = new ArrayList<>();
     private int totalPrice = 0;
 
     @Override
-    public ArrayList<Product> getProductList() {
+    public ArrayList<Product> getProductList() throws RuntimeException {
         if(productList.size()==0){
             throw new RuntimeException("No products in the order");
         }
