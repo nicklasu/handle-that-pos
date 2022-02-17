@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.classes.POSEngine;
-import model.classes.UserDAO;
+import model.classes.ProductDAO;
 import model.interfaces.IPOSEngine;
 
 import java.io.IOException;
@@ -14,7 +14,8 @@ public class MainApp extends Application {
 
     private Stage stage;
     private IPOSEngine engine;
-
+    private String hotkeyProductNames[] = new String[2];
+    private boolean hotkeyDatabaseSearch = false;
     /*
     @Override
     public void start(Stage stage) throws IOException {
@@ -42,6 +43,33 @@ public class MainApp extends Application {
         showLoginView();
     }
 
+    public String[] getHotkeyButtonNames(String hotkeyProductIds[]) {
+        if (!hotkeyDatabaseSearch) {
+            ProductDAO productDAO = new ProductDAO();
+            for (int i = 0; i < hotkeyProductIds.length; i++) {
+                //Necessary try catch. Otherwise program crash and burn.
+                try {
+                    hotkeyProductNames[i] = productDAO.getProduct(hotkeyProductIds[i]).getName();
+                } catch (Exception ignored) {
+
+                }
+            }
+            hotkeyDatabaseSearch = true;
+        }
+        return hotkeyProductNames;
+    }
+
+    public void setHotkeyButtonNames(String hotkeyProductIds[]){
+        ProductDAO productDAO = new ProductDAO();
+        for(int i = 0; i < hotkeyProductIds.length; i++){
+            try {
+                hotkeyProductNames[i] = productDAO.getProduct(hotkeyProductIds[i]).getName();
+            } catch (Exception ignored) {
+
+            }
+        }
+    }
+
     public void showMainView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("main-view.fxml"));
@@ -54,7 +82,7 @@ public class MainApp extends Application {
 
             this.stage.show();
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -70,12 +98,13 @@ public class MainApp extends Application {
             loginView.setMainApp(this);
 
             this.stage.show();
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void showTransactionView() {}
+    public void showTransactionView() {
+    }
 
     public IPOSEngine getEngine() {
         return this.engine;
