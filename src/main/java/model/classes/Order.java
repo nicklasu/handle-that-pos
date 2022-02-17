@@ -10,9 +10,9 @@ public class Order implements IOrder {
 
     @Override
     public ArrayList<Product> getProductList() throws RuntimeException {
-        if(productList.size()==0){
+       /* if(productList.size()==0){
             throw new RuntimeException("No products in the order");
-        }
+        }*/
         return this.productList;
     }
 
