@@ -31,21 +31,21 @@ class POSEngineTest extends TestParent {
 
     @Test
     void getUser() {
-        Assertions.assertEquals("User{id=1, username='testuser', password='$2a$12$QHOXCl8u2OzUpMWRM5oV3eB4rRHTvtyZhgEppjJSJKK2OFKAeN0va', fName='Testi', lName='Käyttäjä', activity=0}", testEngine.getUser().toString(), "error getting logged in user");
+        Assertions.assertEquals("User{id=1, username='testuser', password='$2a$12$QHOXCl8u2OzUpMWRM5oV3eB4rRHTvtyZhgEppjJSJKK2OFKAeN0va', fName='Testi', lName='User', activity=0}", testEngine.getUser().toString(), "error getting logged in user");
     }
 
     @Test
     void getTransaction() {
         testEngine.setTransaction(this.createTestTransaction(testEngine.getUser()));
-        Assertions.assertEquals("Transaction{order=Order{productList=[Suola, Sokeri], totalPrice=300}, customer=Customer{id=3992, customerLevel=NONE}, paymentMethod=CASH, user=User{id=1, username='testuser', password='$2a$12$QHOXCl8u2OzUpMWRM5oV3eB4rRHTvtyZhgEppjJSJKK2OFKAeN0va', fName='Testi', lName='Käyttäjä', activity=0}}", testEngine.getTransaction().toString(), "Problem getting the transaction from engine");
+        Assertions.assertEquals("Transaction{order=Order{productList=[Suola, Sokeri], totalPrice=300}, customer=Customer{id=3992, customerLevel=NONE}, paymentMethod=CASH, user=User{id=1, username='testuser', password='$2a$12$QHOXCl8u2OzUpMWRM5oV3eB4rRHTvtyZhgEppjJSJKK2OFKAeN0va', fName='Testi', lName='User', activity=0}}", testEngine.getTransaction().toString(), "Problem getting the transaction from engine");
     }
 
     @Test
-    @Disabled("Test skipped, implementable after some products exist in the DB")
+
     void scanProduct() {
-        testEngine.scanProduct("1");
-        testEngine.scanProduct("2");
-        Assertions.assertEquals("asd", testEngine.getTransaction().toString(), "problems with scanning products");
+        testEngine.scanProduct("12345678");
+        testEngine.scanProduct("ASDFGHJK");
+        Assertions.assertEquals(600, testEngine.getTransaction().getOrder().getTotalPrice(), "problems with scanning products and adding them to order");
     }
 
     @Test
