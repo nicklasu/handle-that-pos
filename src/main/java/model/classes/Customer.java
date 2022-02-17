@@ -1,14 +1,28 @@
 package model.classes;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Asiakas")
 public class Customer {
+
+    @Id
+    @GeneratedValue // voidaan käyttää ei generated valueta
+    @Column(name = "ID")
     private int id;
+
+    @Transient
     private CustomerLevel customerLevel;
+
+    @Column(name = "Asiakkuus")
+    private int customerLevelIndex;
 
     public Customer(){}
 
     public Customer(int id, CustomerLevel customerLevel) {
         this.id = id;
         this.customerLevel = customerLevel;
+        this.customerLevelIndex = 1; //CustomerLevel.valueOf(customerLevel.name()).ordinal();
     }
 
 

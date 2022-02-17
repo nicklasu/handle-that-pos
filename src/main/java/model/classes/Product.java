@@ -1,6 +1,8 @@
 package model.classes;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Tuote")
@@ -19,6 +21,9 @@ public class Product {
     @Column(name = "Varastomäärä")
     private int stock;
 
+    @OneToMany(mappedBy = "primaryKey.product", cascade = CascadeType.ALL)
+    private Set<OrderProduct> orderProducts = new HashSet<>();
+
     public Product() {
 
     }
@@ -29,6 +34,19 @@ public class Product {
         this.description = description;
         this.price = price;
         this.stock = stock;
+    }
+
+    //@OneToMany(mappedBy = "primaryKey.product", cascade = CascadeType.ALL)
+    public Set<OrderProduct> getOrderProducts() {
+        return orderProducts;
+    }
+
+    public void setOrderProducts(Set<OrderProduct> orderProducts) {
+        this.orderProducts = orderProducts;
+    }
+
+    public void addOrderProduct(OrderProduct orderProduct) {
+        this.orderProducts.add(orderProduct);
     }
 
     public String getId() {

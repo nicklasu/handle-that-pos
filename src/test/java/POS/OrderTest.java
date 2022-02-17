@@ -2,6 +2,8 @@ package POS;
 
 import model.classes.Order;
 import model.classes.Product;
+import model.classes.Transaction;
+import model.classes.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +28,7 @@ class OrderTest extends TestParent {
     @BeforeEach
     void beforeEach() {
         Product[] testProducts = new Product[]{new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100), new Product("0", "Sokeri", "Kahviin slurps", 100, 100)};
-        this.testOrder = new Order();
+        this.testOrder = new Order(new Transaction(new User()));
         this.testOrder.addProductToOrder(testProducts[0]);
         this.testOrder.addProductToOrder(testProducts[1]);
     }
@@ -72,7 +74,7 @@ class OrderTest extends TestParent {
     @Test
     void PriceOfLots() {
         Product[] testProducts = new Product[]{new Product("0b", "Suola", "Kananmunan päälle naminami", 200, 100)};
-        this.testOrder = new Order();
+        this.testOrder = new Order(new Transaction(new User()));
 
         for (int i = 0; i < 100; ++i) {
             this.testOrder.addProductToOrder(testProducts[0]);
@@ -83,7 +85,7 @@ class OrderTest extends TestParent {
 
     @Test
     void GetEmptyOrder() {
-        Order emptyOrder = new Order();
+        Order emptyOrder = new Order(new Transaction(new User()));
         Objects.requireNonNull(emptyOrder);
         RuntimeException poikkeus = (RuntimeException) Assertions.assertThrows(RuntimeException.class, emptyOrder::getProductList);
         Assertions.assertEquals("No products in the order", poikkeus.getMessage());

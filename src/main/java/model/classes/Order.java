@@ -1,15 +1,73 @@
 package model.classes;
 
 import model.interfaces.IOrder;
-import java.util.ArrayList;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+@Table(name = "Tilaus")
 public class Order implements IOrder {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private int id;
-    private ArrayList<Product> productList = new ArrayList<>();
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "MaksutapahtumaID")
+    private Transaction transaction;
+
+    @OneToMany(mappedBy = "primaryKey.order", cascade = CascadeType.ALL)
+    private Set<OrderProduct> orderProducts = new HashSet<>();
+
+    @Transient
+    private List<Product> productList = new ArrayList<>();
+
+    @Transient
     private int totalPrice = 0;
 
+    public Order() {}
+
+    public Order(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
+    //@OneToMany(mappedBy = "primaryKey.order", cascade = CascadeType.ALL)
+    public Set<OrderProduct> getOrderProducts() {
+        return orderProducts;
+    }
+
+    public void setOrderProducts(Set<OrderProduct> orderProducts) {
+        this.orderProducts = orderProducts;
+    }
+
+    public void addOrderProduct(OrderProduct orderProduct) {
+        this.orderProducts.add(orderProduct);
+    }
+
     @Override
-    public ArrayList<Product> getProductList() throws RuntimeException {
+    public List<Product> getProductList() throws RuntimeException {
         if(productList.size()==0){
             throw new RuntimeException("No products in the order");
         }
@@ -22,8 +80,26 @@ public class Order implements IOrder {
     @Override
     public boolean addProductToOrder(Product product) {
         try{
+
+            if (!productList.contains(product)) {
+                OrderProduct orderProduct = new OrderProduct();
+                orderProduct.setOrder(this);
+                orderProduct.setProduct(product);
+                addOrderProduct(orderProduct);
+                System.out.println(orderProduct.getOrder().getId() + "" + orderProduct.getProduct());
+            } else {
+                for (OrderProduct op : orderProducts) {
+                    if (op.getProduct().equals(product)) {
+                        op.setAmount(op.getAmount() + 1);
+                        System.out.println(op);
+                    }
+                }
+            }
+
             productList.add(product);
             totalPrice += product.getPrice();
+
+
             return true;
         }catch(Exception e){
             System.out.println("Error adding a product to the order " + e);
@@ -47,5 +123,19 @@ public class Order implements IOrder {
                 "productList=" + productList +
                 ", totalPrice=" + totalPrice +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        final Order order = (Order) o;
+
+        return this.productList == order.productList;
     }
 }

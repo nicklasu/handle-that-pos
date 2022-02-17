@@ -4,21 +4,34 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import model.interfaces.IPOSEngine;
 import model.interfaces.ITransaction;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Date;
 
+@Entity
+@Table(name = "Maksupääte")
 public class POSEngine implements IPOSEngine {
 
+    @Id
+    @Column(name = "ID", updatable = false, nullable = false)
+    private int id = 0;
+
+    @Transient
     private ITransaction transaction = null;
+    @Transient
     private User user = null;
+    @Transient
     private UserDAO userDAO;
+    @Transient
     private ProductDAO productDAO;
+    @Transient
+    private TransactionDAO transactionDAO;
 
     // constructor
     public POSEngine() {
         this.userDAO = new UserDAO();
         this.productDAO = new ProductDAO();
-
+        this.transactionDAO = new TransactionDAO();
     }
 
     @Override
@@ -36,6 +49,14 @@ public class POSEngine implements IPOSEngine {
         }
 
         return false;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -76,6 +97,11 @@ public class POSEngine implements IPOSEngine {
         Date date = new Date();
         Timestamp ts = new Timestamp(date.getTime());
         transaction.setTimestamp(ts);
+        ((Transaction)transaction).setPos(this);
+
+        transactionDAO.addTransaction((Transaction) this.transaction);
+
+
 
         transaction = null;
     }

@@ -2,6 +2,7 @@ package model.interfaces;
 
 import model.classes.Product;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface IOrder {
 
@@ -12,6 +13,6 @@ public interface IOrder {
      */
     boolean addProductToOrder(Product product);
     boolean removeProductFromOrder(Product product);
-    ArrayList<Product> getProductList();
+    List<Product> getProductList();
     int getTotalPrice();
 }

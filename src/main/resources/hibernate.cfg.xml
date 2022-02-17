@@ -33,5 +33,10 @@
         <!-- Mapping to hibernate mapping files -->
         <mapping class="model.classes.User" />
         <mapping class="model.classes.Product" />
+        <mapping class="model.classes.Order" />
+        <mapping class="model.classes.OrderProduct" />
+        <mapping class="model.classes.Customer" />
+        <mapping class="model.classes.Transaction" />
+        <mapping class="model.classes.POSEngine" />
     </session-factory>
 </hibernate-configuration>
