@@ -1,15 +1,16 @@
 package model.interfaces;
 
 import model.classes.Customer;
+import model.classes.Order;
 import model.classes.PaymentMethod;
 import model.classes.User;
 
 import java.sql.Timestamp;
 
 public interface ITransaction {
-    IOrder getOrder();
+    Order getOrder();
 
-    void setOrder(IOrder order);
+    void setOrder(Order order);
 
     Customer getCustomer();
 

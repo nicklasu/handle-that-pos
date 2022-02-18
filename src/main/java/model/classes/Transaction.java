@@ -3,23 +3,69 @@ package model.classes;
 import model.interfaces.IOrder;
 import model.interfaces.ITransaction;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 
+@Entity
+@Table(name = "Maksutapahtuma")
 public class Transaction implements ITransaction {
 
-    private IOrder order;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private int id;
+
+    @OneToOne(mappedBy = "transaction", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Order order;
+
+    //@OneToOne
+    //@MapsId
+    //@JoinColumn(name = "AsiakasID")
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "AsiakasID", referencedColumnName = "id")
     private Customer customer;
+
+    @Transient
     private PaymentMethod paymentMethod;
+
+    @Column(name = "MaksutapaID")
+    private int paymentMethodIndex;
+
+    //@OneToOne
+    //@MapsId
+    //@JoinColumn(name = "KäyttäjäID")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "KäyttäjäID", referencedColumnName = "id")
     private User user;
+
+    @Column(name = "Aikaleima")
     private Timestamp timestamp;
 
+    //@Column(name = "MaksupääteID")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "MaksupääteID", referencedColumnName = "id")
+    private POSEngine pos;
+
+    public Transaction() { }
 
     public Transaction(User user) {
-        this.order = new Order();
+        this.order = new Order(this);
         this.paymentMethod = PaymentMethod.CARD; // Oletuksena maksukortti maksutapana
+        this.paymentMethodIndex = 1; //PaymentMethod.valueOf(paymentMethod.name()).ordinal();
         this.customer = null; // Ei Bonsuasiakkuutta oletuksena
         this.user = user;
         this.timestamp = null;
+        this.pos = null;
+    }
+
+    public POSEngine getPos() {
+        return pos;
+    }
+
+    public void setPos(POSEngine pos) {
+        this.pos = pos;
     }
 
     public User getUser() {
@@ -39,12 +85,12 @@ public class Transaction implements ITransaction {
     }
 
     @Override
-    public IOrder getOrder() {
+    public Order getOrder() {
         return this.order;
     }
 
     @Override
-    public void setOrder(IOrder order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
 
@@ -66,6 +112,14 @@ public class Transaction implements ITransaction {
     @Override
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public int getPaymentMethodIndex() {
+        return paymentMethodIndex;
+    }
+
+    public void setPaymentMethodIndex(int paymentMethodIndex) {
+        this.paymentMethodIndex = paymentMethodIndex;
     }
 
     @Override

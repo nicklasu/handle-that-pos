@@ -14,6 +14,7 @@ import model.classes.Product;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainView {
@@ -163,7 +164,7 @@ public class MainView {
         // Populate listView with already existing products from open Transaction
         if (this.mainApp.getEngine().getTransaction() != null) {
             try {
-                ArrayList<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
+                List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
 
                 for (Product product : products) {
                     if (!items.contains(product)) {

@@ -11,6 +11,7 @@ import model.classes.Product;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionView {
     private MainApp mainApp;
@@ -95,7 +96,7 @@ public class TransactionView {
         cardToggleButton.setToggleGroup(paymentButtonGroup);
         cashToggleButton.setToggleGroup(paymentButtonGroup);
         if (this.mainApp.getEngine().getTransaction() != null) {
-            ArrayList<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
+            List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
             items.addAll(products);
         }
         scanListView.setItems(items);
