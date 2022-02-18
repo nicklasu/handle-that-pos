@@ -16,7 +16,7 @@ public class Transaction implements ITransaction {
     private int id;
 
     @OneToOne(mappedBy = "transaction", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    //@PrimaryKeyJoinColumn
     private Order order;
 
     //@OneToOne

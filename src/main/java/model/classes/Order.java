@@ -17,9 +17,11 @@ public class Order implements IOrder {
     @Column(name = "ID")
     private int id;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "MaksutapahtumaID")
+    //@OneToOne
+    //@MapsId
+    //@JoinColumn(name = "MaksutapahtumaID")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "MaksutapahtumaID", referencedColumnName = "ID")
     private Transaction transaction;
 
     @OneToMany(mappedBy = "primaryKey.order", cascade = CascadeType.ALL)
