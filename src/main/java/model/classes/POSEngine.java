@@ -40,9 +40,10 @@ public class POSEngine implements IPOSEngine {
         User user = userDAO.getUser(username);
 
         BCrypt.Result result = compare(password, user.getPassword());
-        /**
-         * TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
-         */
+
+
+        //TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
+
         if (user != null && result.verified /*JOS SALIKSET TÄSMÄÄ*/) {
             this.user = user;
             return true;
@@ -79,9 +80,9 @@ public class POSEngine implements IPOSEngine {
             this.transaction = new Transaction(this.user);
         }
 
-        /**
-         * HAETAAN DATABASESTA ID:llä
-         */
+
+        //HAETAAN DATABASESTA ID:llä
+
         Product product = productDAO.getProduct(id);
 
         System.out.println(product.getName());
@@ -92,17 +93,15 @@ public class POSEngine implements IPOSEngine {
         return product;
     }
     @Override
-    public void confirmTransaction(){
-
+    public void confirmTransaction(boolean printReceipt){
         Date date = new Date();
         Timestamp ts = new Timestamp(date.getTime());
         transaction.setTimestamp(ts);
         ((Transaction)transaction).setPos(this);
-
         transactionDAO.addTransaction((Transaction) this.transaction);
-
-
-
+        if(printReceipt) {
+            new ReceiptPrinter().actionPerformed((Transaction) this.transaction);
+        }
         transaction = null;
     }
 
