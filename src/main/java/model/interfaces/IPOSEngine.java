@@ -10,7 +10,7 @@ public interface IPOSEngine {
     User getUser();
     ITransaction getTransaction();
     Product scanProduct(String id);
-    void confirmTransaction();
+    void confirmTransaction(boolean printReceipt);
     ProductDAO productDao();
     void addUser(User user);
     }

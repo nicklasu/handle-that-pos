@@ -14,4 +14,5 @@ module com.example.handlethatpos {
     exports view;
     opens model.classes;
     opens view;
+    exports model.classes;
 }

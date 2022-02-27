@@ -40,12 +40,13 @@ public class TransactionView {
     }
 
     @FXML
-    private void confirmPayment() throws IOException {
-        if (printReceipt) {
-            new ReceiptPrinter().actionPerformed();
-        }
-        this.mainApp.getEngine().confirmTransaction();
-        loadMainView();
+    private void confirmPayment() {
+        try {
+            this.mainApp.getEngine().confirmTransaction(printReceipt);
+            loadMainView();
+        } catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Ei tilauksia tuotteessa!", ButtonType.CLOSE);
+            alert.showAndWait();        }
     }
 
     @FXML
