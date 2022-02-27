@@ -16,12 +16,7 @@ public class Transaction implements ITransaction {
     private int id;
 
     @OneToOne(mappedBy = "transaction", cascade = CascadeType.ALL)
-    //@PrimaryKeyJoinColumn
     private Order order;
-
-    //@OneToOne
-    //@MapsId
-    //@JoinColumn(name = "AsiakasID")
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "AsiakasID", referencedColumnName = "id")
@@ -33,9 +28,6 @@ public class Transaction implements ITransaction {
     @Column(name = "MaksutapaID")
     private int paymentMethodIndex;
 
-    //@OneToOne
-    //@MapsId
-    //@JoinColumn(name = "KäyttäjäID")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "KäyttäjäID", referencedColumnName = "id")
     private User user;
@@ -43,7 +35,6 @@ public class Transaction implements ITransaction {
     @Column(name = "Aikaleima")
     private Timestamp timestamp;
 
-    //@Column(name = "MaksupääteID")
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "MaksupääteID", referencedColumnName = "id")
     private POSEngine pos;

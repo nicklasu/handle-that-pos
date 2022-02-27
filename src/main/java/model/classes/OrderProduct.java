@@ -10,7 +10,6 @@ import javax.persistence.*;
 public class OrderProduct {
     private OrderProductId primaryKey = new OrderProductId();
 
-    //@Column(name = "Määrä")
     private int amount = 1;
 
     @EmbeddedId

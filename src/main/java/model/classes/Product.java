@@ -36,7 +36,6 @@ public class Product {
         this.stock = stock;
     }
 
-    //@OneToMany(mappedBy = "primaryKey.product", cascade = CascadeType.ALL)
     public Set<OrderProduct> getOrderProducts() {
         return orderProducts;
     }
@@ -111,6 +110,6 @@ public class Product {
 
         final Product product = (Product) o;
 
-        return this.id == product.id;
+        return this.id.equals(product.id);
     }
 }

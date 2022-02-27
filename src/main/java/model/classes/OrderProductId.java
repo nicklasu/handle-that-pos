@@ -10,10 +10,8 @@ import java.util.Objects;
 
 @Embeddable
 public class OrderProductId implements Serializable {
-    //@ManyToOne(cascade = CascadeType.ALL)
-    private Order order;
 
-    //@ManyToOne(cascade = CascadeType.ALL)
+    private Order order;
     private Product product;
 
     @ManyToOne(cascade = CascadeType.ALL)
