@@ -29,7 +29,7 @@ public class HWID {
                 return hexString.toString();
             } catch (Exception e) {
                 e.printStackTrace();
-                return "Error";
+                return "Error!";
             }
         }
 

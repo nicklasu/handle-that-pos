@@ -43,9 +43,6 @@ public class POSEngine implements IPOSEngine {
         BCrypt.Result result = compare(password, user.getPassword());
         System.out.println(HWID.getHWID());
 
-
-
-
         //TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
 
         if (user != null && result.verified /*JOS SALIKSET TÄSMÄÄ*/) {
