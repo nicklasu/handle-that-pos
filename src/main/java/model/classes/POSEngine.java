@@ -32,6 +32,7 @@ public class POSEngine implements IPOSEngine {
         this.userDAO = new UserDAO();
         this.productDAO = new ProductDAO();
         this.transactionDAO = new TransactionDAO();
+
     }
 
     @Override
@@ -40,7 +41,7 @@ public class POSEngine implements IPOSEngine {
         User user = userDAO.getUser(username);
 
         BCrypt.Result result = compare(password, user.getPassword());
-
+        System.out.println(HWID.getHWID());
 
         //TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
 
@@ -134,4 +135,6 @@ public class POSEngine implements IPOSEngine {
                 ", productDAO=" + productDAO +
                 '}';
     }
+
+
 }
