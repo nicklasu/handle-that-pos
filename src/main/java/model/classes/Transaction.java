@@ -105,6 +105,10 @@ public class Transaction implements ITransaction {
         this.paymentMethod = paymentMethod;
     }
 
+    public int getID(){
+        return this.id;
+    }
+
     public int getPaymentMethodIndex() {
         return paymentMethodIndex;
     }

@@ -38,7 +38,9 @@ public class DAOTests extends TestParent{
     @Test
     void transactionDAO(){
         User u = new User("junit", "tester", "JUN", "123", 1);
-        Transaction td = super.createTestTransaction(u);
-
+        TransactionDAO td = new TransactionDAO();
+        Transaction t = super.createTestTransaction(u);
+        //td.addTransaction(t);
+        Assertions.assertEquals(t, td.getTransaction(t), "Error finding a transaction with dao");
     }
 }
