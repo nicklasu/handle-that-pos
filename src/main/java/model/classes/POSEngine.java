@@ -14,7 +14,7 @@ public class POSEngine implements IPOSEngine {
 
     @Id
     @Column(name = "ID", updatable = false, nullable = false)
-    private int id = 0;
+    private String id = HWID.getHWID();
 
     @Transient
     private ITransaction transaction = null;
@@ -53,11 +53,11 @@ public class POSEngine implements IPOSEngine {
         return false;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
