@@ -33,6 +33,7 @@ public class DAOTests extends TestParent{
         Assertions.assertNull(pd.getProduct(a.getId()), "Problem with removing a product with dao");
     }
 
+    @Disabled
     @Test
     public void transactionDAO(){
         User u = new User("junit", "tester", "JUN", "123", 1);

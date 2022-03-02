@@ -51,6 +51,7 @@ public class POSEngineTest extends TestParent {
         Assertions.assertEquals(600, testEngine.getTransaction().getOrder().getTotalPrice(), "problems with scanning products and adding them to order");
     }
 
+    @Disabled
     @Test
     public void confirmTransaction() {
         testEngine.setTransaction(this.createTestTransaction(testEngine.getUser()));

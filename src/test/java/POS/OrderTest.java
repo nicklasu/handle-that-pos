@@ -80,6 +80,7 @@ public class OrderTest extends TestParent {
         Assertions.assertEquals(20000, this.testOrder.getTotalPrice(), "Error handling price with large quantities");
     }
 
+    @Disabled
     @Test
     public void GetEmptyOrder() {
         Order emptyOrder = new Order(new Transaction(new User()));
