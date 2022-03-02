@@ -77,26 +77,33 @@ public class Order implements IOrder {
 
     @Override
     public boolean addProductToOrder(Product product) {
+
+        //System.out.println(product.hashCode());
+        Product productToAdd = product;
+
         try {
             if (!productList.contains(product)) {
                 OrderProduct orderProduct = new OrderProduct();
                 orderProduct.setOrder(this);
                 orderProduct.setProduct(product);
                 addOrderProduct(orderProduct);
-                System.out.println(orderProduct.getOrder().getId() + "" + orderProduct.getProduct());
+                //System.out.println(orderProduct.getOrder().getId() + "" + orderProduct.getProduct());
             } else {
                 for (OrderProduct op : orderProducts) {
                     if (op.getProduct().equals(product)) {
                         op.setAmount(op.getAmount() + 1);
-                        System.out.println(op);
+                        productToAdd = op.getProduct();
+                        //System.out.println(op);
                     }
                 }
             }
 
-            productList.add(product);
-            totalPrice += product.getPrice();
+            productList.add(productToAdd);
+            //System.out.println(productToAdd.hashCode());
+            //productList.add(product); // productToAdd
+            totalPrice += productToAdd.getPrice();
 
-            product.setStock(product.getStock() - 1);
+            productToAdd.setStock(productToAdd.getStock() - 1);
 
             return true;
         } catch (Exception e) {
