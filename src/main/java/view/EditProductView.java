@@ -23,8 +23,9 @@ public class EditProductView {
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
     }
+
     @FXML
-    private void editProduct(){
+    private void editProduct() {
         try {
             String barcode = productBarcode.getText();
             String name = productName.getText();
@@ -33,8 +34,7 @@ public class EditProductView {
             int stock = Integer.parseInt(productStock.getText());
             Product product = new Product(barcode, name, desc, price, stock);
             this.mainApp.getEngine().productDao().updateProduct(product);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("There was an error");
             e.printStackTrace();
         }

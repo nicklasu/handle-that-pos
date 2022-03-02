@@ -59,9 +59,9 @@ public class MainApp extends Application {
         return hotkeyProductNames;
     }
 
-    public void setHotkeyButtonNames(String hotkeyProductIds[]){
+    public void setHotkeyButtonNames(String hotkeyProductIds[]) {
         ProductDAO productDAO = new ProductDAO();
-        for(int i = 0; i < hotkeyProductIds.length; i++){
+        for (int i = 0; i < hotkeyProductIds.length; i++) {
             try {
                 hotkeyProductNames[i] = productDAO.getProduct(hotkeyProductIds[i]).getName();
             } catch (Exception ignored) {

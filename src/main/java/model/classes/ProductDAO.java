@@ -74,7 +74,8 @@ public class ProductDAO {
             }
         }
     }
-    public boolean deleteProduct(String id){
+
+    public boolean deleteProduct(String id) {
         Transaction transaction = null;
 
         try (Session session = sessionFactory.getCurrentSession()){

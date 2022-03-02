@@ -23,8 +23,9 @@ public class AddProductView {
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
     }
+
     @FXML
-    private void saveProduct(){
+    private void saveProduct() {
         try {
             String barcode = productBarcode.getText();
             String name = productName.getText();
@@ -33,8 +34,7 @@ public class AddProductView {
             int stock = Integer.parseInt(productStock.getText());
             Product product = new Product(barcode, name, desc, price, stock);
             this.mainApp.getEngine().productDao().addProduct(product);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("There was an error");
             e.printStackTrace();
         }

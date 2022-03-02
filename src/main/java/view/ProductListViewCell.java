@@ -45,9 +45,9 @@ public class ProductListViewCell extends ListCell<Product> {
     private int productAmount;
 
     public ProductListViewCell(MainView mainView, IOrder order, ObservableList<Product> items) {
-        this.mainView   = mainView;
-        this.order      = order;
-        this.items      = items;
+        this.mainView = mainView;
+        this.order = order;
+        this.items = items;
     }
 
 
@@ -55,7 +55,7 @@ public class ProductListViewCell extends ListCell<Product> {
     protected void updateItem(Product product, boolean empty) {
         super.updateItem(product, empty);
 
-        if(empty || product == null) {
+        if (empty || product == null) {
 
             setText(null);
             setGraphic(null);

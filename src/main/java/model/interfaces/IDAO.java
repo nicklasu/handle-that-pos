@@ -1,10 +1,10 @@
 package model.interfaces;
+
 import model.classes.DatabaseObject;
 
 /**
  * Interface-luokka tietokantaan tallennettavien objectien käsittelyä varten,
  * käsittää perus "CRUD" metodit
- *
  */
 public interface IDAO {
 

@@ -39,7 +39,8 @@ public class Transaction implements ITransaction {
     @JoinColumn(name = "MaksupääteID", referencedColumnName = "id")
     private POSEngine pos;
 
-    public Transaction() { }
+    public Transaction() {
+    }
 
     public Transaction(User user) {
         this.order = new Order(this);
@@ -105,7 +106,7 @@ public class Transaction implements ITransaction {
         this.paymentMethod = paymentMethod;
     }
 
-    public int getID(){
+    public int getID() {
         return this.id;
     }
 
