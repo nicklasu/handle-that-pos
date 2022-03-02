@@ -1,15 +1,12 @@
 package POS;
 
 import model.classes.Product;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ProductTest extends TestParent {
     Product test;
 
