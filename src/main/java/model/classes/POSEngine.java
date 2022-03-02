@@ -6,6 +6,7 @@ import model.interfaces.ITransaction;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -103,6 +104,23 @@ public class POSEngine implements IPOSEngine {
         transaction.setTimestamp(ts);
         ((Transaction) transaction).setPos(this);
         transactionDAO.addTransaction((Transaction) this.transaction);
+
+        try {
+            ArrayList<Product> productsToUpdate = new ArrayList<>();
+            for (Product product : this.transaction.getOrder().getProductList()) {
+                if (!productsToUpdate.contains(product)) {
+                    productsToUpdate.add(product);
+                }
+            }
+
+            for (Product product : productsToUpdate) {
+                productDAO.updateProduct(product);
+            }
+        } catch (Exception e) {
+            System.out.println("No products in order!");
+        }
+
+
         if (printReceipt) {
             new ReceiptPrinter().actionPerformed((Transaction) this.transaction);
         }

@@ -78,7 +78,6 @@ public class Order implements IOrder {
     @Override
     public boolean addProductToOrder(Product product) {
         try {
-
             if (!productList.contains(product)) {
                 OrderProduct orderProduct = new OrderProduct();
                 orderProduct.setOrder(this);
@@ -97,6 +96,7 @@ public class Order implements IOrder {
             productList.add(product);
             totalPrice += product.getPrice();
 
+            product.setStock(product.getStock() - 1);
 
             return true;
         } catch (Exception e) {
