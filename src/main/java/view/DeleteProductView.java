@@ -26,8 +26,16 @@ public class DeleteProductView {
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
-                this.mainApp.getEngine().productDao().deleteProduct(productBarcode.getText());
+                boolean res = this.mainApp.getEngine().productDao().deleteProduct(productBarcode.getText());
                 alert.close();
+                if(res == false){
+                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                    alert2.setTitle("Virhe");
+                    alert2.setHeaderText("Virhe");
+                    alert2.setContentText("Tuotetta ei löytynyt");
+                    alert2.showAndWait();
+                }
+
             } else {
                 alert.close();
             }
