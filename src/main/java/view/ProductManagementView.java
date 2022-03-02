@@ -47,7 +47,7 @@ public class ProductManagementView {
     /** Switch to delete-product-view.fxml */
     public void deleteProductPane(ActionEvent event) throws IOException{
 
-        System.out.println("add product button was pressed");
+        System.out.println("delete product button was pressed");
         wrapperPaneProducts.getChildren().clear();
         Pane newLoadedPane3 = null;
         try {
@@ -66,7 +66,7 @@ public class ProductManagementView {
     /** Switch to edit-product-view.fxml */
     public void editProductPane(ActionEvent event) throws IOException{
 
-        System.out.println("add product button was pressed");
+        System.out.println("edit product button was pressed");
         wrapperPaneProducts.getChildren().clear();
         Pane newLoadedPane3 = null;
         try {

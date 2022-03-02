@@ -39,7 +39,10 @@ public class DAOTests extends TestParent{
         User u = new User("junit", "tester", "JUN", "123", 1);
         TransactionDAO td = new TransactionDAO();
         Transaction t = super.createTestTransaction(u);
-        //td.addTransaction(t);
+        Assertions.assertNull(td.getTransaction(t), "Error getting a non-existent transaction with DAO");
+        td.addTransaction(t);
         Assertions.assertEquals(t, td.getTransaction(t), "Error finding a transaction with dao");
+        td.removeTransaction(t);
+        Assertions.assertNull(td.getTransaction(t), "Error removing a transaction with dao");
     }
 }
