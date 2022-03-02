@@ -11,7 +11,7 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class OrderTest extends TestParent {
+public class OrderTest extends TestParent {
     private Order testOrder;
 
     public OrderTest() {

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class ProductTest extends TestParent {
+public class ProductTest extends TestParent {
     Product test;
 
     public ProductTest() {

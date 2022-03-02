@@ -6,7 +6,7 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class TransactionTest extends TestParent {
+public class TransactionTest extends TestParent {
     private Transaction testTransaction;
 
     public TransactionTest() {
