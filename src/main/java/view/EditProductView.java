@@ -1,6 +1,8 @@
 package view;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import model.classes.Product;
 
@@ -19,9 +21,17 @@ public class EditProductView {
     private TextField productPrice;
     @FXML
     private TextField productStock;
+    @FXML
+    private Button editBtn;
 
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
+        BooleanBinding booleanBind = productBarcode.textProperty().isEmpty()
+                .or(productName.textProperty().isEmpty())
+                .or(productDesc.textProperty().isEmpty())
+                .or(productPrice.textProperty().isEmpty())
+                .or(productStock.textProperty().isEmpty());
+        editBtn.disableProperty().bind(booleanBind);
     }
     @FXML
     private void editProduct(){

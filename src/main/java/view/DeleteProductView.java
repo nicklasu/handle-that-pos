@@ -1,10 +1,10 @@
 package view;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.TextField;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -13,8 +13,12 @@ public class DeleteProductView {
     private MainApp mainApp;
     @FXML
     private TextField productBarcode;
+    @FXML
+    private Button deleteBtn;
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
+        BooleanBinding booleanBind = productBarcode.textProperty().isEmpty();
+        deleteBtn.disableProperty().bind(booleanBind);
     }
     @FXML
     private void deleteProduct(){
@@ -25,21 +29,31 @@ public class DeleteProductView {
             alert.setContentText("Poistetaanko varmasti?");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
+            if (result.get() == ButtonType.OK) {
                 boolean res = this.mainApp.getEngine().productDao().deleteProduct(productBarcode.getText());
+                System.out.println(res);
                 alert.close();
-                if(res == false){
-                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
-                    alert2.setTitle("Virhe");
-                    alert2.setHeaderText("Virhe");
-                    alert2.setContentText("Tuotetta ei löytynyt");
-                    alert2.showAndWait();
+                if (res) {
+                    System.out.println("Löytyi");
+                    Notifications.create()
+                            .owner(productBarcode.getScene().getWindow())
+                            .title("Onnistui")
+                            .text("Tuote poistettiin onnistuneesti!")
+                            .position(Pos.TOP_RIGHT)
+                            .show();
+
+                } else {
+                    System.out.println("Ei löytynyt");
+                    Notifications.create()
+                            .owner(productBarcode.getScene().getWindow())
+                            .title("Virhe")
+                            .text("Tuotetta ei löytynyt!")
+                            .position(Pos.TOP_RIGHT)
+                            .showError();
+
+
                 }
-
-            } else {
-                alert.close();
             }
-
 
         }catch (Exception e){
             System.out.println("There was an error");
