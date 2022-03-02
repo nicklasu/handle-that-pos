@@ -65,10 +65,7 @@ public class Order implements IOrder {
     }
 
     @Override
-    public List<Product> getProductList() {
-       /* if(productList.size()==0){
-            throw new RuntimeException("No products in the order");
-        }*/
+    public List<Product> getProductList(){
         return this.productList;
     }
 

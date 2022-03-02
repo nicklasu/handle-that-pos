@@ -2,7 +2,7 @@ package POS;
 
 import model.classes.*;
 
-public class TestParent {
+public abstract class TestParent {
     public TestParent() {
     }
 
@@ -23,4 +23,5 @@ public class TestParent {
         testTransaction.setPaymentMethod(PaymentMethod.CASH);
         return testTransaction;
     }
+
 }

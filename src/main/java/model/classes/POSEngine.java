@@ -32,7 +32,7 @@ public class POSEngine implements IPOSEngine {
         this.userDAO = new UserDAO();
         this.productDAO = new ProductDAO();
         this.transactionDAO = new TransactionDAO();
-
+        this.id = HWID.getHWID();
     }
 
     @Override
@@ -135,6 +135,4 @@ public class POSEngine implements IPOSEngine {
                 ", productDAO=" + productDAO +
                 '}';
     }
-
-
 }
