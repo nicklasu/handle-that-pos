@@ -93,7 +93,7 @@ public class OptionsView {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("products-search-view.fxml"));
                 newLoadedPane = this.loader.load();
-                UsersView view = this.loader.getController();
+                ProductSearchView view = this.loader.getController();
                 view.setMainApp(mainApp);
                 //newLoadedPane = FXMLLoader.load(getClass().getResource("users-view.fxml"));
             } catch (IOException ex) {
