@@ -1,16 +1,12 @@
 package view;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import model.classes.Product;
 import model.classes.User;
 
 import java.io.IOException;
@@ -23,8 +19,6 @@ public class OptionsView {
     private Text lName;
     @FXML
     private AnchorPane transactionAnchorPane;
-    //@FXML
-    //private ListView listView;
     @FXML
     private Button btn1;
     @FXML
@@ -33,12 +27,8 @@ public class OptionsView {
     private Button btn3;
     @FXML
     private Button btn4;
-    //@FXML
-    //private Button addProductBtn;
     @FXML
     Pane wrapperPane = new Pane();
-    //@FXML
-    //Pane wrapperPaneProducts = new Pane();
     private FXMLLoader loader;
 
     public void loadMainView(ActionEvent event) throws IOException {
@@ -75,9 +65,6 @@ public class OptionsView {
                 newLoadedPane2 = this.loader.load();
                 ProductManagementView view = this.loader.getController();
                 view.setMainApp(mainApp);
-
-
-                //newLoadedPane2 = FXMLLoader.load(getClass().getResource("products-view.fxml"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -93,23 +80,27 @@ public class OptionsView {
                 newLoadedPane3 = this.loader.load();
                 AddUserView view = this.loader.getController();
                 view.setMainApp(mainApp);
-                //newLoadedPane2 = FXMLLoader.load(getClass().getResource("add-user-view.fxml"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
             wrapperPane.getChildren().add(newLoadedPane3);
         });
 
-//        btn4.setOnAction(e -> {
-//            wrapperPane.getChildren().clear();
-//            Pane newLoadedPane2 = null;
-//            try {
-//                newLoadedPane2 = FXMLLoader.load(getClass().getResource("add-product-view.fxml"));
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
-//            wrapperPane.getChildren().add(newLoadedPane2);
-//        });
+        btn4.setOnAction(e -> {
+            wrapperPane.getChildren().clear();
+            Pane newLoadedPane = null;
+            try {
+                this.loader = new FXMLLoader();
+                this.loader.setLocation(getClass().getResource("products-search-view.fxml"));
+                newLoadedPane = this.loader.load();
+                UsersView view = this.loader.getController();
+                view.setMainApp(mainApp);
+                //newLoadedPane = FXMLLoader.load(getClass().getResource("users-view.fxml"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            wrapperPane.getChildren().add(newLoadedPane);
+        });
 
         this.mainApp = mainApp;
         User user = this.mainApp.getEngine().getUser();
