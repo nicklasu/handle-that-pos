@@ -10,17 +10,17 @@ public class DAOTests extends TestParent{
     }
 
     @BeforeAll
-    void beforeAll() {
+    public void beforeAll() {
         System.out.println("DAO tests...");
     }
 
     @BeforeEach
-    void beforeEach() {
+    public void beforeEach() {
 
     }
 
     @Test
-    void productDAO() {
+    public void productDAO() {
         Product a = new Product("1a", "Runebergin torttu", "Bergin Rune nautti näitä joka päivä aamiaiseksi", 200, 1);
         ProductDAO pd = new ProductDAO();
         Assertions.assertNull(pd.getProduct(a.getId()), "Problem with getting a non-existent product with dao");
@@ -34,7 +34,7 @@ public class DAOTests extends TestParent{
     }
 
     @Test
-    void transactionDAO(){
+    public void transactionDAO(){
         User u = new User("junit", "tester", "JUN", "123", 1);
         TransactionDAO td = new TransactionDAO();
         Transaction t = super.createTestTransaction(u);
