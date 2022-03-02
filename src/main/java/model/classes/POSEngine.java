@@ -73,7 +73,9 @@ public class POSEngine implements IPOSEngine {
     }
 
     @Override
-    public ITransaction getTransaction() { return this.transaction; }
+    public ITransaction getTransaction() {
+        return this.transaction;
+    }
 
     @Override
     public Product scanProduct(String id) {
@@ -93,26 +95,30 @@ public class POSEngine implements IPOSEngine {
 
         return product;
     }
+
     @Override
-    public void confirmTransaction(boolean printReceipt){
+    public void confirmTransaction(boolean printReceipt) {
         Date date = new Date();
         Timestamp ts = new Timestamp(date.getTime());
         transaction.setTimestamp(ts);
-        ((Transaction)transaction).setPos(this);
+        ((Transaction) transaction).setPos(this);
         transactionDAO.addTransaction((Transaction) this.transaction);
-        if(printReceipt) {
+        if (printReceipt) {
             new ReceiptPrinter().actionPerformed((Transaction) this.transaction);
         }
         transaction = null;
     }
 
     @Override
-    public ProductDAO productDao() { return this.productDAO;  }
+    public ProductDAO productDao() {
+        return this.productDAO;
+    }
 
-    private String hashPassword(String password){
+    private String hashPassword(String password) {
         return BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }
-    private BCrypt.Result compare(String password, String hashedPassword){
+
+    private BCrypt.Result compare(String password, String hashedPassword) {
         return BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
     }
 

@@ -9,21 +9,18 @@ import java.util.Properties;
 public class HotkeyFileHandler extends MainView {
     /**
      * Saves hotkey preferences to hotkey.properties file
-     *
-     * @param hotkeyProductIds
      */
-    void saveHotkeys(String hotkeyProductIds[]) {
+    void saveHotkeys(String[] hotkeyProductIds, String[] hotkeyProductNames) {
         try {
             File configFile = new File("hotkey.properties");
             Properties props = new Properties();
             for (int i = 0; i < hotkeyProductIds.length; i++) {
-                props.setProperty("hotkey" + i, String.valueOf(hotkeyProductIds[i]));
+                props.setProperty("hotkeyId" + i, String.valueOf(hotkeyProductIds[i]));
+                props.setProperty("hotkeyName" + i, String.valueOf(hotkeyProductNames[i]));
             }
             FileWriter writer = new FileWriter(configFile);
             props.store(writer, "Hotkey settings");
             writer.close();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Pikanäppäimen tallennus onnistui!", ButtonType.CLOSE);
-            alert.showAndWait();
         } catch (FileNotFoundException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Pikanäppäimen tallennustiedostoa ei löytynyt!", ButtonType.CLOSE);
             alert.showAndWait();
@@ -35,10 +32,8 @@ public class HotkeyFileHandler extends MainView {
 
     /**
      * Loads hotkey preferences from hotkey.properties file
-     *
-     * @param hotkeyProductIds
      */
-    void loadHotkeys(String hotkeyProductIds[]) {
+    void loadHotkeys(String[] hotkeyProductIds, String[] hotkeyProductNames) {
         try {
             File configFile = new File("hotkey.properties");
             FileReader reader = new FileReader(configFile);
@@ -46,10 +41,10 @@ public class HotkeyFileHandler extends MainView {
             props.load(reader);
             try {
                 for (int i = 0; i < hotkeyProductIds.length; i++) {
-                    hotkeyProductIds[i] = props.getProperty("hotkey" + i);
+                    hotkeyProductIds[i] = props.getProperty("hotkeyId" + i);
+                    hotkeyProductNames[i] = props.getProperty("hotkeyName" + i);
                 }
-            } catch (Exception e) {
-
+            } catch (Exception ignored) {
             }
             reader.close();
         } catch (FileNotFoundException ex) {

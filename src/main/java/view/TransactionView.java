@@ -44,9 +44,10 @@ public class TransactionView {
         try {
             this.mainApp.getEngine().confirmTransaction(printReceipt);
             loadMainView();
-        } catch(Exception e) {
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Ei tilauksia tuotteessa!", ButtonType.CLOSE);
-            alert.showAndWait();        }
+            alert.showAndWait();
+        }
     }
 
     @FXML

@@ -38,10 +38,10 @@
                 <RowConstraints maxHeight="581.0" minHeight="10.0" prefHeight="232.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="367.0" vgrow="SOMETIMES" />
             </rowConstraints>
-            <Button fx:id="hotkeyButton1" mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Pikanäppäin 1" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="hotkeyButton1" mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Pikanäppäin 1" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" onAction="#handleLogoutButton" text="Kirjaudu ulos" />
             <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Palauta tuote" GridPane.rowIndex="2" />
-            <Button fx:id="hotkeyButton0" mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Pikanäppäin 0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="hotkeyButton0" mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Pikanäppäin 0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kirjautuneena: " GridPane.columnIndex="1" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                 <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -57,7 +57,6 @@
                 </Label>
             </HBox>
          <ProgressBar fx:id="feedbackProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pikanäppäimen asetus (aikaa jäljellä):" GridPane.rowIndex="1" />
          <GridPane.margin>
             <Insets left="15.0" />
          </GridPane.margin>
@@ -86,7 +85,7 @@
                 <GridPane.margin>
                     <Insets left="10.0" />
                 </GridPane.margin>
-                <Button fx:id="optionsBtn" mnemonicParsing="false" onAction="#loadOptionsView" prefHeight="100.0" prefWidth="200.0" text="Asetukset" AnchorPane.bottomAnchor="56.39999999999999" AnchorPane.leftAnchor="0.0">
+                <Button mnemonicParsing="false" onAction="#loadOptionsView" prefHeight="100.0" prefWidth="200.0" text="Asetukset" AnchorPane.bottomAnchor="56.39999999999999" AnchorPane.leftAnchor="0.0">
                     <graphic>
                         <ImageView fitHeight="99.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                             <Image url="@../images/options.png" />

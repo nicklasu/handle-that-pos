@@ -17,7 +17,8 @@ public class Customer {
     @Column(name = "Asiakkuus")
     private int customerLevelIndex;
 
-    public Customer(){}
+    public Customer() {
+    }
 
     public Customer(int id, CustomerLevel customerLevel) {
         this.id = id;
@@ -31,7 +32,7 @@ public class Customer {
     }
 
     public void setId(int id) {
-        if(id<0){
+        if (id < 0) {
             throw new RuntimeException("Customer can't have a negative ID");
         }
         this.id = id;

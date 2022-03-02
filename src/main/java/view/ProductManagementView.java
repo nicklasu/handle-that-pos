@@ -17,16 +17,20 @@ import java.io.IOException;
 public class ProductManagementView {
     private MainApp mainApp;
     private FXMLLoader loader;
+
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
     }
-        //@FXML
+
+    //@FXML
     //private Button addProductBtn;
     @FXML
     Pane wrapperPaneProducts = new Pane();
 
-    /** Switch to add-product-view.fxml */
-    public void addProductPane(ActionEvent event) throws IOException{
+    /**
+     * Switch to add-product-view.fxml
+     */
+    public void addProductPane(ActionEvent event) throws IOException {
 
         System.out.println("add product button was pressed");
         wrapperPaneProducts.getChildren().clear();
@@ -44,8 +48,10 @@ public class ProductManagementView {
         wrapperPaneProducts.getChildren().add(newLoadedPane3);
     }
 
-    /** Switch to delete-product-view.fxml */
-    public void deleteProductPane(ActionEvent event) throws IOException{
+    /**
+     * Switch to delete-product-view.fxml
+     */
+    public void deleteProductPane(ActionEvent event) throws IOException {
 
         System.out.println("delete product button was pressed");
         wrapperPaneProducts.getChildren().clear();
@@ -63,8 +69,10 @@ public class ProductManagementView {
         wrapperPaneProducts.getChildren().add(newLoadedPane3);
     }
 
-    /** Switch to edit-product-view.fxml */
-    public void editProductPane(ActionEvent event) throws IOException{
+    /**
+     * Switch to edit-product-view.fxml
+     */
+    public void editProductPane(ActionEvent event) throws IOException {
 
         System.out.println("edit product button was pressed");
         wrapperPaneProducts.getChildren().clear();

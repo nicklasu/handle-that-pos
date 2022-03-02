@@ -5,7 +5,7 @@ import model.classes.*;
 import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class DAOTests extends TestParent{
+public class DAOTests extends TestParent {
     public DAOTests() {
     }
 
@@ -35,7 +35,7 @@ public class DAOTests extends TestParent{
 
     @Disabled
     @Test
-    public void transactionDAO(){
+    public void transactionDAO() {
         User u = new User("junit", "tester", "JUN", "123", 1);
         TransactionDAO td = new TransactionDAO();
         Transaction t = super.createTestTransaction(u);
