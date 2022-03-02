@@ -2,6 +2,7 @@ package POS;
 
 import model.classes.POSEngine;
 import org.junit.jupiter.api.*;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class POSEngineTest extends TestParent {
     private static POSEngine testEngine;

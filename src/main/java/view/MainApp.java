@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.classes.POSEngine;
-import model.classes.ProductDAO;
 import model.interfaces.IPOSEngine;
 
 import java.io.IOException;
@@ -14,8 +13,7 @@ public class MainApp extends Application {
 
     private Stage stage;
     private IPOSEngine engine;
-    private String hotkeyProductNames[] = new String[2];
-    private boolean hotkeyDatabaseSearch = false;
+    private final String[] hotkeyProductNames = new String[2];
     /*
     @Override
     public void start(Stage stage) throws IOException {
@@ -36,38 +34,17 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) {
-
         this.stage = stage;
         stage.setTitle("Kassajärjestelmä");
-
         showLoginView();
     }
 
-    public String[] getHotkeyButtonNames(String hotkeyProductIds[]) {
-        if (!hotkeyDatabaseSearch) {
-            ProductDAO productDAO = new ProductDAO();
-            for (int i = 0; i < hotkeyProductIds.length; i++) {
-                //Necessary try catch. Otherwise program crash and burn.
-                try {
-                    hotkeyProductNames[i] = productDAO.getProduct(hotkeyProductIds[i]).getName();
-                } catch (Exception ignored) {
-
-                }
-            }
-            hotkeyDatabaseSearch = true;
-        }
+    public String[] getHotkeyButtonNames() {
         return hotkeyProductNames;
     }
 
-    public void setHotkeyButtonNames(String hotkeyProductIds[]){
-        ProductDAO productDAO = new ProductDAO();
-        for(int i = 0; i < hotkeyProductIds.length; i++){
-            try {
-                hotkeyProductNames[i] = productDAO.getProduct(hotkeyProductIds[i]).getName();
-            } catch (Exception ignored) {
-
-            }
-        }
+    public void setHotkeyButtonName(String hotkeyButtonName, int buttonId) {
+        hotkeyProductNames[buttonId] = hotkeyButtonName;
     }
 
     public void showMainView() {
@@ -76,12 +53,9 @@ public class MainApp extends Application {
             Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
             //this.stage.setFullScreen(true);
-
             MainView mainView = fxmlLoader.getController();
             mainView.setMainApp(this);
-
             this.stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -93,10 +67,8 @@ public class MainApp extends Application {
             Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
             //this.stage.setFullScreen(true);
-
             LoginView loginView = fxmlLoader.getController();
             loginView.setMainApp(this);
-
             this.stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -112,6 +84,5 @@ public class MainApp extends Application {
 
     public static void main(String[] args) {
         launch();
-
     }
 }

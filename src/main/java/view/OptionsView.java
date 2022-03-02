@@ -116,6 +116,7 @@ public class OptionsView {
         fName.setText(user.getfName());
         lName.setText(user.getlName());
 
-        if (this.mainApp.getEngine().getTransaction() != null) {}
+        if (this.mainApp.getEngine().getTransaction() != null) {
+        }
     }
 }

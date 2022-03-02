@@ -10,6 +10,7 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class OrderTest extends TestParent {
     private Order testOrder;
@@ -83,6 +84,6 @@ public class OrderTest extends TestParent {
     @Test
     public void GetEmptyOrder() {
         Order emptyOrder = new Order(new Transaction(new User()));
-        Assertions.assertEquals(0 ,emptyOrder.getProductList().size() , "Error getting an empty order");
+        Assertions.assertEquals(0, emptyOrder.getProductList().size(), "Error getting an empty order");
     }
 }

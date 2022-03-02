@@ -4,8 +4,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 
+import javax.persistence.PersistenceException;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 public class ProductDAO {
@@ -42,19 +46,32 @@ public class ProductDAO {
 
         return product;
     }
-    public void addProduct(Product product) {
+    public boolean addProduct(Product product) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
 
             session.save(product);
-
+            System.out.println(transaction);
             transaction.commit();
-        } catch (Exception e) {
+            return true;
+        }
+        catch (PersistenceException p){
+
             if (transaction != null) {
                 transaction.rollback();
+
             }
+            return false;
         }
+         catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+
+            }
+
+        }
+        return false;
     }
 
     public void updateProduct(Product product){
@@ -74,7 +91,8 @@ public class ProductDAO {
             }
         }
     }
-    public boolean deleteProduct(String id){
+
+    public boolean deleteProduct(String id) {
         Transaction transaction = null;
 
         try (Session session = sessionFactory.getCurrentSession()){
