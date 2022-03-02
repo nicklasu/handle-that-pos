@@ -100,6 +100,10 @@ public class ProductListViewCell extends ListCell<Product> {
                 this.productAmountLabel.setText(String.valueOf(productAmount));
 
                 this.mainView.setTotalPrice();
+
+                if (product.getStock() < 0) {
+                    mainView.negativeProductStockNotification();
+                }
             });
 
             setText(null);

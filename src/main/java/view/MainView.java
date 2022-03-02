@@ -6,11 +6,14 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Window;
 import model.classes.Product;
+import org.controlsfx.control.Notifications;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -76,6 +79,10 @@ public class MainView {
         }
         scanListView.refresh();
         setTotalPrice();
+
+        if (product.getStock() < 0) {
+            negativeProductStockNotification();
+        }
     }
 
     public void setTotalPrice() {
@@ -164,6 +171,15 @@ public class MainView {
                 }
             }
         });
+    }
+
+    public void negativeProductStockNotification() {
+        Notifications.create()
+                .owner(mainAnchorPane.getScene().getWindow())
+                .title("Huomautus!")
+                .text("Lisätyn tuotteen varastomäärä on alle 0.")
+                .position(Pos.TOP_RIGHT)
+                .show();
     }
 
     public void setMainApp(MainApp mainApp) {
