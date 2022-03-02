@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TransactionTest extends TestParent {
     private Transaction testTransaction;
 
-    TransactionTest() {
+    public TransactionTest() {
     }
 
     @BeforeAll

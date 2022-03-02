@@ -13,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ProductTest extends TestParent {
     Product test;
 
+    public ProductTest(Product test) {
+    }
+
     @BeforeAll
     static void beforeAll() {
         System.out.println("Product test...");

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class OrderTest extends TestParent {
     private Order testOrder;
 
-    OrderTest() {
+    public OrderTest() {
     }
 
     @BeforeAll

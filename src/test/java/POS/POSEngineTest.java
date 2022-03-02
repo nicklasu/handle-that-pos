@@ -6,6 +6,9 @@ import org.junit.jupiter.api.*;
 class POSEngineTest extends TestParent {
     private static POSEngine testEngine;
 
+    public POSEngineTest() {
+    }
+
     @BeforeAll
     static void beforeAll() {
         System.out.println("POSEngine test...");
