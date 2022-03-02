@@ -89,8 +89,7 @@ public class POSEngine implements IPOSEngine {
 
         Product product = productDAO.getProduct(id);
 
-        System.out.println(product.getName());
-        //Product product = new Product(id, "testi tuote", "tätä tuotetta käytetään testaamiseen", 60.20f, 90); // Luodaan uusi product databasesta haettujen tietojen perusteella
+        //System.out.println(product.getName());
 
         this.transaction.getOrder().addProductToOrder(product);
 

@@ -80,9 +80,16 @@ public class MainView {
         scanListView.refresh();
         setTotalPrice();
 
-        if (product.getStock() < 0) {
-            negativeProductStockNotification();
+        for (Product p : this.mainApp.getEngine().getTransaction().getOrder().getProductList()) {
+            if (p.equals(product)) {
+                if (p.getStock() < 0) {
+                    negativeProductStockNotification();
+                }
+                break;
+            }
         }
+
+
     }
 
     public void setTotalPrice() {
