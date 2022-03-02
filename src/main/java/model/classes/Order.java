@@ -30,7 +30,8 @@ public class Order implements IOrder {
     @Transient
     private int totalPrice = 0;
 
-    public Order() {}
+    public Order() {
+    }
 
     public Order(Transaction transaction) {
         this.transaction = transaction;
@@ -65,16 +66,18 @@ public class Order implements IOrder {
     }
 
     @Override
-    public List<Product> getProductList(){
+    public List<Product> getProductList() {
         return this.productList;
     }
 
     @Override
-    public int getTotalPrice() {return totalPrice;}
+    public int getTotalPrice() {
+        return totalPrice;
+    }
 
     @Override
     public boolean addProductToOrder(Product product) {
-        try{
+        try {
 
             if (!productList.contains(product)) {
                 OrderProduct orderProduct = new OrderProduct();
@@ -96,7 +99,7 @@ public class Order implements IOrder {
 
 
             return true;
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error adding a product to the order " + e);
         }
         return false;

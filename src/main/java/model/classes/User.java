@@ -4,30 +4,30 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Käyttäjä")
-public class User{
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", updatable = false, nullable = false)
     private int id;
 
-    @Column(name="Käyttäjätunnus", unique = true)
+    @Column(name = "Käyttäjätunnus", unique = true)
     private String username;
 
-    @Column(name="Salasana")
+    @Column(name = "Salasana")
     private String password;
 
-    @Column(name="Etunimi")
+    @Column(name = "Etunimi")
     private String fName;
-    @Column(name="Sukunimi")
+    @Column(name = "Sukunimi")
     private String lName;
-    @Column(name="Aktiivisuus")
+    @Column(name = "Aktiivisuus")
     private int activity;
 
     public User() {
     }
 
-    public User(String fName, String lName, String username, String password, int activity){
+    public User(String fName, String lName, String username, String password, int activity) {
         this.fName = fName;
         this.lName = lName;
         this.username = username;
@@ -35,11 +35,10 @@ public class User{
         this.activity = activity;
     }
 
-    public User(int id, String fName, String lName, String username, String password, int activity){
+    public User(int id, String fName, String lName, String username, String password, int activity) {
         this(fName, lName, username, password, activity);
         this.id = id;
     }
-
 
 
     public int getId() {
@@ -73,6 +72,7 @@ public class User{
     public void setfName(String fName) {
         this.fName = fName;
     }
+
     public String getlName() {
         return lName;
     }
