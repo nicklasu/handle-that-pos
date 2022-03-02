@@ -11,10 +11,11 @@ import java.util.List;
 public class ProductDAO {
     private SessionFactory sessionFactory = null;
 
-    public ProductDAO() {
+    public ProductDAO(){
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
-        } catch (Exception e) {
+        }
+        catch (Exception e){
             System.out.println("Virhe istuntotehtaan luomisessa");
             e.printStackTrace();
         }
@@ -41,7 +42,6 @@ public class ProductDAO {
 
         return product;
     }
-
     public void addProduct(Product product) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
@@ -57,12 +57,12 @@ public class ProductDAO {
         }
     }
 
-    public void updateProduct(Product product) {
+    public void updateProduct(Product product){
         Transaction transaction = null;
 
-        try (Session session = sessionFactory.getCurrentSession()) {
+        try (Session session = sessionFactory.getCurrentSession()){
 
-            transaction = session.beginTransaction();
+           transaction = session.beginTransaction();
 
             session.saveOrUpdate(product);
 
@@ -75,14 +75,14 @@ public class ProductDAO {
         }
     }
 
-    public void deleteProduct(String id) {
+    public boolean deleteProduct(String id) {
         Transaction transaction = null;
 
-        try (Session session = sessionFactory.getCurrentSession()) {
+        try (Session session = sessionFactory.getCurrentSession()){
 
             transaction = session.beginTransaction();
             Product product = session.get(Product.class, id);
-            if (product != null) {
+            if(product != null) {
                 session.delete(product);
                 transaction.commit();
                 System.out.println("Found product");

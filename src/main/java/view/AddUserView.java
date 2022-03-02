@@ -26,8 +26,9 @@ public class AddUserView {
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
     }
+
     @FXML
-    private void addUser(){
+    private void addUser() {
         try {
             String name = userFirstName.getText();
             String lastname = userLastName.getText();
@@ -35,7 +36,7 @@ public class AddUserView {
             String password = userPassword.getText();
             boolean isActive = activity.isSelected();
 
-            User user = new User(name, lastname,username,password,1);
+            User user = new User(name, lastname, username, password, 1);
 
             if (isActive) {
                 this.mainApp.getEngine().addUser(user);
@@ -45,7 +46,7 @@ public class AddUserView {
             }
 
 
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("There was an error");
             e.printStackTrace();
         }

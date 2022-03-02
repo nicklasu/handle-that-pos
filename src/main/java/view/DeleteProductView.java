@@ -13,11 +13,13 @@ public class DeleteProductView {
     private MainApp mainApp;
     @FXML
     private TextField productBarcode;
+
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
     }
+
     @FXML
-    private void deleteProduct(){
+    private void deleteProduct() {
         try {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Vahvistus");
@@ -25,10 +27,10 @@ public class DeleteProductView {
             alert.setContentText("Poistetaanko varmasti?");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK){
+            if (result.get() == ButtonType.OK) {
                 boolean res = this.mainApp.getEngine().productDao().deleteProduct(productBarcode.getText());
                 alert.close();
-                if(res == false){
+                if (res == false) {
                     Alert alert2 = new Alert(Alert.AlertType.ERROR);
                     alert2.setTitle("Virhe");
                     alert2.setHeaderText("Virhe");
@@ -41,7 +43,7 @@ public class DeleteProductView {
             }
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("There was an error");
             e.printStackTrace();
         }
