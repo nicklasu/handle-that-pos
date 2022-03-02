@@ -10,7 +10,6 @@ import java.io.IOException;
 
 public class EditProductView {
     private MainApp mainApp;
-
     @FXML
     private TextField productBarcode;
     @FXML

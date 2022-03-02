@@ -14,7 +14,6 @@ import java.io.IOException;
 
 public class AddProductView {
     private MainApp mainApp;
-
     @FXML
     private TextField productBarcode;
     @FXML

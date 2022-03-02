@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class DeleteProductView {
     private MainApp mainApp;
+
     @FXML
     private TextField productBarcode;
     @FXML
