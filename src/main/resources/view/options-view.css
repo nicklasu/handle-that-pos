@@ -1,0 +1,14 @@
+.button {
+  -fx-border-style: solid , solid  , solid  , solid;
+  -fx-border-color: #bebebe #bebebe #bebebe #bebebe;
+  -fx-border-width: 1;
+  -fx-text-inner-color: black;
+}
+
+.button:focused  {
+  -fx-border-style: solid , solid  , solid  , solid;
+  -fx-border-color: #bebebe #bebebe #bebebe #bebebe;
+  -fx-border-width: 1;
+  -fx-background-color: #e1ecf4;
+  -fx-text-fill: black;
+}
