@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditProductView">
+<Pane fx:id="fillFields" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditProductView">
     <children>
         <GridPane layoutX="14.0" layoutY="19.0" prefHeight="363.0" prefWidth="377.0">
             <columnConstraints>
@@ -44,5 +43,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <Button layoutX="397.0" layoutY="37.0" mnemonicParsing="false" onAction="#fillFields" text="Hae" />
     </children>
 </Pane>
