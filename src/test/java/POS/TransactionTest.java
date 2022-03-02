@@ -15,31 +15,31 @@ class TransactionTest extends TestParent {
     }
 
     @BeforeAll
-    static void beforeAll() {
+    public void beforeAll() {
         System.out.println("Transaction test...");
     }
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         this.testTransaction = new Transaction(new User());
     }
 
     @Test
-    void getAndSetOrder() {
+    public void getAndSetOrder() {
         Order testOrder = this.createTestOrder();
         this.testTransaction.setOrder(testOrder);
         Assertions.assertEquals(this.testTransaction.getOrder().getProductList().toString(), "[Suola, Sokeri]", "Error in linking order to transaction");
     }
 
     @Test
-    void getAndSetCustomer() {
+    public void getAndSetCustomer() {
         Customer testCustomer = new Customer(3992, CustomerLevel.NONE);
         this.testTransaction.setCustomer(testCustomer);
         Assertions.assertEquals(this.testTransaction.getCustomer().toString(), "Customer{id=3992, customerLevel=NONE}", "Error in handling customers with a transaction");
     }
 
     @Test
-    void getAndSetPaymentMethod() {
+    public void getAndSetPaymentMethod() {
         this.testTransaction.setPaymentMethod(PaymentMethod.CASH);
         Assertions.assertEquals(this.testTransaction.getPaymentMethod(), PaymentMethod.CASH, "Error handling basic paymentmethods in transaction");
     }
