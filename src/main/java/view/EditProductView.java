@@ -1,6 +1,8 @@
 package view;
 
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -34,6 +36,26 @@ public class EditProductView {
                 .or(productPrice.textProperty().isEmpty())
                 .or(productStock.textProperty().isEmpty());
         editBtn.disableProperty().bind(booleanBind);
+
+        productPrice.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    productPrice.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        productStock.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    productStock.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
     }
 
     @FXML
@@ -45,7 +67,15 @@ public class EditProductView {
             int price = Integer.parseInt(productPrice.getText());
             int stock = Integer.parseInt(productStock.getText());
             Product product = new Product(barcode, name, desc, price, stock);
-            this.mainApp.getEngine().productDao().updateProduct(product);
+            boolean res = this.mainApp.getEngine().productDao().updateProduct(product);
+            if(res){
+                Notifications.create()
+                        .owner(productBarcode.getScene().getWindow())
+                        .title("Onnistui")
+                        .text("Tuote on muokattu!")
+                        .position(Pos.TOP_RIGHT)
+                        .show();
+            }
         } catch (Exception e) {
             System.out.println("There was an error");
             e.printStackTrace();

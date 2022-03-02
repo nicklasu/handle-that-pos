@@ -2,6 +2,8 @@ package view;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -35,6 +37,25 @@ public class AddProductView {
                 .or(productStock.textProperty().isEmpty());
         addBtn.disableProperty().bind(booleanBind);
 
+        productPrice.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    productPrice.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        productStock.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    productStock.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
 
     }
     @FXML

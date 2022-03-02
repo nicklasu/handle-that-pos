@@ -74,7 +74,7 @@ public class ProductDAO {
         return false;
     }
 
-    public void updateProduct(Product product){
+    public boolean updateProduct(Product product){
         Transaction transaction = null;
 
         try (Session session = sessionFactory.getCurrentSession()){
@@ -85,10 +85,12 @@ public class ProductDAO {
 
 
             transaction.commit();
+            return true;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
+            return false;
         }
     }
 
