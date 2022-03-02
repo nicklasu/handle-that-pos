@@ -74,7 +74,7 @@ public class ProductDAO {
             }
         }
     }
-    public void deleteProduct(String id){
+    public boolean deleteProduct(String id){
         Transaction transaction = null;
 
         try (Session session = sessionFactory.getCurrentSession()){
@@ -83,15 +83,22 @@ public class ProductDAO {
             Product product = session.get(Product.class, id);
             if(product != null) {
                 session.delete(product);
+                transaction.commit();
+                System.out.println("Found product");
+                return true;
             }
-
             transaction.commit();
+
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
         }
+        System.out.println("product not found ");
+
+        return false;
     }
+
 
 
 }
