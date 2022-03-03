@@ -5,10 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import model.classes.Product;
+import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,38 +57,48 @@ public class ProductSearchView {
     }
     @FXML
     private void updateData(){
-        items.removeAll();
-        productTable.getItems().clear();
-        this.allProducts = this.mainApp.getEngine().productDao().getAllProducts();
-        items.addAll(allProducts);
-        //productListView.setItems(items);
+        try {
+            items.removeAll();
+            productTable.getItems().clear();
+            this.allProducts = this.mainApp.getEngine().productDao().getAllProducts();
+            items.addAll(allProducts);
+            //productListView.setItems(items);
 
-        productDescription.setCellValueFactory(new PropertyValueFactory<Product, String>("description"));
-        productId.setCellValueFactory(new PropertyValueFactory<Product, String>("id"));
-        productName.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
-        productPrice.setCellValueFactory(new PropertyValueFactory<Product, Integer>("price"));
-        productStock.setCellValueFactory(new PropertyValueFactory<Product, Integer>("stock"));
+            productDescription.setCellValueFactory(new PropertyValueFactory<Product, String>("description"));
+            productId.setCellValueFactory(new PropertyValueFactory<Product, String>("id"));
+            productName.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+            productPrice.setCellValueFactory(new PropertyValueFactory<Product, Integer>("price"));
+            productStock.setCellValueFactory(new PropertyValueFactory<Product, Integer>("stock"));
 
-        productTable.setItems(items);
+            productTable.setItems(items);
 
 
-        productTable.setRowFactory(productTableView -> new TableRow<Product>() {
-            @Override
-            protected void updateItem(Product product, boolean empty) {
-                super.updateItem(product, empty);
-                if (product == null) {
-                    setStyle("");
-                }else if (product.getStock() <= 0) {
-                    //setStyle("-fx-background-color: #ff3b3b;");
-                    setStyle("-fx-background-color: rgba(255,59,59,0.5);");
-                } else if (product.getStock() <= 50) {
-                    setStyle("-fx-background-color: rgba(255,216,103,0.5);");
-                } else {
-                    //setStyle("");
-                    setStyle("-fx-background-color: rgba(175,255,131,0.2);");
+            productTable.setRowFactory(productTableView -> new TableRow<Product>() {
+                @Override
+                protected void updateItem(Product product, boolean empty) {
+                    super.updateItem(product, empty);
+                    if (product == null) {
+                        setStyle("");
+                    } else if (product.getStock() <= 0) {
+                        //setStyle("-fx-background-color: #ff3b3b;");
+                        setStyle("-fx-background-color: rgba(255,59,59,0.5);");
+                    } else if (product.getStock() <= 50) {
+                        setStyle("-fx-background-color: rgba(255,216,103,0.5);");
+                    } else {
+                        //setStyle("");
+                        setStyle("-fx-background-color: rgba(175,255,131,0.2);");
+                    }
                 }
-            }
-        });
+            });
+        } catch(Exception e){
+            Notifications.create()
+                    .owner(fetchBtn.getScene().getWindow())
+                    .title("Virhe")
+                    .text("Tapahtui virhe tuotteiden hakemisessa!")
+                    .position(Pos.TOP_RIGHT)
+                    .showError();
+            e.printStackTrace();
+        }
     }
 
 }
