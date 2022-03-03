@@ -3,10 +3,14 @@ package view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.classes.User;
 
 import java.io.IOException;
@@ -31,10 +35,16 @@ public class OptionsView {
     Pane wrapperPane = new Pane();
     private FXMLLoader loader;
 
-    public void loadMainView(ActionEvent event) throws IOException {
-        this.loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
-        new ViewLoader(transactionAnchorPane, this.loader.load());
-        ((MainView) this.loader.getController()).setMainApp(this.mainApp);
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
+    public void switchToMainScene(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("main-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void setMainApp(MainApp mainApp) throws IOException {
