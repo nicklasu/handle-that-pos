@@ -12,11 +12,9 @@ import java.util.Date;
 @Entity
 @Table(name = "Maksupääte")
 public class POSEngine implements IPOSEngine {
-
     @Id
     @Column(name = "ID", updatable = false, nullable = false)
     private String id = HWID.getHWID();
-
     @Transient
     private ITransaction transaction = null;
     @Transient
@@ -27,30 +25,28 @@ public class POSEngine implements IPOSEngine {
     private ProductDAO productDAO;
     @Transient
     private TransactionDAO transactionDAO;
+    @Transient
+    private CustomerDAO customerDAO;
 
     // constructor
     public POSEngine() {
         this.userDAO = new UserDAO();
         this.productDAO = new ProductDAO();
         this.transactionDAO = new TransactionDAO();
+        this.customerDAO = new CustomerDAO();
         this.id = HWID.getHWID();
     }
 
     @Override
     public boolean login(String username, String password) {
-
         User user = userDAO.getUser(username);
-
         BCrypt.Result result = compare(password, user.getPassword());
         System.out.println(HWID.getHWID());
-
         //TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
-
         if (user != null && result.verified /*JOS SALIKSET TÄSMÄÄ*/) {
             this.user = user;
             return true;
         }
-
         return false;
     }
 
@@ -83,27 +79,21 @@ public class POSEngine implements IPOSEngine {
         if (this.transaction == null) {
             this.transaction = new Transaction(this.user);
         }
-
-
         //HAETAAN DATABASESTA ID:llä
-
         Product product = productDAO.getProduct(id);
-
         //System.out.println(product.getName());
-
         this.transaction.getOrder().addProductToOrder(product);
-
         return product;
     }
 
     @Override
-    public void confirmTransaction(boolean printReceipt) {
+    public void confirmTransaction(boolean printReceipt, Customer customer) {
         Date date = new Date();
         Timestamp ts = new Timestamp(date.getTime());
         transaction.setTimestamp(ts);
+        transaction.setCustomer(customer);
         ((Transaction) transaction).setPos(this);
         transactionDAO.addTransaction((Transaction) this.transaction);
-
         try {
             ArrayList<Product> productsToUpdate = new ArrayList<>();
             for (Product product : this.transaction.getOrder().getProductList()) {
@@ -111,19 +101,21 @@ public class POSEngine implements IPOSEngine {
                     productsToUpdate.add(product);
                 }
             }
-
             for (Product product : productsToUpdate) {
                 productDAO.updateProduct(product);
             }
         } catch (Exception e) {
             System.out.println("No products in order!");
         }
-
-
         if (printReceipt) {
             new ReceiptPrinter().actionPerformed((Transaction) this.transaction);
         }
         transaction = null;
+    }
+
+    @Override
+    public CustomerDAO getCustomerDAO() {
+        return this.customerDAO;
     }
 
     @Override

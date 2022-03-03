@@ -1,8 +1,6 @@
 package model.interfaces;
 
-import model.classes.Product;
-import model.classes.ProductDAO;
-import model.classes.User;
+import model.classes.*;
 
 public interface IPOSEngine {
     boolean login(String username, String password);
@@ -15,7 +13,9 @@ public interface IPOSEngine {
 
     Product scanProduct(String id);
 
-    void confirmTransaction(boolean printReceipt);
+    void confirmTransaction(boolean printReceipt, Customer customer);
+
+    CustomerDAO getCustomerDAO();
 
     ProductDAO productDao();
 
