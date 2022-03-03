@@ -26,6 +26,7 @@ public class TransactionDAO {
 
             t.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             if (transaction != null) {
                 t.rollback();
             }
