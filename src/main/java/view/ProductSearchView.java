@@ -10,15 +10,18 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
 public class ProductSearchView {
     private MainApp mainApp;
 
-    private List allProducts;
+    private List<Product> allProducts;
 
     private FilteredList<Product> filteredList;
 
@@ -68,7 +71,12 @@ public class ProductSearchView {
     @FXML
     private void updateData(){
         try {
-            productTable.getItems().clear();
+            if (!(filteredList == null)) {
+                filteredList.removeAll();
+            }
+            if (!(productTable == null)) {
+                productTable.getItems().removeAll();
+            }
             allProducts = this.mainApp.getEngine().productDao().getAllProducts();
             filteredList = new FilteredList<>(FXCollections.observableList(allProducts));
 
