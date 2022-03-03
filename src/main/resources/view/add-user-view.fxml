@@ -32,7 +32,7 @@
             <TextField fx:id="userFirstName" GridPane.columnIndex="1" />
             <TextField fx:id="userLastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#addUser" text="Tallenna" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <CheckBox fx:id="activity" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <CheckBox fx:id="activity" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="userName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <PasswordField fx:id="userPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Käyttäjänimi" GridPane.rowIndex="2" />
