@@ -57,7 +57,7 @@ public class EditProductView {
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
                 if (!newValue.matches("\\d*")) {
-                    productStock.setText(newValue.replaceAll("[^\\d]", ""));
+                    productStock.setText(newValue.replaceAll("[^-?\\d+$]", ""));
                 }
             }
         });
