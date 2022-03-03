@@ -77,9 +77,6 @@ public class Product {
     }
 
     public void setPrice(int price) {
-        if (price < 0) {
-            throw new RuntimeException("Negative price for a product is not accepted");
-        }
         this.price = price;
     }
 
@@ -88,11 +85,9 @@ public class Product {
     }
 
     public void setStock(int stock) {
-        //if (stock < 0) {
-        //    throw new RuntimeException("Negative stock for a product is not accepted");
-        //}
         this.stock = stock;
     }
+
 
     @Override
     public String toString() {

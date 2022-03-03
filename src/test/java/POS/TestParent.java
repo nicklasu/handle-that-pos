@@ -7,7 +7,7 @@ public abstract class TestParent {
     }
 
     protected Order createTestOrder() {
-        Product[] testProducts = new Product[]{new Product("1a", "Suola", "Kananmunan päälle naminami", 200, 100), new Product("1a", "Sokeri", "Kahviin slurps", 100, 100)};
+        Product[] testProducts = new Product[]{new Product("1a", "Suola", "Kananmunan päälle naminami", 200, 100), new Product("1b", "Sokeri", "Kahviin slurps", 100, 100)};
         Order testOrder = new Order(new Transaction(new User()));
         testOrder.addProductToOrder(testProducts[0]);
         testOrder.addProductToOrder(testProducts[1]);
