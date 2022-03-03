@@ -18,7 +18,7 @@ public abstract class TestParent {
         Transaction testTransaction = new Transaction(user);
         Order testOrder = this.createTestOrder();
         testTransaction.setOrder(testOrder);
-        Customer testCustomer = new Customer(3992, CustomerLevel.NONE);
+        Customer testCustomer = new Customer(3992, 0);
         testTransaction.setCustomer(testCustomer);
         testTransaction.setPaymentMethod(PaymentMethod.CASH);
         return testTransaction;

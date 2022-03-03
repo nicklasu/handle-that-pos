@@ -1,5 +1,7 @@
 package POS;
 
+import model.classes.Customer;
+import model.classes.CustomerLevel;
 import model.classes.POSEngine;
 import org.junit.jupiter.api.*;
 
@@ -55,7 +57,7 @@ public class POSEngineTest extends TestParent {
     @Test
     public void confirmTransaction() {
         testEngine.setTransaction(createTestTransaction(testEngine.getUser()));
-        testEngine.confirmTransaction(false);
+        testEngine.confirmTransaction(false, new Customer(222, 1));
         Assertions.assertNull(testEngine.getTransaction(), "Problem with confirming transaction");
     }
 }

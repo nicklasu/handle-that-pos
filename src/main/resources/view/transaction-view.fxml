@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="transactionAnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TransactionView">
+<AnchorPane fx:id="transactionAnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TransactionView">
     <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <rowConstraints>
             <RowConstraints maxHeight="783.0" minHeight="240.0" prefHeight="780.0" />
@@ -53,6 +45,7 @@
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -61,10 +54,11 @@
                 </rowConstraints>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kuitin tulostus" GridPane.rowIndex="1" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Asiakas on bonusasiakas" />
-                <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" />
+                <CheckBox fx:id="bonusCustomerCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" />
                 <CheckBox fx:id="receiptCheckBox" mnemonicParsing="false" onAction="#confirmReceipt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kuitin lähetys sähköpostiin" GridPane.rowIndex="2" />
             <TextField fx:id="receiptEmailTextField" onKeyReleased="#sendReceiptEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="customerTextField" GridPane.columnIndex="2" />
             </GridPane>
         </GridPane>
         <GridPane>

@@ -5,13 +5,13 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
-import model.classes.PaymentMethod;
-import model.classes.Product;
+import model.classes.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TransactionView {
     private MainApp mainApp;
@@ -27,6 +27,10 @@ public class TransactionView {
     private CheckBox receiptCheckBox;
     @FXML
     private TextField receiptEmailTextField;
+    @FXML
+    private TextField customerTextField;
+    @FXML
+    private CheckBox bonusCustomerCheckBox;
     private boolean printReceipt = false;
     private boolean sendReceiptEmail = false;
     private final ToggleGroup paymentButtonGroup = new ToggleGroup();
@@ -42,10 +46,20 @@ public class TransactionView {
     @FXML
     private void confirmPayment() {
         try {
-            this.mainApp.getEngine().confirmTransaction(printReceipt);
+            if (!Objects.equals(customerTextField.getText(), "")) {
+                CustomerDAO customerDAO = this.mainApp.getEngine().getCustomerDAO();
+                try {
+                    this.mainApp.getEngine().confirmTransaction(printReceipt, customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
+                } catch (Exception e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Asiakasta ei löytynyt!", ButtonType.CLOSE);
+                    alert.showAndWait();
+                }
+            } else {
+                this.mainApp.getEngine().confirmTransaction(printReceipt, null);
+            }
             loadMainView();
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Ei tilauksia tuotteessa!", ButtonType.CLOSE);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Ei tuotteita tilauksessa!", ButtonType.CLOSE);
             alert.showAndWait();
         }
     }
@@ -93,12 +107,16 @@ public class TransactionView {
         enabledButton.setDisable(false);
     }
 
+    private void readCustomer() {
+        customerTextField.requestFocus();
+    }
+
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
         cardToggleButton.setToggleGroup(paymentButtonGroup);
         cashToggleButton.setToggleGroup(paymentButtonGroup);
         if (this.mainApp.getEngine().getTransaction() != null) {
-            if (this.mainApp.getEngine().getTransaction().getPaymentMethod().ordinal() == 1){
+            if (this.mainApp.getEngine().getTransaction().getPaymentMethod().ordinal() == 1) {
                 cardToggleButton.setDisable(true);
             } else {
                 cashToggleButton.setDisable(true);
@@ -115,6 +133,11 @@ public class TransactionView {
             dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
             dialog.showAndWait();
         });
+        customerTextField.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER)
+                readCustomer();
+        });
+        customerTextField.requestFocus();
     }
 }
 

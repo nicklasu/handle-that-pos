@@ -11,21 +11,17 @@ public class Customer {
     @Column(name = "ID")
     private int id;
 
-    @Transient
-    private CustomerLevel customerLevel;
-
     @Column(name = "Asiakkuus")
     private int customerLevelIndex;
 
     public Customer() {
     }
 
-    public Customer(int id, CustomerLevel customerLevel) {
+    public Customer(int id, int customerLevelIndex) {
         this.id = id;
-        this.customerLevel = customerLevel;
-        this.customerLevelIndex = 1; //CustomerLevel.valueOf(customerLevel.name()).ordinal();
+        // this.customerLevel = customerLevel;
+        this.customerLevelIndex = customerLevelIndex; //CustomerLevel.valueOf(customerLevel.name()).ordinal();
     }
-
 
     public int getId() {
         return id;
@@ -38,19 +34,11 @@ public class Customer {
         this.id = id;
     }
 
-    public CustomerLevel getCustomerLevel() {
-        return customerLevel;
-    }
-
-    public void setCustomerLevel(CustomerLevel customerLevel) {
-        this.customerLevel = customerLevel;
-    }
-
     @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
-                ", customerLevel=" + customerLevel +
+                ", customerLevelIndex=" + customerLevelIndex +
                 '}';
     }
 }
