@@ -31,6 +31,8 @@ public class OptionsView {
     Pane wrapperPane = new Pane();
     private FXMLLoader loader;
 
+
+
     public void loadMainView(ActionEvent event) throws IOException {
         this.loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
         new ViewLoader(transactionAnchorPane, this.loader.load());
@@ -95,7 +97,7 @@ public class OptionsView {
                 newLoadedPane = this.loader.load();
                 ProductSearchView view = this.loader.getController();
                 view.setMainApp(mainApp);
-                //newLoadedPane = FXMLLoader.load(getClass().getResource("users-view.fxml"));
+                view.setWrapperPane(wrapperPane); // jotta voidaan siirtyä suoraan edit ikkunaan
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

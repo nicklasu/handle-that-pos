@@ -2,10 +2,10 @@ package view;
 
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -14,7 +14,7 @@ import javafx.scene.layout.Pane;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -48,6 +48,8 @@ public class ProductSearchView {
     @FXML
     private TextField input;
 
+    private Pane wrapperPane;
+
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
 
@@ -59,8 +61,10 @@ public class ProductSearchView {
             public void handle(MouseEvent event) {
                 int row = productTable.getSelectionModel().getSelectedIndex();
                 System.out.println(productTable.getSelectionModel().getSelectedIndex());
-                Product product = (Product) allProducts.get(row);
+                Product product = allProducts.get(row);
                 System.out.println(product);
+
+                loadEditProductView(product);
             }
         });
 
@@ -126,6 +130,25 @@ public class ProductSearchView {
             if (searchText == null || searchText.isEmpty()) return true;
             return searchFindsProduct(product, searchText);
         };
+    }
+
+    public void setWrapperPane(Pane wrapperPane) {
+        this.wrapperPane = wrapperPane;
+    }
+
+    private void loadEditProductView(Product product) {
+        wrapperPane.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("products-view.fxml"));
+        Pane newLoadedPane = null;
+        try {
+            newLoadedPane = loader.load();
+            ProductManagementView view = loader.getController();
+            view.setMainApp(mainApp);
+            view.editProductPaneFillFields(product);
+        } catch (IOException e) {
+
+        }
+        wrapperPane.getChildren().add(newLoadedPane);
     }
 
 }

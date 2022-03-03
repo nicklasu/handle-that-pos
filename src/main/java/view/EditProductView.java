@@ -104,4 +104,12 @@ public class EditProductView {
                     .showError();
         }
     }
+
+    public void fillFieldsOnLoad(Product product) {
+        productBarcode.setText(product.getId());
+        productName.setText(product.getName());
+        productDesc.setText(product.getDescription());
+        productPrice.setText(String.valueOf(product.getPrice()));
+        productStock.setText(String.valueOf(product.getStock()));
+    }
 }

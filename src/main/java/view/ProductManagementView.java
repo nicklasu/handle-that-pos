@@ -10,6 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import model.classes.Product;
 import model.classes.User;
 
 import java.io.IOException;
@@ -88,5 +89,24 @@ public class ProductManagementView {
             ex.printStackTrace();
         }
         wrapperPaneProducts.getChildren().add(newLoadedPane3);
+    }
+
+    /**
+     * Switch to edit-product-view.fxml with autofilled text fields
+     */
+    public void editProductPaneFillFields(Product product) {
+        wrapperPaneProducts.getChildren().clear();
+        Pane newLoadedPane = null;
+        try {
+            this.loader = new FXMLLoader();
+            this.loader.setLocation(getClass().getResource("edit-product-view.fxml"));
+            newLoadedPane = this.loader.load();
+            EditProductView view = this.loader.getController();
+            view.setMainApp(mainApp);
+            view.fillFieldsOnLoad(product);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        wrapperPaneProducts.getChildren().add(newLoadedPane);
     }
 }
