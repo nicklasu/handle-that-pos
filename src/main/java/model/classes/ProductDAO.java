@@ -46,9 +46,9 @@ public class ProductDAO {
         return product;
     }
 
-    public List<User> getAllProducts() {
+    public List<Product> getAllProducts() {
         Transaction transaction = null;
-        List<User> products = null;
+        List<Product> products = null;
         try (Session session = sessionFactory.getCurrentSession()) {
 
             transaction = session.beginTransaction();

@@ -2,13 +2,16 @@ package view;
 
 import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import model.classes.User;
+import org.controlsfx.control.Notifications;
 
+import javax.persistence.PersistenceException;
 import java.io.IOException;
 
 public class AddUserView {
@@ -56,9 +59,17 @@ public class AddUserView {
                 this.mainApp.getEngine().addUser(user);
             }
 
-
+        }catch(IllegalStateException p){
+            System.out.println("Error! Username is taken!");
+            Notifications.create()
+                    .owner(saveBtn.getScene().getWindow())
+                    .title("Virhe")
+                    .text("Käyttäjänimi on varattu!")
+                    .position(Pos.TOP_RIGHT)
+                    .showError();
         } catch (Exception e) {
             System.out.println("There was an error");
+            System.out.println(e);
             e.printStackTrace();
         }
     }

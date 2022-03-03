@@ -3,30 +3,27 @@ package view;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Callback;
+import javafx.scene.layout.Pane;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
-
-import java.io.IOException;
-import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class ProductSearchView {
     private MainApp mainApp;
 
-    private List allProducts;
+    private List<Product> allProducts;
 
-    private ObservableList<Product> items = FXCollections.observableArrayList();
+    private FilteredList<Product> filteredList;
 
     @FXML
     private TableView<Product> productTable;
@@ -67,15 +64,21 @@ public class ProductSearchView {
             }
         });
 
+        input.textProperty().addListener((observable, oldValue, newValue) ->
+                filteredList.setPredicate(createPredicate(newValue))
+        );
     }
     @FXML
     private void updateData(){
         try {
-            items.removeAll();
-            productTable.getItems().clear();
-            this.allProducts = this.mainApp.getEngine().productDao().getAllProducts();
-            items.addAll(allProducts);
-            //productListView.setItems(items);
+            if (!(filteredList == null)) {
+                filteredList.removeAll();
+            }
+            if (!(productTable == null)) {
+                productTable.getItems().removeAll();
+            }
+            allProducts = this.mainApp.getEngine().productDao().getAllProducts();
+            filteredList = new FilteredList<>(FXCollections.observableList(allProducts));
 
             productDescription.setCellValueFactory(new PropertyValueFactory<Product, String>("description"));
             productId.setCellValueFactory(new PropertyValueFactory<Product, String>("id"));
@@ -83,8 +86,7 @@ public class ProductSearchView {
             productPrice.setCellValueFactory(new PropertyValueFactory<Product, Integer>("price"));
             productStock.setCellValueFactory(new PropertyValueFactory<Product, Integer>("stock"));
 
-            productTable.setItems(items);
-
+            productTable.setItems(filteredList);
 
             productTable.setRowFactory(productTableView -> new TableRow<Product>() {
                 @Override
@@ -112,6 +114,18 @@ public class ProductSearchView {
                     .showError();
             e.printStackTrace();
         }
+    }
+
+    private boolean searchFindsProduct(Product product, String searchText){
+        return (product.getName().toLowerCase().contains(searchText.toLowerCase())) ||
+                (product.getId().toLowerCase().contains(searchText.toLowerCase()));
+    }
+
+    private Predicate<Product> createPredicate(String searchText){
+        return product -> {
+            if (searchText == null || searchText.isEmpty()) return true;
+            return searchFindsProduct(product, searchText);
+        };
     }
 
 }
