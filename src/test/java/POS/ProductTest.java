@@ -85,17 +85,13 @@ public class ProductTest extends TestParent {
 
     @Test
     public void testNegativePrice() {
-        RuntimeException poikkeus = (RuntimeException) Assertions.assertThrows(RuntimeException.class, () -> {
-            this.test.setPrice(-1);
-        });
-        Assertions.assertEquals("Negative price for a product is not accepted", poikkeus.getMessage());
+        this.test.setPrice(-1);
+        Assertions.assertEquals(-1, this.test.getPrice(), "Returning negative price does not work");
     }
 
     @Test
     public void testNegativeStock() {
-        RuntimeException poikkeus = (RuntimeException) Assertions.assertThrows(RuntimeException.class, () -> {
-            this.test.setStock(-1);
-        });
-        Assertions.assertEquals("Negative stock for a product is not accepted", poikkeus.getMessage());
+        this.test.setStock(-1);
+        Assertions.assertEquals(-1 ,this.test.getStock(), "Negative stock not accurate");
     }
 }

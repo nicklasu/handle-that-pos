@@ -25,7 +25,7 @@ public class OrderTest extends TestParent {
 
     @BeforeEach
     public void beforeEach() {
-        Product[] testProducts = new Product[]{new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100), new Product("0", "Sokeri", "Kahviin slurps", 100, 100)};
+        Product[] testProducts = new Product[]{new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100), new Product("1", "Sokeri", "Kahviin slurps", 100, 100)};
         this.testOrder = new Order(new Transaction(new User()));
         this.testOrder.addProductToOrder(testProducts[0]);
         this.testOrder.addProductToOrder(testProducts[1]);
