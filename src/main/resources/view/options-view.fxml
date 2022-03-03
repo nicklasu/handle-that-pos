@@ -50,19 +50,19 @@
                 <RowConstraints />
                 <RowConstraints />
                 <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
             </rowConstraints>
             <children>
                 <Button fx:id="btn1" mnemonicParsing="false" prefHeight="50.0" prefWidth="654.0" text="Käyttäjien haku" GridPane.rowIndex="6" />
                 <Button fx:id="btn2" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" text="Tuotteiden hallinta" />
-            <Button fx:id="btn3" mnemonicParsing="false" prefHeight="50.0" prefWidth="654.0" text="Lisää käyttäjä" GridPane.rowIndex="5" />
-            <Button fx:id="btn4" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" text="Tuotteiden haku" GridPane.rowIndex="9" />
+                <Button fx:id="btn3" mnemonicParsing="false" prefHeight="50.0" prefWidth="654.0" text="Lisää käyttäjä" GridPane.rowIndex="5" />
+                <Button fx:id="btn4" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" text="Tuotteiden haku" GridPane.rowIndex="9" />
             </children>
         </GridPane>
         <Pane fx:id="wrapperPane1" prefHeight="200.0" prefWidth="200.0" stylesheets="/view/products-view.css" visible="false" GridPane.columnIndex="1">
@@ -153,3 +153,4 @@
         </Pane>
     </GridPane>
 </AnchorPane>
+

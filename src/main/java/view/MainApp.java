@@ -3,6 +3,7 @@ package view;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.classes.POSEngine;
 import model.interfaces.IPOSEngine;
@@ -75,7 +76,32 @@ public class MainApp extends Application {
         }
     }
 
+    public void showOptionsView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("options-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            this.stage.setScene(scene);
+            //this.stage.setFullScreen(true);
+            OptionsView optionsView = fxmlLoader.getController();
+            optionsView.setMainApp(this);
+            this.stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void showTransactionView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("transaction-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            this.stage.setScene(scene);
+            //this.stage.setFullScreen(true);
+            TransactionView transactionView = fxmlLoader.getController();
+            transactionView.setMainApp(this);
+            this.stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public IPOSEngine getEngine() {
