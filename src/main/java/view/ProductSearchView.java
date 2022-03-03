@@ -1,13 +1,11 @@
 package view;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import model.classes.Product;
@@ -41,10 +39,16 @@ public class ProductSearchView {
 
     @FXML
     private TableColumn<Product, Integer> productStock;
-
+    @FXML
+    private Button fetchBtn;
+    @FXML
+    private TextField input;
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+
+        BooleanBinding booleanBind = input.textProperty().isEmpty();
+        fetchBtn.disableProperty().bind(booleanBind);
 
         this.allProducts = this.mainApp.getEngine().productDao().getAllProducts();
         items.addAll(allProducts);

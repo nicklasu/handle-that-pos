@@ -1,0 +1,9 @@
+
+.table-row-cell:filled:selected {
+    -fx-border-style: solid;
+    -fx-border-color: #54bbd6;
+    -fx-border-width: 1;
+}
+.table-row-cell:filled:selected .table-cell {
+    -fx-text-fill: black;
+}

@@ -43,6 +43,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="397.0" layoutY="37.0" mnemonicParsing="false" onAction="#fillFields" text="Hae" />
+      <Button fx:id="fetchBtn" layoutX="397.0" layoutY="37.0" mnemonicParsing="false" onAction="#fillFields" text="Hae" />
     </children>
 </Pane>

@@ -1,6 +1,8 @@
 package view;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -22,9 +24,18 @@ public class AddUserView {
     private PasswordField userPassword;
     @FXML
     private CheckBox activity;
+    @FXML
+    private Button saveBtn;
 
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
+
+        BooleanBinding booleanBind = userFirstName.textProperty().isEmpty()
+                .or(userLastName.textProperty().isEmpty())
+                .or(userName.textProperty().isEmpty())
+                .or(userPassword.textProperty().isEmpty());
+        saveBtn.disableProperty().bind(booleanBind);
+
     }
 
     @FXML

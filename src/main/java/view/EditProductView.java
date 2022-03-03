@@ -26,6 +26,8 @@ public class EditProductView {
     private TextField productStock;
     @FXML
     private Button editBtn;
+    @FXML
+    private Button fetchBtn;
 
 
     public void setMainApp(MainApp mainApp) throws IOException {
@@ -36,6 +38,9 @@ public class EditProductView {
                 .or(productPrice.textProperty().isEmpty())
                 .or(productStock.textProperty().isEmpty());
         editBtn.disableProperty().bind(booleanBind);
+
+        BooleanBinding booleanBind2 = productBarcode.textProperty().isEmpty();
+        fetchBtn.disableProperty().bind(booleanBind2);
 
         productPrice.textProperty().addListener(new ChangeListener<String>() {
             @Override
