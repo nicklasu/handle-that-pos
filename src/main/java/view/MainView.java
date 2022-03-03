@@ -79,7 +79,6 @@ public class MainView {
         }
         scanListView.refresh();
         setTotalPrice();
-
         for (Product p : this.mainApp.getEngine().getTransaction().getOrder().getProductList()) {
             if (p.equals(product)) {
                 if (p.getStock() < 0) {
@@ -88,14 +87,12 @@ public class MainView {
                 break;
             }
         }
-
-
     }
 
     public void setTotalPrice() {
         try {
-            float priceInEuros = this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100.0f;
-            this.totalPriceLabel.setText(Float.toString(priceInEuros));
+            String priceInEuros = String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f)) + "€";
+            this.totalPriceLabel.setText(priceInEuros);
         } catch (NullPointerException ignored) {
         }
     }

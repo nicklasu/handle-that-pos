@@ -1,6 +1,5 @@
 package model.classes;
 
-import model.interfaces.IOrder;
 import model.interfaces.ITransaction;
 
 import javax.persistence.*;
@@ -104,6 +103,7 @@ public class Transaction implements ITransaction {
     @Override
     public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
+        this.paymentMethodIndex = this.paymentMethod.ordinal();
     }
 
     public int getID() {

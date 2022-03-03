@@ -29,17 +29,23 @@ public class ReceiptPrinter implements Printable {
             g.drawString("Testikatu 1337, 00420 Helsinki", 100, 120);
             g.drawString("Puh. 0201234567 y-1234567-8", 100, 140);
             g.drawString("Kuitti: " + order.getId() + " Asiakas: " + transaction.getCustomer(), 100, 160);
-            g.drawString("Myyjä: " + transaction.getUser().getFullName(), 100, 180);
-            g.drawString(String.valueOf(transaction.getTimestamp()), 100, 200);
+            g.drawString("Maksutapa: " + transaction.getPaymentMethod(), 100, 180);
+            g.drawString("Myyjä: " + transaction.getUser().getFullName(), 100, 200);
+            g.drawString(String.valueOf(transaction.getTimestamp()), 100, 220);
             for (Product product : productList) {
-                g.drawString(product.getName(), 100, nameY);
+                String productName = product.getName();
+                if (productName.length() > 20) {
+                    productName = productName.substring(0, 20);
+                    productName += "...";
+                }
+                g.drawString(productName, 100, nameY);
                 nameY += 20;
             }
             for (Product product : productList) {
-                g.drawString((product.getPrice()) / 100f + "€", 400, priceY);
+                g.drawString(String.format("%.2f", (product.getPrice() / 100f)) + "€", 300, priceY);
                 priceY += 20;
             }
-            g.drawString("Kokonaishinta: " + (order.getTotalPrice()) / 100f + "€", 100, (nameY + 40));
+            g.drawString("Kokonaishinta: " + String.format("%.2f", (order.getTotalPrice() / 100f)) + "€", 100, (nameY + 20));
         }
         /* tell the caller that this page is part of the printed document */
         return PAGE_EXISTS;
