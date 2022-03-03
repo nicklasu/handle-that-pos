@@ -3,14 +3,18 @@ package view;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -53,6 +57,15 @@ public class ProductSearchView {
         BooleanBinding booleanBind = input.textProperty().isEmpty();
         fetchBtn.disableProperty().bind(booleanBind);
         updateData();
+        productTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                int row = productTable.getSelectionModel().getSelectedIndex();
+                System.out.println(productTable.getSelectionModel().getSelectedIndex());
+                Product product = (Product) allProducts.get(row);
+                System.out.println(product);
+            }
+        });
 
     }
     @FXML
