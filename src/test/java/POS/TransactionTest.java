@@ -9,23 +9,25 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TransactionTest extends TestParent {
     private Transaction testTransaction;
-
+    private POSEngine pos;
     public TransactionTest() {
     }
 
     @BeforeAll
     public void beforeAll() {
         System.out.println("Transaction test...");
+        pos = new POSEngine();
+        pos.login("testuser", "123");
     }
 
     @BeforeEach
     public void setUp() {
-        this.testTransaction = new Transaction(new User());
+        this.testTransaction = new Transaction(pos.getUser());
     }
 
     @Test
     public void getAndSetOrder() {
-        Order testOrder = this.createTestOrder();
+        Order testOrder = this.createTestOrder(pos.getUser());
         this.testTransaction.setOrder(testOrder);
         Assertions.assertEquals(this.testTransaction.getOrder().getProductList().toString(), "[Suola, Sokeri]", "Error in linking order to transaction");
     }
