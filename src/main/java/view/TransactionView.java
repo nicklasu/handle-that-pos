@@ -98,6 +98,11 @@ public class TransactionView {
         cardToggleButton.setToggleGroup(paymentButtonGroup);
         cashToggleButton.setToggleGroup(paymentButtonGroup);
         if (this.mainApp.getEngine().getTransaction() != null) {
+            if (this.mainApp.getEngine().getTransaction().getPaymentMethod().ordinal() == 1){
+                cardToggleButton.setDisable(true);
+            } else {
+                cashToggleButton.setDisable(true);
+            }
             List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
             items.addAll(products);
         }
