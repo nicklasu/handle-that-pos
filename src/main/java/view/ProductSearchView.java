@@ -59,12 +59,14 @@ public class ProductSearchView {
         productTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                int row = productTable.getSelectionModel().getSelectedIndex();
-                System.out.println(productTable.getSelectionModel().getSelectedIndex());
-                Product product = allProducts.get(row);
-                System.out.println(product);
+                if(event.getClickCount() == 2) {
+                    int row = productTable.getSelectionModel().getSelectedIndex();
+                    System.out.println(productTable.getSelectionModel().getSelectedIndex());
+                    Product product = allProducts.get(row);
+                    System.out.println(product);
 
-                loadEditProductView(product);
+                    loadEditProductView(product);
+                }
             }
         });
 
