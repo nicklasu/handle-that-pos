@@ -13,7 +13,7 @@ public class MainApp extends Application {
 
     private Stage stage;
     private IPOSEngine engine;
-    private final String[] hotkeyProductNames = new String[2];
+    private final String[] hotkeyProductNames = new String[5];
     /*
     @Override
     public void start(Stage stage) throws IOException {

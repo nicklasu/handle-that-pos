@@ -39,10 +39,16 @@ public class MainView {
     @FXML
     private Button hotkeyButton1;
     @FXML
+    private Button hotkeyButton2;
+    @FXML
+    private Button hotkeyButton3;
+    @FXML
+    private Button hotkeyButton4;
+    @FXML
     private ProgressBar feedbackProgressBar;
     private ObservableList<Product> items = FXCollections.observableArrayList();
     private String productId;
-    private final String[] hotkeyProductIds = new String[2];
+    private final String[] hotkeyProductIds = new String[5];
     private ArrayList<Button> hotkeyButtons = new ArrayList<>();
     private HotkeyFileHandler hotkeyFileHandler;
 
@@ -69,6 +75,7 @@ public class MainView {
             productId = null;
             Alert alert = new Alert(Alert.AlertType.ERROR, "Tuotetta ei löytynyt tietokannasta!", ButtonType.CLOSE);
             alert.showAndWait();
+            System.out.println(e);
         }
     }
 
@@ -194,6 +201,10 @@ public class MainView {
         hotkeyFileHandler.loadHotkeys(hotkeyProductIds, mainApp.getHotkeyButtonNames());
         hotkeyButtons.add(hotkeyButton0);
         hotkeyButtons.add(hotkeyButton1);
+        hotkeyButtons.add(hotkeyButton2);
+        hotkeyButtons.add(hotkeyButton3);
+        hotkeyButtons.add(hotkeyButton4);
+
         addHotkeys(hotkeyButtons);
         // Populate listView with already existing products from open Transaction
         if (this.mainApp.getEngine().getTransaction() != null) {
