@@ -111,7 +111,7 @@ public class ProductSearchView {
             });
         } catch(Exception e){
             Notifications.create()
-                    .owner(fetchBtn.getScene().getWindow())
+                    //.owner(fetchBtn.getScene().getWindow())
                     .title("Virhe")
                     .text("Tapahtui virhe tuotteiden hakemisessa!")
                     .position(Pos.TOP_RIGHT)

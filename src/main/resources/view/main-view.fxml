@@ -35,38 +35,38 @@
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="234.0" minHeight="0.0" prefHeight="116.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="234.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="234.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="581.0" minHeight="10.0" prefHeight="232.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="367.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <Button fx:id="hotkeyButton1" mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Pikanäppäin 1" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Palauta tuote" GridPane.rowIndex="2" />
             <Button fx:id="hotkeyButton0" mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Pikanäppäin 0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-         <Button fx:id="hotkeyButton4" layoutX="426.0" layoutY="165.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Pikanäppäin 4" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-         <Button fx:id="hotkeyButton3" layoutX="426.0" layoutY="165.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Pikanäppäin 3" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-         <Button fx:id="hotkeyButton2" layoutX="426.0" layoutY="165.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Pikanäppäin 2" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Button fx:id="hotkeyButton4" layoutX="426.0" layoutY="165.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Pikanäppäin 4" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Button fx:id="hotkeyButton3" layoutX="426.0" layoutY="165.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Pikanäppäin 3" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Button fx:id="hotkeyButton2" layoutX="426.0" layoutY="165.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="100.0" text="Pikanäppäin 2" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3" GridPane.valignment="TOP" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kirjautuneena: " GridPane.halignment="RIGHT" />
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
-            <children>
-               <AnchorPane centerShape="false" prefWidth="220.0">
-                  <children>
-                        <Button layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleLogoutButton" prefHeight="50.0" prefWidth="150.0" text="Kirjaudu ulos" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
-                  </children>
-               </AnchorPane>
-            </children>
+                <children>
+                    <AnchorPane centerShape="false" prefWidth="220.0">
+                        <children>
+                            <Button layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleLogoutButton" prefHeight="50.0" prefWidth="150.0" text="Kirjaudu ulos" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                        </children>
+                    </AnchorPane>
+                </children>
             </HBox>
-         <ProgressBar fx:id="feedbackProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-             <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-                 <Image url="@../images/person.png" />
-             </ImageView>
-             <Label fx:id="usernameLabel" text="&quot;Testuser&quot;" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-                 <opaqueInsets>
-                     <Insets />
-                 </opaqueInsets>
-             </Label>
-         <GridPane.margin>
-            <Insets left="15.0" />
-         </GridPane.margin>
+            <ProgressBar fx:id="feedbackProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                <Image url="@../images/person.png" />
+            </ImageView>
+            <Label fx:id="usernameLabel" text="&quot;Testuser&quot;" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                <opaqueInsets>
+                    <Insets />
+                </opaqueInsets>
+            </Label>
+            <GridPane.margin>
+                <Insets left="15.0" />
+            </GridPane.margin>
         </GridPane>
         <GridPane prefWidth="600.0" GridPane.rowIndex="1">
             <columnConstraints>
@@ -85,25 +85,25 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Summa: " GridPane.halignment="RIGHT" GridPane.valignment="TOP">
-               <font>
-                  <Font size="41.0" />
-               </font></Text>
+                    <font>
+                        <Font size="41.0" />
+                    </font></Text>
                 <Label fx:id="totalPriceLabel" text="0€" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-               <font>
-                  <Font size="41.0" />
-               </font></Label>
+                    <font>
+                        <Font size="41.0" />
+                    </font></Label>
             </GridPane>
-         <AnchorPane>
-            <children>
-                   <Button mnemonicParsing="false" onAction="#loadOptionsView" prefHeight="100.0" prefWidth="200.0" text="Asetukset" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
-                       <graphic>
-                           <ImageView fitHeight="99.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                               <Image url="@../images/options.png" />
-                           </ImageView>
-                       </graphic>
-                   </Button>
-            </children>
-         </AnchorPane>
+            <AnchorPane>
+                <children>
+                    <Button mnemonicParsing="false" onAction="#loadOptionsView" prefHeight="100.0" prefWidth="200.0" text="Asetukset" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                        <graphic>
+                            <ImageView fitHeight="99.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../images/options.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </children>
+            </AnchorPane>
         </GridPane>
         <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
             <GridPane layoutX="420.0" layoutY="125.0" prefHeight="101.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

@@ -53,15 +53,17 @@ public class MainView {
     private HotkeyFileHandler hotkeyFileHandler;
 
     public void loadTransactionView() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transaction-view.fxml"));
+        /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transaction-view.fxml"));
         new ViewLoader(mainAnchorPane, fxmlLoader.load());
-        ((TransactionView) fxmlLoader.getController()).setMainApp(this.mainApp);
+        ((TransactionView) fxmlLoader.getController()).setMainApp(this.mainApp);*/
+        mainApp.showTransactionView();
     }
 
     public void loadOptionsView() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("options-view.fxml"));
+        /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("options-view.fxml"));
         new ViewLoader(mainAnchorPane, fxmlLoader.load());
-        ((OptionsView) fxmlLoader.getController()).setMainApp(this.mainApp);
+        ((OptionsView) fxmlLoader.getController()).setMainApp(this.mainApp);*/
+        mainApp.showOptionsView();
     }
 
     @FXML
