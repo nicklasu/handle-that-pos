@@ -41,6 +41,7 @@ public class ProductSearchView {
     private TableColumn<Product, Integer> productStock;
     @FXML
     private Button fetchBtn;
+
     @FXML
     private TextField input;
 
@@ -49,7 +50,13 @@ public class ProductSearchView {
 
         BooleanBinding booleanBind = input.textProperty().isEmpty();
         fetchBtn.disableProperty().bind(booleanBind);
+        updateData();
 
+    }
+    @FXML
+    private void updateData(){
+        items.removeAll();
+        productTable.getItems().clear();
         this.allProducts = this.mainApp.getEngine().productDao().getAllProducts();
         items.addAll(allProducts);
         //productListView.setItems(items);
@@ -81,6 +88,5 @@ public class ProductSearchView {
             }
         });
     }
-
 
 }

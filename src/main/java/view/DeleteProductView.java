@@ -4,6 +4,7 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
@@ -24,10 +25,20 @@ public class DeleteProductView {
     @FXML
     private void deleteProduct(){
         try {
+            Product product = this.mainApp.getEngine().productDao().getProduct(productBarcode.getText());
+            if(product == null){
+                System.out.println("Ei löytynyt");
+                Notifications.create()
+                        .owner(productBarcode.getScene().getWindow())
+                        .title("Virhe")
+                        .text("Tuotetta ei löytynyt!")
+                        .position(Pos.TOP_RIGHT)
+                        .showError();
+            }
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Vahvistus");
             alert.setHeaderText("Vahvistus");
-            alert.setContentText("Poistetaanko varmasti?");
+            alert.setContentText("Poistetaanko varmasti?\n" + "Tuote: " + product.getName() + "\nKuvaus: " + product.getName());
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
