@@ -46,6 +46,25 @@ public class ProductDAO {
 
         return product;
     }
+
+    public List<User> getAllProducts() {
+        Transaction transaction = null;
+        List<User> products = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+
+            transaction = session.beginTransaction();
+
+            products = session.createQuery("from Product").list();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return products;
+    }
+
     public boolean addProduct(Product product) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
