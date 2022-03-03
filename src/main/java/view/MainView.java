@@ -75,7 +75,6 @@ public class MainView {
             productId = null;
             Alert alert = new Alert(Alert.AlertType.ERROR, "Tuotetta ei löytynyt tietokannasta!", ButtonType.CLOSE);
             alert.showAndWait();
-            System.out.println(e);
         }
     }
 
@@ -169,7 +168,12 @@ public class MainView {
                         }
                     } else {
                         try {
-                            addProduct(hotkeyProductIds[buttonId]);
+                            if (!Objects.equals(hotkeyProductIds[buttonId], "null")) {
+                                addProduct(hotkeyProductIds[buttonId]);
+                            } else {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Pikanäppäintä ei ole asetettu.", ButtonType.CLOSE);
+                                alert.showAndWait();
+                            }
                         } catch (Exception e) {
                             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Pikanäppäintä ei ole asetettu.", ButtonType.CLOSE);
                             alert.showAndWait();

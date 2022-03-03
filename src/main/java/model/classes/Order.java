@@ -79,35 +79,37 @@ public class Order implements IOrder {
     public boolean addProductToOrder(Product product) {
 
         //System.out.println(product.hashCode());
-        Product productToAdd = product;
+        if (product != null) {
+            Product productToAdd = product;
 
-        try {
-            if (!productList.contains(product)) {
-                OrderProduct orderProduct = new OrderProduct();
-                orderProduct.setOrder(this);
-                orderProduct.setProduct(product);
-                addOrderProduct(orderProduct);
-                //System.out.println(orderProduct.getOrder().getId() + "" + orderProduct.getProduct());
-            } else {
-                for (OrderProduct op : orderProducts) {
-                    if (op.getProduct().equals(product)) {
-                        op.setAmount(op.getAmount() + 1);
-                        productToAdd = op.getProduct();
-                        //System.out.println(op);
+            try {
+                if (!productList.contains(product)) {
+                    OrderProduct orderProduct = new OrderProduct();
+                    orderProduct.setOrder(this);
+                    orderProduct.setProduct(product);
+                    addOrderProduct(orderProduct);
+                    //System.out.println(orderProduct.getOrder().getId() + "" + orderProduct.getProduct());
+                } else {
+                    for (OrderProduct op : orderProducts) {
+                        if (op.getProduct().equals(product)) {
+                            op.setAmount(op.getAmount() + 1);
+                            productToAdd = op.getProduct();
+                            //System.out.println(op);
+                        }
                     }
                 }
+
+                productList.add(productToAdd);
+                //System.out.println(productToAdd.hashCode());
+                //productList.add(product); // productToAdd
+                totalPrice += productToAdd.getPrice();
+
+                productToAdd.setStock(productToAdd.getStock() - 1);
+
+                return true;
+            } catch (Exception e) {
+                System.out.println("Error adding a product to the order " + e);
             }
-
-            productList.add(productToAdd);
-            //System.out.println(productToAdd.hashCode());
-            //productList.add(product); // productToAdd
-            totalPrice += productToAdd.getPrice();
-
-            productToAdd.setStock(productToAdd.getStock() - 1);
-
-            return true;
-        } catch (Exception e) {
-            System.out.println("Error adding a product to the order " + e);
         }
         return false;
     }
