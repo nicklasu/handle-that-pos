@@ -22,6 +22,13 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 public class MainView {
     private MainApp mainApp;
     @FXML
@@ -46,16 +53,24 @@ public class MainView {
     private ArrayList<Button> hotkeyButtons = new ArrayList<>();
     private HotkeyFileHandler hotkeyFileHandler;
 
-    public void loadTransactionView() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transaction-view.fxml"));
-        new ViewLoader(mainAnchorPane, fxmlLoader.load());
-        ((TransactionView) fxmlLoader.getController()).setMainApp(this.mainApp);
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
+    public void switchToOptionsScene(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("options-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void loadOptionsView() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("options-view.fxml"));
-        new ViewLoader(mainAnchorPane, fxmlLoader.load());
-        ((OptionsView) fxmlLoader.getController()).setMainApp(this.mainApp);
+    public void switchToTransactionScene(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("transaction-view.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
