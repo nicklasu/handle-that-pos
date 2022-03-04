@@ -48,11 +48,11 @@ public class TransactionView {
         try {
             if (!Objects.equals(customerTextField.getText(), "")) {
                 CustomerDAO customerDAO = this.mainApp.getEngine().getCustomerDAO();
-                try {
-                    this.mainApp.getEngine().confirmTransaction(printReceipt, customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
-                } catch (Exception e) {
+                if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) == null) {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Asiakasta ei löytynyt!", ButtonType.CLOSE);
                     alert.showAndWait();
+                } else {
+                    this.mainApp.getEngine().confirmTransaction(printReceipt, customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
                 }
             } else {
                 this.mainApp.getEngine().confirmTransaction(printReceipt, null);
