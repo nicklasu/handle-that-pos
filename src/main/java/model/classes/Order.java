@@ -77,35 +77,25 @@ public class Order implements IOrder {
 
     @Override
     public boolean addProductToOrder(Product product) {
-
-        //System.out.println(product.hashCode());
         if (product != null) {
             Product productToAdd = product;
-
             try {
                 if (!productList.contains(product)) {
                     OrderProduct orderProduct = new OrderProduct();
                     orderProduct.setOrder(this);
                     orderProduct.setProduct(product);
                     addOrderProduct(orderProduct);
-                    //System.out.println(orderProduct.getOrder().getId() + "" + orderProduct.getProduct());
                 } else {
                     for (OrderProduct op : orderProducts) {
                         if (op.getProduct().equals(product)) {
                             op.setAmount(op.getAmount() + 1);
                             productToAdd = op.getProduct();
-                            //System.out.println(op);
                         }
                     }
                 }
-
                 productList.add(productToAdd);
-                //System.out.println(productToAdd.hashCode());
-                //productList.add(product); // productToAdd
                 totalPrice += productToAdd.getPrice();
-
                 productToAdd.setStock(productToAdd.getStock() - 1);
-
                 return true;
             } catch (Exception e) {
                 System.out.println("Error adding a product to the order " + e);
@@ -123,6 +113,9 @@ public class Order implements IOrder {
         } else return false;
     }
 
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     @Override
     public String toString() {
@@ -140,9 +133,7 @@ public class Order implements IOrder {
         if (o.getClass() != this.getClass()) {
             return false;
         }
-
         final Order order = (Order) o;
-
         return this.productList == order.productList;
     }
 }

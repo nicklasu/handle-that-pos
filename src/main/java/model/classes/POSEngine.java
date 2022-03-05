@@ -118,7 +118,16 @@ public class POSEngine implements IPOSEngine {
         Date date = new Date();
         Timestamp ts = new Timestamp(date.getTime());
         transaction.setTimestamp(ts);
-        transaction.setCustomer(customer);
+        if (customer != null) {
+            if(customer.getCustomerLevelIndex() == 1){
+                float totalPrice = transaction.getOrder().getTotalPrice();
+                totalPrice *= 0.95;
+                transaction.getOrder().setTotalPrice(Math.round(totalPrice));
+            }
+            transaction.setCustomer(customer);
+        } else {
+            transaction.setCustomer(new Customer(1000, 0));
+        }
         ((Transaction) transaction).setPos(this);
         transactionDAO.addTransaction((Transaction) this.transaction);
         try {
