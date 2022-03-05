@@ -19,8 +19,7 @@ public class Customer {
 
     public Customer(int id, int customerLevelIndex) {
         this.id = id;
-        // this.customerLevel = customerLevel;
-        this.customerLevelIndex = customerLevelIndex; //CustomerLevel.valueOf(customerLevel.name()).ordinal();
+        this.customerLevelIndex = customerLevelIndex;
     }
 
     public int getId() {
@@ -32,6 +31,10 @@ public class Customer {
             throw new RuntimeException("Customer can't have a negative ID");
         }
         this.id = id;
+    }
+
+    public int getCustomerLevelIndex() {
+        return this.customerLevelIndex;
     }
 
     @Override
