@@ -2,6 +2,8 @@ package model.interfaces;
 
 import model.classes.*;
 
+import java.util.List;
+
 public interface IPOSEngine {
     boolean login(String username, String password);
 
@@ -20,4 +22,12 @@ public interface IPOSEngine {
     ProductDAO productDao();
 
     void addUser(User user);
+
+    List<Privilege> getPrivileges();
+
+    List<Integer> getPrivilegeIndexes();
+    PrivilegeDAO privilegeDAO();
+    UserDAO userDAO();
+    TransactionDAO transactionDAO();
+
 }

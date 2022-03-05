@@ -38,5 +38,6 @@
         <mapping class="model.classes.Customer" />
         <mapping class="model.classes.Transaction" />
         <mapping class="model.classes.POSEngine" />
+        <mapping class="model.classes.Privilege" />
     </session-factory>
 </hibernate-configuration>

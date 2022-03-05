@@ -1,18 +1,21 @@
 package view;
 
 import javafx.beans.binding.BooleanBinding;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import model.classes.Privilege;
+import model.classes.PrivilegeLevel;
 import model.classes.User;
 import org.controlsfx.control.Notifications;
 
 import javax.persistence.PersistenceException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class AddUserView {
     private MainApp mainApp;
@@ -29,6 +32,12 @@ public class AddUserView {
     private CheckBox activity;
     @FXML
     private Button saveBtn;
+    @FXML
+    private DatePicker startDate;
+    @FXML
+    private DatePicker endDate;
+    @FXML
+    private ChoiceBox<String> privilegeLevel;
 
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
@@ -38,7 +47,10 @@ public class AddUserView {
                 .or(userName.textProperty().isEmpty())
                 .or(userPassword.textProperty().isEmpty());
         saveBtn.disableProperty().bind(booleanBind);
-
+        ObservableList<String> availableChoices = FXCollections.observableArrayList("Myyjä", "Myymäläpäällikkö");
+        privilegeLevel.setItems(availableChoices);
+        privilegeLevel.setValue("Myyjä");
+        startDate.setValue(LocalDate.now());
     }
 
     @FXML
@@ -49,15 +61,34 @@ public class AddUserView {
             String username = userName.getText();
             String password = userPassword.getText();
             boolean isActive = activity.isSelected();
+            LocalDate dateStart =  startDate.getValue();
+            LocalDate dateEnd = endDate.getValue();
+            PrivilegeLevel pLevel = switch(privilegeLevel.getValue()){
+                case "Myyjä" -> PrivilegeLevel.USER;
+                case "Myymäläpäällikkö" -> PrivilegeLevel.MANAGER;
+                case "Järjestelmän ylläpitäjä" -> PrivilegeLevel.ADMIN;
+                default -> throw new IllegalStateException("Unexpected value");
+            };
+
+
 
             User user = new User(name, lastname, username, password, 1);
-
+            Privilege privilege = new Privilege(user, java.sql.Date.valueOf(dateStart), dateEnd == null ? null : java.sql.Date.valueOf(dateEnd), pLevel);
             if (isActive) {
                 this.mainApp.getEngine().addUser(user);
+                this.mainApp.getEngine().privilegeDAO().addPrivilege(privilege);
             } else {
                 user.setActivity(0);
                 this.mainApp.getEngine().addUser(user);
+                this.mainApp.getEngine().privilegeDAO().addPrivilege(privilege);
             }
+
+            Notifications.create()
+                    .owner(saveBtn.getScene().getWindow())
+                    .title("Onnistui")
+                    .text("Käyttäjä on luotu!")
+                    .position(Pos.TOP_RIGHT)
+                    .show();
 
         }catch(IllegalStateException p){
             System.out.println("Error! Username is taken!");

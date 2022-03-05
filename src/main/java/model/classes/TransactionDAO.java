@@ -3,6 +3,9 @@ package model.classes;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class TransactionDAO {
 
@@ -56,6 +59,25 @@ public class TransactionDAO {
         } catch (Exception e) {
             if (transaction != null) {
                 t.rollback();
+            }
+        }
+        return tr;
+    }
+
+    public List<model.classes.Transaction> getTransactions(User user) {
+        Transaction transaction = null;
+        List<model.classes.Transaction> tr = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            int userId = user.getId();
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("from Transaction where user = :userId");
+            query.setInteger("userId", userId);
+            tr = query.list();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                System.out.println(e);
+                transaction.rollback();
             }
         }
         return tr;

@@ -6,8 +6,11 @@ import model.interfaces.ITransaction;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "Maksupääte")
@@ -27,6 +30,10 @@ public class POSEngine implements IPOSEngine {
     private TransactionDAO transactionDAO;
     @Transient
     private CustomerDAO customerDAO;
+    @Transient
+    private PrivilegeDAO privilegeDAO;
+    @Transient
+    private List<Privilege> privileges;
 
     // constructor
     public POSEngine() {
@@ -34,6 +41,7 @@ public class POSEngine implements IPOSEngine {
         this.productDAO = new ProductDAO();
         this.transactionDAO = new TransactionDAO();
         this.customerDAO = new CustomerDAO();
+        this.privilegeDAO = new PrivilegeDAO();
         this.id = HWID.getHWID();
     }
 
@@ -44,7 +52,13 @@ public class POSEngine implements IPOSEngine {
         System.out.println(HWID.getHWID());
         //TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
         if (user != null && result.verified /*JOS SALIKSET TÄSMÄÄ*/) {
+
             this.user = user;
+            System.out.println(privilegeDAO.getPrivileges(user));
+            privileges = privilegeDAO.getPrivileges(user);
+            List<Date> privilegeDates = privileges.stream().map(p -> p.getPrivilegeEnd()).collect(Collectors.toList());
+            System.out.println(privilegeDates);
+
             return true;
         }
         return false;
@@ -56,6 +70,19 @@ public class POSEngine implements IPOSEngine {
 
     public void setId(String id) {
         this.id = id;
+    }
+    @Override
+    public List<Privilege> getPrivileges() {
+        return privileges;
+    }
+
+    @Override
+    public List<Integer> getPrivilegeIndexes(){
+        return privileges.stream().map(p -> p.getPrivilegeLevelIndex()).collect(Collectors.toList());
+    }
+
+    public void setPrivileges(List<Privilege> privileges) {
+        this.privileges = privileges;
     }
 
     @Override
@@ -131,6 +158,13 @@ public class POSEngine implements IPOSEngine {
     public ProductDAO productDao() {
         return this.productDAO;
     }
+    @Override
+    public PrivilegeDAO privilegeDAO() { return this.privilegeDAO;}
+
+    @Override
+    public UserDAO userDAO(){return this.userDAO;}
+@Override
+public TransactionDAO transactionDAO(){return this.transactionDAO;};
 
     private String hashPassword(String password) {
         return BCrypt.withDefaults().hashToString(12, password.toCharArray());
