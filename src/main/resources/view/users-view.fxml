@@ -42,8 +42,8 @@
                </GridPane.margin>
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Haku" GridPane.rowIndex="1" />
-                  <TextField fx:id="input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" text="Hae" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="searchField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#searchUser" text="Hae" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <GridPane prefHeight="264.0" prefWidth="646.0" GridPane.rowIndex="1">
@@ -71,7 +71,7 @@
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Aktiivinen työntekijä:" GridPane.rowIndex="2" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nimi:" />
-                        <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="activity" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sukunimi:" GridPane.rowIndex="1" />
                         <Text fx:id="fName" strokeType="OUTSIDE" strokeWidth="0.0" text="Nimi" GridPane.columnIndex="1" />
                         <Text fx:id="lName" strokeType="OUTSIDE" strokeWidth="0.0" text="Sukunimi" GridPane.columnIndex="1" GridPane.rowIndex="1" />

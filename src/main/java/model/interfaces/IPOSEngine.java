@@ -27,4 +27,7 @@ public interface IPOSEngine {
 
     List<Integer> getPrivilegeIndexes();
     PrivilegeDAO privilegeDAO();
+    UserDAO userDAO();
+    TransactionDAO transactionDAO();
+
 }

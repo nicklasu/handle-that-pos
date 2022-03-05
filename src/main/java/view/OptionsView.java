@@ -49,18 +49,18 @@ public class OptionsView {
         /** Change views: */
         btn1.setOnAction(e -> {
             wrapperPane.getChildren().clear();
-            Pane newLoadedPane = null;
+            Pane newLoadedPane0 = null;
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("users-view.fxml"));
-                newLoadedPane = this.loader.load();
+                newLoadedPane0 = this.loader.load();
                 UsersView view = this.loader.getController();
                 view.setMainApp(mainApp);
                 //newLoadedPane = FXMLLoader.load(getClass().getResource("users-view.fxml"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            wrapperPane.getChildren().add(newLoadedPane);
+            wrapperPane.getChildren().add(newLoadedPane0);
         });
 
         btn2.setOnAction(e -> {

@@ -152,6 +152,11 @@ public class POSEngine implements IPOSEngine {
     @Override
     public PrivilegeDAO privilegeDAO() { return this.privilegeDAO;}
 
+    @Override
+    public UserDAO userDAO(){return this.userDAO;}
+@Override
+public TransactionDAO transactionDAO(){return this.transactionDAO;};
+
     private String hashPassword(String password) {
         return BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }
