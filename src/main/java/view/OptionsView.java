@@ -7,9 +7,15 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import model.classes.Privilege;
 import model.classes.User;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class OptionsView {
     private MainApp mainApp;
@@ -40,7 +46,6 @@ public class OptionsView {
     }
 
     public void setMainApp(MainApp mainApp) throws IOException {
-
         /** Change views: */
         btn1.setOnAction(e -> {
             wrapperPane.getChildren().clear();
@@ -105,6 +110,15 @@ public class OptionsView {
         });
 
         this.mainApp = mainApp;
+        System.out.println(this.mainApp.getEngine().getPrivileges());
+        List<Integer> privilegesOfUser = this.mainApp.getEngine().getPrivileges().stream().map(p -> p.getPrivilegeLevelIndex()).collect(Collectors.toList());
+        System.out.println(privilegesOfUser);
+        if(privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1){
+            btn1.setDisable(true);
+            btn2.setDisable(true);
+            btn3.setDisable(true);
+            btn4.setDisable(true);
+        }
         User user = this.mainApp.getEngine().getUser();
         fName.setText(user.getfName());
         lName.setText(user.getlName());
