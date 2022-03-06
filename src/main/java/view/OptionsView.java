@@ -83,9 +83,9 @@ public class OptionsView {
             Pane newLoadedPane3 = null;
             try {
                 this.loader = new FXMLLoader();
-                this.loader.setLocation(getClass().getResource("add-user-view.fxml"));
+                this.loader.setLocation(getClass().getResource("user-management-view.fxml"));
                 newLoadedPane3 = this.loader.load();
-                AddUserView view = this.loader.getController();
+                UserManagementView view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (IOException ex) {
                 ex.printStackTrace();

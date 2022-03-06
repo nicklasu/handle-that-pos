@@ -86,7 +86,7 @@ public class AddUserView {
             Notifications.create()
                     .owner(saveBtn.getScene().getWindow())
                     .title("Onnistui")
-                    .text("Käyttäjä on luotu!")
+                    .text("Käyttäjä on lisätty!")
                     .position(Pos.TOP_RIGHT)
                     .show();
 
