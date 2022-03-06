@@ -34,9 +34,9 @@ public class TransactionTest extends TestParent {
 
     @Test
     public void getAndSetCustomer() {
-        Customer testCustomer = new Customer(3992, 0);
+        Customer testCustomer = new Customer(0);
         this.testTransaction.setCustomer(testCustomer);
-        Assertions.assertEquals(this.testTransaction.getCustomer().toString(), "Customer{id=3992, customerLevelIndex=0}", "Error in handling customers with a transaction");
+        Assertions.assertEquals(this.testTransaction.getCustomer().toString(), "Customer{id=0, customerLevelIndex=0}", "Error in handling customers with a transaction");
     }
 
     @Test
