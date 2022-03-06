@@ -109,6 +109,24 @@ public class UserDAO {
         }
     }
 
+    public void deleteUser(User user){
+        Transaction transaction = null;
+
+        try (Session session = sessionFactory.getCurrentSession()) {
+
+            transaction = session.beginTransaction();
+
+            session.delete(user);
+
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
     public void updateUser(User user) {
         Transaction transaction = null;
 
