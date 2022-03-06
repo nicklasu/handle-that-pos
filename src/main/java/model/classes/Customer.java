@@ -17,8 +17,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int id, int customerLevelIndex) {
-        this.id = id;
+    public Customer(int customerLevelIndex) {
         this.customerLevelIndex = customerLevelIndex;
     }
 

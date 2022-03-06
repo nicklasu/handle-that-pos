@@ -40,7 +40,7 @@ public class DAOTests extends TestParent {
     @Test
     public void transactionDAO() {
         CustomerDAO cd = new CustomerDAO();
-        Customer c = new Customer(222,1);
+        Customer c = new Customer(1);
         Date date = new Date();
         POSEngine posE = new POSEngine();
         UserDAO ud = new UserDAO();
@@ -61,9 +61,28 @@ public class DAOTests extends TestParent {
         Assertions.assertNull(td.getTransaction(t), "Error removing a transaction with dao");
     }
 
-    @Disabled
     @Test
     public void userDAO(){
+        UserDAO ud = new UserDAO();
+        Assertions.assertNull(ud.getUser("JUN"), "Finding a nonexistant user should return null");
+        User u = new User("junit", "tester", "JUN", "123", 1);
+        ud.createUser(u);
+        Assertions.assertEquals(u.toString(),ud.getUser("JUN").toString(), "Finding a user fails");
+        u.setlName("test2");
+        ud.updateUser(u);
+        Assertions.assertEquals("test2",ud.getUser("JUN").getlName(), "Updating user does not work");
+        ud.deleteUser(u);
+        Assertions.assertNull(ud.getUser("JUN"), "Deleting user does not work");
+    }
 
+    @Test
+    public void customerDAO(){
+        CustomerDAO cd = new CustomerDAO();
+        Customer c = new Customer(1);
+        Assertions.assertNull(cd.getCustomer(c.getId()));
+        cd.addCustomer(c);
+        Assertions.assertEquals(c.toString(),cd.getCustomer(c.getId()).toString(), "Finding added customer has problems");
+        cd.deleteCustomer(c);
+        Assertions.assertNull(cd.getCustomer(c.getId()),"Deleting a customer has problems");
     }
 }
