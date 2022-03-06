@@ -51,7 +51,7 @@ public class POSEngineTest extends TestParent {
     public void scanProduct() {
         testEngine.scanProduct("12345678");
         testEngine.scanProduct("ASDFGHJK");
-        Assertions.assertEquals(10500, testEngine.getTransaction().getOrder().getTotalPrice(), "problems with scanning products and adding them to order");
+        Assertions.assertEquals(1500, testEngine.getTransaction().getOrder().getTotalPrice(), "problems with scanning products and adding them to order");
     }
 
     @Test

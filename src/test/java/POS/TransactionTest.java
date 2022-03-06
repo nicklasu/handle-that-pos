@@ -27,7 +27,7 @@ public class TransactionTest extends TestParent {
 
     @Test
     public void getAndSetOrder() {
-        Order testOrder = this.createTestOrder(pos.getUser());
+        Order testOrder = this.createTestOrder(pos.getUser(),testTransaction);
         this.testTransaction.setOrder(testOrder);
         Assertions.assertEquals(this.testTransaction.getOrder().getProductList().toString(), "[Suola, Sokeri]", "Error in linking order to transaction");
     }

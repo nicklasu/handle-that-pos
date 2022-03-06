@@ -32,4 +32,31 @@ public class CustomerDAO {
         return customer;
     }
 
+    public void addCustomer(Customer c){
+        Transaction transaction = null;
+        try(Session session = sessionFactory.getCurrentSession()) {
+            transaction = session.beginTransaction();
+            session.save(c);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
+
+    public void deleteCustomer(Customer c){
+        Transaction transaction = null;
+        try(Session session = sessionFactory.getCurrentSession()) {
+            transaction = session.beginTransaction();
+            session.delete(c);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
 }

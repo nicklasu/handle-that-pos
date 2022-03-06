@@ -6,9 +6,9 @@ public abstract class TestParent {
     public TestParent() {
     }
 
-    protected Order createTestOrder(User user) {
+    protected Order createTestOrder(User user, Transaction t) {
         Product[] testProducts = new Product[]{new Product("1a", "Suola", "Kananmunan päälle naminami", 200, 100), new Product("1b", "Sokeri", "Kahviin slurps", 100, 100)};
-        Order testOrder = new Order(new Transaction(user));
+        Order testOrder = new Order(t);
         testOrder.addProductToOrder(testProducts[0]);
         testOrder.addProductToOrder(testProducts[1]);
         return testOrder;
@@ -16,7 +16,7 @@ public abstract class TestParent {
 
     protected Transaction createTestTransaction(User user) {
         Transaction testTransaction = new Transaction(user);
-        Order testOrder = this.createTestOrder(user);
+        Order testOrder = this.createTestOrder(user, testTransaction);
         testTransaction.setOrder(testOrder);
         Customer testCustomer = new Customer(3992, 0);
         testTransaction.setCustomer(testCustomer);
