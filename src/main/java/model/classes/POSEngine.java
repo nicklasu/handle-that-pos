@@ -7,6 +7,7 @@ import model.interfaces.ITransaction;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -56,9 +57,21 @@ public class POSEngine implements IPOSEngine {
             this.user = user;
             System.out.println(privilegeDAO.getPrivileges(user));
             privileges = privilegeDAO.getPrivileges(user);
-            List<Date> privilegeDates = privileges.stream().map(p -> p.getPrivilegeEnd()).collect(Collectors.toList());
-            System.out.println(privilegeDates);
-
+            List<Date> privilegeEndDates = privileges.stream().map(p -> p.getPrivilegeEnd()).collect(Collectors.toList());
+            List<Date> privilegeStartDates = privileges.stream().map(p -> p.getPrivilegeStart()).collect(Collectors.toList());
+            List<Privilege> validPrivileges = new ArrayList<>();
+            for(int i = 0; i<privilegeEndDates.size(); i++){
+                if(!privilegeStartDates.get(i).after(new Date()) && (privilegeEndDates.get(i) == null || !privilegeEndDates.get(i).before(new Date()))){
+                    validPrivileges.add(privileges.get(i));
+                }
+            }
+            System.out.println("Valid privileges");
+            System.out.println(validPrivileges);
+            System.out.println(privilegeStartDates);
+            System.out.println(privilegeEndDates);
+            if(validPrivileges.isEmpty()){
+                return false;
+            }
             return true;
         }
         return false;
