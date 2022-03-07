@@ -88,12 +88,12 @@
                   </HBox>
                </children>
             </GridPane>
-            <ListView prefHeight="204.0" prefWidth="351.0" GridPane.rowIndex="3">
+            <ListView prefHeight="204.0" prefWidth="351.0" visible="false" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
             </ListView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ostopäätetapahtumat" GridPane.rowIndex="2">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ostopäätetapahtumat" visible="false" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="30.0" />
                </GridPane.margin>
