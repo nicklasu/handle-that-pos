@@ -38,7 +38,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button disable="true" mnemonicParsing="false" prefHeight="77.0" prefWidth="150.0" styleClass="delete_button" stylesheets="@products-view.css" text="Poista käyttäjä" GridPane.columnIndex="2" GridPane.valignment="TOP">
+                  <Button mnemonicParsing="false" prefHeight="77.0" prefWidth="150.0" styleClass="delete_button" stylesheets="@products-view.css" text="Poista käyttäjä" visible="false" GridPane.columnIndex="2" GridPane.valignment="TOP">
                      <graphic>
                         <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -47,7 +47,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button disable="true" mnemonicParsing="false" prefHeight="77.0" prefWidth="150.0" text="Muokkaa käyttäjää" wrapText="true" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                  <Button mnemonicParsing="false" prefHeight="77.0" prefWidth="150.0" text="Muokkaa käyttäjää" visible="false" wrapText="true" GridPane.columnIndex="1" GridPane.valignment="TOP">
                      <graphic>
                         <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>
