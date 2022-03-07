@@ -1,3 +1,8 @@
+Point of sale system, developed with Java.
+“Handle that POS” is a point of sale system created primarily for executing sales transactions and storing them in a database. This project aims to be easy to use and affordable. If you want to use this system, you need an SQL database, which can be local or cloud.
+
+Development team: Anna Raevskaia, Antti Taponen, Nicklas Sundell, Samu Luoma, Lassi Piispanen
+
 Maven dependencies and plugins:
 - At.favre.lib
     - Bcrypt (0.9.0), https://github.com/patrickfav/bcrypt
@@ -19,12 +24,7 @@ Maven dependencies and plugins:
     - Javafx-controls (17.0.2)
 - Com.dlsc.formsfx
     - Formsfx-core (11.4.2)
-
-Point of sale system, developed with Java.
-“Handle that POS” is a point of sale system created primarily for executing sales transactions and storing them in a database. This project aims to be easy to use and affordable. If you want to use this system, you need an SQL database, which can be local or cloud.
-
-Development team: Anna Raevskaia, Antti Taponen, Nicklas Sundell, Samu Luoma, Lassi Piispanen
-
+    
 Installation and configuration:
 
 To use this program, you have to create an SQL database named “pos” and construct the tables into it with the following script:
