@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class POSEngine implements IPOSEngine {
     @Id
     @Column(name = "ID", updatable = false, nullable = false)
-    private String id = HWID.getHWID();
+    private String id;
     @Transient
     private ITransaction transaction = null;
     @Transient
@@ -176,8 +176,8 @@ public class POSEngine implements IPOSEngine {
 
     @Override
     public UserDAO userDAO(){return this.userDAO;}
-@Override
-public TransactionDAO transactionDAO(){return this.transactionDAO;};
+    @Override
+    public TransactionDAO transactionDAO(){return this.transactionDAO;};
 
     private String hashPassword(String password) {
         return BCrypt.withDefaults().hashToString(12, password.toCharArray());
