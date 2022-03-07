@@ -1,5 +1,7 @@
 package view;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -138,6 +140,7 @@ public class TransactionView {
                 readCustomer();
         });
         customerTextField.requestFocus();
+        customerTextField.visibleProperty().bind(Bindings.createBooleanBinding(() -> bonusCustomerCheckBox.isSelected(), bonusCustomerCheckBox.selectedProperty()));
     }
 }
 
