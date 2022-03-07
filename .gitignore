@@ -3,3 +3,4 @@ target/
 **/.idea/tasks.xml
 hotkey.properties
 hibernate.cfg.xml
+documents/
