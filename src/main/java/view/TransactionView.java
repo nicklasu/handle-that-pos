@@ -20,6 +20,8 @@ public class TransactionView {
     @FXML
     private AnchorPane transactionAnchorPane;
     @FXML
+    private Label transactionOverviewLabel;
+    @FXML
     private ListView<Product> scanListView;
     @FXML
     private ToggleButton cardToggleButton;
@@ -125,6 +127,9 @@ public class TransactionView {
             }
             List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
             items.addAll(products);
+
+            String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotta hintaan " + (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice()/100.0f) + "€";
+            transactionOverviewLabel.setText(overviewText);
         }
         scanListView.setItems(items);
         scanListView.setOnMouseClicked(event -> {
