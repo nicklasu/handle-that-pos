@@ -115,7 +115,7 @@
                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <AnchorPane GridPane.columnIndex="1">
-                    <Button mnemonicParsing="false" onAction="#loadTransactionView" prefHeight="100.0" prefWidth="200.0" text="Maksu" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                    <Button fx:id="paymentButton" mnemonicParsing="false" onAction="#loadTransactionView" prefHeight="100.0" prefWidth="200.0" text="Maksu" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
                 </AnchorPane>
                 <GridPane>
                     <columnConstraints>
