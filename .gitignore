@@ -2,4 +2,4 @@ target/
 **/.idea/workspace.xml
 **/.idea/tasks.xml
 hotkey.properties
-hibernate.cfg.xml
+src/main/resources/hibernate.cfg.xml
