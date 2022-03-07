@@ -24,12 +24,17 @@ Maven dependencies and plugins:
     - Javafx-controls (17.0.2)
 - Com.dlsc.formsfx
     - Formsfx-core (11.4.2)
-    
+
+
+
 Installation and configuration:
 
-To use this program, you have to create an SQL database named “pos” and construct the tables into it with the following script:
+<details>
 
-```
+<summary>To use this program, you have to create an SQL database named “pos” and construct the tables into it with the following script:</summary>
+
+
+```sql
 CREATE TABLE Tuote
 (
   ID VARCHAR(8) NOT NULL,
@@ -128,13 +133,16 @@ INSERT INTO `pos`.`Käyttäjätaso` (`ID`, `Nimi`) VALUES ('0', 'USER'),('1', 'M
 SET GLOBAL FOREIGN_KEY_CHECKS=0;
 ```
 
-After constructing the database you have to edit JDBC’s connection settings in hibernate.cfg.xml (located in src/main/resources, you have to create the file also) to match your database connection information.
-Code for hibernate config:
+</details>
+
+<details>
+
+<summary>After constructing the database you have to edit JDBC’s connection settings in hibernate.cfg.xml (located in src/main/resources, you have to create the file also) to match your database connection information.
+Code for hibernate config:</summary>
 
 ```
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN""http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
         <!-- JDBC connection settings -->
@@ -175,9 +183,9 @@ Code for hibernate config:
         <mapping class="model.classes.Privilege" />
     </session-factory>
 </hibernate-configuration>
-
 ```
 
+</details>
 The program itself is now set up but you have to insert users and products into the database in order to use the program at its full potential.
 
 
