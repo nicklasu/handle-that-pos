@@ -1,0 +1,25 @@
+.button {
+    -fx-font-size: 11pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #1c1c1c;
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #1c1c1c;
+}
+
+.bold_label {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #1c1c1c;
+    -fx-font-weight: bold;
+}
+
+.bold_button {
+    -fx-font-size: 14pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #1c1c1c;
+    -fx-font-weight: bold;
+}

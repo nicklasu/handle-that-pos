@@ -139,7 +139,7 @@ public class POSEngine implements IPOSEngine {
             }
             transaction.setCustomer(customer);
         } else {
-            transaction.setCustomer(new Customer( 0));
+            transaction.setCustomer(null);
         }
         ((Transaction) transaction).setPos(this);
         transactionDAO.addTransaction((Transaction) this.transaction);
@@ -178,6 +178,9 @@ public class POSEngine implements IPOSEngine {
     public UserDAO userDAO(){return this.userDAO;}
     @Override
     public TransactionDAO transactionDAO(){return this.transactionDAO;};
+
+    @Override
+    public CustomerDAO customerDAO() { return this.customerDAO;}
 
     private String hashPassword(String password) {
         return BCrypt.withDefaults().hashToString(12, password.toCharArray());

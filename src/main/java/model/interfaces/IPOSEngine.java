@@ -14,7 +14,7 @@ public interface IPOSEngine {
     ITransaction getTransaction();
 
     Product scanProduct(String id);
-
+    CustomerDAO customerDAO();
     void confirmTransaction(boolean printReceipt, Customer customer);
 
     CustomerDAO getCustomerDAO();
