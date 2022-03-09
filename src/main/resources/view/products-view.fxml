@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" stylesheets="/view/products-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ProductManagementView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" stylesheets="/view/products-view.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ProductManagementView">
    <children>
       <GridPane prefHeight="861.0" prefWidth="720.0">
         <columnConstraints>
@@ -29,7 +29,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="addProductBtn" mnemonicParsing="false" onAction="#addProductPane" prefHeight="77.0" prefWidth="150.0" text="Lisää tuote" GridPane.valignment="TOP">
+                  <Button fx:id="addProductBtn" mnemonicParsing="false" onAction="#addProductPane" prefHeight="77.0" prefWidth="150.0" stylesheets="@main-view.css" text="Lisää tuote" GridPane.valignment="TOP">
                      <graphic>
                         <ImageView fitHeight="44.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -45,7 +45,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button mnemonicParsing="false" onAction="#editProductPane" prefHeight="77.0" prefWidth="150.0" text="Muokkaa tuotetta" wrapText="true" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                  <Button mnemonicParsing="false" onAction="#editProductPane" prefHeight="77.0" prefWidth="150.0" stylesheets="@main-view.css" text="Muokkaa tuotetta" wrapText="true" GridPane.columnIndex="1" GridPane.valignment="TOP">
                      <graphic>
                         <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>

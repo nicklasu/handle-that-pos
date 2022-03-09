@@ -9,12 +9,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="fillFields" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditProductView">
+<Pane fx:id="fillFields" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditProductView">
     <children>
-        <GridPane layoutX="14.0" layoutY="19.0" prefHeight="363.0" prefWidth="377.0">
+        <GridPane layoutX="14.0" layoutY="49.0" prefHeight="333.0" prefWidth="424.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="229.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="22.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -25,24 +26,24 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="Tuotteen viivakoodi" />
-                <Label text="Tuotteen nimi" GridPane.rowIndex="1" />
-                <Label text="Tuotteen kuvaus" GridPane.rowIndex="2" />
-                <Label text="Tuotteen hinta" GridPane.rowIndex="3" />
-                <Label text="Varastomäärä" GridPane.rowIndex="4" />
-                <TextField fx:id="productBarcode" GridPane.columnIndex="1" />
-                <TextField fx:id="productName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="productDesc" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <TextField fx:id="productPrice" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <TextField fx:id="productStock" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editProduct" text="Muokkaa" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label stylesheets="@main-view.css" text="Tuotteen viivakoodi" />
+                <Label stylesheets="@main-view.css" text="Tuotteen nimi" GridPane.rowIndex="1" />
+                <Label stylesheets="@main-view.css" text="Tuotteen kuvaus" GridPane.rowIndex="2" />
+                <Label stylesheets="@main-view.css" text="Tuotteen hinta" GridPane.rowIndex="3" />
+                <Label stylesheets="@main-view.css" text="Varastomäärä" GridPane.rowIndex="4" />
+                <TextField fx:id="productBarcode" prefHeight="31.0" prefWidth="229.0" GridPane.columnIndex="1" />
+                <TextField fx:id="productName" prefHeight="31.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="productDesc" prefHeight="31.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="productPrice" prefHeight="31.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="productStock" prefHeight="31.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editProduct" stylesheets="@main-view.css" text="Muokkaa" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="fetchBtn" mnemonicParsing="false" onAction="#fillFields" stylesheets="@main-view.css" text="Hae" GridPane.columnIndex="2" />
             </children>
         </GridPane>
-      <Label layoutX="14.0" layoutY="11.0" text="Muokkaa tuotetta">
+      <Label layoutX="14.0" layoutY="14.0" styleClass="bold_label" stylesheets="@main-view.css" text="Muokkaa tuotetta">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button fx:id="fetchBtn" layoutX="397.0" layoutY="37.0" mnemonicParsing="false" onAction="#fillFields" text="Hae" />
     </children>
 </Pane>
