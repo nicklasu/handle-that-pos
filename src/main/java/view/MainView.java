@@ -1,7 +1,10 @@
 package view;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -44,6 +47,8 @@ public class MainView {
     private Button hotkeyButton3;
     @FXML
     private Button hotkeyButton4;
+    @FXML
+    private Button paymentButton;
     @FXML
     private ProgressBar feedbackProgressBar;
     private ObservableList<Product> items = FXCollections.observableArrayList();
@@ -235,5 +240,8 @@ public class MainView {
         });
         items.addListener((ListChangeListener<Product>) change -> setTotalPrice());
         barcodeTextField.requestFocus();
+        BooleanBinding booleanBind = Bindings.size(items).isEqualTo(0);
+        paymentButton.disableProperty().bind(booleanBind);
+
     }
 }

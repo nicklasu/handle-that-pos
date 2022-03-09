@@ -26,6 +26,15 @@ public class UsersView {
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
         activity.setDisable(true);
+        User user = this.mainApp.getEngine().getUser();
+        fName.setText(user.getfName());
+        lName.setText(user.getlName());
+        if(user.getActivity() == 1){
+            activity.setSelected(true);
+        }
+        else {
+            activity.setSelected(false);
+        }
     }
 
     @FXML

@@ -1,5 +1,7 @@
 package view;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +19,8 @@ public class TransactionView {
     private MainApp mainApp;
     @FXML
     private AnchorPane transactionAnchorPane;
+    @FXML
+    private Label transactionOverviewLabel;
     @FXML
     private ListView<Product> scanListView;
     @FXML
@@ -123,6 +127,9 @@ public class TransactionView {
             }
             List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
             items.addAll(products);
+
+            String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotta hintaan " + (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice()/100.0f) + "€";
+            transactionOverviewLabel.setText(overviewText);
         }
         scanListView.setItems(items);
         scanListView.setOnMouseClicked(event -> {
@@ -138,6 +145,7 @@ public class TransactionView {
                 readCustomer();
         });
         customerTextField.requestFocus();
+        customerTextField.visibleProperty().bind(Bindings.createBooleanBinding(() -> bonusCustomerCheckBox.isSelected(), bonusCustomerCheckBox.selectedProperty()));
     }
 }
 
