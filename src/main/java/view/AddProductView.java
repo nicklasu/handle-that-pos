@@ -26,6 +26,7 @@ public class AddProductView {
     private TextField productStock;
     @FXML
     private Button addBtn;
+
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
         BooleanBinding booleanBind = productBarcode.textProperty().isEmpty()
@@ -56,8 +57,9 @@ public class AddProductView {
         });
 
     }
+
     @FXML
-    private void saveProduct(){
+    private void saveProduct() {
 
         try {
 
@@ -68,15 +70,14 @@ public class AddProductView {
             int stock = Integer.parseInt(productStock.getText());
             Product product = new Product(barcode, name, desc, price, stock);
             boolean res = this.mainApp.getEngine().productDao().addProduct(product);
-            if(res){
+            if (res) {
                 Notifications.create()
                         .owner(productBarcode.getScene().getWindow())
                         .title("Onnistui")
                         .text("Tuote lisättiin onnistuneesti tietokantaan!")
                         .position(Pos.TOP_RIGHT)
                         .show();
-            }
-            else {
+            } else {
                 Notifications.create()
                         .owner(productBarcode.getScene().getWindow())
                         .title("Virhe")
@@ -86,8 +87,7 @@ public class AddProductView {
             }
 
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("There was an error");
             e.printStackTrace();
             Notifications.create()

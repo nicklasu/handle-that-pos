@@ -58,8 +58,8 @@ public class POSEngine implements IPOSEngine {
             List<Date> privilegeEndDates = privileges.stream().map(p -> p.getPrivilegeEnd()).collect(Collectors.toList());
             List<Date> privilegeStartDates = privileges.stream().map(p -> p.getPrivilegeStart()).collect(Collectors.toList());
             List<Privilege> validPrivileges = new ArrayList<>();
-            for(int i = 0; i<privilegeEndDates.size(); i++){
-                if(!privilegeStartDates.get(i).after(new Date()) && (privilegeEndDates.get(i) == null || !privilegeEndDates.get(i).before(new Date()))){
+            for (int i = 0; i < privilegeEndDates.size(); i++) {
+                if (!privilegeStartDates.get(i).after(new Date()) && (privilegeEndDates.get(i) == null || !privilegeEndDates.get(i).before(new Date()))) {
                     validPrivileges.add(privileges.get(i));
                 }
             }
@@ -67,7 +67,7 @@ public class POSEngine implements IPOSEngine {
             System.out.println(validPrivileges);
             System.out.println(privilegeStartDates);
             System.out.println(privilegeEndDates);
-            if(validPrivileges.isEmpty()){
+            if (validPrivileges.isEmpty()) {
                 return 2;
             }
             return 1;
@@ -82,13 +82,14 @@ public class POSEngine implements IPOSEngine {
     public void setId(String id) {
         this.id = id;
     }
+
     @Override
     public List<Privilege> getPrivileges() {
         return privileges;
     }
 
     @Override
-    public List<Integer> getPrivilegeIndexes(){
+    public List<Integer> getPrivilegeIndexes() {
         return privileges.stream().map(p -> p.getPrivilegeLevelIndex()).collect(Collectors.toList());
     }
 
@@ -130,7 +131,7 @@ public class POSEngine implements IPOSEngine {
         Timestamp ts = new Timestamp(date.getTime());
         transaction.setTimestamp(ts);
         if (customer != null) {
-            if(customer.getCustomerLevelIndex() == 1){
+            if (customer.getCustomerLevelIndex() == 1) {
                 float totalPrice = transaction.getOrder().getTotalPrice();
                 totalPrice *= 0.95;
                 transaction.getOrder().setTotalPrice(Math.round(totalPrice));
@@ -169,16 +170,26 @@ public class POSEngine implements IPOSEngine {
     public ProductDAO productDao() {
         return this.productDAO;
     }
-    @Override
-    public PrivilegeDAO privilegeDAO() { return this.privilegeDAO;}
 
     @Override
-    public UserDAO userDAO(){return this.userDAO;}
-    @Override
-    public TransactionDAO transactionDAO(){return this.transactionDAO;}
+    public PrivilegeDAO privilegeDAO() {
+        return this.privilegeDAO;
+    }
 
     @Override
-    public CustomerDAO customerDAO() { return this.customerDAO;}
+    public UserDAO userDAO() {
+        return this.userDAO;
+    }
+
+    @Override
+    public TransactionDAO transactionDAO() {
+        return this.transactionDAO;
+    }
+
+    @Override
+    public CustomerDAO customerDAO() {
+        return this.customerDAO;
+    }
 
     private String hashPassword(String password) {
         return BCrypt.withDefaults().hashToString(12, password.toCharArray());

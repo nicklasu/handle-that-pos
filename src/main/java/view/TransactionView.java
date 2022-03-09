@@ -114,6 +114,7 @@ public class TransactionView {
 
         paymentMethodLabel.setText(paymentMethod.name());
     }
+
     @FXML
     private void requestFocus() {
         customerTextField.requestFocus();

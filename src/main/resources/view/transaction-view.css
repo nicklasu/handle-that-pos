@@ -6,3 +6,10 @@
 .check-box > .box > .mark {
     -fx-padding: 4.16em 4.16em 5em 5em;
 }
+
+.button:disabled {
+    -fx-border-radius: 5px;
+    -fx-border-width: 3px;
+    -fx-border-style: solid;
+    -fx-border-color: blue;
+}
