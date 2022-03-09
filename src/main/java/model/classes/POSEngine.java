@@ -139,7 +139,7 @@ public class POSEngine implements IPOSEngine {
             }
             transaction.setCustomer(customer);
         } else {
-            transaction.setCustomer(new Customer( 0));
+            transaction.setCustomer(null);
         }
         ((Transaction) transaction).setPos(this);
         transactionDAO.addTransaction((Transaction) this.transaction);
