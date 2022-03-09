@@ -100,6 +100,7 @@ public class MainView {
                 break;
             }
         }
+        barcodeTextField.requestFocus();
     }
 
     public void setTotalPrice() {
