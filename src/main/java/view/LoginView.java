@@ -31,9 +31,9 @@ public class LoginView {
 
     @FXML
     private void handleLoginButton() {
-        if (this.mainApp.getEngine().login(usernameTextField.getText(), passwordPasswordField.getText())) {
+        if (this.mainApp.getEngine().login(usernameTextField.getText(), passwordPasswordField.getText()) == 1) {
             this.mainApp.showMainView();
-        } else {
+        } else if(this.mainApp.getEngine().login(usernameTextField.getText(), passwordPasswordField.getText()) == 0) {
             // alert, wrong username or password
             Alert alert = new Alert(Alert.AlertType.ERROR, "Väärä käyttäjänimi tai salasana!", ButtonType.OK);
             alert.showAndWait();
@@ -41,6 +41,17 @@ public class LoginView {
             if (alert.getResult() == ButtonType.OK) {
                 alert.close();
             }
+
+        }else if(this.mainApp.getEngine().login(usernameTextField.getText(), passwordPasswordField.getText()) == 2) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Ei käyttöoikeuksia! Ota yhteyttä myymäläpäällikköön.", ButtonType.OK);
+            alert.showAndWait();
+
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+        }
+        else {
+            System.out.println("Muu virhe");
         }
     }
 
