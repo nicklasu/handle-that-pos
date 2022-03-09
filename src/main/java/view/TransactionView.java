@@ -34,6 +34,8 @@ public class TransactionView {
     private TextField customerTextField;
     @FXML
     private CheckBox bonusCustomerCheckBox;
+    @FXML
+    private Label paymentMethodLabel;
     private boolean printReceipt = false;
     private boolean sendReceiptEmail = false;
     private final ToggleGroup paymentButtonGroup = new ToggleGroup();
@@ -109,6 +111,8 @@ public class TransactionView {
         }
         disabledButton.setDisable(true);
         enabledButton.setDisable(false);
+
+        paymentMethodLabel.setText(paymentMethod.name());
     }
     @FXML
     private void requestFocus() {
@@ -130,6 +134,7 @@ public class TransactionView {
 
             String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotetta hintaan " + (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))) + "€";
             transactionOverviewLabel.setText(overviewText);
+            paymentMethodLabel.setText(this.mainApp.getEngine().getTransaction().getPaymentMethod().name());
         }
         scanListView.setItems(items);
         scanListView.setOnMouseClicked(event -> {

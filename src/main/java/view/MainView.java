@@ -94,12 +94,13 @@ public class MainView {
     }
 
     public void setTotalPrice() {
-        try {
+        if (!(this.mainApp.getEngine().getTransaction() == null)) {
             String priceInEuros = String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f)) + "€";
             this.totalPriceLabel.setText(priceInEuros);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            this.totalPriceLabel.setText("0.00€");
         }
+
     }
 
     @FXML
