@@ -8,7 +8,6 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class TransactionDAO {
-
     private SessionFactory sessionFactory = null;
 
     public TransactionDAO() {
@@ -24,9 +23,7 @@ public class TransactionDAO {
         Transaction t = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             t = session.beginTransaction();
-
             session.save(transaction);
-
             t.commit();
         } catch (Exception e) {
             e.printStackTrace();

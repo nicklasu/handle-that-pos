@@ -6,8 +6,6 @@ import model.interfaces.ITransaction;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -177,7 +175,7 @@ public class POSEngine implements IPOSEngine {
     @Override
     public UserDAO userDAO(){return this.userDAO;}
     @Override
-    public TransactionDAO transactionDAO(){return this.transactionDAO;};
+    public TransactionDAO transactionDAO(){return this.transactionDAO;}
 
     @Override
     public CustomerDAO customerDAO() { return this.customerDAO;}
@@ -190,6 +188,7 @@ public class POSEngine implements IPOSEngine {
         return BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
     }
 
+    @Override
     public void setTransaction(Transaction testTransaction) {
         this.transaction = testTransaction;
     }

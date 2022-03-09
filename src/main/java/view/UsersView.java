@@ -4,12 +4,9 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.text.Text;
-import model.classes.Transaction;
 import model.classes.User;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.Notifications;
-import java.util.List;
-import java.awt.*;
 import java.io.IOException;
 
 public class UsersView {
@@ -63,7 +60,7 @@ public class UsersView {
             }
         }
         catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 }
