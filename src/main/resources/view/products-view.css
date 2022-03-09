@@ -3,6 +3,8 @@
   -fx-border-color: #bebebe #bebebe #bebebe #bebebe;
   -fx-border-width: 1;
   -fx-text-inner-color: black;
+  -fx-font-size: 11pt;
+  -fx-font-family: 'Montserrat';
 }
 
 .button:focused  {
@@ -11,6 +13,8 @@
   -fx-border-width: 1;
   -fx-background-color: #e1ecf4;
   -fx-text-fill: black;
+  -fx-font-size: 11pt;
+  -fx-font-family: 'Montserrat';
 }
 
 .delete_button {
@@ -19,6 +23,8 @@
   -fx-border-width: 1;
   -fx-background-color: #e8594e;
   -fx-text-inner-color: black;
+  -fx-font-size: 11pt;
+  -fx-font-family: 'Montserrat';
 }
 
 .delete_button:focused  {
@@ -27,4 +33,6 @@
   -fx-border-width: 1;
   -fx-background-color: #ad3931;
   -fx-text-fill: black;
+  -fx-font-size: 11pt;
+  -fx-font-family: 'Montserrat';
 }
