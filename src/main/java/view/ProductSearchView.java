@@ -59,7 +59,7 @@ public class ProductSearchView {
         productTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(event.getClickCount() == 2) {
+                if (event.getClickCount() == 2) {
                     int row = productTable.getSelectionModel().getSelectedIndex();
                     System.out.println(productTable.getSelectionModel().getSelectedIndex());
                     if (!(row < 0)) {
@@ -74,8 +74,9 @@ public class ProductSearchView {
                 filteredList.setPredicate(createPredicate(newValue))
         );
     }
+
     @FXML
-    private void updateData(){
+    private void updateData() {
         try {
             if (!(filteredList == null)) {
                 filteredList.removeAll();
@@ -111,7 +112,7 @@ public class ProductSearchView {
                     }
                 }
             });
-        } catch(Exception e){
+        } catch (Exception e) {
             Notifications.create()
                     .owner(fetchBtn.getScene().getWindow())
                     .title("Virhe")
@@ -122,12 +123,12 @@ public class ProductSearchView {
         }
     }
 
-    private boolean searchFindsProduct(Product product, String searchText){
+    private boolean searchFindsProduct(Product product, String searchText) {
         return (product.getName().toLowerCase().contains(searchText.toLowerCase())) ||
                 (product.getId().toLowerCase().contains(searchText.toLowerCase()));
     }
 
-    private Predicate<Product> createPredicate(String searchText){
+    private Predicate<Product> createPredicate(String searchText) {
         return product -> {
             if (searchText == null || searchText.isEmpty()) return true;
             return searchFindsProduct(product, searchText);

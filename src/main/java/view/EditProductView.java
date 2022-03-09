@@ -73,7 +73,7 @@ public class EditProductView {
             int stock = Integer.parseInt(productStock.getText());
             Product product = new Product(barcode, name, desc, price, stock);
             boolean res = this.mainApp.getEngine().productDao().updateProduct(product);
-            if(res){
+            if (res) {
                 Notifications.create()
                         .owner(productBarcode.getScene().getWindow())
                         .title("Onnistui")
@@ -86,15 +86,16 @@ public class EditProductView {
             e.printStackTrace();
         }
     }
+
     @FXML
-    private void fillFields(){
+    private void fillFields() {
         try {
             Product product = this.mainApp.getEngine().productDao().getProduct(productBarcode.getText());
             productName.setText(product.getName());
             productDesc.setText(product.getDescription());
             productPrice.setText(String.valueOf(product.getPrice()));
             productStock.setText(String.valueOf(product.getStock()));
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             Notifications.create()
                     .owner(productBarcode.getScene().getWindow())

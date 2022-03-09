@@ -61,15 +61,14 @@ public class AddUserView {
             String username = userName.getText();
             String password = userPassword.getText();
             boolean isActive = activity.isSelected();
-            LocalDate dateStart =  startDate.getValue();
+            LocalDate dateStart = startDate.getValue();
             LocalDate dateEnd = endDate.getValue();
-            PrivilegeLevel pLevel = switch(privilegeLevel.getValue()){
+            PrivilegeLevel pLevel = switch (privilegeLevel.getValue()) {
                 case "Myyjä" -> PrivilegeLevel.USER;
                 case "Myymäläpäällikkö" -> PrivilegeLevel.MANAGER;
                 case "Järjestelmän ylläpitäjä" -> PrivilegeLevel.ADMIN;
                 default -> throw new IllegalStateException("Unexpected value");
             };
-
 
 
             User user = new User(name, lastname, username, password, 1);
@@ -90,7 +89,7 @@ public class AddUserView {
                     .position(Pos.TOP_RIGHT)
                     .show();
 
-        }catch(IllegalStateException p){
+        } catch (IllegalStateException p) {
             System.out.println("Error! Username is taken!");
             Notifications.create()
                     .owner(saveBtn.getScene().getWindow())
