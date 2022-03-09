@@ -1,7 +1,6 @@
 package view;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -63,6 +62,7 @@ public class TransactionView {
             }
             loadMainView();
         } catch (Exception e) {
+            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Ei tuotteita tilauksessa!", ButtonType.CLOSE);
             alert.showAndWait();
         }
@@ -110,8 +110,8 @@ public class TransactionView {
         disabledButton.setDisable(true);
         enabledButton.setDisable(false);
     }
-
-    private void readCustomer() {
+    @FXML
+    private void requestFocus() {
         customerTextField.requestFocus();
     }
 
@@ -128,7 +128,7 @@ public class TransactionView {
             List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
             items.addAll(products);
 
-            String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotta hintaan " + (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice()/100.0f) + "€";
+            String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotetta hintaan " + (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))) + "€";
             transactionOverviewLabel.setText(overviewText);
         }
         scanListView.setItems(items);
@@ -142,9 +142,8 @@ public class TransactionView {
         });
         customerTextField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)
-                readCustomer();
+                requestFocus();
         });
-        customerTextField.requestFocus();
         customerTextField.visibleProperty().bind(Bindings.createBooleanBinding(() -> bonusCustomerCheckBox.isSelected(), bonusCustomerCheckBox.selectedProperty()));
     }
 }
