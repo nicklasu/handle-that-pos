@@ -10,13 +10,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", updatable = false, nullable = false)
     private int id;
-
     @Column(name = "Käyttäjätunnus", unique = true)
     private String username;
-
     @Column(name = "Salasana")
     private String password;
-
     @Column(name = "Etunimi")
     private String fName;
     @Column(name = "Sukunimi")
@@ -87,7 +84,6 @@ public class User {
 
     public void setActivity(int activity) {
         this.activity = activity;
-
     }
 
     @Override

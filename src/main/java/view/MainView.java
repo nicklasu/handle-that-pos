@@ -4,21 +4,17 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Window;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -57,17 +53,11 @@ public class MainView {
     private ArrayList<Button> hotkeyButtons = new ArrayList<>();
     private HotkeyFileHandler hotkeyFileHandler;
 
-    public void loadTransactionView() throws IOException {
-        /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("transaction-view.fxml"));
-        new ViewLoader(mainAnchorPane, fxmlLoader.load());
-        ((TransactionView) fxmlLoader.getController()).setMainApp(this.mainApp);*/
+    public void loadTransactionView() {
         mainApp.showTransactionView();
     }
 
-    public void loadOptionsView() throws IOException {
-        /*FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("options-view.fxml"));
-        new ViewLoader(mainAnchorPane, fxmlLoader.load());
-        ((OptionsView) fxmlLoader.getController()).setMainApp(this.mainApp);*/
+    public void loadOptionsView() {
         mainApp.showOptionsView();
     }
 
@@ -107,7 +97,8 @@ public class MainView {
         try {
             String priceInEuros = String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f)) + "€";
             this.totalPriceLabel.setText(priceInEuros);
-        } catch (NullPointerException ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -207,7 +198,7 @@ public class MainView {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        this.usernameLabel.setText(mainApp.getEngine().getUser().getUsername());
+        usernameLabel.setText(mainApp.getEngine().getUser().getUsername());
         feedbackProgressBar.setVisible(false);
         hotkeyFileHandler = new HotkeyFileHandler();
         hotkeyFileHandler.loadHotkeys(hotkeyProductIds, mainApp.getHotkeyButtonNames());
@@ -216,7 +207,6 @@ public class MainView {
         hotkeyButtons.add(hotkeyButton2);
         hotkeyButtons.add(hotkeyButton3);
         hotkeyButtons.add(hotkeyButton4);
-
         addHotkeys(hotkeyButtons);
         // Populate listView with already existing products from open Transaction
         if (this.mainApp.getEngine().getTransaction() != null) {
@@ -243,6 +233,5 @@ public class MainView {
         barcodeTextField.requestFocus();
         BooleanBinding booleanBind = Bindings.size(items).isEqualTo(0);
         paymentButton.disableProperty().bind(booleanBind);
-
     }
 }

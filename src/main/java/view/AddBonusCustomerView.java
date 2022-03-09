@@ -3,11 +3,8 @@ package view;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import model.classes.Customer;
 
@@ -20,6 +17,7 @@ public class AddBonusCustomerView {
     private TextField bonusCustomerId;
     @FXML
     private Button addBonusBtn;
+
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
         BooleanBinding booleanBind = bonusCustomerId.textProperty().isEmpty();
@@ -36,11 +34,11 @@ public class AddBonusCustomerView {
     }
 
     @FXML
-    private void addBonusCustomer(){
+    private void addBonusCustomer() {
         System.out.println("adding bonus customer");
         int customerId = Integer.parseInt(bonusCustomerId.getText());
         Customer c = new Customer(1);
         c.setId(customerId);
         this.mainApp.getEngine().customerDAO().addCustomer(c);
-    };
+    }
 }

@@ -41,9 +41,7 @@ public class PrivilegeDAO {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-
             session.save(privilege);
-
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
