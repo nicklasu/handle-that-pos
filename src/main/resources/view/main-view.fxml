@@ -40,7 +40,7 @@
                 <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="367.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <Button fx:id="hotkeyButton1" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@main-view.css" text="Pikanäppäin 1" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@main-view.css" text="Palauta tuote" GridPane.rowIndex="2" />
+            <Button fx:id="hotkeyButton5" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@main-view.css" text="Pikanäppäin" GridPane.rowIndex="2" />
             <Button fx:id="hotkeyButton0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@main-view.css" text="Pikanäppäin 0" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button fx:id="hotkeyButton4" layoutX="426.0" layoutY="165.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@main-view.css" text="Pikanäppäin 4" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
             <Button fx:id="hotkeyButton3" layoutX="426.0" layoutY="165.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@main-view.css" text="Pikanäppäin 3" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />

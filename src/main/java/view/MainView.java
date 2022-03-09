@@ -44,12 +44,14 @@ public class MainView {
     @FXML
     private Button hotkeyButton4;
     @FXML
+    private Button hotkeyButton5;
+    @FXML
     private Button paymentButton;
     @FXML
     private ProgressBar feedbackProgressBar;
     private ObservableList<Product> items = FXCollections.observableArrayList();
     private String productId;
-    private final String[] hotkeyProductIds = new String[5];
+    private final String[] hotkeyProductIds = new String[6];
     private ArrayList<Button> hotkeyButtons = new ArrayList<>();
     private HotkeyFileHandler hotkeyFileHandler;
 
@@ -208,6 +210,7 @@ public class MainView {
         hotkeyButtons.add(hotkeyButton2);
         hotkeyButtons.add(hotkeyButton3);
         hotkeyButtons.add(hotkeyButton4);
+        hotkeyButtons.add(hotkeyButton5);
         addHotkeys(hotkeyButtons);
         // Populate listView with already existing products from open Transaction
         if (this.mainApp.getEngine().getTransaction() != null) {

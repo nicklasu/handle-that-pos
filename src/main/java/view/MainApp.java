@@ -13,7 +13,7 @@ public class MainApp extends Application {
 
     private Stage stage;
     private IPOSEngine engine;
-    private final String[] hotkeyProductNames = new String[5];
+    private final String[] hotkeyProductNames = new String[6];
 
     public MainApp() {
         this.engine = new POSEngine();
