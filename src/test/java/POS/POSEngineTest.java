@@ -25,8 +25,8 @@ public class POSEngineTest extends TestParent {
 
     @Test
     public void login() {
-        Assertions.assertEquals(testEngine.login("testuser", "123"), 1, "logging in to testuser doesn't work properly");
-        Assertions.assertEquals(testEngine.login("testuser", "asd"), 0, "logging in with wrong password works");
+        Assertions.assertEquals(testEngine.login("testuser", "123"), 1, "logging in to testuser doesn't work properly!");
+        Assertions.assertEquals(testEngine.login("testuser", "asd"), 0, "logging in with wrong password works!");
     }
 
     @Test
