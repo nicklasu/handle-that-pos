@@ -2,7 +2,6 @@ package model.interfaces;
 
 import model.classes.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface IOrder {

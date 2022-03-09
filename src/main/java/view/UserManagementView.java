@@ -4,43 +4,40 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
-import model.classes.Product;
 
 import java.io.IOException;
 
 public class UserManagementView {
-        private MainApp mainApp;
-        private FXMLLoader loader;
+    private MainApp mainApp;
+    private FXMLLoader loader;
 
-        public void setMainApp(MainApp mainApp) throws IOException {
-            this.mainApp = mainApp;
+    public void setMainApp(MainApp mainApp) throws IOException {
+        this.mainApp = mainApp;
+    }
+
+    @FXML
+    Pane wrapperPaneUsers = new Pane();
+
+    /**
+     * Switch to add-product-view.fxml
+     */
+    public void addUserPane(ActionEvent event) throws IOException {
+
+        System.out.println("add user button was pressed");
+        wrapperPaneUsers.getChildren().clear();
+        Pane newLoadedPane = null;
+        try {
+            this.loader = new FXMLLoader();
+            this.loader.setLocation(getClass().getResource("add-user-view.fxml"));
+            newLoadedPane = this.loader.load();
+            AddUserView view = this.loader.getController();
+            view.setMainApp(mainApp);
+            //newLoadedPane3 = FXMLLoader.load(getClass().getResource("add-product-view.fxml"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-
-
-        @FXML
-        Pane wrapperPaneUsers = new Pane();
-
-        /**
-         * Switch to add-product-view.fxml
-         */
-        public void addUserPane(ActionEvent event) throws IOException {
-
-            System.out.println("add user button was pressed");
-            wrapperPaneUsers.getChildren().clear();
-            Pane newLoadedPane = null;
-            try {
-                this.loader = new FXMLLoader();
-                this.loader.setLocation(getClass().getResource("add-user-view.fxml"));
-                newLoadedPane = this.loader.load();
-                AddUserView view = this.loader.getController();
-                view.setMainApp(mainApp);
-                //newLoadedPane3 = FXMLLoader.load(getClass().getResource("add-product-view.fxml"));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            wrapperPaneUsers.getChildren().add(newLoadedPane);
-        }
-
+        wrapperPaneUsers.getChildren().add(newLoadedPane);
+    }
 //        /**
 //         * Switch to delete-user-view.fxml
 //         */
@@ -82,6 +79,4 @@ public class UserManagementView {
 //            }
 //            wrapperPaneProducts.getChildren().add(newLoadedPane3);
 //        }
-
-
 }

@@ -7,7 +7,7 @@ import org.hibernate.Transaction;
 public class CustomerDAO {
     private SessionFactory sessionFactory = null;
 
-    public CustomerDAO(){
+    public CustomerDAO() {
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
         } catch (Exception e) {
@@ -16,10 +16,10 @@ public class CustomerDAO {
         }
     }
 
-    public Customer getCustomer(int id){
+    public Customer getCustomer(int id) {
         Transaction transaction = null;
         Customer customer = null;
-        try(Session session = sessionFactory.getCurrentSession()) {
+        try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
             customer = session.get(Customer.class, id);
             transaction.commit();
@@ -32,9 +32,9 @@ public class CustomerDAO {
         return customer;
     }
 
-    public void addCustomer(Customer c){
+    public void addCustomer(Customer c) {
         Transaction transaction = null;
-        try(Session session = sessionFactory.getCurrentSession()) {
+        try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
             session.save(c);
             transaction.commit();
@@ -46,9 +46,9 @@ public class CustomerDAO {
         }
     }
 
-    public void deleteCustomer(Customer c){
+    public void deleteCustomer(Customer c) {
         Transaction transaction = null;
-        try(Session session = sessionFactory.getCurrentSession()) {
+        try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
             session.delete(c);
             transaction.commit();

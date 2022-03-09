@@ -2,14 +2,8 @@ package model.classes;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.Transaction;
-import org.hibernate.exception.ConstraintViolationException;
-import org.hibernate.query.Query;
-
 import javax.persistence.PersistenceException;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 public class ProductDAO {
@@ -29,20 +23,14 @@ public class ProductDAO {
         Transaction transaction = null;
         Product product = null;
         try (Session session = sessionFactory.getCurrentSession()) {
-
             transaction = session.beginTransaction();
-
             product = session.get(Product.class, id);
-
             transaction.commit();
         } catch (Exception e) {
-
             if (transaction != null) {
-
                 transaction.rollback();
             }
         }
-
         return product;
     }
 
@@ -50,11 +38,8 @@ public class ProductDAO {
         Transaction transaction = null;
         List<Product> products = null;
         try (Session session = sessionFactory.getCurrentSession()) {
-
             transaction = session.beginTransaction();
-
             products = session.createQuery("from Product").list();
-
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -68,40 +53,30 @@ public class ProductDAO {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-
             session.save(product);
             System.out.println(transaction);
             transaction.commit();
             return true;
         }
         catch (PersistenceException p){
-
             if (transaction != null) {
                 transaction.rollback();
-
             }
             return false;
         }
          catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
-
             }
-
         }
         return false;
     }
 
     public boolean updateProduct(Product product){
         Transaction transaction = null;
-
         try (Session session = sessionFactory.getCurrentSession()){
-
            transaction = session.beginTransaction();
-
             session.saveOrUpdate(product);
-
-
             transaction.commit();
             return true;
         } catch (Exception e) {
@@ -114,9 +89,7 @@ public class ProductDAO {
 
     public boolean deleteProduct(String id) {
         Transaction transaction = null;
-
         try (Session session = sessionFactory.getCurrentSession()){
-
             transaction = session.beginTransaction();
             Product product = session.get(Product.class, id);
             if(product != null) {
@@ -126,17 +99,12 @@ public class ProductDAO {
                 return true;
             }
             transaction.commit();
-
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
         }
         System.out.println("product not found ");
-
         return false;
     }
-
-
-
 }

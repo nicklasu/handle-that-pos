@@ -2,7 +2,6 @@ package model.classes;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
@@ -12,7 +11,6 @@ public class UserDAO {
     private SessionFactory sessionFactory = null;
 
     public UserDAO() {
-
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
         } catch (Exception e) {
@@ -26,21 +24,14 @@ public class UserDAO {
         Transaction transaction = null;
         User user = null;
         try (Session session = sessionFactory.getCurrentSession()) {
-
             transaction = session.beginTransaction();
-
-
             user = session.get(User.class, id);
-
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
-
                 transaction.rollback();
             }
-
         }
-
         return user;
     }
 
@@ -48,7 +39,6 @@ public class UserDAO {
         Transaction transaction = null;
         User user = null;
         try (Session session = sessionFactory.getCurrentSession()) {
-
             transaction = session.beginTransaction();
             Query query = session.createQuery("from User where username=:username");
             query.setParameter("username", username);
@@ -56,21 +46,14 @@ public class UserDAO {
             if (list.isEmpty()) {
                 System.out.println("Käyttäjää ei löytynyt tietokannasta.");
                 return null;
-
             }
-
             user = (User) list.get(0);
-
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
-
                 transaction.rollback();
-
             }
-
         }
-
         return user;
     }
 
@@ -79,12 +62,8 @@ public class UserDAO {
         Transaction transaction = null;
         List<User> users = null;
         try (Session session = sessionFactory.getCurrentSession()) {
-
             transaction = session.beginTransaction();
-
-
             users = session.createQuery("from User").list();
-
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -98,9 +77,7 @@ public class UserDAO {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-
             session.save(user);
-
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -109,16 +86,11 @@ public class UserDAO {
         }
     }
 
-    public void deleteUser(User user){
+    public void deleteUser(User user) {
         Transaction transaction = null;
-
         try (Session session = sessionFactory.getCurrentSession()) {
-
             transaction = session.beginTransaction();
-
             session.delete(user);
-
-
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -129,14 +101,9 @@ public class UserDAO {
 
     public void updateUser(User user) {
         Transaction transaction = null;
-
         try (Session session = sessionFactory.getCurrentSession()) {
-
             transaction = session.beginTransaction();
-
             session.saveOrUpdate(user);
-
-
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -144,5 +111,4 @@ public class UserDAO {
             }
         }
     }
-
 }
