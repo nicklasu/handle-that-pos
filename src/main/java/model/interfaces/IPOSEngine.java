@@ -5,7 +5,7 @@ import model.classes.*;
 import java.util.List;
 
 public interface IPOSEngine {
-    boolean login(String username, String password);
+    int login(String username, String password);
 
     void logout();
 

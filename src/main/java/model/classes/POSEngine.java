@@ -47,7 +47,7 @@ public class POSEngine implements IPOSEngine {
     }
 
     @Override
-    public boolean login(String username, String password) {
+    public int login(String username, String password) {
         User user = userDAO.getUser(username);
         BCrypt.Result result = compare(password, user.getPassword());
         System.out.println(HWID.getHWID());
@@ -70,11 +70,11 @@ public class POSEngine implements IPOSEngine {
             System.out.println(privilegeStartDates);
             System.out.println(privilegeEndDates);
             if(validPrivileges.isEmpty()){
-                return false;
+                return 2;
             }
-            return true;
+            return 1;
         }
-        return false;
+        return 0;
     }
 
     public String getId() {
