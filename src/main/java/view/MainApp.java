@@ -3,6 +3,7 @@ package view;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.classes.POSEngine;
 import model.interfaces.IPOSEngine;
@@ -24,7 +25,9 @@ public class MainApp extends Application {
         this.stage = stage;
         this.stage.setMinHeight(750);
         this.stage.setMinWidth(1070);
-        stage.setTitle("Kassajärjestelmä");
+        stage.setTitle("Handle that POS");
+        this.stage.getIcons().add(new Image("file:src/main/resources/images/pos.png"));
+
         showLoginView();
     }
 
