@@ -62,10 +62,10 @@ public class ProductSearchView {
                 if(event.getClickCount() == 2) {
                     int row = productTable.getSelectionModel().getSelectedIndex();
                     System.out.println(productTable.getSelectionModel().getSelectedIndex());
-                    Product product = allProducts.get(row);
-                    System.out.println(product);
-
-                    loadEditProductView(product);
+                    if (!(row < 0)) {
+                        Product product = allProducts.get(row);
+                        loadEditProductView(product);
+                    }
                 }
             }
         });
