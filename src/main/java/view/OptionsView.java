@@ -34,6 +34,8 @@ public class OptionsView {
     @FXML
     private Button btn4;
     @FXML
+    private Button btn5;
+    @FXML
     Pane wrapperPane = new Pane();
     private FXMLLoader loader;
 
@@ -107,6 +109,20 @@ public class OptionsView {
                 ex.printStackTrace();
             }
             wrapperPane.getChildren().add(newLoadedPane);
+        });
+        btn5.setOnAction(e -> {
+            wrapperPane.getChildren().clear();
+            Pane newLoadedPane5 = null;
+            try {
+                this.loader = new FXMLLoader();
+                this.loader.setLocation(getClass().getResource("bonus-customer-management-view.fxml"));
+                newLoadedPane5 = this.loader.load();
+                BonusCustomerManagementView view = this.loader.getController();
+                view.setMainApp(mainApp);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            wrapperPane.getChildren().add(newLoadedPane5);
         });
 
         this.mainApp = mainApp;
