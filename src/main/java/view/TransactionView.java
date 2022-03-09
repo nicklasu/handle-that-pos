@@ -112,11 +112,21 @@ public class TransactionView {
         disabledButton.setDisable(true);
         enabledButton.setDisable(false);
 
-        paymentMethodLabel.setText(paymentMethod.name());
+        setPaymentMethodLabelText(paymentMethod);
     }
     @FXML
     private void requestFocus() {
         customerTextField.requestFocus();
+    }
+
+    private void setPaymentMethodLabelText(PaymentMethod paymentMethod) {
+        if (paymentMethod == PaymentMethod.CARD) {
+            paymentMethodLabel.setText("Maksukortti");
+        } else if (paymentMethod == PaymentMethod.CASH) {
+            paymentMethodLabel.setText("Käteinen");
+        } else {
+            paymentMethodLabel.setText("");
+        }
     }
 
     public void setMainApp(MainApp mainApp) {
@@ -134,7 +144,7 @@ public class TransactionView {
 
             String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotetta hintaan " + (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))) + "€";
             transactionOverviewLabel.setText(overviewText);
-            paymentMethodLabel.setText(this.mainApp.getEngine().getTransaction().getPaymentMethod().name());
+            setPaymentMethodLabelText(this.mainApp.getEngine().getTransaction().getPaymentMethod());
         }
         scanListView.setItems(items);
         scanListView.setOnMouseClicked(event -> {
