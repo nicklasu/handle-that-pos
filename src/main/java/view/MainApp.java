@@ -36,6 +36,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = stage;
+        this.stage.setMinHeight(750);
+        this.stage.setMinWidth(1070);
         stage.setTitle("Kassajärjestelmä");
         showLoginView();
     }
