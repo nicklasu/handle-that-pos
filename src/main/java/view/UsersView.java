@@ -7,6 +7,7 @@ import javafx.scene.text.Text;
 import model.classes.User;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.Notifications;
+
 import java.io.IOException;
 
 public class UsersView {
@@ -26,16 +27,15 @@ public class UsersView {
         User user = this.mainApp.getEngine().getUser();
         fName.setText(user.getfName());
         lName.setText(user.getlName());
-        if(user.getActivity() == 1){
+        if (user.getActivity() == 1) {
             activity.setSelected(true);
-        }
-        else {
+        } else {
             activity.setSelected(false);
         }
     }
 
     @FXML
-    private void searchUser(){
+    private void searchUser() {
         try {
             System.out.println("searching");
             String username = searchField.getText();
@@ -48,9 +48,7 @@ public class UsersView {
                 } else {
                     activity.setSelected(false);
                 }
-            }
-
-            else {
+            } else {
                 Notifications.create()
                         .owner(searchField.getScene().getWindow())
                         .title("Virhe")
@@ -58,8 +56,7 @@ public class UsersView {
                         .position(Pos.TOP_RIGHT)
                         .showError();
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

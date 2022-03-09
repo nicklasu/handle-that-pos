@@ -3,17 +3,17 @@ package model.classes;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
 import javax.persistence.PersistenceException;
 import java.util.List;
 
 public class ProductDAO {
     private SessionFactory sessionFactory = null;
 
-    public ProductDAO(){
+    public ProductDAO() {
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Virhe istuntotehtaan luomisessa");
             e.printStackTrace();
         }
@@ -57,14 +57,12 @@ public class ProductDAO {
             System.out.println(transaction);
             transaction.commit();
             return true;
-        }
-        catch (PersistenceException p){
+        } catch (PersistenceException p) {
             if (transaction != null) {
                 transaction.rollback();
             }
             return false;
-        }
-         catch (Exception e) {
+        } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
@@ -72,10 +70,10 @@ public class ProductDAO {
         return false;
     }
 
-    public boolean updateProduct(Product product){
+    public boolean updateProduct(Product product) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.getCurrentSession()){
-           transaction = session.beginTransaction();
+        try (Session session = sessionFactory.getCurrentSession()) {
+            transaction = session.beginTransaction();
             session.saveOrUpdate(product);
             transaction.commit();
             return true;
@@ -89,10 +87,10 @@ public class ProductDAO {
 
     public boolean deleteProduct(String id) {
         Transaction transaction = null;
-        try (Session session = sessionFactory.getCurrentSession()){
+        try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
             Product product = session.get(Product.class, id);
-            if(product != null) {
+            if (product != null) {
                 session.delete(product);
                 transaction.commit();
                 System.out.println("Found product");
