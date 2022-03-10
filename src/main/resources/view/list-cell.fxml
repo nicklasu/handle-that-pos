@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<HBox stylesheets="@main-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox stylesheets="@main-view.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane fx:id="gridPane" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" HBox.hgrow="ALWAYS">
       <columnConstraints>
@@ -30,7 +26,7 @@
               </rowConstraints>
                <children>
                   <Button fx:id="minusButton" maxHeight="26.0" maxWidth="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="-" GridPane.halignment="RIGHT" />
-                  <Button fx:id="plusButton" maxHeight="26.0" maxWidth="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="+" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
+                  <Button fx:id="plusButton" ellipsisString="" maxHeight="26.0" maxWidth="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="+" textOverrun="CLIP" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
                <Label fx:id="productAmountLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                </children>
             </GridPane>
