@@ -27,6 +27,8 @@ public class POSEngineTest extends TestParent {
         testEngine.logout();
     }
 
+
+
     @Test
     public void login() {
         Assertions.assertEquals(testEngine.login("testuser", "123"), 1, "logging in to testuser doesn't work properly!");
