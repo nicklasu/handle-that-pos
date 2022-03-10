@@ -4,6 +4,7 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
@@ -20,6 +21,10 @@ public class DeleteProductView {
 
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
+        productBarcode.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER)
+                deleteProduct();
+        });
         BooleanBinding booleanBind = productBarcode.textProperty().isEmpty();
         deleteBtn.disableProperty().bind(booleanBind);
     }
