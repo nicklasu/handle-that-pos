@@ -14,30 +14,22 @@ import java.io.IOException;
 import java.util.Collections;
 
 public class ProductListViewCell extends ListCell<Product> {
-
     @FXML
     private Label productNameLabel;
-
+    @FXML
+    private Label productPriceLabel;
     @FXML
     private Label productAmountLabel;
-
     @FXML
     private Button minusButton;
-
     @FXML
     private Button plusButton;
-
     @FXML
     private GridPane gridPane;
-
     private FXMLLoader fxmlLoader;
-
     private MainView mainView;
-
     private IOrder order;
-
     private ObservableList<Product> items;
-
     private int productAmount;
 
     public ProductListViewCell(MainView mainView, IOrder order, ObservableList<Product> items) {
@@ -46,14 +38,12 @@ public class ProductListViewCell extends ListCell<Product> {
         this.items = items;
     }
 
-
     @Override
     protected void updateItem(Product product, boolean empty) {
         super.updateItem(product, empty);
         if (empty || product == null) {
             setText(null);
             setGraphic(null);
-
         } else {
             if (this.fxmlLoader == null) {
                 this.fxmlLoader = new FXMLLoader(getClass().getResource("list-cell.fxml"));
@@ -64,14 +54,15 @@ public class ProductListViewCell extends ListCell<Product> {
                     e.printStackTrace();
                 }
             }
-
             this.productNameLabel.setText(product.getName());
             productAmount = Collections.frequency(this.order.getProductList(), product);
             this.productAmountLabel.setText(String.valueOf(productAmount));
+            productPriceSet(product);
             this.minusButton.setOnAction(event -> {
                 this.order.removeProductFromOrder(product);
                 productAmount = Collections.frequency(this.order.getProductList(), product);
                 if (productAmount > 0) {
+                    productPriceSet(product);
                     this.productAmountLabel.setText(String.valueOf(productAmount));
                 } else {
                     this.items.remove(product);
@@ -81,6 +72,7 @@ public class ProductListViewCell extends ListCell<Product> {
             this.plusButton.setOnAction(event -> {
                 this.order.addProductToOrder(product);
                 productAmount = Collections.frequency(this.order.getProductList(), product);
+                productPriceSet(product);
                 this.productAmountLabel.setText(String.valueOf(productAmount));
                 this.mainView.setTotalPrice();
                 if (product.getStock() < 0) {
@@ -90,5 +82,9 @@ public class ProductListViewCell extends ListCell<Product> {
             setText(null);
             setGraphic(this.gridPane);
         }
+    }
+
+    private void productPriceSet(Product product) {
+        this.productPriceLabel.setText(String.format("%.2f", (product.getPrice() * productAmount) / 100f) + "€");
     }
 }
