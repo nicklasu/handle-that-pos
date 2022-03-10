@@ -38,7 +38,7 @@ public class ListCellTransaction extends ListCell<Product> {
                 }
             }
             this.nameLabel.setText(product.getName());
-           // this.priceLabel.setText(String.valueOf(product.getPrice()));
+            this.priceLabel.setText(String.format("%.2f",product.getPrice() / 100f) + "€");
             setText(null);
             setGraphic(this.gridPane);
         }
