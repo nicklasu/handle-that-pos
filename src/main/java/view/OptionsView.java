@@ -33,6 +33,8 @@ public class OptionsView {
     @FXML
     private Button btn5;
     @FXML
+    private Button returnBtn;
+    @FXML
     Pane wrapperPane = new Pane();
     private FXMLLoader loader;
 
@@ -43,7 +45,7 @@ public class OptionsView {
     }
 
     public void setMainApp(MainApp mainApp) throws IOException {
-        /** Change views: */
+        /* Change views: */
         btn1.setOnAction(e -> {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane0 = null;
@@ -129,6 +131,7 @@ public class OptionsView {
         User user = this.mainApp.getEngine().getUser();
         fName.setText(user.getfName());
         lName.setText(user.getlName());
+        returnBtn.requestFocus();
         if (this.mainApp.getEngine().getTransaction() != null) {
         }
     }
