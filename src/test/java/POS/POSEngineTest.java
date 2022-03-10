@@ -1,7 +1,6 @@
 package POS;
 
 import model.classes.Customer;
-import model.classes.CustomerLevel;
 import model.classes.POSEngine;
 import org.junit.jupiter.api.*;
 
@@ -21,6 +20,11 @@ public class POSEngineTest extends TestParent {
     @BeforeEach
     public void setUp() {
         testEngine.login("testuser", "123");
+    }
+
+    @AfterEach
+    public void logoutAfterEach() {
+        testEngine.logout();
     }
 
     @Test
@@ -49,9 +53,9 @@ public class POSEngineTest extends TestParent {
     @Test
 
     public void scanProduct() {
-        testEngine.scanProduct("12345678");
-        testEngine.scanProduct("ASDFGHJK");
-        Assertions.assertEquals(1500, testEngine.getTransaction().getOrder().getTotalPrice(), "problems with scanning products and adding them to order");
+        testEngine.scanProduct("1a");
+        testEngine.scanProduct("1b");
+        Assertions.assertEquals(300, testEngine.getTransaction().getOrder().getTotalPrice(), "problems with scanning products and adding them to order");
     }
 
     @Test
