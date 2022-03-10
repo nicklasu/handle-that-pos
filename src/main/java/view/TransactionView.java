@@ -11,7 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import model.classes.*;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 
 public class TransactionView {
@@ -140,22 +139,24 @@ public class TransactionView {
             } else {
                 cashToggleButton.setDisable(true);
             }
-            List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
-            items.addAll(products);
+            /*List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
+            items.addAll(products);*/
 
+            scanListView.setItems(items);
+            scanListView.setCellFactory(productListView -> new ListCellTransaction());
             String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotetta hintaan " + (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))) + "€";
             transactionOverviewLabel.setText(overviewText);
             setPaymentMethodLabelText(this.mainApp.getEngine().getTransaction().getPaymentMethod());
         }
-        scanListView.setItems(items);
-        scanListView.setOnMouseClicked(event -> {
+       // scanListView.setItems(items);
+      /*  scanListView.setOnMouseClicked(event -> {
             Product product = scanListView.getSelectionModel().getSelectedItem();
             Dialog<Void> dialog = new Dialog<>();
             dialog.setTitle(product.getName());
-            dialog.setHeaderText("ID: " + product.getId() + "\n" + "Kuvaus: " + product.getDescription() + "\nHinta: " + product.getPrice() + " per kpl" + "\nVarastomäärä: " + product.getStock());
+            dialog.setHeaderText("ID: " + product.getId() + "\n" + "Kuvaus: " + product.getDescription() + "\nHinta: " + String.format("%.2f", (product.getPrice() / 100f)) + "€" + " per kpl" + "\nVarastomäärä: " + product.getStock());
             dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
             dialog.showAndWait();
-        });
+        });*/
         customerTextField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)
                 requestFocus();
