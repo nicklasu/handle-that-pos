@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
@@ -32,6 +33,10 @@ public class EditProductView {
 
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
+        productBarcode.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER)
+                fillFields();
+        });
         BooleanBinding booleanBind = productBarcode.textProperty().isEmpty()
                 .or(productName.textProperty().isEmpty())
                 .or(productDesc.textProperty().isEmpty())

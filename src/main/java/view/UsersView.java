@@ -3,6 +3,7 @@ package view;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
+import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import model.classes.User;
 import javafx.scene.control.TextField;
@@ -23,6 +24,10 @@ public class UsersView {
 
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
+        searchField.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER)
+                searchUser();
+        });
         activity.setDisable(true);
         User user = this.mainApp.getEngine().getUser();
         fName.setText(user.getfName());

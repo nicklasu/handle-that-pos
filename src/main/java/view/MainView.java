@@ -65,32 +65,35 @@ public class MainView {
 
     @FXML
     private void readBarcode() {
-        try {
-            productId = barcodeTextField.getText();
-            addProduct(productId);
-            barcodeTextField.clear();
-            barcodeTextField.requestFocus();
-        } catch (Exception e) {
-            productId = null;
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Tuotetta ei löytynyt tietokannasta!", ButtonType.CLOSE);
-            alert.showAndWait();
-        }
+        productId = barcodeTextField.getText();
+        addProduct(productId);
+        barcodeTextField.clear();
+        barcodeTextField.requestFocus();
     }
 
     private void addProduct(String productId) {
         Product product = this.mainApp.getEngine().scanProduct(productId);
-        if (!items.contains(product)) {
-            items.add(product);
-        }
-        scanListView.refresh();
-        setTotalPrice();
-        for (Product p : this.mainApp.getEngine().getTransaction().getOrder().getProductList()) {
-            if (p.equals(product)) {
-                if (p.getStock() < 0) {
-                    negativeProductStockNotification();
-                }
-                break;
+        if (product != null) {
+            if (!items.contains(product)) {
+                items.add(product);
             }
+            scanListView.refresh();
+            setTotalPrice();
+            for (Product p : this.mainApp.getEngine().getTransaction().getOrder().getProductList()) {
+                if (p.equals(product)) {
+                    if (p.getStock() < 0) {
+                        negativeProductStockNotification();
+                    }
+                    break;
+                }
+            }
+        } else {
+            Notifications.create()
+                    .owner(barcodeTextField.getScene().getWindow())
+                    .title("Virhe")
+                    .text("Tuotetta ei löydy tietokannasta!")
+                    .position(Pos.TOP_RIGHT)
+                    .showError();
         }
         barcodeTextField.requestFocus();
     }
