@@ -51,4 +51,18 @@ public class PrivilegeDAO {
             }
         }
     }
+
+    public void deletePrivilege(Privilege privilege) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            transaction = session.beginTransaction();
+            session.delete(privilege);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
 }

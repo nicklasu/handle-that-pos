@@ -5,6 +5,7 @@ import model.classes.*;
 import org.junit.jupiter.api.*;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -19,6 +20,11 @@ public class DAOTests extends TestParent {
 
     @BeforeEach
     public void beforeEach() {
+
+    }
+
+    @AfterEach
+    public void afterEach(){
 
     }
 
@@ -84,5 +90,22 @@ public class DAOTests extends TestParent {
         Assertions.assertEquals(c.toString(),cd.getCustomer(c.getId()).toString(), "Finding added customer has problems");
         cd.deleteCustomer(c);
         Assertions.assertNull(cd.getCustomer(c.getId()),"Deleting a customer has problems");
+    }
+
+    @Test
+    public void PrivilegeDAO(){
+        PrivilegeDAO pd = new PrivilegeDAO();
+        java.sql.Date d1 = new java.sql.Date(new Date().getTime());
+        java.sql.Date d2 = new java.sql.Date(3000, Calendar.JANUARY, 28);
+        User u = new User("junit", "tester", "JUN", "123", 1);
+        UserDAO ud = new UserDAO();
+        ud.createUser(u);
+        Privilege p = new Privilege(u, d1, d2, PrivilegeLevel.MANAGER);
+
+        Assertions.assertEquals(0, pd.getPrivileges(u).size(),"problem getting a nonexistant privilege");
+        pd.addPrivilege(p);
+        Assertions.assertEquals("JUN",pd.getPrivileges(u).get(0).getUser().getUsername(), "Error finding an added privilege");
+        pd.deletePrivilege(p);
+        ud.deleteUser(u);
     }
 }
