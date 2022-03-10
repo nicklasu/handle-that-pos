@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
 import java.util.List;
 
 public class PrivilegeDAO {
@@ -41,9 +42,7 @@ public class PrivilegeDAO {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-
             session.save(privilege);
-
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();

@@ -7,15 +7,12 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import model.classes.Privilege;
 import model.classes.User;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
 
 public class OptionsView {
     private MainApp mainApp;
@@ -36,10 +33,10 @@ public class OptionsView {
     @FXML
     private Button btn5;
     @FXML
+    private Button returnBtn;
+    @FXML
     Pane wrapperPane = new Pane();
     private FXMLLoader loader;
-
-
 
     public void loadMainView(ActionEvent event) throws IOException {
         this.loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
@@ -48,7 +45,7 @@ public class OptionsView {
     }
 
     public void setMainApp(MainApp mainApp) throws IOException {
-        /** Change views: */
+        /* Change views: */
         btn1.setOnAction(e -> {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane0 = null;
@@ -64,7 +61,6 @@ public class OptionsView {
             }
             wrapperPane.getChildren().add(newLoadedPane0);
         });
-
         btn2.setOnAction(e -> {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane2 = null;
@@ -79,7 +75,6 @@ public class OptionsView {
             }
             wrapperPane.getChildren().add(newLoadedPane2);
         });
-
         btn3.setOnAction(e -> {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane3 = null;
@@ -94,7 +89,6 @@ public class OptionsView {
             }
             wrapperPane.getChildren().add(newLoadedPane3);
         });
-
         btn4.setOnAction(e -> {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane = null;
@@ -124,12 +118,11 @@ public class OptionsView {
             }
             wrapperPane.getChildren().add(newLoadedPane5);
         });
-
         this.mainApp = mainApp;
         System.out.println(this.mainApp.getEngine().getPrivileges());
         List<Integer> privilegesOfUser = this.mainApp.getEngine().getPrivileges().stream().map(p -> p.getPrivilegeLevelIndex()).collect(Collectors.toList());
         System.out.println(privilegesOfUser);
-        if(privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1){
+        if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
             btn1.setDisable(true);
             btn2.setDisable(true);
             btn3.setDisable(true);
@@ -138,7 +131,7 @@ public class OptionsView {
         User user = this.mainApp.getEngine().getUser();
         fName.setText(user.getfName());
         lName.setText(user.getlName());
-
+        returnBtn.requestFocus();
         if (this.mainApp.getEngine().getTransaction() != null) {
         }
     }

@@ -102,9 +102,7 @@ public class Product {
         if (o.getClass() != this.getClass()) {
             return false;
         }
-
         final Product product = (Product) o;
-
         return this.id.equals(product.id);
     }
 }

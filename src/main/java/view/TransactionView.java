@@ -5,10 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import model.classes.*;
+import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,6 +36,8 @@ public class TransactionView {
     private TextField customerTextField;
     @FXML
     private CheckBox bonusCustomerCheckBox;
+    @FXML
+    private Label paymentMethodLabel;
     private boolean printReceipt = false;
     private boolean sendReceiptEmail = false;
     private final ToggleGroup paymentButtonGroup = new ToggleGroup();
@@ -109,10 +113,23 @@ public class TransactionView {
         }
         disabledButton.setDisable(true);
         enabledButton.setDisable(false);
+
+        setPaymentMethodLabelText(paymentMethod);
     }
+
     @FXML
     private void requestFocus() {
         customerTextField.requestFocus();
+    }
+
+    private void setPaymentMethodLabelText(PaymentMethod paymentMethod) {
+        if (paymentMethod == PaymentMethod.CARD) {
+            paymentMethodLabel.setText("Maksukortti");
+        } else if (paymentMethod == PaymentMethod.CASH) {
+            paymentMethodLabel.setText("Käteinen");
+        } else {
+            paymentMethodLabel.setText("");
+        }
     }
 
     public void setMainApp(MainApp mainApp) {
@@ -128,17 +145,24 @@ public class TransactionView {
             List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
             items.addAll(products);
 
+            scanListView.setItems(items);
+            scanListView.setCellFactory(productListView -> new ListCellTransaction());
             String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotetta hintaan " + (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))) + "€";
             transactionOverviewLabel.setText(overviewText);
+            setPaymentMethodLabelText(this.mainApp.getEngine().getTransaction().getPaymentMethod());
         }
-        scanListView.setItems(items);
+       // scanListView.setItems(items);
         scanListView.setOnMouseClicked(event -> {
-            Product product = scanListView.getSelectionModel().getSelectedItem();
-            Dialog<Void> dialog = new Dialog<>();
-            dialog.setTitle(product.getName());
-            dialog.setHeaderText("ID: " + product.getId() + "\n" + "Kuvaus: " + product.getDescription() + "\nHinta: " + product.getPrice() + " per kpl" + "\nVarastomäärä: " + product.getStock());
-            dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
-            dialog.showAndWait();
+            try {
+                Product product = scanListView.getSelectionModel().getSelectedItem();
+                Dialog<Void> dialog = new Dialog<>();
+                dialog.setTitle(product.getName());
+                dialog.setHeaderText("ID: " + product.getId() + "\n" + "Kuvaus: " + product.getDescription() + "\nHinta: " + String.format("%.2f", (product.getPrice() / 100f)) + "€" + " per kpl" + "\nVarastomäärä: " + product.getStock());
+                dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+                dialog.showAndWait();
+            }
+            catch (Exception ignored){
+            }
         });
         customerTextField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)

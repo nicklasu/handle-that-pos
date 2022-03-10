@@ -4,6 +4,7 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
@@ -17,16 +18,22 @@ public class DeleteProductView {
     private TextField productBarcode;
     @FXML
     private Button deleteBtn;
+
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
+        productBarcode.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER)
+                deleteProduct();
+        });
         BooleanBinding booleanBind = productBarcode.textProperty().isEmpty();
         deleteBtn.disableProperty().bind(booleanBind);
     }
+
     @FXML
-    private void deleteProduct(){
+    private void deleteProduct() {
         try {
             Product product = this.mainApp.getEngine().productDao().getProduct(productBarcode.getText());
-            if(product == null){
+            if (product == null) {
                 System.out.println("Ei löytynyt");
                 Notifications.create()
                         .owner(productBarcode.getScene().getWindow())
@@ -67,7 +74,7 @@ public class DeleteProductView {
                 }
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("There was an error");
             e.printStackTrace();
         }

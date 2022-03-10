@@ -6,8 +6,6 @@ import model.interfaces.ITransaction;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -49,30 +47,32 @@ public class POSEngine implements IPOSEngine {
     @Override
     public int login(String username, String password) {
         User user = userDAO.getUser(username);
-        BCrypt.Result result = compare(password, user.getPassword());
-        System.out.println(HWID.getHWID());
-        //TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
-        if (user != null && result.verified /*JOS SALIKSET TÄSMÄÄ*/) {
+        if (user != null) {
+            BCrypt.Result result = compare(password, user.getPassword());
+            System.out.println(HWID.getHWID());
+            //TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
+            if (result.verified /*JOS SALIKSET TÄSMÄÄ*/) {
 
-            this.user = user;
-            System.out.println(privilegeDAO.getPrivileges(user));
-            privileges = privilegeDAO.getPrivileges(user);
-            List<Date> privilegeEndDates = privileges.stream().map(p -> p.getPrivilegeEnd()).collect(Collectors.toList());
-            List<Date> privilegeStartDates = privileges.stream().map(p -> p.getPrivilegeStart()).collect(Collectors.toList());
-            List<Privilege> validPrivileges = new ArrayList<>();
-            for(int i = 0; i<privilegeEndDates.size(); i++){
-                if(!privilegeStartDates.get(i).after(new Date()) && (privilegeEndDates.get(i) == null || !privilegeEndDates.get(i).before(new Date()))){
-                    validPrivileges.add(privileges.get(i));
+                this.user = user;
+                System.out.println(privilegeDAO.getPrivileges(user));
+                privileges = privilegeDAO.getPrivileges(user);
+                List<Date> privilegeEndDates = privileges.stream().map(p -> p.getPrivilegeEnd()).collect(Collectors.toList());
+                List<Date> privilegeStartDates = privileges.stream().map(p -> p.getPrivilegeStart()).collect(Collectors.toList());
+                List<Privilege> validPrivileges = new ArrayList<>();
+                for (int i = 0; i < privilegeEndDates.size(); i++) {
+                    if (!privilegeStartDates.get(i).after(new Date()) && (privilegeEndDates.get(i) == null || !privilegeEndDates.get(i).before(new Date()))) {
+                        validPrivileges.add(privileges.get(i));
+                    }
                 }
+                System.out.println("Valid privileges");
+                System.out.println(validPrivileges);
+                System.out.println(privilegeStartDates);
+                System.out.println(privilegeEndDates);
+                if (validPrivileges.isEmpty()) {
+                    return 2;
+                }
+                return 1;
             }
-            System.out.println("Valid privileges");
-            System.out.println(validPrivileges);
-            System.out.println(privilegeStartDates);
-            System.out.println(privilegeEndDates);
-            if(validPrivileges.isEmpty()){
-                return 2;
-            }
-            return 1;
         }
         return 0;
     }
@@ -84,13 +84,14 @@ public class POSEngine implements IPOSEngine {
     public void setId(String id) {
         this.id = id;
     }
+
     @Override
     public List<Privilege> getPrivileges() {
         return privileges;
     }
 
     @Override
-    public List<Integer> getPrivilegeIndexes(){
+    public List<Integer> getPrivilegeIndexes() {
         return privileges.stream().map(p -> p.getPrivilegeLevelIndex()).collect(Collectors.toList());
     }
 
@@ -132,7 +133,7 @@ public class POSEngine implements IPOSEngine {
         Timestamp ts = new Timestamp(date.getTime());
         transaction.setTimestamp(ts);
         if (customer != null) {
-            if(customer.getCustomerLevelIndex() == 1){
+            if (customer.getCustomerLevelIndex() == 1) {
                 float totalPrice = transaction.getOrder().getTotalPrice();
                 totalPrice *= 0.95;
                 transaction.getOrder().setTotalPrice(Math.round(totalPrice));
@@ -171,16 +172,26 @@ public class POSEngine implements IPOSEngine {
     public ProductDAO productDao() {
         return this.productDAO;
     }
-    @Override
-    public PrivilegeDAO privilegeDAO() { return this.privilegeDAO;}
 
     @Override
-    public UserDAO userDAO(){return this.userDAO;}
-    @Override
-    public TransactionDAO transactionDAO(){return this.transactionDAO;};
+    public PrivilegeDAO privilegeDAO() {
+        return this.privilegeDAO;
+    }
 
     @Override
-    public CustomerDAO customerDAO() { return this.customerDAO;}
+    public UserDAO userDAO() {
+        return this.userDAO;
+    }
+
+    @Override
+    public TransactionDAO transactionDAO() {
+        return this.transactionDAO;
+    }
+
+    @Override
+    public CustomerDAO customerDAO() {
+        return this.customerDAO;
+    }
 
     private String hashPassword(String password) {
         return BCrypt.withDefaults().hashToString(12, password.toCharArray());
@@ -190,6 +201,7 @@ public class POSEngine implements IPOSEngine {
         return BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
     }
 
+    @Override
     public void setTransaction(Transaction testTransaction) {
         this.transaction = testTransaction;
     }

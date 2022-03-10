@@ -3,13 +3,12 @@ package view;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
+import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
-import model.classes.Transaction;
 import model.classes.User;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.Notifications;
-import java.util.List;
-import java.awt.*;
+
 import java.io.IOException;
 
 public class UsersView {
@@ -25,20 +24,23 @@ public class UsersView {
 
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
+        searchField.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.ENTER)
+                searchUser();
+        });
         activity.setDisable(true);
         User user = this.mainApp.getEngine().getUser();
         fName.setText(user.getfName());
         lName.setText(user.getlName());
-        if(user.getActivity() == 1){
+        if (user.getActivity() == 1) {
             activity.setSelected(true);
-        }
-        else {
+        } else {
             activity.setSelected(false);
         }
     }
 
     @FXML
-    private void searchUser(){
+    private void searchUser() {
         try {
             System.out.println("searching");
             String username = searchField.getText();
@@ -51,9 +53,7 @@ public class UsersView {
                 } else {
                     activity.setSelected(false);
                 }
-            }
-
-            else {
+            } else {
                 Notifications.create()
                         .owner(searchField.getScene().getWindow())
                         .title("Virhe")
@@ -61,9 +61,8 @@ public class UsersView {
                         .position(Pos.TOP_RIGHT)
                         .showError();
             }
-        }
-        catch (Exception e){
-            System.out.println(e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
