@@ -14,6 +14,7 @@ import static model.classes.PrivilegeLevel.USER;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PrivilegeTest {
     private Privilege privilege;
+    private long time;
 
     @BeforeAll
     public void beforeAll() {
@@ -22,8 +23,8 @@ public class PrivilegeTest {
     }
 
     @Test
-    public void privilegeSetGetTest(){
-        long time = System.currentTimeMillis();
+    public void privilegeSetGetTest() {
+        time = System.currentTimeMillis();
         long timeToAdd = Long.MAX_VALUE - time;
         Date date = new Date(time);
         Date dateEnd = new Date(time + timeToAdd);
@@ -41,8 +42,9 @@ public class PrivilegeTest {
         Assertions.assertEquals(privilege.getPrivilegeEnd(), dateEnd, "Privilege end date incorrect!");
         Assertions.assertEquals(privilege.getPrivilegeLevelIndex(), 0, "PrivilegeLevelIndex is incorrect!");
     }
+
     @Test
-    public void privilegeToStringTest(){
-        Assertions.assertEquals(privilege.toString(), "Privilege{id=1, privilegeStart=2022-03-10, privilegeEnd=8994-08-17, privilegeLevelIndex=0, privilegeLevel=USER, user=User{id=0, username='null', password='null', fName='null', lName='null', activity=0}}", "Privilege toString doesn't work correctly!");
+    public void privilegeToStringTest() {
+        Assertions.assertEquals(privilege.toString(), "Privilege{id=1, privilegeStart=" + new Date(time) + ", privilegeEnd=8994-08-17, privilegeLevelIndex=0, privilegeLevel=USER, user=User{id=0, username='null', password='null', fName='null', lName='null', activity=0}}", "Privilege toString doesn't work correctly!");
     }
 }
