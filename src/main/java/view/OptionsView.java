@@ -119,9 +119,7 @@ public class OptionsView {
             wrapperPane.getChildren().add(newLoadedPane5);
         });
         this.mainApp = mainApp;
-        System.out.println(this.mainApp.getEngine().getPrivileges());
-        List<Integer> privilegesOfUser = this.mainApp.getEngine().getPrivileges().stream().map(p -> p.getPrivilegeLevelIndex()).collect(Collectors.toList());
-        System.out.println(privilegesOfUser);
+        List<Integer> privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
             btn1.setDisable(true);
             btn2.setDisable(true);

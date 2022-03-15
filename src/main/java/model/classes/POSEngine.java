@@ -33,7 +33,8 @@ public class POSEngine implements IPOSEngine {
     private PrivilegeDAO privilegeDAO;
     @Transient
     private List<Privilege> privileges;
-
+    @Transient
+    private List<Integer> verifiedPrivileges;
     // constructor
     public POSEngine() {
         this.userDAO = new UserDAO();
@@ -43,7 +44,10 @@ public class POSEngine implements IPOSEngine {
         this.privilegeDAO = new PrivilegeDAO();
         this.id = HWID.getHWID();
     }
-
+    @Override
+    public List<Integer> getVerifiedPrivileges(){
+        return this.verifiedPrivileges;
+    }
     @Override
     public int login(String username, String password) {
         User user = userDAO.getUser(username);
@@ -54,20 +58,20 @@ public class POSEngine implements IPOSEngine {
             if (result.verified /*JOS SALIKSET TÄSMÄÄ*/) {
 
                 this.user = user;
-                System.out.println(privilegeDAO.getPrivileges(user));
                 privileges = privilegeDAO.getPrivileges(user);
+                this.verifiedPrivileges = new ArrayList<>();
                 List<Date> privilegeEndDates = privileges.stream().map(p -> p.getPrivilegeEnd()).collect(Collectors.toList());
                 List<Date> privilegeStartDates = privileges.stream().map(p -> p.getPrivilegeStart()).collect(Collectors.toList());
                 List<Privilege> validPrivileges = new ArrayList<>();
                 for (int i = 0; i < privilegeEndDates.size(); i++) {
                     if (!privilegeStartDates.get(i).after(new Date()) && (privilegeEndDates.get(i) == null || !privilegeEndDates.get(i).before(new Date()))) {
                         validPrivileges.add(privileges.get(i));
+                        this.verifiedPrivileges.add(privileges.get(i).getPrivilegeLevelIndex());
                     }
                 }
                 System.out.println("Valid privileges");
                 System.out.println(validPrivileges);
-                System.out.println(privilegeStartDates);
-                System.out.println(privilegeEndDates);
+                System.out.println(this.verifiedPrivileges);
                 if (validPrivileges.isEmpty()) {
                     return 2;
                 }
