@@ -23,7 +23,7 @@
             <RowConstraints maxHeight="368.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#addUser" stylesheets="@main-view.css" text="Poista" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#addUser" styleClass="delete_button" stylesheets="@products-view.css" text="Poista" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="userName" GridPane.columnIndex="1" />
             <Label stylesheets="@main-view.css" text="Käyttäjänimi" />
          </children>

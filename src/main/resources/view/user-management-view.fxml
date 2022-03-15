@@ -38,7 +38,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#deleteUserPane" prefHeight="80.0" prefWidth="150.0" stylesheets="@main-view.css" text="Poista käyttäjä" GridPane.columnIndex="2" GridPane.valignment="TOP">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="80.0" prefWidth="150.0" stylesheets="@main-view.css" text="Poista käyttäjä" GridPane.columnIndex="2" GridPane.valignment="TOP">
                      <graphic>
                         <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>
