@@ -17,9 +17,9 @@
             <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <ListView fx:id="scanListView" stylesheets="@main-view.css">
-         <GridPane.margin>
-            <Insets left="20.0" />
-         </GridPane.margin></ListView>
+            <GridPane.margin>
+                <Insets left="20.0" />
+            </GridPane.margin></ListView>
         <GridPane GridPane.columnIndex="1">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -46,25 +46,25 @@
             <ProgressBar fx:id="feedbackProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT">
                 <Image url="@../images/person.png" />
-            <GridPane.margin>
-               <Insets />
-            </GridPane.margin>
+                <GridPane.margin>
+                    <Insets />
+                </GridPane.margin>
             </ImageView>
             <Label fx:id="usernameLabel" stylesheets="@main-view.css" text="&quot;Testuser&quot;" GridPane.halignment="RIGHT">
                 <opaqueInsets>
                     <Insets />
                 </opaqueInsets>
-            <GridPane.margin>
-               <Insets right="45.0" />
-            </GridPane.margin>
+                <GridPane.margin>
+                    <Insets right="45.0" />
+                </GridPane.margin>
             </Label>
             <Label fx:id="usernameLabel1" stylesheets="@main-view.css" text="Kirjautuneena: ">
                 <opaqueInsets>
                     <Insets />
                 </opaqueInsets>
-            <GridPane.margin>
-               <Insets />
-            </GridPane.margin>
+                <GridPane.margin>
+                    <Insets />
+                </GridPane.margin>
             </Label>
             <GridPane.margin>
                 <Insets left="15.0" />
@@ -140,3 +140,4 @@
         </AnchorPane>
     </GridPane>
 </AnchorPane>
+
