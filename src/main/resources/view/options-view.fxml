@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="transactionAnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="/view/options-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.OptionsView">
+<AnchorPane fx:id="transactionAnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="/view/options-view.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.OptionsView">
     <GridPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <rowConstraints>
             <RowConstraints maxHeight="846.0" minHeight="240.0" prefHeight="580.0" />
@@ -61,7 +61,7 @@
                 <Button fx:id="btn2" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="Tuotteiden hallinta" />
                 <Button fx:id="btn3" mnemonicParsing="false" prefHeight="50.0" prefWidth="654.0" styleClass="settings_button" stylesheets="@main-view.css" text="Käyttäjien hallinta" GridPane.rowIndex="5" />
                 <Button fx:id="btn4" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="Tuotteiden haku" GridPane.rowIndex="9" />
-                <Button fx:id="btn5" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" text="Bonusasiakkaiden hallinta" wrapText="true" GridPane.rowIndex="10" />
+                <Button fx:id="btn5" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="Bonusasiakkaiden hallinta" wrapText="true" GridPane.rowIndex="10" />
 
             </children>
         </GridPane>

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" stylesheets="/view/products-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BonusCustomerManagementView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" stylesheets="/view/products-view.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BonusCustomerManagementView">
    <children>
       <GridPane prefHeight="861.0" prefWidth="720.0">
          <columnConstraints>
@@ -29,7 +29,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#addBonusCustomerPane" prefHeight="77.0" prefWidth="150.0" text="Lisää bonuasiakas" wrapText="true" GridPane.valignment="TOP">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#addBonusCustomerPane" prefHeight="104.0" prefWidth="146.0" stylesheets="@main-view.css" text="Lisää bonuasiakas" textAlignment="CENTER" wrapText="true" GridPane.valignment="TOP">
                      <graphic>
                         <ImageView fitHeight="44.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -38,7 +38,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="77.0" prefWidth="150.0" styleClass="delete_button" stylesheets="@products-view.css" text="Poista bonusasiakas" wrapText="true" GridPane.columnIndex="2" GridPane.valignment="TOP">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="103.0" prefWidth="150.0" styleClass="delete_button" stylesheets="@products-view.css" text="Poista bonusasiakas" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.valignment="TOP">
                      <graphic>
                         <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -47,7 +47,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="77.0" prefWidth="150.0" text="Muokkaa bonusasiakasta" wrapText="true" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="104.0" prefWidth="150.0" stylesheets="@main-view.css" text="Muokkaa bonusasiakasta" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.valignment="TOP">
                      <graphic>
                         <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>
