@@ -127,7 +127,6 @@ public class MainView {
                 hotkey.setStyle("-fx-background-color: red;");
                 hotkey.setOnMouseEntered(mouseEvent -> hotkey.setStyle("-fx-background-color: darkred;"));
                 hotkey.setOnMouseExited(mouseEvent -> hotkey.setStyle("-fx-background-color: red;"));
-
             } else {
                 hotkeys.get(i).setText(mainApp.getHotkeyButtonNames()[i]);
             }
@@ -171,7 +170,6 @@ public class MainView {
                                 Button hotkey = hotkeyButtons.get(buttonId);
                                 hotkey.setOnMouseEntered(mouseEvent -> hotkey.setStyle(paymentButton.getStyle()));
                                 hotkey.setOnMouseExited(mouseEvent -> hotkey.setStyle(paymentButton.getStyle()));
-
                                 if (!Objects.equals(inputField.getText(), "")) {
                                     mainApp.setHotkeyButtonName(inputField.getText(), buttonId);
                                     hotkeyButtons.get(buttonId).setText(inputField.getText());
@@ -213,6 +211,14 @@ public class MainView {
                 .title("Huomautus!")
                 .text("Lisätyn tuotteen varastomäärä on alle 0.")
                 .position(Pos.TOP_RIGHT)
+                .show();
+    }
+
+    public final void fileNotFoundNotification() {
+        Notifications.create()
+                .title("Huomautus!")
+                .text("Pikanäppäinasetusten tiedostoa ei löytynyt. Jos haluat asettaa pikanäppäimen, aloita skannaamalla haluamasi tuote. \nTämän jälkeen pidä jotakin pikanäppäintä pohjassa yli 2 sekuntia.")
+                .position(Pos.CENTER)
                 .show();
     }
 
