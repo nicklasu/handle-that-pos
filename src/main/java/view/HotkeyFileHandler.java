@@ -48,8 +48,8 @@ public class HotkeyFileHandler extends MainView {
             }
             reader.close();
         } catch (FileNotFoundException ex) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Pikanäppäinasetusten tiedostoa ei löytynyt. Jos haluat asettaa pikanäppäimen, aloita skannaamalla haluamasi tuote. Tämän jälkeen pidä jotakin pikanäppäintä pohjassa yli 2 sekuntia.", ButtonType.CLOSE);
-            alert.showAndWait();
+            fileNotFoundNotification();
+
         } catch (IOException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Pikanäppäinasetusten lataamisvirhe! Kokeile käynnistää sovellus uudelleen. Jos tämä ei auta, aseta pikanäppäimet uudelleen.", ButtonType.CLOSE);
             alert.showAndWait();

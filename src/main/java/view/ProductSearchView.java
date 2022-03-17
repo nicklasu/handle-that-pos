@@ -102,13 +102,11 @@ public class ProductSearchView {
                     if (product == null) {
                         setStyle("");
                     } else if (product.getStock() <= 0) {
-                        //setStyle("-fx-background-color: #ff3b3b;");
-                        setStyle("-fx-background-color: rgba(255,59,59,0.5);");
+                        setStyle("-fx-background-color: rgba(254, 97, 0, 0.5)");
                     } else if (product.getStock() <= 50) {
-                        setStyle("-fx-background-color: rgba(255,216,103,0.5);");
+                        setStyle("-fx-background-color: rgba(255, 176, 0, 0.5)");
                     } else {
-                        //setStyle("");
-                        setStyle("-fx-background-color: rgba(175,255,131,0.2);");
+                        setStyle("-fx-background-color: rgba(100, 143, 255, 0.2)");
                     }
                 }
             });

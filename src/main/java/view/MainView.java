@@ -49,10 +49,10 @@ public class MainView {
     private Button paymentButton;
     @FXML
     private ProgressBar feedbackProgressBar;
-    private ObservableList<Product> items = FXCollections.observableArrayList();
+    final private ObservableList<Product> items = FXCollections.observableArrayList();
     private String productId;
     private final String[] hotkeyProductIds = new String[6];
-    private ArrayList<Button> hotkeyButtons = new ArrayList<>();
+    private final ArrayList<Button> hotkeyButtons = new ArrayList<>();
     private HotkeyFileHandler hotkeyFileHandler;
 
     public void loadTransactionView() {
@@ -121,7 +121,15 @@ public class MainView {
     private void addHotkeys(ArrayList<Button> hotkeys) {
         for (int i = 0; i < hotkeys.size(); i++) {
             setHotkeyButton(hotkeys.get(i));
-            hotkeys.get(i).setText(mainApp.getHotkeyButtonNames()[i]);
+            if (Objects.equals(hotkeyProductIds[i], "null") || Objects.equals(hotkeyProductIds[i], "") || Objects.equals(hotkeyProductIds[i], null)) {
+                Button hotkey = hotkeys.get(i);
+                hotkey.setText("Ei asetettu");
+                hotkey.setStyle("-fx-background-color: red;");
+                hotkey.setOnMouseEntered(mouseEvent -> hotkey.setStyle("-fx-background-color: darkred;"));
+                hotkey.setOnMouseExited(mouseEvent -> hotkey.setStyle("-fx-background-color: red;"));
+            } else {
+                hotkeys.get(i).setText(mainApp.getHotkeyButtonNames()[i]);
+            }
         }
     }
 
@@ -133,7 +141,7 @@ public class MainView {
         int buttonId = Integer.parseInt(button.getId().replace("hotkeyButton", ""));
         button.addEventFilter(MouseEvent.ANY, new EventHandler<>() {
             long startTime;
-            AtomicBoolean running = new AtomicBoolean(false);
+            final AtomicBoolean running = new AtomicBoolean(false);
 
             @Override
             public void handle(MouseEvent event) {
@@ -158,6 +166,10 @@ public class MainView {
                             result.ifPresent(e -> {
                                 TextField inputField = tid.getEditor();
                                 hotkeyProductIds[buttonId] = productId;
+                                hotkeyButtons.get(buttonId).setStyle(paymentButton.getStyle());
+                                Button hotkey = hotkeyButtons.get(buttonId);
+                                hotkey.setOnMouseEntered(mouseEvent -> hotkey.setStyle(paymentButton.getStyle()));
+                                hotkey.setOnMouseExited(mouseEvent -> hotkey.setStyle(paymentButton.getStyle()));
                                 if (!Objects.equals(inputField.getText(), "")) {
                                     mainApp.setHotkeyButtonName(inputField.getText(), buttonId);
                                     hotkeyButtons.get(buttonId).setText(inputField.getText());
@@ -199,6 +211,14 @@ public class MainView {
                 .title("Huomautus!")
                 .text("Lisätyn tuotteen varastomäärä on alle 0.")
                 .position(Pos.TOP_RIGHT)
+                .show();
+    }
+
+    public final void fileNotFoundNotification() {
+        Notifications.create()
+                .title("Huomautus!")
+                .text("Pikanäppäinasetusten tiedostoa ei löytynyt. Jos haluat asettaa pikanäppäimen, aloita skannaamalla haluamasi tuote. \nTämän jälkeen pidä jotakin pikanäppäintä pohjassa yli 2 sekuntia.")
+                .position(Pos.CENTER)
                 .show();
     }
 
