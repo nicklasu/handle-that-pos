@@ -170,5 +170,13 @@ public class TransactionView {
         });
         customerTextField.visibleProperty().bind(Bindings.createBooleanBinding(() -> bonusCustomerCheckBox.isSelected(), bonusCustomerCheckBox.selectedProperty()));
     }
+
+    @FXML
+    public void showHelp() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Kuitin tulostaminen: \nVoidaan halutessaan tulostaa kuitin rastittamalla ”Kuitin tulostus”. Napsautettuaan ”Vahvista” painikkeetta, voidaan valita, mitä tulostinta käytetään. \n\nMaksutavan valinta: \nValitetaan maksutavan klikkaamalla joko ”Maksukortti” tai ”Käteinen”. Oletusmaksutapa on maksukortti.", ButtonType.CLOSE);
+        alert.setTitle("Ohje");
+        alert.setHeaderText("Ohje");
+        alert.showAndWait();
+    }
 }
 

@@ -3,7 +3,9 @@ package view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -36,6 +38,8 @@ public class OptionsView {
     @FXML
     private Button returnBtn;
     @FXML
+    private Button helpBtn;
+    @FXML
     Pane wrapperPane = new Pane();
     private FXMLLoader loader;
 
@@ -46,7 +50,7 @@ public class OptionsView {
     }
 
     public void setMainApp(MainApp mainApp) throws IOException {
-        /* Change views: */
+        /** Change views. */
         btn1.setOnAction(e -> {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane0 = null;
@@ -118,6 +122,7 @@ public class OptionsView {
             }
             wrapperPane.getChildren().add(newLoadedPane5);
         });
+
         this.mainApp = mainApp;
         List<Integer> privilegesOfUser = this.mainApp.getEngine().getPrivileges().stream().map(Privilege::getPrivilegeLevelIndex).collect(Collectors.toList());
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
@@ -132,6 +137,17 @@ public class OptionsView {
         returnBtn.requestFocus();
        /* if (this.mainApp.getEngine().getTransaction() != null) {
         }*/
+    }
+
+    @FXML
+    public void showHelp() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Valitse tarvittava toiminto listasta vasemmalla." +
+                "\n\nTuotteiden lisääminen: Valitse 'Tuotteiden hallinta' välilehti. Klikkaa ”Lisää tuote” -painiketta ja syötä tuotteen tiedot. Varmista, että tuotteen viivakoodi on ainutlaatuinen. Napsauttaa ”Tallenna”, kun olet valmis." +
+                "\n\nTuotteen poistaminen: Valitse 'Tuotteiden hallinta', sitten 'Poista tuote'. Syötä poistettavan tuotteen tunnus ja napsauta 'Poista'. " +
+                "\n\nTuotteen muokkaus: Valitse joko 'Tuotteiden haku', sitten valitse muokattava tuote kaksoisklikkaamalla sitä. Syötä tuotteen uudet tiedot ja klikkaa ”Muokkaa”. Tai avaa 'Tuotteiden hallinta' välilehti. Valitse ”Muokkaa tuote”. Syötä muokattavan tuotteen viivakoodi ja napsauta ”Hae”. Syötä tuotteen uudet tiedot ja klikkaa ”Muokkaa”.", ButtonType.CLOSE);
+        alert.setTitle("Ohje");
+        alert.setHeaderText("Ohje");
+        alert.showAndWait();
     }
 }
 
