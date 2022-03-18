@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import model.classes.Privilege;
 import model.classes.User;
 
 import java.io.IOException;
@@ -55,7 +56,6 @@ public class OptionsView {
                 newLoadedPane0 = this.loader.load();
                 UsersView view = this.loader.getController();
                 view.setMainApp(mainApp);
-                //newLoadedPane = FXMLLoader.load(getClass().getResource("users-view.fxml"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -119,7 +119,9 @@ public class OptionsView {
             wrapperPane.getChildren().add(newLoadedPane5);
         });
         this.mainApp = mainApp;
-        List<Integer> privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
+        System.out.println(this.mainApp.getEngine().getPrivileges());
+        List<Integer> privilegesOfUser = this.mainApp.getEngine().getPrivileges().stream().map(Privilege::getPrivilegeLevelIndex).collect(Collectors.toList());
+        System.out.println(privilegesOfUser);
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
             btn1.setDisable(true);
             btn2.setDisable(true);
@@ -130,8 +132,8 @@ public class OptionsView {
         fName.setText(user.getfName());
         lName.setText(user.getlName());
         returnBtn.requestFocus();
-        if (this.mainApp.getEngine().getTransaction() != null) {
-        }
+       /* if (this.mainApp.getEngine().getTransaction() != null) {
+        }*/
     }
 }
 

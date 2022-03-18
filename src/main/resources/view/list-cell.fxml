@@ -4,35 +4,36 @@
 <?import javafx.scene.layout.*?>
 
 <HBox stylesheets="@main-view.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <GridPane fx:id="gridPane" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" HBox.hgrow="ALWAYS">
-      <columnConstraints>
-         <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-         <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="30.0" />
-      </columnConstraints>
-      <rowConstraints>
-         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      </rowConstraints>
-      <children>
-         <Label fx:id="productNameLabel" prefHeight="18.0" prefWidth="460.0" text="Label" />
-            <GridPane GridPane.columnIndex="2">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="50.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="50.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="50.0" />
-              </columnConstraints>
-              <rowConstraints>
+    <children>
+        <GridPane fx:id="gridPane" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" HBox.hgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="30.0" />
+            </columnConstraints>
+            <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Button fx:id="minusButton" maxHeight="26.0" maxWidth="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="-" GridPane.halignment="RIGHT" />
-                  <Button fx:id="plusButton" ellipsisString="" maxHeight="26.0" maxWidth="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="+" textOverrun="CLIP" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
-               <Label fx:id="productAmountLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-               </children>
-            </GridPane>
-            <Label fx:id="productPriceLabel" text="Label" GridPane.columnIndex="1" />
-      </children>
-      </GridPane>
-   </children>
+            </rowConstraints>
+            <children>
+                <Label fx:id="productNameLabel" prefHeight="18.0" prefWidth="460.0" text="Label" />
+                <GridPane GridPane.columnIndex="2">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="50.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="50.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="10.0" prefWidth="50.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Button fx:id="minusButton" maxHeight="26.0" maxWidth="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="-" GridPane.halignment="RIGHT" />
+                        <Button fx:id="plusButton" ellipsisString="" maxHeight="26.0" maxWidth="30.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="30.0" text="+" textOverrun="CLIP" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
+                        <Label fx:id="productAmountLabel" text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                    </children>
+                </GridPane>
+                <Label fx:id="productPriceLabel" text="Label" GridPane.columnIndex="1" />
+            </children>
+        </GridPane>
+    </children>
 </HBox>
+

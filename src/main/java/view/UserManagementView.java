@@ -41,42 +41,42 @@ public class UserManagementView {
 //        /**
 //         * Switch to delete-user-view.fxml
 //         */
-//        public void deleteProductPane(ActionEvent event) throws IOException {
+//        public void deleteUserPane(ActionEvent event) throws IOException {
 //
 //            System.out.println("delete user button was pressed");
 //            wrapperPaneUsers.getChildren().clear();
-//            Pane newLoadedPane3 = null;
+//            Pane newLoadedPane = null;
 //            try {
 //                this.loader = new FXMLLoader();
 //                this.loader.setLocation(getClass().getResource("delete-user-view.fxml"));
-//                newLoadedPane3 = this.loader.load();
-//                DeleteProductView view = this.loader.getController();
+//                newLoadedPane = this.loader.load();
+//                AddUserView view = this.loader.getController();
 //                view.setMainApp(mainApp);
 //                //newLoadedPane3 = FXMLLoader.load(getClass().getResource("delete-user-view.fxml"));
 //            } catch (IOException ex) {
 //                ex.printStackTrace();
 //            }
-//            wrapperPaneUsers.getChildren().add(newLoadedPane3);
+//            wrapperPaneUsers.getChildren().add(newLoadedPane);
 //        }
 
-//        /**
-//         * Switch to edit-user-view.fxml
-//         */
-//        public void editProductPane(ActionEvent event) throws IOException {
-//
-//            System.out.println("edit product button was pressed");
-//            wrapperPaneProducts.getChildren().clear();
-//            Pane newLoadedPane3 = null;
-//            try {
-//                this.loader = new FXMLLoader();
-//                this.loader.setLocation(getClass().getResource("edit-user-view.fxml"));
-//                newLoadedPane3 = this.loader.load();
-//                EditProductView view = this.loader.getController();
-//                view.setMainApp(mainApp);
-//                //newLoadedPane3 = FXMLLoader.load(getClass().getResource("edit-user-view.fxml"));
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
-//            wrapperPaneProducts.getChildren().add(newLoadedPane3);
-//        }
+        /**
+         * Switch to edit-user-view.fxml
+         */
+        public void editUserPane(ActionEvent event) throws IOException {
+
+            System.out.println("edit product button was pressed");
+            wrapperPaneUsers.getChildren().clear();
+            Pane newLoadedPane = null;
+            try {
+                this.loader = new FXMLLoader();
+                this.loader.setLocation(getClass().getResource("edit-user-view.fxml"));
+                newLoadedPane = this.loader.load();
+                AddUserView view = this.loader.getController();
+                view.setMainApp(mainApp);
+                //newLoadedPane3 = FXMLLoader.load(getClass().getResource("edit-user-view.fxml"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            wrapperPaneUsers.getChildren().add(newLoadedPane);
+        }
 }
