@@ -5,7 +5,6 @@
 }
 
 .label {
-    -fx-font-size: 11pt;
     -fx-font-family: 'Montserrat';
     -fx-text-fill: #1c1c1c;
 }
@@ -21,5 +20,9 @@
     -fx-font-size: 14pt;
     -fx-font-family: 'Montserrat';
     -fx-text-fill: #1c1c1c;
+    -fx-font-weight: bold;
+}
+.question_button{
+    -fx-font-size: 40pt;
     -fx-font-weight: bold;
 }

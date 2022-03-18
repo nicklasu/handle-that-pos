@@ -6,138 +6,192 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainAnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
-    <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane fx:id="mainAnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@main-view.css"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
+    <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="590.0" minHeight="10.0" prefHeight="572.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="590.0" minHeight="10.0" prefHeight="572.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES"/>
         </rowConstraints>
         <ListView fx:id="scanListView" stylesheets="@main-view.css">
             <GridPane.margin>
-                <Insets left="20.0" />
-            </GridPane.margin></ListView>
+                <Insets left="20.0"/>
+            </GridPane.margin>
+        </ListView>
         <GridPane GridPane.columnIndex="1">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="234.0" minHeight="0.0" prefHeight="116.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="234.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="581.0" minHeight="10.0" prefHeight="232.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="367.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="234.0" minHeight="0.0" prefHeight="58.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="581.0" minHeight="10.0" prefHeight="173.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="173.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="173.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <Button fx:id="hotkeyButton1" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@main-view.css" text="Pikanäppäin 2" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button fx:id="hotkeyButton5" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@main-view.css" text="Pikanäppäin 0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" />
-            <Button fx:id="hotkeyButton0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@main-view.css" text="Pikanäppäin 1" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="hotkeyButton4" layoutX="426.0" layoutY="165.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@main-view.css" text="Pikanäppäin 5" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-            <Button fx:id="hotkeyButton3" layoutX="426.0" layoutY="165.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@main-view.css" text="Pikanäppäin 4" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-            <Button fx:id="hotkeyButton2" layoutX="426.0" layoutY="165.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="110.0" stylesheets="@main-view.css" text="Pikanäppäin 3" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <center>
+                    <Button fx:id="hotkeyButton2" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0"
+                            stylesheets="@main-view.css" text="Hotkey 2" textAlignment="CENTER" wrapText="true"/>
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.rowIndex="1">
+                <center>
+                    <Button fx:id="hotkeyButton0" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0"
+                            stylesheets="@main-view.css" text="Hotkey 0" textAlignment="CENTER" wrapText="true"/>
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <center>
+                    <Button fx:id="hotkeyButton1" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0"
+                            stylesheets="@main-view.css" text="Hotkey 1" textAlignment="CENTER" wrapText="true"/>
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                <center>
+                    <Button fx:id="hotkeyButton5" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0"
+                            stylesheets="@main-view.css" text="Hoktey 5" textAlignment="CENTER" wrapText="true"/>
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                <center>
+                    <Button fx:id="hotkeyButton4" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0"
+                            stylesheets="@main-view.css" text="Hoktey 4" textAlignment="CENTER" wrapText="true"/>
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.rowIndex="2" GridPane.valignment="TOP">
+                <center>
+                    <Button fx:id="hotkeyButton3" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0"
+                            stylesheets="@main-view.css" text="Hotkey 3" textAlignment="CENTER" wrapText="true"/>
+                </center>
+            </BorderPane>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
                 <AnchorPane centerShape="false" prefWidth="220.0">
-                    <Button layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleLogoutButton" prefHeight="50.0" prefWidth="150.0" stylesheets="@main-view.css" text="Kirjaudu ulos" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                    <Button layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleLogoutButton"
+                            prefHeight="50.0" prefWidth="150.0" stylesheets="@main-view.css" text="Kirjaudu ulos"
+                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0"
+                            AnchorPane.topAnchor="20.0"/>
                 </AnchorPane>
             </HBox>
-            <ProgressBar fx:id="feedbackProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ImageView fitHeight="45.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT">
-                <Image url="@../images/person.png" />
+            <ProgressBar fx:id="feedbackProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1"/>
+            <BorderPane GridPane.rowIndex="3">
+                <center>
+                    <Button fx:id="hotkeyButton6" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0"
+                            text="Hotkey 6"/>
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <center>
+                    <Button fx:id="hotkeyButton7" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0"
+                            text="Hotkey 7"/>
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="3">
+                <center>
+                    <Button fx:id="hotkeyButton8" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0"
+                            text="Hotkey 8"/>
+                </center>
+            </BorderPane>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pikanäppäimet:">
                 <GridPane.margin>
-                    <Insets />
+                    <Insets left="30.0"/>
                 </GridPane.margin>
-            </ImageView>
-            <Label fx:id="usernameLabel" stylesheets="@main-view.css" text="&quot;Testuser&quot;" GridPane.halignment="RIGHT">
-                <opaqueInsets>
-                    <Insets />
-                </opaqueInsets>
-                <GridPane.margin>
-                    <Insets right="45.0" />
-                </GridPane.margin>
-            </Label>
-            <Label fx:id="usernameLabel1" stylesheets="@main-view.css" text="Kirjautuneena: ">
-                <opaqueInsets>
-                    <Insets />
-                </opaqueInsets>
-                <GridPane.margin>
-                    <Insets />
-                </GridPane.margin>
-            </Label>
+            </Text>
             <GridPane.margin>
-                <Insets left="15.0" />
+                <Insets left="15.0"/>
             </GridPane.margin>
         </GridPane>
         <GridPane prefHeight="113.0" prefWidth="640.0" GridPane.rowIndex="1">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="224.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="416.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="364.0" minWidth="10.0" prefWidth="160.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="364.0" minWidth="10.0" prefWidth="164.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="317.0"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <GridPane GridPane.columnIndex="1">
+            <GridPane prefWidth="279.0" GridPane.columnIndex="2">
                 <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.0" minWidth="10.0" prefWidth="166.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="265.0" minWidth="10.0" prefWidth="250.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="265.0" minWidth="10.0" prefWidth="154.0"/>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="265.0" minWidth="10.0" prefWidth="163.0"/>
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 </rowConstraints>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Summa: " GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Summa: " GridPane.halignment="RIGHT"
+                      GridPane.valignment="TOP">
                     <font>
-                        <Font size="41.0" />
+                        <Font size="36.0"/>
                     </font>
                 </Text>
-                <Label fx:id="totalPriceLabel" text="0€" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                <Label fx:id="totalPriceLabel" alignment="TOP_LEFT" ellipsisString="" prefHeight="150.0"
+                       prefWidth="163.0" text="0€" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT"
+                       GridPane.valignment="TOP">
                     <font>
-                        <Font size="41.0" />
+                        <Font size="37.0"/>
                     </font>
                 </Label>
             </GridPane>
-            <AnchorPane prefHeight="141.0" prefWidth="221.0">
-                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#loadOptionsView" prefHeight="118.0" prefWidth="129.0" styleClass="bold_button" stylesheets="@main-view.css" text="Asetukset" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+            <AnchorPane prefHeight="141.0" prefWidth="335.0">
+                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#loadOptionsView" prefHeight="118.0"
+                        prefWidth="129.0" styleClass="bold_button" stylesheets="@main-view.css" text="Asetukset"
+                        AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
                     <graphic>
                         <ImageView fitHeight="73.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                            <Image url="@../images/options.png" />
+                            <Image url="@../images/options.png"/>
                         </ImageView>
                     </graphic>
                 </Button>
             </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="178.0" GridPane.columnIndex="1">
+                <Button layoutX="47.0" layoutY="62.0" mnemonicParsing="false" onAction="#showHelp" prefHeight="118.0"
+                        prefWidth="129.0" styleClass="question_button" stylesheets="@main-view.css" text="?"
+                        AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"/>
+            </AnchorPane>
         </GridPane>
         <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
-            <GridPane layoutX="420.0" layoutY="125.0" prefHeight="101.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane layoutX="420.0" layoutY="125.0" prefHeight="101.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="327.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="365.0" minWidth="10.0" prefWidth="313.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="327.0"/>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="365.0" minWidth="10.0" prefWidth="313.0"/>
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
                 </rowConstraints>
                 <AnchorPane prefHeight="131.0" prefWidth="313.0" GridPane.columnIndex="1">
-                    <Button fx:id="paymentButton" mnemonicParsing="false" onAction="#loadTransactionView" prefHeight="100.0" prefWidth="200.0" styleClass="bold_button" stylesheets="@main-view.css" text="Maksu" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                    <Button fx:id="paymentButton" mnemonicParsing="false" onAction="#loadTransactionView"
+                            prefHeight="100.0" prefWidth="200.0" styleClass="bold_button" stylesheets="@main-view.css"
+                            text="Maksu" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0"/>
                 </AnchorPane>
-                <GridPane prefHeight="129.0" prefWidth="327.0">
+                <GridPane prefHeight="129.0" prefWidth="317.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
-                    <TextField fx:id="barcodeTextField" prefHeight="31.0" prefWidth="164.0" GridPane.rowIndex="1" />
-                    <Button mnemonicParsing="false" onAction="#readBarcode" prefHeight="27.0" prefWidth="47.0" stylesheets="@main-view.css" text="Lue" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <Label fx:id="usernameLabel11" stylesheets="@main-view.css" text="Lue viivakoodi:">
+                    <TextField fx:id="barcodeTextField" prefHeight="31.0" prefWidth="164.0" GridPane.rowIndex="1"/>
+                    <Button mnemonicParsing="false" onAction="#readBarcode" prefHeight="27.0" prefWidth="47.0"
+                            stylesheets="@main-view.css" text="Lue" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <Label prefWidth="96.0" stylesheets="@main-view.css" text="Lue viivakoodi:">
                         <opaqueInsets>
-                            <Insets />
+                            <Insets/>
                         </opaqueInsets>
+                        <GridPane.margin>
+                            <Insets top="50.0"/>
+                        </GridPane.margin>
                     </Label>
                 </GridPane>
             </GridPane>
         </AnchorPane>
     </GridPane>
 </AnchorPane>
-

@@ -27,7 +27,7 @@
             <children>
                 <Label stylesheets="@main-view.css" text="Tuotteen viivakoodi" />
                 <TextField fx:id="productBarcode" GridPane.columnIndex="1" />
-                <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteProduct" stylesheets="@main-view.css" text="Poista" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteProduct" styleClass="delete_button" stylesheets="@products-view.css" text="Poista" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             </children>
         </GridPane>
       <Label layoutX="14.0" layoutY="11.0" styleClass="bold_label" stylesheets="@main-view.css" text="Poista tuote">
