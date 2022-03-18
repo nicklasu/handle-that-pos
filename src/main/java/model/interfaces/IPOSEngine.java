@@ -39,4 +39,5 @@ public interface IPOSEngine {
     TransactionDAO transactionDAO();
 
     List<Integer> getVerifiedPrivileges();
+    void updateUser(User user);
 }

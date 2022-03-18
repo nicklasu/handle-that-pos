@@ -31,7 +31,7 @@ public class PrivilegeDAO {
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
-                System.out.println(e);
+                e.printStackTrace();
                 transaction.rollback();
             }
         }
@@ -52,7 +52,7 @@ public class PrivilegeDAO {
         }
     }
 
-    public void addPrivileges(Privilege[] privileges) {
+    public void addPrivileges(List<Privilege> privileges) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
@@ -79,6 +79,39 @@ public class PrivilegeDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
+        }
+    }
+
+    public void deletePrivileges(List<Privilege> privileges) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            transaction = session.beginTransaction();
+            for(Privilege p : privileges){
+                session.delete(p);
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                e.printStackTrace();
+                transaction.rollback();
+            }
+        }
+    }
+
+
+    public void updatePrivileges(List<Privilege> privileges){
+            Transaction transaction = null;
+            try (Session session = sessionFactory.getCurrentSession()) {
+                transaction = session.beginTransaction();
+                for(Privilege p : privileges) {
+                    session.saveOrUpdate(p);
+                }
+                transaction.commit();
+            } catch (Exception e) {
+                if (transaction != null) {
+                    e.printStackTrace();
+                    transaction.rollback();
+                }
         }
     }
 }
