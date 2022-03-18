@@ -2,6 +2,7 @@ package model.interfaces;
 
 import model.classes.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 public interface IPOSEngine {
@@ -36,4 +37,6 @@ public interface IPOSEngine {
     UserDAO userDAO();
 
     TransactionDAO transactionDAO();
+
+    List<Integer> getVerifiedPrivileges();
 }
