@@ -13,8 +13,8 @@ import java.io.IOException;
 public class MainApp extends Application {
 
     private Stage stage;
-    private IPOSEngine engine;
-    private final String[] hotkeyProductNames = new String[6];
+    private final IPOSEngine engine;
+    private final String[] hotkeyProductNames = new String[9];
 
     public MainApp() {
         this.engine = new POSEngine();
@@ -27,7 +27,6 @@ public class MainApp extends Application {
         this.stage.setMinWidth(1070);
         stage.setTitle("Handle that POS");
         this.stage.getIcons().add(new Image("file:src/main/resources/images/pos.png"));
-
         showLoginView();
     }
 

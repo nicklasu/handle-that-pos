@@ -26,8 +26,6 @@ public class MainView {
     @FXML
     private AnchorPane mainAnchorPane;
     @FXML
-    private Label usernameLabel;
-    @FXML
     private Label totalPriceLabel;
     @FXML
     private ListView<Product> scanListView;
@@ -46,12 +44,18 @@ public class MainView {
     @FXML
     private Button hotkeyButton5;
     @FXML
+    private Button hotkeyButton6;
+    @FXML
+    private Button hotkeyButton7;
+    @FXML
+    private Button hotkeyButton8;
+    @FXML
     private Button paymentButton;
     @FXML
     private ProgressBar feedbackProgressBar;
     final private ObservableList<Product> items = FXCollections.observableArrayList();
     private String productId;
-    private final String[] hotkeyProductIds = new String[6];
+    private final String[] hotkeyProductIds = new String[9];
     private final ArrayList<Button> hotkeyButtons = new ArrayList<>();
     private HotkeyFileHandler hotkeyFileHandler;
 
@@ -105,7 +109,6 @@ public class MainView {
         } else {
             this.totalPriceLabel.setText("0.00€");
         }
-
     }
 
     @FXML
@@ -180,29 +183,51 @@ public class MainView {
                                 hotkeyFileHandler.saveHotkeys(hotkeyProductIds, mainApp.getHotkeyButtonNames());
                             });
                         } else {
-                            Alert alert = new Alert(Alert.AlertType.ERROR, "Skannaa tuote ennen kuin yrität tallentaa sitä pikanäppäimeen!", ButtonType.CLOSE);
-                            alert.showAndWait();
+                            Notifications.create()
+                                    .owner(mainAnchorPane.getScene().getWindow())
+                                    .title("Huomautus!")
+                                    .text("Skannaa tuote ennen kuin yrität tallentaa sitä pikanäppäimeen!")
+                                    .position(Pos.TOP_RIGHT)
+                                    .show();
                         }
                     } else {
                         try {
                             if (!Objects.equals(hotkeyProductIds[buttonId], "null")) {
                                 addProduct(hotkeyProductIds[buttonId]);
                             } else {
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Pikanäppäintä ei ole asetettu.", ButtonType.CLOSE);
-                                alert.showAndWait();
+                                Notifications.create()
+                                        .owner(mainAnchorPane.getScene().getWindow())
+                                        .title("Huomautus!")
+                                        .text("Pikanäppäintä ei ole asetettu.")
+                                        .position(Pos.TOP_RIGHT)
+                                        .show();
                             }
                         } catch (Exception e) {
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Pikanäppäintä ei ole asetettu.", ButtonType.CLOSE);
-                            alert.showAndWait();
+                            Notifications.create()
+                                    .owner(mainAnchorPane.getScene().getWindow())
+                                    .title("Huomautus!")
+                                    .text("Pikanäppäintä ei ole asetettu.")
+                                    .position(Pos.TOP_RIGHT)
+                                    .show();
                         }
                     }
                     running.set(false);
                     startTime = 0;
                     feedbackProgressBar.setProgress(0);
                     feedbackProgressBar.setVisible(false);
+                    barcodeTextField.requestFocus();
                 }
             }
         });
+    }
+
+    @FXML
+    public void showHelp() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Tuote voidaan skannata joko lukijalla tai manuaalisesti näppäimistöllä alhaalla olevaan Lue viivakoodi-kenttään. Pikanäppäimet asetetaan ensin skannaamalla tuote, minkä jälkeen näppäintä pidetään pohjassa n. 2 sekuntia.", ButtonType.CLOSE);
+        alert.setTitle("Ohje");
+        alert.setHeaderText("Ohje");
+        alert.showAndWait();
+        barcodeTextField.requestFocus();
     }
 
     public void negativeProductStockNotification() {
@@ -224,7 +249,6 @@ public class MainView {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        usernameLabel.setText(mainApp.getEngine().getUser().getUsername());
         feedbackProgressBar.setVisible(false);
         hotkeyFileHandler = new HotkeyFileHandler();
         hotkeyFileHandler.loadHotkeys(hotkeyProductIds, mainApp.getHotkeyButtonNames());
@@ -234,6 +258,9 @@ public class MainView {
         hotkeyButtons.add(hotkeyButton3);
         hotkeyButtons.add(hotkeyButton4);
         hotkeyButtons.add(hotkeyButton5);
+        hotkeyButtons.add(hotkeyButton6);
+        hotkeyButtons.add(hotkeyButton7);
+        hotkeyButtons.add(hotkeyButton8);
         addHotkeys(hotkeyButtons);
         // Populate listView with already existing products from open Transaction
         if (this.mainApp.getEngine().getTransaction() != null) {
