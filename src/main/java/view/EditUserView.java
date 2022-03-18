@@ -82,7 +82,7 @@ public class EditUserView {
                     String pLevel = switch (p.getPrivilegeLevelIndex()) {
                         case 0 -> "Myyjä";
                         case 1 -> "Myymäläpäällikkö";
-                        case 3 -> "Järjestelmän ylläpitäjä";
+                        case 2 -> "Järjestelmän ylläpitäjä";
                         default -> throw new IllegalStateException("Unexpected value");
                     };
                     privilegeLevel.setValue(pLevel);
@@ -178,13 +178,16 @@ public class EditUserView {
 
 
 
-                for (int i = 0; i < privileges.size(); i++) {
-                    for (int j = 0; j < privilegeList.size(); j++) {
-                        if (privileges.get(i).getId() == privilegeList.get(j).getId()) {
-                            privileges.remove(i);
-                        }
-                    }
+    for (int i = 0; i < privileges.size(); i++) {
+        for (int j = 0; j < privilegeList.size(); j++) {
+            if(!privileges.isEmpty()) {
+                if (privileges.get(i).getId() == privilegeList.get(j).getId()) {
+                    privileges.remove(i);
                 }
+            }
+        }
+    }
+
                 if(!privileges.isEmpty()) {
                     this.mainApp.getEngine().privilegeDAO().deletePrivileges(privileges);
                 }

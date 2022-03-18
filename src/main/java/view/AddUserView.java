@@ -81,7 +81,7 @@ public class AddUserView {
                     String pLevel = switch (p.getPrivilegeLevelIndex()) {
                         case 0 -> "Myyjä";
                         case 1 -> "Myymäläpäällikkö";
-                        case 3 -> "Järjestelmän ylläpitäjä";
+                        case 2 -> "Järjestelmän ylläpitäjä";
                         default -> throw new IllegalStateException("Unexpected value");
                     };
                     privilegeLevel.setValue(pLevel);
