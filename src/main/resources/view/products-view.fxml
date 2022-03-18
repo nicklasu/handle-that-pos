@@ -29,7 +29,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="addProductBtn" mnemonicParsing="false" onAction="#addProductPane" prefHeight="77.0" prefWidth="150.0" stylesheets="@main-view.css" text="Lisää tuote" GridPane.valignment="TOP">
+                  <Button fx:id="addProductBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#addProductPane" prefHeight="82.0" prefWidth="146.0" stylesheets="@main-view.css" text="Lisää tuote" GridPane.valignment="TOP">
                      <graphic>
                         <ImageView fitHeight="44.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -37,7 +37,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button mnemonicParsing="false" onAction="#deleteProductPane" prefHeight="77.0" prefWidth="150.0" styleClass="delete_button" stylesheets="@products-view.css" text="Poista tuote" GridPane.columnIndex="2" GridPane.valignment="TOP">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#deleteProductPane" prefHeight="77.0" prefWidth="150.0" styleClass="delete_button" stylesheets="@products-view.css" text="Poista tuote" GridPane.columnIndex="2" GridPane.valignment="TOP">
                      <graphic>
                         <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -45,7 +45,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button mnemonicParsing="false" onAction="#editProductPane" prefHeight="77.0" prefWidth="150.0" stylesheets="@main-view.css" text="Muokkaa tuotetta" wrapText="true" GridPane.columnIndex="1" GridPane.valignment="TOP">
+                  <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#editProductPane" prefHeight="82.0" prefWidth="150.0" stylesheets="@main-view.css" text="Muokkaa tuotetta" wrapText="true" GridPane.columnIndex="1" GridPane.valignment="TOP">
                      <graphic>
                         <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>

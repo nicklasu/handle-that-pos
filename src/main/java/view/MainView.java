@@ -117,6 +117,7 @@ public class MainView {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
             this.mainApp.getEngine().logout();
+            this.mainApp.getStage().setTitle(this.mainApp.APP_TITLE);
             this.mainApp.showLoginView();
         }
     }
@@ -250,6 +251,7 @@ public class MainView {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
         feedbackProgressBar.setVisible(false);
+        mainApp.getStage().setTitle(mainApp.APP_TITLE + " - " + mainApp.getEngine().getUser().getUsername());
         hotkeyFileHandler = new HotkeyFileHandler();
         hotkeyFileHandler.loadHotkeys(hotkeyProductIds, mainApp.getHotkeyButtonNames());
         hotkeyButtons.add(hotkeyButton0);

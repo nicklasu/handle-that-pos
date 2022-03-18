@@ -12,12 +12,14 @@ import java.io.IOException;
 
 public class MainApp extends Application {
 
+    public static String APP_TITLE = "Handle that POS";
+
     private Stage stage;
-    private final IPOSEngine engine;
-    private final String[] hotkeyProductNames = new String[9];
+    private IPOSEngine engine;
+    private final String[] hotkeyProductNames = new String[6];
 
     public MainApp() {
-        this.engine = new POSEngine();
+        //this.engine = new POSEngine();
     }
 
     @Override
@@ -25,9 +27,11 @@ public class MainApp extends Application {
         this.stage = stage;
         this.stage.setMinHeight(750);
         this.stage.setMinWidth(1070);
-        stage.setTitle("Handle that POS");
+        stage.setTitle(APP_TITLE);
         this.stage.getIcons().add(new Image("file:src/main/resources/images/pos.png"));
-        showLoginView();
+
+        //showLoginView();
+        showConnectToDatabaseView();
     }
 
     public String[] getHotkeyButtonNames() {
@@ -36,6 +40,19 @@ public class MainApp extends Application {
 
     public void setHotkeyButtonName(String hotkeyButtonName, int buttonId) {
         hotkeyProductNames[buttonId] = hotkeyButtonName;
+    }
+
+    private void showConnectToDatabaseView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("connect-database-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            this.stage.setScene(scene);
+            ConnectDatabaseView connectDatabaseView = fxmlLoader.getController();
+            connectDatabaseView.setMainApp(this);
+            this.stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showMainView() {
@@ -93,6 +110,12 @@ public class MainApp extends Application {
     public IPOSEngine getEngine() {
         return this.engine;
     }
+
+    public void setEngine(IPOSEngine engine) {
+        this.engine = engine;
+    }
+
+    public Stage getStage() { return this.stage; }
 
     public static void main(String[] args) {
         launch();
