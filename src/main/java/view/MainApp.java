@@ -17,7 +17,7 @@ public class MainApp extends Application {
     private final String[] hotkeyProductNames = new String[6];
 
     public MainApp() {
-        this.engine = new POSEngine();
+        //this.engine = new POSEngine();
     }
 
     @Override
@@ -28,7 +28,8 @@ public class MainApp extends Application {
         stage.setTitle("Handle that POS");
         this.stage.getIcons().add(new Image("file:src/main/resources/images/pos.png"));
 
-        showLoginView();
+        //showLoginView();
+        showConnectToDatabaseView();
     }
 
     public String[] getHotkeyButtonNames() {
@@ -37,6 +38,19 @@ public class MainApp extends Application {
 
     public void setHotkeyButtonName(String hotkeyButtonName, int buttonId) {
         hotkeyProductNames[buttonId] = hotkeyButtonName;
+    }
+
+    private void showConnectToDatabaseView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("connect-database-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            this.stage.setScene(scene);
+            ConnectDatabaseView connectDatabaseView = fxmlLoader.getController();
+            connectDatabaseView.setMainApp(this);
+            this.stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showMainView() {
@@ -93,6 +107,10 @@ public class MainApp extends Application {
 
     public IPOSEngine getEngine() {
         return this.engine;
+    }
+
+    public void setEngine(IPOSEngine engine) {
+        this.engine = engine;
     }
 
     public static void main(String[] args) {
