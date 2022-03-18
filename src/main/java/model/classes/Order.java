@@ -109,14 +109,20 @@ public class Order implements IOrder {
         if (this.productList.contains(product)) {
             this.productList.remove(product);
 
+            OrderProduct orderProductToRemove = null;
+
             for (OrderProduct op : orderProducts) {
                 if (op.getProduct().equals(product)) {
                     if (op.getAmount() > 1) {
                         op.setAmount(op.getAmount() - 1);
                     } else {
-                        orderProducts.remove(op);
+                        orderProductToRemove = op;
                     }
                 }
+            }
+
+            if (orderProductToRemove != null) {
+                orderProducts.remove(orderProductToRemove);
             }
 
             this.totalPrice -= product.getPrice();
