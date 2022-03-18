@@ -217,6 +217,12 @@ public class POSEngine implements IPOSEngine {
     }
 
     @Override
+    public void updateUser(User user) {
+        user.setPassword(hashPassword(user.getPassword()));
+        userDAO.updateUser(user);
+    }
+
+    @Override
     public String toString() {
         return "POSEngine{" +
                 "transaction=" + transaction +

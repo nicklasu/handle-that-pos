@@ -23,7 +23,7 @@ public class Privilege {
     @Transient
     private PrivilegeLevel privilegeLevel;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "KäyttäjäID", referencedColumnName = "id")
     private User user;
 
@@ -34,6 +34,13 @@ public class Privilege {
 
     public Privilege(User user, Date privilegeStart, Date privilegeEnd, PrivilegeLevel privilegeLevel) {
         this.user = user;
+        this.privilegeLevel = privilegeLevel; // Oletuksena myyjän oikeudet
+        this.privilegeLevelIndex = privilegeLevel.ordinal();
+        this.privilegeStart = privilegeStart;
+        this.privilegeEnd = privilegeEnd;
+    }
+
+    public Privilege(Date privilegeStart, Date privilegeEnd, PrivilegeLevel privilegeLevel) {
         this.privilegeLevel = privilegeLevel; // Oletuksena myyjän oikeudet
         this.privilegeLevelIndex = privilegeLevel.ordinal();
         this.privilegeStart = privilegeStart;
@@ -91,13 +98,12 @@ public class Privilege {
 
     @Override
     public String toString() {
-        return "Privilege{" +
-                "id=" + id +
-                ", privilegeStart=" + privilegeStart +
-                ", privilegeEnd=" + privilegeEnd +
-                ", privilegeLevelIndex=" + privilegeLevelIndex +
-                ", privilegeLevel=" + privilegeLevel +
-                ", user=" + user +
-                '}';
+        String pLevel = switch (privilegeLevelIndex) {
+            case 0 -> "Myyjä";
+            case 1 -> "Myymäläpäällikkö";
+            case 2 -> "Järjestelmän ylläpitäjä";
+            default -> throw new IllegalStateException("Unexpected value");
+        };
+        return privilegeStart + ", " + (privilegeEnd == null ? "Ei päättymispäivää" : privilegeEnd) + ", " + pLevel;
     }
 }

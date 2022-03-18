@@ -1,5 +1,6 @@
 package view;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +18,9 @@ import javax.persistence.PersistenceException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class AddUserView {
@@ -36,6 +39,8 @@ public class AddUserView {
     @FXML
     private Button saveBtn;
     @FXML
+    private Button editBtn;
+    @FXML
     private DatePicker startDate;
     @FXML
     private DatePicker endDate;
@@ -44,7 +49,7 @@ public class AddUserView {
     @FXML
     private ListView privilegeListView;
 
-    private ObservableList<PrivilegeItem> privilegeList = FXCollections.observableArrayList();
+    private ObservableList<Privilege> privilegeList = FXCollections.observableArrayList();
 
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
@@ -54,16 +59,57 @@ public class AddUserView {
                 .or(userName.textProperty().isEmpty())
                 .or(userPassword.textProperty().isEmpty());
         saveBtn.disableProperty().bind(booleanBind);
-        ObservableList<String> availableChoices = FXCollections.observableArrayList("Myyjä", "Myymäläpäällikkö");
-        privilegeLevel.setItems(availableChoices);
-        privilegeLevel.setValue("Myyjä");
-        startDate.setValue(LocalDate.now());
-        privilegeListView.setOnMouseClicked(click -> {
-            if (click.getButton() == MouseButton.SECONDARY){
-                 privilegeList.remove(privilegeListView.getSelectionModel().getSelectedIndex());
+        List<Integer> privilegeInts = this.mainApp.getEngine().getVerifiedPrivileges();
+        ObservableList<String> availableChoices;
+        EditUserView.checkPrivilegeLevel(privilegeInts, privilegeLevel, startDate);
 
+        privilegeListView.setOnMouseClicked((click) -> {
+            if (click.getButton() == MouseButton.SECONDARY){
+                int index = privilegeListView.getSelectionModel().getSelectedIndex();
+                privilegeList.remove(index);
+            }
+            else if(click.getButton() == MouseButton.PRIMARY) {
+                if (click.getClickCount() == 2) {
+                    saveBtn.setVisible(false);
+                    editBtn.setVisible(true);
+                    Privilege p = privilegeList.get(privilegeListView.getSelectionModel().getSelectedIndex());
+                    startDate.setValue(p.getPrivilegeStart().toLocalDate());
+                    if (p.getPrivilegeEnd() != null) {
+                        endDate.setValue(p.getPrivilegeEnd().toLocalDate());
+                    }
+
+                    String pLevel = switch (p.getPrivilegeLevelIndex()) {
+                        case 0 -> "Myyjä";
+                        case 1 -> "Myymäläpäällikkö";
+                        case 3 -> "Järjestelmän ylläpitäjä";
+                        default -> throw new IllegalStateException("Unexpected value");
+                    };
+                    privilegeLevel.setValue(pLevel);
+
+                    editBtn.setOnAction((action) -> {
+                        Privilege priv = privilegeList.get(privilegeListView.getSelectionModel().getSelectedIndex());
+                        LocalDate dateStart = startDate.getValue();
+                        priv.setPrivilegeStart(java.sql.Date.valueOf(dateStart));
+                        LocalDate dateEnd = endDate.getValue();
+                        if (dateEnd != null) {
+                            priv.setPrivilegeEnd(java.sql.Date.valueOf(dateEnd));
+                        }
+                        String priviLevel = privilegeLevel.getValue();
+                        PrivilegeLevel privilegeLvl = switch (priviLevel) {
+                            case "Myyjä" -> PrivilegeLevel.USER;
+                            case "Myymäläpäällikkö" -> PrivilegeLevel.MANAGER;
+                            case "Järjestelmän ylläpitäjä" -> PrivilegeLevel.ADMIN;
+                            default -> throw new IllegalStateException("Unexpected value");
+                        };
+                        priv.setPrivilegeLevel(privilegeLvl);
+                        editBtn.setVisible(false);
+                        saveBtn.setVisible(true);
+                        privilegeListView.refresh();
+                    });
+                }
             }
         });
+
     }
 
     @FXML
@@ -74,37 +120,18 @@ public class AddUserView {
             String username = userName.getText();
             String password = userPassword.getText();
             boolean isActive = activity.isSelected();
-            LocalDate dateStart = startDate.getValue();
-            LocalDate dateEnd = endDate.getValue();
-            PrivilegeLevel pLevel = switch (privilegeLevel.getValue()) {
-                case "Myyjä" -> PrivilegeLevel.USER;
-                case "Myymäläpäällikkö" -> PrivilegeLevel.MANAGER;
-                case "Järjestelmän ylläpitäjä" -> PrivilegeLevel.ADMIN;
-                default -> throw new IllegalStateException("Unexpected value");
-            };
-
 
             User user = new User(name, lastname, username, password, 1);
-//            Privilege privilege = new Privilege(user, java.sql.Date.valueOf(dateStart), dateEnd == null ? null : java.sql.Date.valueOf(dateEnd), pLevel);
-           Privilege[] priv = new Privilege[privilegeList.size()];
-            for (int i = 0; i<privilegeList.size(); i++){
-
-                PrivilegeLevel privilegeleLvl = switch (privilegeList.get(i).getPrivilegeLevel()) {
-                    case "Myyjä" -> PrivilegeLevel.USER;
-                    case "Myymäläpäällikkö" -> PrivilegeLevel.MANAGER;
-                    case "Järjestelmän ylläpitäjä" -> PrivilegeLevel.ADMIN;
-                    default -> throw new IllegalStateException("Unexpected value");
-                };
-                Privilege privilege = new Privilege(user, java.sql.Date.valueOf(privilegeList.get(i).getStartDate()), privilegeList.get(i).getEndDate() == null ? null : java.sql.Date.valueOf(privilegeList.get(i).getEndDate()), privilegeleLvl);
-                priv[i] = privilege;
+            for (Privilege p : privilegeList){
+                p.setUser(user);
             }
             if (isActive) {
                 this.mainApp.getEngine().addUser(user);
-                this.mainApp.getEngine().privilegeDAO().addPrivileges(priv);
+                this.mainApp.getEngine().privilegeDAO().addPrivileges(privilegeList);
             } else {
                 user.setActivity(0);
                 this.mainApp.getEngine().addUser(user);
-                this.mainApp.getEngine().privilegeDAO().addPrivileges(priv);
+                this.mainApp.getEngine().privilegeDAO().addPrivileges(privilegeList);
             }
 
             Notifications.create()
@@ -129,7 +156,6 @@ public class AddUserView {
                     .showError();
         } catch (Exception e) {
             System.out.println("There was an error");
-            System.out.println(e);
             e.printStackTrace();
         }
     }
@@ -138,8 +164,14 @@ public class AddUserView {
         LocalDate dateStart = startDate.getValue();
         LocalDate dateEnd = endDate.getValue();
         String pLevel = privilegeLevel.getValue();
-        PrivilegeItem item = new PrivilegeItem(dateStart, dateEnd == null ? null : dateEnd, pLevel);
-        privilegeList.add(item);
+        PrivilegeLevel privilegeLvl = switch (pLevel) {
+            case "Myyjä" -> PrivilegeLevel.USER;
+            case "Myymäläpäällikkö" -> PrivilegeLevel.MANAGER;
+            case "Järjestelmän ylläpitäjä" -> PrivilegeLevel.ADMIN;
+            default -> throw new IllegalStateException("Unexpected value");
+        };
+        Privilege privilege = new Privilege(java.sql.Date.valueOf(dateStart), dateEnd == null ? null : java.sql.Date.valueOf(dateEnd), privilegeLvl);
+        privilegeList.add(privilege);
         privilegeListView.setItems(privilegeList);
     }
 }
