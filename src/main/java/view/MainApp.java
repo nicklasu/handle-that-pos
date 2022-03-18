@@ -16,7 +16,7 @@ public class MainApp extends Application {
 
     private Stage stage;
     private IPOSEngine engine;
-    private final String[] hotkeyProductNames = new String[6];
+    private final String[] hotkeyProductNames = new String[9];
 
     public MainApp() {
         //this.engine = new POSEngine();
