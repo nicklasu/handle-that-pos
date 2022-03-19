@@ -51,7 +51,7 @@ public class TransactionDAO {
         model.classes.Transaction tr = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             t = session.beginTransaction();
-            tr = session.get(model.classes.Transaction.class, transaction.getID());
+            tr = session.get(model.classes.Transaction.class, transaction.getId());
             t.commit();
         } catch (Exception e) {
             if (transaction != null) {

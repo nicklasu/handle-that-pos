@@ -21,7 +21,7 @@ public class Order implements IOrder {
     @JoinColumn(name = "MaksutapahtumaID", referencedColumnName = "ID")
     private Transaction transaction;
 
-    @OneToMany(mappedBy = "primaryKey.order", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "primaryKey.order", cascade = CascadeType.ALL)
     private Set<OrderProduct> orderProducts = new HashSet<>();
 
     @Transient

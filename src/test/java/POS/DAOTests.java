@@ -60,7 +60,7 @@ public class DAOTests extends TestParent {
         posE.setTransaction(t);
         posE.confirmTransaction(false,c);
 
-        Assertions.assertEquals(t.getID(), td.getTransaction(t).getID(), "Error finding a transaction with dao");
+        Assertions.assertEquals(t.getId(), td.getTransaction(t).getId(), "Error finding a transaction with dao");
         td.removeTransaction(t);
         cd.deleteCustomer(c);
         ud.deleteUser(u);
