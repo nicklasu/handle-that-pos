@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DAOTests extends TestParent {
@@ -41,7 +42,8 @@ public class DAOTests extends TestParent {
         Date date = new Date();
         POSEngine posE = new POSEngine();
         UserDAO ud = new UserDAO();
-        User u = new User("junit", "tester", "JUN", "123", 1);
+        String name = UUID.randomUUID().toString();
+        User u = new User("junit", "tester", name, "123", 1);
         TransactionDAO td = new TransactionDAO();
 
         cd.addCustomer(c);
@@ -61,15 +63,16 @@ public class DAOTests extends TestParent {
     @Test
     public void userDAO(){
         UserDAO ud = new UserDAO();
-        Assertions.assertNull(ud.getUser("JUN"), "Finding a nonexistant user should return null");
-        User u = new User("junit", "tester", "JUN", "123", 1);
+        String name = UUID.randomUUID().toString();
+        Assertions.assertNull(ud.getUser(name), "Finding a nonexistant user should return null");
+        User u = new User("junit", "tester", name, "123", 1);
         ud.createUser(u);
-        Assertions.assertEquals(u.toString(),ud.getUser("JUN").toString(), "Finding a user fails");
+        Assertions.assertEquals(u.toString(),ud.getUser(name).toString(), "Finding a user fails");
         u.setlName("test2");
         ud.updateUser(u);
-        Assertions.assertEquals("test2",ud.getUser("JUN").getlName(), "Updating user does not work");
+        Assertions.assertEquals("test2",ud.getUser(name).getlName(), "Updating user does not work");
         ud.deleteUser(u);
-        Assertions.assertNull(ud.getUser("JUN"), "Deleting user does not work");
+        Assertions.assertNull(ud.getUser(name), "Deleting user does not work");
     }
 
     @Test
@@ -86,16 +89,17 @@ public class DAOTests extends TestParent {
     @Test
     public void PrivilegeDAO(){
         PrivilegeDAO pd = new PrivilegeDAO();
+        String name = UUID.randomUUID().toString();
         java.sql.Date d1 = new java.sql.Date(new Date().getTime());
         java.sql.Date d2 = new java.sql.Date(3000, Calendar.JANUARY, 28);
-        User u = new User("junit", "tester", "JUN", "123", 1);
+        User u = new User("junit", "tester", name, "123", 1);
         UserDAO ud = new UserDAO();
         ud.createUser(u);
         Privilege p = new Privilege(u, d1, d2, PrivilegeLevel.MANAGER);
 
         Assertions.assertEquals(0, pd.getPrivileges(u).size(),"problem getting a nonexistant privilege");
         pd.addPrivilege(p);
-        Assertions.assertEquals("JUN",pd.getPrivileges(u).get(0).getUser().getUsername(), "Error finding an added privilege");
+        Assertions.assertEquals(name,pd.getPrivileges(u).get(0).getUser().getUsername(), "Error finding an added privilege");
         pd.deletePrivilege(p);
         ud.deleteUser(u);
     }
