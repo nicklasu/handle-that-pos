@@ -23,7 +23,7 @@ public class POSEngine implements IPOSEngine {
     @Transient
     private User user = null;
     @Transient
-    POSEngineDAO ped;
+    private POSEngineDAO ped;
     @Transient
     private UserDAO userDAO;
     @Transient
