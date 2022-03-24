@@ -43,13 +43,13 @@ public class POSEngineTest extends TestParent {
 
     @Test
     public void getUser() {
-        Assertions.assertEquals("User{id=1, username='testuser', password='$2a$12$QHOXCl8u2OzUpMWRM5oV3eB4rRHTvtyZhgEppjJSJKK2OFKAeN0va', fName='Testi', lName='User', activity=1}", testEngine.getUser().toString(), "error getting logged in user");
+        Assertions.assertEquals("User{id=769, username='testuser', password='$2a$12$QHOXCl8u2OzUpMWRM5oV3eB4rRHTvtyZhgEppjJSJKK2OFKAeN0va', fName='Testi', lName='User', activity=1}", testEngine.getUser().toString(), "error getting logged in user");
     }
 
     @Test
     public void getTransaction() {
         testEngine.setTransaction(this.createTestTransaction(testEngine.getUser()));
-        Assertions.assertEquals("Transaction{order=Order{productList=[Suola, Sokeri], totalPrice=300}, customer=Customer{id=0, customerLevelIndex=0}, paymentMethod=CASH, user=User{id=1, username='testuser', password='$2a$12$QHOXCl8u2OzUpMWRM5oV3eB4rRHTvtyZhgEppjJSJKK2OFKAeN0va', fName='Testi', lName='User', activity=1}}", testEngine.getTransaction().toString(), "Problem getting the transaction from engine");
+        Assertions.assertEquals("Transaction{order=Order{productList=[Suola, Sokeri], totalPrice=300}, customer=Customer{id=0, customerLevelIndex=0}, paymentMethod=CASH, user=User{id=769, username='testuser', password='$2a$12$QHOXCl8u2OzUpMWRM5oV3eB4rRHTvtyZhgEppjJSJKK2OFKAeN0va', fName='Testi', lName='User', activity=1}}", testEngine.getTransaction().toString(), "Problem getting the transaction from engine");
     }
 
     @Test

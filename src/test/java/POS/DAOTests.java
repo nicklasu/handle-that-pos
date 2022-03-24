@@ -18,15 +18,6 @@ public class DAOTests extends TestParent {
         System.out.println("DAO tests...");
     }
 
-    @BeforeEach
-    public void beforeEach() {
-
-    }
-
-    @AfterEach
-    public void afterEach(){
-
-    }
 
     @Test
     public void productDAO() {
