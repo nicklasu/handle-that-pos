@@ -66,6 +66,7 @@ public class POSEngine implements IPOSEngine {
     public int login(String username, String password) {
         ped.addID(this);
         User user = userDAO.getUser(username);
+
         if (user != null) {
             BCrypt.Result result = compare(password, user.getPassword());
             System.out.println(HWID.getHWID());
