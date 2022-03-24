@@ -34,7 +34,7 @@ public class Transaction implements ITransaction {
     @Column(name = "Aikaleima")
     private Timestamp timestamp;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "MaksupääteID", referencedColumnName = "id")
     private POSEngine pos;
 
