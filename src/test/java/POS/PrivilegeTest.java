@@ -45,6 +45,6 @@ public class PrivilegeTest {
 
     @Test
     public void privilegeToStringTest() {
-        Assertions.assertEquals(privilege.toString(), "Privilege{id=1, privilegeStart=" + new Date(time) + ", privilegeEnd=8994-08-17, privilegeLevelIndex=0, privilegeLevel=USER, user=User{id=0, username='null', password='null', fName='null', lName='null', activity=0}}", "Privilege toString doesn't work correctly!");
+        Assertions.assertEquals(privilege.toString(), new Date(time) + ", 8994-08-17, Myyjä", "Privilege toString doesn't work correctly!");
     }
 }
