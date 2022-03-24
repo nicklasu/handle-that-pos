@@ -1,16 +1,19 @@
-package model.classes;
+package model.DAOs;
 
+import model.classes.HibernateUtil;
+import model.classes.Privilege;
+import model.classes.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
-import javax.persistence.PersistenceException;
 import java.util.List;
 
-public class ProductDAO {
+public class PrivilegeDAO {
     private SessionFactory sessionFactory = null;
 
-    public ProductDAO() {
+    public PrivilegeDAO() {
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
         } catch (Exception e) {
@@ -19,90 +22,99 @@ public class ProductDAO {
         }
     }
 
-    public Product getProduct(String id) {
+    public List<Privilege> getPrivileges(User user) {
         Transaction transaction = null;
-        Product product = null;
+        List<Privilege> privileges = null;
         try (Session session = sessionFactory.getCurrentSession()) {
+            int userId = user.getId();
             transaction = session.beginTransaction();
-            product = session.get(Product.class, id);
+            Query query = session.createQuery("from Privilege where user = :userId");
+            query.setInteger("userId", userId);
+            privileges = query.list();
             transaction.commit();
         } catch (Exception e) {
+            if (transaction != null) {
+                e.printStackTrace();
+                transaction.rollback();
+            }
+        }
+        return privileges;
+    }
+
+    public void addPrivilege(Privilege privilege) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            transaction = session.beginTransaction();
+            session.save(privilege);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-        return product;
     }
 
-    public List<Product> getAllProducts() {
+    public void addPrivileges(List<Privilege> privileges) {
         Transaction transaction = null;
-        List<Product> products = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            products = session.createQuery("from Product").list();
+            for(Privilege p : privileges) {
+                session.save(p);
+            }
             transaction.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-        return products;
     }
 
-    public boolean addProduct(Product product) {
+    public void deletePrivilege(Privilege privilege) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            session.save(product);
-            System.out.println(transaction);
+            session.delete(privilege);
             transaction.commit();
-            return true;
-        } catch (PersistenceException p) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            return false;
         } catch (Exception e) {
+            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-        return false;
     }
 
-    public boolean updateProduct(Product product) {
+    public void deletePrivileges(List<Privilege> privileges) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            session.saveOrUpdate(product);
+            for(Privilege p : privileges){
+                session.delete(p);
+            }
             transaction.commit();
-            return true;
         } catch (Exception e) {
             if (transaction != null) {
+                e.printStackTrace();
                 transaction.rollback();
             }
-            return false;
         }
     }
 
-    public boolean deleteProduct(String id) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.getCurrentSession()) {
-            transaction = session.beginTransaction();
-            Product product = session.get(Product.class, id);
-            if (product != null) {
-                session.delete(product);
+
+    public void updatePrivileges(List<Privilege> privileges){
+            Transaction transaction = null;
+            try (Session session = sessionFactory.getCurrentSession()) {
+                transaction = session.beginTransaction();
+                for(Privilege p : privileges) {
+                    session.saveOrUpdate(p);
+                }
                 transaction.commit();
-                System.out.println("Found product");
-                return true;
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+            } catch (Exception e) {
+                if (transaction != null) {
+                    e.printStackTrace();
+                    transaction.rollback();
+                }
         }
-        System.out.println("product not found ");
-        return false;
     }
 }

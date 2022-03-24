@@ -1,5 +1,7 @@
-package model.classes;
+package model.DAOs;
 
+import model.classes.Customer;
+import model.classes.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

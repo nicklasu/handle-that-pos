@@ -1,6 +1,7 @@
 package model.classes;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import model.DAOs.*;
 import model.interfaces.IPOSEngine;
 import model.interfaces.ITransaction;
 
@@ -22,6 +23,8 @@ public class POSEngine implements IPOSEngine {
     @Transient
     private User user = null;
     @Transient
+    POSEngineDAO ped;
+    @Transient
     private UserDAO userDAO;
     @Transient
     private ProductDAO productDAO;
@@ -38,10 +41,12 @@ public class POSEngine implements IPOSEngine {
     // constructor
     public POSEngine() {
         this.userDAO = new UserDAO();
+        this.ped = new POSEngineDAO();
         this.productDAO = new ProductDAO();
         this.transactionDAO = new TransactionDAO();
         this.customerDAO = new CustomerDAO();
         this.privilegeDAO = new PrivilegeDAO();
+        this.ped = new POSEngineDAO();
         this.id = HWID.getHWID();
     }
 
@@ -59,6 +64,7 @@ public class POSEngine implements IPOSEngine {
     }
     @Override
     public int login(String username, String password) {
+        ped.addID(this);
         User user = userDAO.getUser(username);
         if (user != null) {
             BCrypt.Result result = compare(password, user.getPassword());

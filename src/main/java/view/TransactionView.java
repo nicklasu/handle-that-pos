@@ -5,12 +5,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import model.DAOs.CustomerDAO;
 import model.classes.*;
-import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,8 +1,8 @@
 package model.interfaces;
 
+import model.DAOs.*;
 import model.classes.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 public interface IPOSEngine {
