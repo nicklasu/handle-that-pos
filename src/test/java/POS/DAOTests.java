@@ -41,7 +41,7 @@ public class DAOTests extends TestParent {
         CustomerDAO cd = new CustomerDAO();
         Customer c = new Customer(1);
         Date date = new Date();
-        POSEngine posE = new POSEngine("testi");
+        POSEngine posE = new POSEngine();
         UserDAO ud = new UserDAO();
         String name = UUID.randomUUID().toString();
         User u = new User("junit", "tester", name, "123", 1);
