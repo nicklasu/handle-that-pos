@@ -51,6 +51,7 @@ public class Transaction implements ITransaction {
         this.pos = null;
     }
 
+
     public POSEngine getPos() {
         return pos;
     }
