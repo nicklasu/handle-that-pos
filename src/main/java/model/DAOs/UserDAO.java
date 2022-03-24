@@ -1,5 +1,7 @@
-package model.classes;
+package model.DAOs;
 
+import model.classes.HibernateUtil;
+import model.classes.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -7,111 +9,109 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class PrivilegeDAO {
+public class UserDAO {
     private SessionFactory sessionFactory = null;
 
-    public PrivilegeDAO() {
+    public UserDAO() {
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
         } catch (Exception e) {
             System.out.println("Virhe istuntotehtaan luomisessa");
             e.printStackTrace();
         }
+
     }
 
-    public List<Privilege> getPrivileges(User user) {
+    public User getUserById(int id) {
         Transaction transaction = null;
-        List<Privilege> privileges = null;
-        try (Session session = sessionFactory.getCurrentSession()) {
-            int userId = user.getId();
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("from Privilege where user = :userId");
-            query.setInteger("userId", userId);
-            privileges = query.list();
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                e.printStackTrace();
-                transaction.rollback();
-            }
-        }
-        return privileges;
-    }
-
-    public void addPrivilege(Privilege privilege) {
-        Transaction transaction = null;
+        User user = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            session.save(privilege);
+            user = session.get(User.class, id);
             transaction.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
         }
+        return user;
     }
 
-    public void addPrivileges(List<Privilege> privileges) {
+    public User getUser(String username) {
         Transaction transaction = null;
+        User user = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            for(Privilege p : privileges) {
-                session.save(p);
+            Query query = session.createQuery("from User where username=:username");
+            query.setParameter("username", username);
+            List list = query.list();
+            System.out.println(list);
+            if (list.isEmpty()) {
+                System.out.println("Käyttäjää ei löytynyt tietokannasta.");
+                return null;
             }
+            user = (User) list.get(0);
             transaction.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
         }
+        return user;
     }
 
-    public void deletePrivilege(Privilege privilege) {
+
+    public List<User> getAllUsers() {
         Transaction transaction = null;
+        List<User> users = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            session.delete(privilege);
+            users = session.createQuery("from User").list();
             transaction.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
             }
         }
+        return users;
     }
 
-    public void deletePrivileges(List<Privilege> privileges) {
+    public void createUser(User user) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            for(Privilege p : privileges){
-                session.delete(p);
-            }
+            session.save(user);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
-                e.printStackTrace();
                 transaction.rollback();
             }
         }
     }
 
+    public void deleteUser(User user) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            transaction = session.beginTransaction();
+            session.delete(user);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+    }
 
-    public void updatePrivileges(List<Privilege> privileges){
-            Transaction transaction = null;
-            try (Session session = sessionFactory.getCurrentSession()) {
-                transaction = session.beginTransaction();
-                for(Privilege p : privileges) {
-                    session.saveOrUpdate(p);
-                }
-                transaction.commit();
-            } catch (Exception e) {
-                if (transaction != null) {
-                    e.printStackTrace();
-                    transaction.rollback();
-                }
+    public void updateUser(User user) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(user);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
         }
     }
 }

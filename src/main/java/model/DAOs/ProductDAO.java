@@ -1,115 +1,110 @@
-package model.classes;
+package model.DAOs;
 
+import model.classes.HibernateUtil;
+import model.classes.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
+import javax.persistence.PersistenceException;
 import java.util.List;
 
-public class UserDAO {
+public class ProductDAO {
     private SessionFactory sessionFactory = null;
 
-    public UserDAO() {
+    public ProductDAO() {
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
         } catch (Exception e) {
             System.out.println("Virhe istuntotehtaan luomisessa");
             e.printStackTrace();
         }
-
     }
 
-    public User getUserById(int id) {
+    public Product getProduct(String id) {
         Transaction transaction = null;
-        User user = null;
+        Product product = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            user = session.get(User.class, id);
+            product = session.get(Product.class, id);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-        return user;
+        return product;
     }
 
-    public User getUser(String username) {
+    public List<Product> getAllProducts() {
         Transaction transaction = null;
-        User user = null;
+        List<Product> products = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            Query query = session.createQuery("from User where username=:username");
-            query.setParameter("username", username);
-            List list = query.list();
-            System.out.println(list);
-            if (list.isEmpty()) {
-                System.out.println("Käyttäjää ei löytynyt tietokannasta.");
-                return null;
-            }
-            user = (User) list.get(0);
+            products = session.createQuery("from Product").list();
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-        return user;
+        return products;
     }
 
-
-    public List<User> getAllUsers() {
+    public boolean addProduct(Product product) {
         Transaction transaction = null;
-        List<User> users = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            users = session.createQuery("from User").list();
+            session.save(product);
+            System.out.println(transaction);
+            transaction.commit();
+            return true;
+        } catch (PersistenceException p) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            return false;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return false;
+    }
+
+    public boolean updateProduct(Product product) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(product);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            return false;
+        }
+    }
+
+    public boolean deleteProduct(String id) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            transaction = session.beginTransaction();
+            Product product = session.get(Product.class, id);
+            if (product != null) {
+                session.delete(product);
+                transaction.commit();
+                System.out.println("Found product");
+                return true;
+            }
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-        return users;
-    }
-
-    public void createUser(User user) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.getCurrentSession()) {
-            transaction = session.beginTransaction();
-            session.save(user);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        }
-    }
-
-    public void deleteUser(User user) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.getCurrentSession()) {
-            transaction = session.beginTransaction();
-            session.delete(user);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        }
-    }
-
-    public void updateUser(User user) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.getCurrentSession()) {
-            transaction = session.beginTransaction();
-            session.saveOrUpdate(user);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-        }
+        System.out.println("product not found ");
+        return false;
     }
 }

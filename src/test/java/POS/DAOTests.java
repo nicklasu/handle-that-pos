@@ -1,6 +1,7 @@
 package POS;
 
 
+import model.DAOs.*;
 import model.classes.*;
 import org.junit.jupiter.api.*;
 
