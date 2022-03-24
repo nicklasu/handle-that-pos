@@ -44,6 +44,15 @@ public class POSEngine implements IPOSEngine {
         this.privilegeDAO = new PrivilegeDAO();
         this.id = HWID.getHWID();
     }
+
+    public POSEngine(String testID){
+        this.userDAO = new UserDAO();
+        this.productDAO = new ProductDAO();
+        this.transactionDAO = new TransactionDAO();
+        this.customerDAO = new CustomerDAO();
+        this.privilegeDAO = new PrivilegeDAO();
+        id = testID;
+    }
     @Override
     public List<Integer> getVerifiedPrivileges(){
         return this.verifiedPrivileges;
