@@ -59,32 +59,40 @@ public class AddUserView {
                 .or(userName.textProperty().isEmpty())
                 .or(userPassword.textProperty().isEmpty());
         saveBtn.disableProperty().bind(booleanBind);
+        privilegeListView.disableProperty().bind(Bindings.isEmpty(privilegeList));
         List<Integer> privilegeInts = this.mainApp.getEngine().getVerifiedPrivileges();
-        ObservableList<String> availableChoices;
         EditUserView.checkPrivilegeLevel(privilegeInts, privilegeLevel, startDate);
 
         privilegeListView.setOnMouseClicked((click) -> {
             if (click.getButton() == MouseButton.SECONDARY){
                 int index = privilegeListView.getSelectionModel().getSelectedIndex();
-                privilegeList.remove(index);
+                System.out.println(index);
+                if(index >= 0) {
+                    privilegeList.remove(index);
+                }
             }
             else if(click.getButton() == MouseButton.PRIMARY) {
                 if (click.getClickCount() == 2) {
+                    int index = privilegeListView.getSelectionModel().getSelectedIndex();
+                    if(index >= 0) {
                     saveBtn.setVisible(false);
                     editBtn.setVisible(true);
-                    Privilege p = privilegeList.get(privilegeListView.getSelectionModel().getSelectedIndex());
-                    startDate.setValue(p.getPrivilegeStart().toLocalDate());
-                    if (p.getPrivilegeEnd() != null) {
-                        endDate.setValue(p.getPrivilegeEnd().toLocalDate());
-                    }
 
-                    String pLevel = switch (p.getPrivilegeLevelIndex()) {
-                        case 0 -> "Myyjä";
-                        case 1 -> "Myymäläpäällikkö";
-                        case 2 -> "Järjestelmän ylläpitäjä";
-                        default -> throw new IllegalStateException("Unexpected value");
-                    };
-                    privilegeLevel.setValue(pLevel);
+
+                        Privilege p = privilegeList.get(index);
+                        startDate.setValue(p.getPrivilegeStart().toLocalDate());
+                        if (p.getPrivilegeEnd() != null) {
+                            endDate.setValue(p.getPrivilegeEnd().toLocalDate());
+                        }
+
+                        String pLevel = switch (p.getPrivilegeLevelIndex()) {
+                            case 0 -> "Myyjä";
+                            case 1 -> "Myymäläpäällikkö";
+                            case 2 -> "Järjestelmän ylläpitäjä";
+                            default -> throw new IllegalStateException("Unexpected value");
+                        };
+                        privilegeLevel.setValue(pLevel);
+                    }
 
                     editBtn.setOnAction((action) -> {
                         Privilege priv = privilegeList.get(privilegeListView.getSelectionModel().getSelectedIndex());
