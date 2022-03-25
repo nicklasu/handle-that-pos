@@ -4,9 +4,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
 
+/**
+ * Generates a unique hardware ID from the machine that is running the software
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ */
 public class HWID {
     /**
-     * @return HWID in MD5;
+     * @return hardwareID in MD5;
      */
     public static String getHWID() {
         try {
@@ -46,6 +50,10 @@ public class HWID {
             return "Error!";
         }
     }
+
+    /**
+     * @return current operating system
+     */
     public static String getOperatingSystem() {
         String os = System.getProperty("os.name");
         System.out.println("Using System Property: " + os);

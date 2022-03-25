@@ -8,68 +8,130 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Represents a set of products
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ */
 @Entity
 @Table(name = "Tilaus")
 public class Order implements IOrder {
+    /**
+     * Boolean representing the customerlevel
+     */
     private boolean bonusCustomer = false;
+
+    /**
+     * Identifier for the order
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private int id;
 
+    /**
+     * Parent object of Order
+     */
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "MaksutapahtumaID", referencedColumnName = "ID")
     private Transaction transaction;
 
+    /**
+     * Maps products to order, used for database purposes
+     */
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "primaryKey.order", cascade = CascadeType.ALL)
     private Set<OrderProduct> orderProducts = new HashSet<>();
 
+    /**
+     * Maps products to order, used for user interface purposes
+     */
     @Transient
     private List<Product> productList = new ArrayList<>();
 
+    /**
+     * Total price of products in the order
+     */
     @Transient
     private int totalPrice = 0;
 
+    /**
+     * Empty constructor for hibernate
+     */
     public Order() {
     }
 
+    /**
+     * Creates the order as a child of a parent object
+     * @param transaction the parent object
+     */
     public Order(Transaction transaction) {
         this.transaction = transaction;
     }
 
+    /**
+     * @return identifier of  the order
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @param id sets identifier of the order
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * @return the parent object
+     */
     public Transaction getTransaction() {
         return transaction;
     }
 
+    /**
+     * @param transaction sets the parent object
+     */
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
     }
 
+    /**
+     * Gets the product to order mapping (database version)
+     * @return
+     */
     public Set<OrderProduct> getOrderProducts() {
         return orderProducts;
     }
 
+    /**
+     * Sets the product to order mapping (database version)
+     * @param orderProducts
+     */
     public void setOrderProducts(Set<OrderProduct> orderProducts) {
         this.orderProducts = orderProducts;
     }
 
+    /**
+     * Adds a product to current order
+     * @param orderProduct the product
+     */
     public void addOrderProduct(OrderProduct orderProduct) {
         this.orderProducts.add(orderProduct);
     }
 
+    /**
+     * Gets the product to order mapping
+     * @return list of products
+     */
     @Override
     public List<Product> getProductList() {
         return this.productList;
     }
 
+    /**
+     * Fetches the total price of products in the order
+     * @return price
+     */
     @Override
     public int getTotalPrice() {
         if (transaction.getCustomer() != null) {
@@ -78,6 +140,11 @@ public class Order implements IOrder {
         return totalPrice;
     }
 
+    /**
+     * Adds a product to the order, creates an order if one does not exist
+     * @param product Scanned product the product to add
+     * @return returns true if successful
+     */
     @Override
     public boolean addProductToOrder(Product product) {
         if (product != null) {
@@ -107,6 +174,11 @@ public class Order implements IOrder {
         return false;
     }
 
+    /**
+     * removes a product from the current order
+     * @param product the product to be deleted
+     * @return true if succesful
+     */
     @Override
     public boolean removeProductFromOrder(Product product) {
         if (this.productList.contains(product)) {
@@ -130,10 +202,17 @@ public class Order implements IOrder {
         } else return false;
     }
 
+    /**
+     * Setter for totalprice
+     * @param totalPrice price of all products in the order
+     */
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
 
+    /**
+     * @return displays the order as a string
+     */
     @Override
     public String toString() {
         return "Order{" +
@@ -142,6 +221,11 @@ public class Order implements IOrder {
                 '}';
     }
 
+    /**
+     * Overwritten equals method for comparing productlists
+     * @param o input object
+     * @return true if same
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null) {

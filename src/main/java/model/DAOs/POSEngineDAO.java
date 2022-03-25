@@ -1,6 +1,5 @@
 package model.DAOs;
 
-import model.classes.Customer;
 import model.classes.HibernateUtil;
 import model.classes.POSEngine;
 import org.hibernate.Session;
