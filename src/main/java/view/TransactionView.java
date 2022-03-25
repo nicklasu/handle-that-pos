@@ -6,11 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import model.DAOs.CustomerDAO;
 import model.classes.*;
+import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 import java.util.List;
@@ -56,8 +58,23 @@ public class TransactionView {
     @FXML
     private void confirmPayment() {
         try {
-            this.mainApp.getEngine().confirmTransaction(printReceipt);
-            loadMainView();
+            if (this.mainApp.getEngine().getTransaction().getCustomer() == null && bonusCustomerCheckBox.isSelected()) {
+                if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) != null) {
+                    this.mainApp.getEngine().getTransaction().setCustomer(customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
+                    this.mainApp.getEngine().confirmTransaction(printReceipt);
+                    loadMainView();
+                } else {
+                    Notifications.create()
+                            .owner(transactionAnchorPane.getScene().getWindow())
+                            .title("Virhe")
+                            .text("Asiakasta ei löydy!")
+                            .position(Pos.TOP_RIGHT)
+                            .showError();
+                }
+            } else {
+                this.mainApp.getEngine().confirmTransaction(printReceipt);
+                loadMainView();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Ei tuotteita tilauksessa!", ButtonType.CLOSE);
@@ -84,13 +101,25 @@ public class TransactionView {
                         Thread.sleep(100);
                         if ((System.currentTimeMillis() - startTime) >= 2000) {
                             Platform.runLater(() -> {
-                                if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) != null) {
-                                    this.mainApp.getEngine().getTransaction().setCustomer(customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
-                                    String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotetta hintaan " + (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))) + "€";
-                                    transactionOverviewLabel.setText(overviewText);
-                                } else {
-                                    Alert alert = new Alert(Alert.AlertType.ERROR, "Asiakasta ei löytynyt!", ButtonType.CLOSE);
-                                    alert.showAndWait();
+                                if (this.mainApp.getEngine().getTransaction() != null) {
+                                    if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) != null && !Objects.equals(customerTextField.getText(), "")) {
+                                        this.mainApp.getEngine().getTransaction().setCustomer(customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
+                                        String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotetta hintaan " + (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))) + "€";
+                                        transactionOverviewLabel.setText(overviewText);
+                                        Notifications.create()
+                                                .owner(transactionAnchorPane.getScene().getWindow())
+                                                .title("Tieto")
+                                                .text("Asiakas löytyi.")
+                                                .position(Pos.TOP_RIGHT)
+                                                .showConfirm();
+                                    } else {
+                                        Notifications.create()
+                                                .owner(transactionAnchorPane.getScene().getWindow())
+                                                .title("Virhe")
+                                                .text("Asiakasta ei löydy!")
+                                                .position(Pos.TOP_RIGHT)
+                                                .showError();
+                                    }
                                 }
                                 Thread.currentThread().interrupt();
                             });
