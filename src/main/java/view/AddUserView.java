@@ -66,7 +66,6 @@ public class AddUserView {
         privilegeListView.setOnMouseClicked((click) -> {
             if (click.getButton() == MouseButton.SECONDARY){
                 int index = privilegeListView.getSelectionModel().getSelectedIndex();
-                System.out.println(index);
                 if(index >= 0) {
                     privilegeList.remove(index);
                 }

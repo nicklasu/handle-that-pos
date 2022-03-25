@@ -101,7 +101,8 @@ public class EditProductView {
             productPrice.setText(String.valueOf(product.getPrice()));
             productStock.setText(String.valueOf(product.getStock()));
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("There was an error");
+            e.printStackTrace();
             Notifications.create()
                     .owner(productBarcode.getScene().getWindow())
                     .title("Virhe")
