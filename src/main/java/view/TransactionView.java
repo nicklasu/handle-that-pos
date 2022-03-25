@@ -230,7 +230,7 @@ public class TransactionView {
 
     @FXML
     public void showHelp() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Kuitin tulostaminen: \nVoidaan halutessaan tulostaa kuitin rastittamalla ”Kuitin tulostus”. Napsautettuaan ”Vahvista” painikkeetta, voidaan valita, mitä tulostinta käytetään. \n\nMaksutavan valinta: \nValitetaan maksutavan klikkaamalla joko ”Maksukortti” tai ”Käteinen”. Oletusmaksutapa on maksukortti.", ButtonType.CLOSE);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Kuitin tulostaminen: \nVoit halutessasi tulostaa kuitin rastittamalla ”Kuitin tulostus”-valintaruudun. Napsautettuasi ”Vahvista” painikketta, voit valita, mitä tulostinta käytetään. \n\nMaksutavan valinta: \nValitse maksutapa klikkaamalla joko ”Maksukortti” tai ”Käteinen”. Oletusmaksutapa on maksukortti. \n\nBonusasiakkuuden valinta: \nBonusasiakkuuden valinta tapahtuu ”Bonusasiakas”-valintaruudun rastittamisen jälkeen. \nSyötä ilmestyvään kenttään bonusasiakkaan numero, ja asiakkuuden tulisi aktivoitua n. 2 sekunnin odottamisen jälkeen.", ButtonType.CLOSE);
         alert.setTitle("Ohje");
         alert.setHeaderText("Ohje");
         alert.showAndWait();
