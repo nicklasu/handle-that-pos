@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "Tilaus")
 public class Order implements IOrder {
-
+    private boolean bonusCustomer = false;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -72,6 +72,9 @@ public class Order implements IOrder {
 
     @Override
     public int getTotalPrice() {
+        if (transaction.getCustomer() != null) {
+            return (int) (totalPrice * 0.95);
+        }
         return totalPrice;
     }
 
@@ -108,7 +111,6 @@ public class Order implements IOrder {
     public boolean removeProductFromOrder(Product product) {
         if (this.productList.contains(product)) {
             this.productList.remove(product);
-
             OrderProduct orderProductToRemove = null;
 
             for (OrderProduct op : orderProducts) {
@@ -120,13 +122,10 @@ public class Order implements IOrder {
                     }
                 }
             }
-
             if (orderProductToRemove != null) {
                 orderProducts.remove(orderProductToRemove);
             }
-
             this.totalPrice -= product.getPrice();
-
             return true;
         } else return false;
     }

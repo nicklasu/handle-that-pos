@@ -63,7 +63,7 @@ public class POSEngineTest extends TestParent {
     @Test
     public void confirmTransaction() {
         testEngine.setTransaction(createTestTransaction(testEngine.getUser()));
-        testEngine.confirmTransaction(false, new Customer(1));
+        testEngine.confirmTransaction(false);
         Assertions.assertNull(testEngine.getTransaction(), "Problem with confirming transaction");
     }
 }

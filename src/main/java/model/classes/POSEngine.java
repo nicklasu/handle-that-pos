@@ -38,6 +38,7 @@ public class POSEngine implements IPOSEngine {
     private List<Privilege> privileges;
     @Transient
     private List<Integer> verifiedPrivileges;
+
     // constructor
     public POSEngine() {
         this.userDAO = new UserDAO();
@@ -50,7 +51,7 @@ public class POSEngine implements IPOSEngine {
         this.id = HWID.getHWID();
     }
 
-    public POSEngine(String testID){
+    public POSEngine(String testID) {
         this.userDAO = new UserDAO();
         this.productDAO = new ProductDAO();
         this.transactionDAO = new TransactionDAO();
@@ -58,21 +59,21 @@ public class POSEngine implements IPOSEngine {
         this.privilegeDAO = new PrivilegeDAO();
         id = testID;
     }
+
     @Override
-    public List<Integer> getVerifiedPrivileges(){
+    public List<Integer> getVerifiedPrivileges() {
         return this.verifiedPrivileges;
     }
+
     @Override
     public int login(String username, String password) {
         ped.addID(this);
         User user = userDAO.getUser(username);
-
         if (user != null) {
             BCrypt.Result result = compare(password, user.getPassword());
             System.out.println(HWID.getHWID());
             //TÄSSÄ KOHTAA LUETAAN DATABASESTA JA VERTAILLAAN SALIKSII
             if (result.verified /*JOS SALIKSET TÄSMÄÄ*/) {
-
                 this.user = user;
                 privileges = privilegeDAO.getPrivileges(user);
                 this.verifiedPrivileges = new ArrayList<>();
@@ -148,20 +149,10 @@ public class POSEngine implements IPOSEngine {
     }
 
     @Override
-    public void confirmTransaction(boolean printReceipt, Customer customer) {
+    public void confirmTransaction(boolean printReceipt) {
         Date date = new Date();
         Timestamp ts = new Timestamp(date.getTime());
         transaction.setTimestamp(ts);
-        if (customer != null) {
-            if (customer.getCustomerLevelIndex() == 1) {
-                float totalPrice = transaction.getOrder().getTotalPrice();
-                totalPrice *= 0.95;
-                transaction.getOrder().setTotalPrice(Math.round(totalPrice));
-            }
-            transaction.setCustomer(customer);
-        } else {
-            transaction.setCustomer(null);
-        }
         ((Transaction) transaction).setPos(this);
         transactionDAO.addTransaction((Transaction) this.transaction);
         try {

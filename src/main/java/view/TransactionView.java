@@ -1,5 +1,6 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import model.classes.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TransactionView {
     private MainApp mainApp;
@@ -41,6 +43,8 @@ public class TransactionView {
     private boolean sendReceiptEmail = false;
     private final ToggleGroup paymentButtonGroup = new ToggleGroup();
     private final ObservableList<Product> items = FXCollections.observableArrayList();
+    private CustomerDAO customerDAO = null;
+    private volatile AtomicBoolean customerKeyPressed = new AtomicBoolean(false);
 
     @FXML
     public void loadMainView() throws IOException {
@@ -52,17 +56,7 @@ public class TransactionView {
     @FXML
     private void confirmPayment() {
         try {
-            if (!Objects.equals(customerTextField.getText(), "")) {
-                CustomerDAO customerDAO = this.mainApp.getEngine().getCustomerDAO();
-                if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) == null) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Asiakasta ei löytynyt!", ButtonType.CLOSE);
-                    alert.showAndWait();
-                } else {
-                    this.mainApp.getEngine().confirmTransaction(printReceipt, customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
-                }
-            } else {
-                this.mainApp.getEngine().confirmTransaction(printReceipt, null);
-            }
+            this.mainApp.getEngine().confirmTransaction(printReceipt);
             loadMainView();
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,6 +69,41 @@ public class TransactionView {
     private void confirmReceipt() {
         printReceipt = receiptCheckBox.isSelected();
         System.out.println(printReceipt);
+    }
+
+    @FXML
+    private void bonusCustomerCheck() {
+        if (!customerKeyPressed.get()) {
+            customerKeyPressed.set(true);
+            final AtomicBoolean running = new AtomicBoolean(false);
+            long startTime = System.currentTimeMillis();
+            Thread thread = new Thread(() -> {
+                running.set(true);
+                while (running.get()) {
+                    try {
+                        Thread.sleep(100);
+                        if ((System.currentTimeMillis() - startTime) >= 2000) {
+                            Platform.runLater(() -> {
+                                if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) != null) {
+                                    this.mainApp.getEngine().getTransaction().setCustomer(customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
+                                    String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotetta hintaan " + (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))) + "€";
+                                    transactionOverviewLabel.setText(overviewText);
+                                } else {
+                                    Alert alert = new Alert(Alert.AlertType.ERROR, "Asiakasta ei löytynyt!", ButtonType.CLOSE);
+                                    alert.showAndWait();
+                                }
+                                Thread.currentThread().interrupt();
+                            });
+                            running.set(false);
+                            customerKeyPressed.set(false);
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            thread.start();
+        }
     }
 
     @FXML
@@ -133,6 +162,7 @@ public class TransactionView {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+        customerDAO = this.mainApp.getEngine().getCustomerDAO();
         cardToggleButton.setToggleGroup(paymentButtonGroup);
         cashToggleButton.setToggleGroup(paymentButtonGroup);
         if (this.mainApp.getEngine().getTransaction() != null) {
@@ -150,7 +180,7 @@ public class TransactionView {
             transactionOverviewLabel.setText(overviewText);
             setPaymentMethodLabelText(this.mainApp.getEngine().getTransaction().getPaymentMethod());
         }
-       // scanListView.setItems(items);
+        // scanListView.setItems(items);
         scanListView.setOnMouseClicked(event -> {
             try {
                 Product product = scanListView.getSelectionModel().getSelectedItem();
@@ -159,8 +189,7 @@ public class TransactionView {
                 dialog.setHeaderText("ID: " + product.getId() + "\n" + "Kuvaus: " + product.getDescription() + "\nHinta: " + String.format("%.2f", (product.getPrice() / 100f)) + "€" + " per kpl" + "\nVarastomäärä: " + product.getStock());
                 dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
                 dialog.showAndWait();
-            }
-            catch (Exception ignored){
+            } catch (Exception ignored) {
             }
         });
         customerTextField.setOnKeyPressed(e -> {

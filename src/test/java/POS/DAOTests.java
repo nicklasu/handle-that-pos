@@ -52,7 +52,7 @@ public class DAOTests extends TestParent {
         t.setTimestamp(new Timestamp(date.getTime()));
         t.setPos(posE);
         posE.setTransaction(t);
-        posE.confirmTransaction(false,c);
+        posE.confirmTransaction(false);
 
         Assertions.assertEquals(t.getId(), td.getTransaction(t).getId(), "Error finding a transaction with dao");
         td.removeTransaction(t);
