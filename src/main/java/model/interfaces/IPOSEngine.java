@@ -18,7 +18,7 @@ public interface IPOSEngine {
 
     CustomerDAO customerDAO();
 
-    void confirmTransaction(boolean printReceipt, Customer customer);
+    void confirmTransaction(boolean printReceipt);
 
     CustomerDAO getCustomerDAO();
 
