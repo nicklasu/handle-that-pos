@@ -1,6 +1,5 @@
 package view;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -21,9 +20,7 @@ public class BonusCustomerManagementView {
     /**
      * Switch to add-bonus-customer-view.fxml
      */
-    public void addBonusCustomerPane(ActionEvent event) throws IOException {
-
-        System.out.println("add user button was pressed");
+    public void addBonusCustomerPane() {
         wrapperPaneBonusCustomers.getChildren().clear();
         Pane newLoadedPane = null;
         try {
@@ -31,6 +28,21 @@ public class BonusCustomerManagementView {
             this.loader.setLocation(getClass().getResource("add-bonus-customer-view.fxml"));
             newLoadedPane = this.loader.load();
             AddBonusCustomerView view = this.loader.getController();
+            view.setMainApp(mainApp);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        wrapperPaneBonusCustomers.getChildren().add(newLoadedPane);
+    }
+
+    public void deleteBonusCustomerPane() {
+        wrapperPaneBonusCustomers.getChildren().clear();
+        Pane newLoadedPane = null;
+        try {
+            this.loader = new FXMLLoader();
+            this.loader.setLocation(getClass().getResource("delete-bonus-customer-view.fxml"));
+            newLoadedPane = this.loader.load();
+            DeleteBonusCustomerView view = this.loader.getController();
             view.setMainApp(mainApp);
         } catch (IOException ex) {
             ex.printStackTrace();

@@ -1,8 +1,5 @@
 package view;
 
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -34,9 +31,7 @@ public class AddBonusCustomerView {
 
     @FXML
     private void addBonusCustomer() {
-        //int customerId = Integer.parseInt(bonusCustomerId.getText());
         Customer c = new Customer(1);
-        // c.setId(customerId);
         this.mainApp.getEngine().customerDAO().addCustomer(c);
         bonusCustomerId.setText(String.valueOf(this.mainApp.getEngine().customerDAO().getCustomer(c.getId()).getId()));
         bonusCustomerId.setVisible(true);
