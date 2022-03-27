@@ -1,6 +1,5 @@
 package POS;
 
-import model.classes.Customer;
 import model.classes.POSEngine;
 import model.classes.Privilege;
 import model.classes.PrivilegeLevel;
