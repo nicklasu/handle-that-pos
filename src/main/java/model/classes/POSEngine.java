@@ -229,7 +229,6 @@ public class POSEngine implements IPOSEngine {
     /**
      * Finalizes a sales transaction and lastly sets current transaction to null
      * @param printReceipt true if customer wants a receipt
-     * @param customer CustomerID if the customer is a part of a membership program
      */
     @Override
     public void confirmTransaction(boolean printReceipt) {
