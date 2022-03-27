@@ -2,14 +2,8 @@ package POS;
 
 import model.classes.*;
 import model.classes.Order;
-import org.junit.Assert;
 import org.junit.jupiter.api.*;
 
-import java.util.Objects;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class OrderTest extends TestParent {
@@ -45,7 +39,7 @@ public class OrderTest extends TestParent {
 
     @Test
     public void comparing(){
-        Assertions.assertTrue(this.testOrder.equals(testOrder), "Error comparing orders with equals");
+        Assertions.assertFalse(this.testOrder.equals(new Order()), "Error comparing orders with equals");
     }
 
     @Test
