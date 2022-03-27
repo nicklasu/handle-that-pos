@@ -104,4 +104,5 @@ public class DAOTests extends TestParent {
         pd.deletePrivilege(p);
         ud.deleteUser(u);
     }
+
 }
