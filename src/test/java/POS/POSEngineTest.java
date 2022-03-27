@@ -2,7 +2,13 @@ package POS;
 
 import model.classes.Customer;
 import model.classes.POSEngine;
+import model.classes.Privilege;
+import model.classes.PrivilegeLevel;
 import org.junit.jupiter.api.*;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class POSEngineTest extends TestParent {
@@ -65,5 +71,22 @@ public class POSEngineTest extends TestParent {
         testEngine.setTransaction(createTestTransaction(testEngine.getUser()));
         testEngine.confirmTransaction(false);
         Assertions.assertNull(testEngine.getTransaction(), "Problem with confirming transaction");
+    }
+
+
+    @Test
+    public void privileges(){
+        List<Integer> luvat = testEngine.getVerifiedPrivileges();
+        Assertions.assertEquals(0, luvat.get(0), "Getting privilegelevel has a problem");
+        Assertions.assertEquals("testuser",testEngine.getPrivileges().get(0).getUser().getUsername(),"getting privileges has a problem");
+        Assertions.assertEquals(0,testEngine.getPrivilegeIndexes().get(0),"Getting privilege indexes has a problem");
+
+        java.sql.Date date = new Date(123);
+        java.sql.Date date2 = new Date(1234);
+        List<Privilege> a = new ArrayList<>();
+        a.add(new Privilege(testEngine.getUser(), date, date, PrivilegeLevel.ADMIN));
+        a.add(new Privilege(testEngine.getUser(), date2, date2, PrivilegeLevel.MANAGER));
+        testEngine.setPrivileges(a);
+        Assertions.assertEquals(1,testEngine.getPrivileges().get(1).getPrivilegeLevelIndex(),"problem with adding privileges");
     }
 }
