@@ -4,7 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
- * Helper class for accessing database with hibernate
+ * Helper singleton class for accessing database with hibernate
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
  */
 public class HibernateUtil {
@@ -15,7 +15,7 @@ public class HibernateUtil {
     public static SessionFactory factory;
 
     /**
-     * Empty constructor required for hibernate
+     * private constructor for singleton
      */
     private HibernateUtil() {
     }

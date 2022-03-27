@@ -9,9 +9,19 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+/**
+ * Data access object for users
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ */
 public class UserDAO {
+    /**
+     * This handles the connections to database
+     */
     private SessionFactory sessionFactory = null;
 
+    /**
+     * Gets an instance of sessionfactory
+     */
     public UserDAO() {
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
@@ -22,6 +32,11 @@ public class UserDAO {
 
     }
 
+    /**
+     * Fetches user based on ID
+     * @param id identifier for the user
+     * @return user object
+     */
     public User getUserById(int id) {
         Transaction transaction = null;
         User user = null;
@@ -37,6 +52,11 @@ public class UserDAO {
         return user;
     }
 
+    /**
+     * Fetches user based on username
+     * @param username username for the user
+     * @return user object
+     */
     public User getUser(String username) {
         Transaction transaction = null;
         User user = null;
@@ -60,7 +80,10 @@ public class UserDAO {
         return user;
     }
 
-
+    /**
+     * Gets all users from the database
+     * @return lits of users
+     */
     public List<User> getAllUsers() {
         Transaction transaction = null;
         List<User> users = null;
@@ -76,6 +99,10 @@ public class UserDAO {
         return users;
     }
 
+    /**
+     * Creates a new user in the database
+     * @param user user to be created
+     */
     public void createUser(User user) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
@@ -89,6 +116,10 @@ public class UserDAO {
         }
     }
 
+    /**
+     * Deletes a user from the database
+     * @param user user to be deleted
+     */
     public void deleteUser(User user) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
@@ -102,6 +133,10 @@ public class UserDAO {
         }
     }
 
+    /**
+     * Updates an user in the database
+     * @param user user to be modified
+     */
     public void updateUser(User user) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {

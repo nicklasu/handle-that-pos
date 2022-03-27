@@ -6,9 +6,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * Data access object for POSEngine, the device info running the software
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ */
 public class POSEngineDAO {
+    /**
+     * This handles the connections to database
+     */
     private SessionFactory sessionFactory = null;
 
+    /**
+     * Gets an instance of sessionfactory
+     */
     public POSEngineDAO() {
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
@@ -18,6 +28,10 @@ public class POSEngineDAO {
         }
     }
 
+    /**
+     * Adds a POSEngine to the database if it does not exist there yet
+     * @param pos the engine to be added
+     */
     public void addID(POSEngine pos) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
