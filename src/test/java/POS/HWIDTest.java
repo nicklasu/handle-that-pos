@@ -17,6 +17,6 @@ public class HWIDTest extends TestParent{
     @Test
     public void osTest(){
         String os = System.getProperty("os.name");
-        Assertions.assertEquals(os,HWID.getOperatingSystem(), "Error getting operating system with hwid");
+        Assertions.assertEquals(os,HWID.getOperatingSystem(), "Error getting operating system with HWID");
     }
 }
