@@ -1,7 +1,6 @@
 package POS;
 
 import model.classes.Customer;
-import model.classes.User;
 import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

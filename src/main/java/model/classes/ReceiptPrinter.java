@@ -4,9 +4,23 @@ import java.awt.*;
 import java.awt.print.*;
 import java.util.List;
 
+/**
+ * Represents a receipt printer
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ */
 public class ReceiptPrinter implements Printable {
+    /**
+     * Transaction to be printed
+     */
     private Transaction transaction;
 
+    /**
+     * Print method...
+     * @param g Object that draws
+     * @param pf Format of the printout
+     * @param page Page number
+     * @return
+     */
     public int print(Graphics g, PageFormat pf, int page) {
         if (page > 0) {
             return NO_SUCH_PAGE;
@@ -52,6 +66,10 @@ public class ReceiptPrinter implements Printable {
         return PAGE_EXISTS;
     }
 
+    /**
+     * Helper function that is called from outside, this function calls for the print method
+     * @param transaction transaction to print out
+     */
     public void actionPerformed(Transaction transaction) {
         this.transaction = transaction;
         PrinterJob job = PrinterJob.getPrinterJob();
@@ -64,5 +82,4 @@ public class ReceiptPrinter implements Printable {
             }
         }
     }
-
 }

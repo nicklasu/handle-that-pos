@@ -1,6 +1,5 @@
 package POS;
 
-import model.classes.Product;
 import model.classes.User;
 import org.junit.jupiter.api.*;
 

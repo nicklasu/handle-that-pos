@@ -1,15 +1,9 @@
 package POS;
 
+import model.classes.*;
 import model.classes.Order;
-import model.classes.Product;
-import model.classes.Transaction;
-import model.classes.User;
 import org.junit.jupiter.api.*;
 
-import java.util.Objects;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class OrderTest extends TestParent {
@@ -29,6 +23,23 @@ public class OrderTest extends TestParent {
         this.testOrder = new Order(new Transaction(new User()));
         this.testOrder.addProductToOrder(testProducts[0]);
         this.testOrder.addProductToOrder(testProducts[1]);
+    }
+
+    @Test
+    public void getAndSetTests(){
+        this.testOrder.setId(1);
+        Assertions.assertEquals(1,this.testOrder.getId(),"Id getter or setter for order has a problem");
+        this.testOrder.setTransaction(new Transaction(new User("TEST","TEST","TEST","TEST",1)));
+        Assertions.assertEquals("TEST",this.testOrder.getTransaction().getUser().getfName(), "Error setting or getting a transaction from order");
+        this.testOrder.setTotalPrice(2);
+        Assertions.assertEquals(2,this.testOrder.getTotalPrice());
+        //this.testOrder.setOrderProducts(); //TODO setorderproduct testit
+        //Assertions.assertEquals();
+    }
+
+    @Test
+    public void comparing(){
+        Assertions.assertFalse(this.testOrder.equals(new Order()), "Error comparing orders with equals");
     }
 
     @Test

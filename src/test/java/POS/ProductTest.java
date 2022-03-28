@@ -8,8 +8,6 @@ import org.junit.jupiter.api.*;
 public class ProductTest extends TestParent {
     Product test;
 
-    public ProductTest() {
-    }
 
     @BeforeAll
     public void beforeAll() {

@@ -9,9 +9,19 @@ import org.hibernate.Transaction;
 import javax.persistence.PersistenceException;
 import java.util.List;
 
+/**
+ * Data access object for products
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ */
 public class ProductDAO {
+    /**
+     * This handles the connections to database
+     */
     private SessionFactory sessionFactory = null;
 
+    /**
+     * Gets an instance of sessionfactory
+     */
     public ProductDAO() {
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
@@ -21,6 +31,11 @@ public class ProductDAO {
         }
     }
 
+    /**
+     * Gets a product from the database based on an id
+     * @param id identifier in string format
+     * @return a product if one is found
+     */
     public Product getProduct(String id) {
         Transaction transaction = null;
         Product product = null;
@@ -36,6 +51,10 @@ public class ProductDAO {
         return product;
     }
 
+    /**
+     * Fetches all the products in the database
+     * @return list of all the products
+     */
     public List<Product> getAllProducts() {
         Transaction transaction = null;
         List<Product> products = null;
@@ -51,6 +70,11 @@ public class ProductDAO {
         return products;
     }
 
+    /**
+     * Adds a product to the database
+     * @param product Product to be added
+     * @return true if succesfull
+     */
     public boolean addProduct(Product product) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
@@ -72,6 +96,11 @@ public class ProductDAO {
         return false;
     }
 
+    /**
+     * Updates a product in the database
+     * @param product Product to be updated
+     * @return true if succesfull
+     */
     public boolean updateProduct(Product product) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
@@ -87,6 +116,11 @@ public class ProductDAO {
         }
     }
 
+    /**
+     * Deletes a product from the database
+     * @param id identifier of the product
+     * @return true if succesfull
+     */
     public boolean deleteProduct(String id) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
