@@ -140,7 +140,9 @@ public class OptionsView {
         });
 
         this.mainApp = mainApp;
-        List<Integer> privilegesOfUser = this.mainApp.getEngine().getPrivileges().stream().map(Privilege::getPrivilegeLevelIndex).collect(Collectors.toList());
+        List<Integer> privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
+
+
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
             btn1.setDisable(true);
             btn2.setDisable(true);
