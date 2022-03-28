@@ -191,7 +191,7 @@ public class TransactionView {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        customerDAO = this.mainApp.getEngine().getCustomerDAO();
+        customerDAO = this.mainApp.getEngine().customerDAO();
         cardToggleButton.setToggleGroup(paymentButtonGroup);
         cashToggleButton.setToggleGroup(paymentButtonGroup);
         if (this.mainApp.getEngine().getTransaction() != null) {

@@ -260,7 +260,7 @@ public class POSEngine implements IPOSEngine {
      * @return customer data access object
      */
     @Override
-    public CustomerDAO getCustomerDAO() {
+    public CustomerDAO customerDAO() {
         return this.customerDAO;
     }
 
@@ -296,13 +296,6 @@ public class POSEngine implements IPOSEngine {
         return this.transactionDAO;
     }
 
-    /**
-     * @return customer data access object
-     */
-    @Override
-    public CustomerDAO customerDAO() {
-        return this.customerDAO;
-    }
 
     /**
      * Hashes the password with BCrypt
