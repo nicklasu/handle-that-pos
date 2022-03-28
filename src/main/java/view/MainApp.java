@@ -29,7 +29,7 @@ public class MainApp extends Application {
         this.stage.setMinWidth(1070);
         stage.setTitle(APP_TITLE);
         this.stage.getIcons().add(new Image("file:src/main/resources/images/pos.png"));
-
+        //Test
         //showLoginView();
         showConnectToDatabaseView();
     }
