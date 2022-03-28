@@ -41,12 +41,6 @@ public interface IPOSEngine {
     Product scanProduct(String id);
 
     /**
-     * Gets the customer data access object
-     * @return the data access object
-     */
-    CustomerDAO customerDAO();
-
-    /**
      * Finalizes the transaction and saves it to the database
      * @param printReceipt whether a receipt is to be printed or not
      */
@@ -56,7 +50,7 @@ public interface IPOSEngine {
      * Gets the customerDAO object
      * @return the data access object
      */
-    CustomerDAO getCustomerDAO();
+    CustomerDAO customerDAO();
 
     /**
      * Gets the productDAO object
