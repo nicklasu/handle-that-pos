@@ -49,6 +49,14 @@ public class MainView {
     @FXML
     private Button paymentButton;
     @FXML
+    private Button logoutButton;
+    @FXML
+    private Button settingsButton;
+    @FXML
+    private Button logoutBtn;
+    @FXML
+    private Button settingsBtn;
+    @FXML
     private ProgressBar feedbackProgressBar;
     final private ObservableList<Product> items = FXCollections.observableArrayList();
     private String productId;
@@ -244,6 +252,11 @@ public class MainView {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
         bundle = mainApp.getBundle();
+        List<Integer> privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
+        if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
+            logoutButton.setVisible(false);
+            settingsButton.setVisible(false);
+        }
         feedbackProgressBar.setVisible(false);
         mainApp.getStage().setTitle(mainApp.APP_TITLE + " - " + mainApp.getEngine().getUser().getUsername());
         hotkeyFileHandler = new HotkeyFileHandler(bundle);
@@ -283,5 +296,9 @@ public class MainView {
         barcodeTextField.requestFocus();
         BooleanBinding booleanBind = Bindings.size(items).isEqualTo(0);
         paymentButton.disableProperty().bind(booleanBind);
+        if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
+            settingsBtn.setVisible(false);
+            logoutBtn.setVisible(false);
+        }
     }
 }

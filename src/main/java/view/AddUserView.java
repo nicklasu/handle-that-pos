@@ -85,12 +85,13 @@ public class AddUserView {
                         String user = this.mainApp.getBundle().getString("user");
                         String manager = this.mainApp.getBundle().getString("manager");
                         String admin = this.mainApp.getBundle().getString("admin");
-
+                        String self_checkout = this.mainApp.getBundle().getString("self_checkout");
 
                         String pLevel = switch (p.getPrivilegeLevelIndex()) {
-                            case 0 -> user;
-                            case 1 -> manager;
-                            case 2 -> admin;
+                            case 0 -> self_checkout;
+                            case 1 -> user;
+                            case 2 -> manager;
+                            case 3 -> admin;
                             default -> throw new IllegalStateException("Unexpected value");
                         };
                         privilegeLevelChoiceBox.setValue(pLevel);
@@ -113,6 +114,9 @@ public class AddUserView {
                             privilegeLvl = PrivilegeLevel.USER;
                         }else if(pLevel.equals(this.mainApp.getBundle().getString("manager"))){
                             privilegeLvl = PrivilegeLevel.MANAGER;
+                        }
+                        else if(pLevel.equals(this.mainApp.getBundle().getString("self_checkout"))){
+                            privilegeLvl = PrivilegeLevel.SELF;
                         }
                         else if(pLevel.equals(this.mainApp.getBundle().getString("admin"))){
                             privilegeLvl = PrivilegeLevel.ADMIN;
@@ -187,6 +191,9 @@ public class AddUserView {
         }else if(pLevel.equals(this.mainApp.getBundle().getString("manager"))){
             privilegeLvl = PrivilegeLevel.MANAGER;
         }
+        else if(pLevel.equals(this.mainApp.getBundle().getString("self_checkout"))){
+            privilegeLvl = PrivilegeLevel.SELF;
+        }
         else if(pLevel.equals(this.mainApp.getBundle().getString("admin"))){
             privilegeLvl = PrivilegeLevel.ADMIN;
         }
@@ -197,11 +204,11 @@ public class AddUserView {
 
     void checkPrivilegeLevel(List<Integer> privilegeInts, ChoiceBox<String> privilegeLevel, DatePicker startDate) {
         ObservableList<String> availableChoices;
-        if(Collections.max(privilegeInts) < 2) {
-            availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString("user"), this.mainApp.getBundle().getString("manager"));
+        if(Collections.max(privilegeInts) < 3) {
+            availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString("user"), this.mainApp.getBundle().getString("manager"), this.mainApp.getBundle().getString("self_checkout"));
         }
         else {
-            availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString("user"), this.mainApp.getBundle().getString("manager"), this.mainApp.getBundle().getString("admin"));
+            availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString("user"), this.mainApp.getBundle().getString("manager"), this.mainApp.getBundle().getString("admin"), this.mainApp.getBundle().getString("self_checkout"));
         }
         privilegeLevel.setItems(availableChoices);
         privilegeLevel.setValue(this.mainApp.getBundle().getString("user"));

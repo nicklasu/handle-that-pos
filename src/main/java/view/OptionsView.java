@@ -156,7 +156,7 @@ public class OptionsView {
         List<Integer> privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
 
 
-        if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
+        if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 2) {
             btn1.setDisable(true);
             btn2.setDisable(true);
             btn3.setDisable(true);

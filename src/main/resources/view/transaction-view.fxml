@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="transactionAnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="/view/transaction-view.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TransactionView">
+<AnchorPane fx:id="transactionAnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="/view/transaction-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TransactionView">
     <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <rowConstraints>
             <RowConstraints maxHeight="783.0" minHeight="240.0" prefHeight="577.0" />
@@ -26,7 +36,7 @@
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
            </rowConstraints>
             <children>
-                  <Button mnemonicParsing="false" onAction="#loadMainView" prefHeight="100.0" prefWidth="200.0" styleClass="bold_button" stylesheets="@main-view.css" text="Peruuta">
+                  <Button mnemonicParsing="false" onAction="#loadMainView" prefHeight="100.0" prefWidth="200.0" styleClass="bold_button" stylesheets="@main-view.css" text="%cancel">
                   <GridPane.margin>
                      <Insets left="20.0" />
                   </GridPane.margin>
@@ -40,7 +50,7 @@
          </GridPane>
         </AnchorPane>
         <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
-            <Button mnemonicParsing="false" onAction="#confirmPayment" prefHeight="100.0" prefWidth="200.0" styleClass="bold_button" stylesheets="@main-view.css" text="Vahvista" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+            <Button mnemonicParsing="false" onAction="#confirmPayment" prefHeight="100.0" prefWidth="200.0" styleClass="bold_button" stylesheets="@main-view.css" text="%confirmationString" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
         </AnchorPane>
         <GridPane GridPane.columnIndex="1">
             <columnConstraints>
@@ -59,7 +69,7 @@
                     <RowConstraints maxHeight="137.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
                     <RowConstraints maxHeight="284.0" minHeight="10.0" prefHeight="172.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-            <Label text="Maksutapa:">
+            <Label text="%paymentmethod">
                <font>
                   <Font size="19.0" />
                </font>
@@ -72,7 +82,7 @@
                   <Insets left="100.0" />
                </GridPane.margin>
             </Label>
-            <ToggleButton fx:id="cardToggleButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#selectCard" prefHeight="173.0" prefWidth="220.0" styleClass="button" stylesheets="@main-view.css" text="Maksukortti" GridPane.rowIndex="1">
+            <ToggleButton fx:id="cardToggleButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#selectCard" prefHeight="173.0" prefWidth="220.0" styleClass="button" stylesheets="@main-view.css" text="%creditcard" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="138.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -80,7 +90,7 @@
                      </image>
                   </ImageView>
                </graphic></ToggleButton>
-            <ToggleButton fx:id="cashToggleButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#selectCash" prefHeight="171.0" prefWidth="223.0" styleClass="button" stylesheets="@main-view.css" text="Käteinen" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ToggleButton fx:id="cashToggleButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#selectCash" prefHeight="171.0" prefWidth="223.0" styleClass="button" stylesheets="@main-view.css" text="%cash" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="114.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -103,11 +113,11 @@
                     <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
                <RowConstraints maxHeight="68.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kuitin tulostus" GridPane.rowIndex="1">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%printreceipt" GridPane.rowIndex="1">
                <font>
                   <Font size="19.0" />
                </font></Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Asiakas on bonusasiakas">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%customerisbonus">
                <font>
                   <Font size="19.0" />
                </font></Text>
@@ -134,7 +144,7 @@
             <GridPane.margin>
                <Insets left="20.0" />
             </GridPane.margin></ListView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tilauksen tuotteet:">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%ordersproducts">
             <font>
                <Font size="19.0" />
             </font>

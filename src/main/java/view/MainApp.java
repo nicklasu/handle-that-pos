@@ -7,8 +7,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.interfaces.IPOSEngine;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class MainApp extends Application {
@@ -31,6 +32,24 @@ public class MainApp extends Application {
 
     @Override
     public void init() {
+        File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
+        Properties properties = new Properties();
+        try {
+            FileReader reader = new FileReader(appConfigPath);
+            properties.load(reader);
+            language = properties.getProperty("language");
+            country = properties.getProperty("country");
+            reader.close();
+        } catch (IOException e) {
+            try {
+                FileWriter writer = new FileWriter(appConfigPath);
+                properties.setProperty("language", "");
+                properties.setProperty("country", "");
+                properties.store(writer, "HandleThatPos settings");
+                writer.close();
+            } catch (Exception ignored) {
+            }
+        }
         this.locale = new Locale(language, country);
         Locale.setDefault(locale);
         this.bundle = ResourceBundle.getBundle("TextResources", locale);
@@ -114,6 +133,7 @@ public class MainApp extends Application {
     public void showTransactionView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("transaction-view.fxml"));
+            fxmlLoader.setResources(this.bundle);
             Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
             TransactionView transactionView = fxmlLoader.getController();
@@ -132,7 +152,9 @@ public class MainApp extends Application {
         this.engine = engine;
     }
 
-    public Stage getStage() { return this.stage; }
+    public Stage getStage() {
+        return this.stage;
+    }
 
     public Locale getLocale() {
         return locale;
