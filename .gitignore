@@ -2,4 +2,5 @@ target/
 **/.idea/workspace.xml
 **/.idea/tasks.xml
 src/main/resources/hotkey.properties
+src/main/resources/HandleThatPos.properties
 documents/
