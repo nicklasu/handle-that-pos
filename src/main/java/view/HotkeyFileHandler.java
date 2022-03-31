@@ -22,7 +22,7 @@ public class HotkeyFileHandler extends MainView {
      */
     void saveHotkeys(String[] hotkeyProductIds, String[] hotkeyProductNames) {
         try {
-            File configFile = new File("hotkey.properties");
+            File configFile = new File("src/main/resources/hotkey.properties");
             Properties props = new Properties();
             for (int i = 0; i < hotkeyProductIds.length; i++) {
                 props.setProperty("hotkeyId" + i, String.valueOf(hotkeyProductIds[i]));
@@ -45,7 +45,7 @@ public class HotkeyFileHandler extends MainView {
      */
     void loadHotkeys(String[] hotkeyProductIds, String[] hotkeyProductNames) {
         try {
-            File configFile = new File("hotkey.properties");
+            File configFile = new File("src/main/resources/hotkey.properties");
             FileReader reader = new FileReader(configFile);
             Properties props = new Properties();
             props.load(reader);

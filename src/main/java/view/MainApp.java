@@ -7,8 +7,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.interfaces.IPOSEngine;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class MainApp extends Application {
@@ -19,8 +20,8 @@ public class MainApp extends Application {
     private IPOSEngine engine;
     private final String[] hotkeyProductNames = new String[9];
 
-    private String language = "FI";
-    private String country = "fi";
+    private String language;
+    private String country;
 
     private Locale locale;
     private ResourceBundle bundle;
@@ -31,6 +32,17 @@ public class MainApp extends Application {
 
     @Override
     public void init() {
+        File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
+        Properties properties = new Properties();
+        try {
+            FileReader reader = new FileReader(appConfigPath);
+            properties.load(reader);
+            language = properties.getProperty("language");
+            country = properties.getProperty("country");
+        } catch (Exception e) {
+            //System.exit(0);
+        }
+        System.out.println(language + country);
         this.locale = new Locale(language, country);
         Locale.setDefault(locale);
         this.bundle = ResourceBundle.getBundle("TextResources", locale);
@@ -133,7 +145,9 @@ public class MainApp extends Application {
         this.engine = engine;
     }
 
-    public Stage getStage() { return this.stage; }
+    public Stage getStage() {
+        return this.stage;
+    }
 
     public Locale getLocale() {
         return locale;
