@@ -20,8 +20,8 @@ public class MainApp extends Application {
     private IPOSEngine engine;
     private final String[] hotkeyProductNames = new String[9];
 
-    private String language;
-    private String country;
+    private String language = "";
+    private String country = "";
 
     private Locale locale;
     private ResourceBundle bundle;
@@ -39,10 +39,8 @@ public class MainApp extends Application {
             properties.load(reader);
             language = properties.getProperty("language");
             country = properties.getProperty("country");
-        } catch (Exception e) {
-            //System.exit(0);
+        } catch (Exception ignored) {
         }
-        System.out.println(language + country);
         this.locale = new Locale(language, country);
         Locale.setDefault(locale);
         this.bundle = ResourceBundle.getBundle("TextResources", locale);
