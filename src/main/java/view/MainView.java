@@ -296,12 +296,9 @@ public class MainView {
         barcodeTextField.requestFocus();
         BooleanBinding booleanBind = Bindings.size(items).isEqualTo(0);
         paymentButton.disableProperty().bind(booleanBind);
-
-
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
             settingsBtn.setVisible(false);
             logoutBtn.setVisible(false);
         }
-
     }
 }
