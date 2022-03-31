@@ -111,4 +111,6 @@ public interface IPOSEngine {
      * @param user the user to be updated
      */
     void updateUser(User user);
+
+    ProfileDAO profileDAO();
 }
