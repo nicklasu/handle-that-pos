@@ -8,16 +8,32 @@ import javafx.stage.Stage;
 import model.interfaces.IPOSEngine;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MainApp extends Application {
 
-    public static String APP_TITLE = "Handle that POS";
+    public static final String APP_TITLE = "Handle that POS";
 
     private Stage stage;
     private IPOSEngine engine;
     private final String[] hotkeyProductNames = new String[9];
+
+    private String language = "fi";
+    private String country = "FI";
+
+    private Locale locale;
+    private ResourceBundle bundle;
+
     public MainApp() {
         //this.engine = new POSEngine();
+    }
+
+    @Override
+    public void init() {
+        this.locale = new Locale(language, country);
+        Locale.setDefault(locale);
+        this.bundle = ResourceBundle.getBundle("TextResources", locale);
     }
 
     @Override
@@ -43,6 +59,7 @@ public class MainApp extends Application {
     private void showConnectToDatabaseView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("connect-database-view.fxml"));
+            fxmlLoader.setResources(this.bundle);
             Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
             ConnectDatabaseView connectDatabaseView = fxmlLoader.getController();
@@ -114,6 +131,22 @@ public class MainApp extends Application {
     }
 
     public Stage getStage() { return this.stage; }
+
+    public Locale getLocale() {
+        return locale;
+    }
+
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+    }
+
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
 
     public static void main(String[] args) {
         launch();
