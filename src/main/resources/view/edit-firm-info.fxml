@@ -27,28 +27,28 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="Yrityksen osoite" GridPane.rowIndex="2">
+            <Label text="%address" GridPane.rowIndex="2">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <Label stylesheets="@main-view.css" text="Puhelin" GridPane.rowIndex="6" />
-            <Label stylesheets="@main-view.css" text="Yrityksen nimi" />
+            <Label stylesheets="@main-view.css" text="%phone" GridPane.rowIndex="6" />
+            <Label stylesheets="@main-view.css" text="%companyName" />
 
-            <Button mnemonicParsing="false" onAction="#updateInfo" stylesheets="@main-view.css" text="Tallenna" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Button mnemonicParsing="false" onAction="#updateInfo" stylesheets="@main-view.css" text="%saveCompanyInfo" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
             <TextField fx:id="firmNameTF" GridPane.columnIndex="1" />
             <TextField fx:id="addressTF" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="phoneNumberTF" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label stylesheets="@main-view.css" text="Katu" GridPane.rowIndex="5" />
-            <Label stylesheets="@main-view.css" text="Postinumero" GridPane.rowIndex="3" />
+            <Label stylesheets="@main-view.css" text="%street" GridPane.rowIndex="5" />
+            <Label stylesheets="@main-view.css" text="%postalCode" GridPane.rowIndex="3" />
             <TextField fx:id="addressTF1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label stylesheets="@main-view.css" text="Kaupunki" GridPane.rowIndex="4" />
+            <Label stylesheets="@main-view.css" text="%city" GridPane.rowIndex="4" />
             <TextField fx:id="addressTF11" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="firmNameTF1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label stylesheets="@main-view.css" text="Y-tunnus" GridPane.rowIndex="1" />
+            <Label stylesheets="@main-view.css" text="%businessID" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Label layoutX="14.0" layoutY="10.0" styleClass="bold_label" stylesheets="@main-view.css" text="Muokkaa yrityksen tiedot">
+      <Label layoutX="14.0" layoutY="10.0" styleClass="bold_label" stylesheets="@main-view.css" text="%companyInfo">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

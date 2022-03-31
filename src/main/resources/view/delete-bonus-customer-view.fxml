@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DeleteBonusCustomerView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DeleteBonusCustomerView">
    <children>
       <GridPane layoutX="14.0" layoutY="19.0" prefHeight="363.0" prefWidth="377.0">
          <columnConstraints>
@@ -20,13 +26,13 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label fx:id="bonusCustomerLabel" text="Bonusasiakasnumero" />
+            <Label fx:id="bonusCustomerLabel" text="%bonusCustomerNumber" />
             <TextField fx:id="bonusCustomerId" GridPane.columnIndex="1" />
-            <Button fx:id="addBonusBtn" mnemonicParsing="false" onAction="#deleteBonusCustomer" text="Poista" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Syötä bonusasiakas, minkä haluat poistaa kenttään. Paina poista-painiketta poistaaksesi bonusasiakkaan." wrappingWidth="186.14453125" GridPane.rowIndex="1" />
+            <Button fx:id="addBonusBtn" mnemonicParsing="false" onAction="#deleteBonusCustomer" text="%deleteBonusCustomerBtn" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%bonusCustomerDeleteInfo" wrappingWidth="186.14453125" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Label layoutX="14.0" layoutY="11.0" text="Poista bonusasiakas">
+      <Label layoutX="14.0" layoutY="11.0" text="%deleteBonusCustomer">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

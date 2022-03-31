@@ -26,6 +26,7 @@ public class BonusCustomerManagementView {
         try {
             this.loader = new FXMLLoader();
             this.loader.setLocation(getClass().getResource("add-bonus-customer-view.fxml"));
+            this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane = this.loader.load();
             AddBonusCustomerView view = this.loader.getController();
             view.setMainApp(mainApp);
@@ -41,6 +42,7 @@ public class BonusCustomerManagementView {
         try {
             this.loader = new FXMLLoader();
             this.loader.setLocation(getClass().getResource("delete-bonus-customer-view.fxml"));
+            this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane = this.loader.load();
             DeleteBonusCustomerView view = this.loader.getController();
             view.setMainApp(mainApp);
