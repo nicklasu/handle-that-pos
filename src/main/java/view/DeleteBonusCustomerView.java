@@ -6,9 +6,11 @@ import javafx.scene.control.TextField;
 import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class DeleteBonusCustomerView {
     private MainApp mainApp;
+    private ResourceBundle bundle;
 
     @FXML
     private TextField bonusCustomerId;
@@ -24,20 +26,21 @@ public class DeleteBonusCustomerView {
 
     @FXML
     private void deleteBonusCustomer() {
+        bundle = mainApp.getBundle();
         try {
             String text = bonusCustomerId.getText();
             this.mainApp.getEngine().customerDAO().deleteCustomer(this.mainApp.getEngine().customerDAO().getCustomer(Integer.parseInt(text)));
             Notifications.create()
                     .owner(bonusCustomerId.getScene().getWindow())
                     .title("")
-                    .text("Bonusasiakas poistettu.")
+                    .text(bundle.getString("bonusCustomerDeleted"))
                     .position(Pos.TOP_RIGHT)
                     .showConfirm();
         } catch (Exception e) {
             Notifications.create()
                     .owner(bonusCustomerId.getScene().getWindow())
-                    .title("Virhe")
-                    .text("Bonusasiakasta ei löydy!")
+                    .title(bundle.getString("errorString"))
+                    .text(bundle.getString("bonusCustomerError"))
                     .position(Pos.TOP_RIGHT)
                     .showError();
         }
