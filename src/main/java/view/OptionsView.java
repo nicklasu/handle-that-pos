@@ -102,6 +102,7 @@ public class OptionsView {
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("products-search-view.fxml"));
+                this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane = this.loader.load();
                 ProductSearchView view = this.loader.getController();
                 view.setMainApp(mainApp);
@@ -117,6 +118,7 @@ public class OptionsView {
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("bonus-customer-management-view.fxml"));
+                this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane = this.loader.load();
                 BonusCustomerManagementView view = this.loader.getController();
                 view.setMainApp(mainApp);
@@ -131,6 +133,7 @@ public class OptionsView {
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("edit-firm-info.fxml"));
+                this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane = this.loader.load();
                 EditFirmInfoView view = this.loader.getController();
                 view.setMainApp(mainApp);
