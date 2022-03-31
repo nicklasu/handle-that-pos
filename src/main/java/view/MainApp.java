@@ -19,8 +19,8 @@ public class MainApp extends Application {
     private IPOSEngine engine;
     private final String[] hotkeyProductNames = new String[9];
 
-    private String language = "en";
-    private String country = "US";
+    private String language = "FI";
+    private String country = "fi";
 
     private Locale locale;
     private ResourceBundle bundle;
@@ -73,6 +73,7 @@ public class MainApp extends Application {
     public void showMainView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("main-view.fxml"));
+            fxmlLoader.setResources(this.bundle);
             Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
             MainView mainView = fxmlLoader.getController();
@@ -99,7 +100,6 @@ public class MainApp extends Application {
     public void showOptionsView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("options-view.fxml"));
-            fxmlLoader.setResources(this.getBundle());
             Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
             OptionsView optionsView = fxmlLoader.getController();
