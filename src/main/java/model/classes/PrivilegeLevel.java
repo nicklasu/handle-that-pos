@@ -5,5 +5,5 @@ package model.classes;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
  */
 public enum PrivilegeLevel {
-    USER, MANAGER, ADMIN
+    SELF, USER, MANAGER, ADMIN
 }

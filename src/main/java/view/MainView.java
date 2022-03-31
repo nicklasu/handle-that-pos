@@ -53,6 +53,10 @@ public class MainView {
     @FXML
     private Button settingsButton;
     @FXML
+    private Button logoutBtn;
+    @FXML
+    private Button settingsBtn;
+    @FXML
     private ProgressBar feedbackProgressBar;
     final private ObservableList<Product> items = FXCollections.observableArrayList();
     private String productId;
@@ -292,5 +296,12 @@ public class MainView {
         barcodeTextField.requestFocus();
         BooleanBinding booleanBind = Bindings.size(items).isEqualTo(0);
         paymentButton.disableProperty().bind(booleanBind);
+
+
+        if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
+            settingsBtn.setVisible(false);
+            logoutBtn.setVisible(false);
+        }
+
     }
 }
