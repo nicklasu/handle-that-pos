@@ -19,8 +19,8 @@ public class MainApp extends Application {
     private IPOSEngine engine;
     private final String[] hotkeyProductNames = new String[9];
 
-    private String language = "FI";
-    private String country = "fi";
+    private String language = "";
+    private String country = "";
 
     private Locale locale;
     private ResourceBundle bundle;

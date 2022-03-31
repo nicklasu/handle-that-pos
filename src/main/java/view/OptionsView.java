@@ -12,9 +12,11 @@ import javafx.scene.text.Text;
 import model.classes.Privilege;
 import model.classes.User;
 
+import java.util.*;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 public class OptionsView {
@@ -44,6 +46,10 @@ public class OptionsView {
     @FXML
     Pane wrapperPane = new Pane();
     private FXMLLoader loader;
+    private ResourceBundle bundle;
+
+    public OptionsView() {
+    }
 
     public void loadMainView(ActionEvent event) throws IOException {
         this.loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
@@ -166,12 +172,10 @@ public class OptionsView {
 
     @FXML
     public void showHelp() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Valitse tarvittava toiminto listasta vasemmalla." +
-                "\n\nTuotteiden lisääminen: Valitse 'Tuotteiden hallinta' välilehti. Klikkaa ”Lisää tuote” -painiketta ja syötä tuotteen tiedot. Varmista, että tuotteen viivakoodi on ainutlaatuinen. Napsauttaa ”Tallenna”, kun olet valmis." +
-                "\n\nTuotteen poistaminen: Valitse 'Tuotteiden hallinta', sitten 'Poista tuote'. Syötä poistettavan tuotteen tunnus ja napsauta 'Poista'. " +
-                "\n\nTuotteen muokkaus: Valitse joko 'Tuotteiden haku', sitten valitse muokattava tuote kaksoisklikkaamalla sitä. Syötä tuotteen uudet tiedot ja klikkaa ”Muokkaa”. Tai avaa 'Tuotteiden hallinta' välilehti. Valitse ”Muokkaa tuote”. Syötä muokattavan tuotteen viivakoodi ja napsauta ”Hae”. Syötä tuotteen uudet tiedot ja klikkaa ”Muokkaa”.", ButtonType.CLOSE);
-        alert.setTitle("Ohje");
-        alert.setHeaderText("Ohje");
+        bundle = mainApp.getBundle();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, bundle.getString("optionsViewHelpString"), ButtonType.CLOSE);
+        alert.setTitle(bundle.getString("helpString"));
+        alert.setHeaderText(bundle.getString("helpString"));
         alert.showAndWait();
     }
 }

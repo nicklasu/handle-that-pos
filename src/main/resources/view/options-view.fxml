@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="transactionAnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="/view/options-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.OptionsView">
+<AnchorPane fx:id="transactionAnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="/view/options-view.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.OptionsView">
     <GridPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <rowConstraints>
             <RowConstraints maxHeight="846.0" minHeight="240.0" prefHeight="580.0" />
@@ -150,9 +150,9 @@
         </Pane>
         <Pane fx:id="wrapperPane" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
             <children>
-                <Text layoutX="62.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valitse toiminto listasta vasemmalla">
+                <Text layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%optionsViewNothingSelected" textAlignment="CENTER" wrappingWidth="720.0">
                <font>
-                  <Font size="38.0" />
+                  <Font size="32.0" />
                </font></Text>
             </children>
         </Pane>
@@ -165,7 +165,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-              <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#loadMainView" prefHeight="100.0" prefWidth="200.0" styleClass="bold_button" stylesheets="@main-view.css" text="Takaisin">
+              <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#loadMainView" prefHeight="100.0" prefWidth="200.0" styleClass="bold_button" stylesheets="@main-view.css" text="%backToMain">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
