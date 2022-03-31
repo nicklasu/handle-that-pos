@@ -53,6 +53,8 @@ public class MainView {
     @FXML
     private Button settingsBtn;
     @FXML
+    private Label selfcheckoutlabel;
+    @FXML
     private ProgressBar feedbackProgressBar;
     final private ObservableList<Product> items = FXCollections.observableArrayList();
     private String productId;
@@ -248,6 +250,7 @@ public class MainView {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+        selfcheckoutlabel.setVisible(false);
         bundle = mainApp.getBundle();
         feedbackProgressBar.setVisible(false);
         mainApp.getStage().setTitle(mainApp.APP_TITLE + " - " + mainApp.getEngine().getUser().getUsername());
@@ -292,6 +295,7 @@ public class MainView {
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
             settingsBtn.setVisible(false);
             logoutBtn.setVisible(false);
+            selfcheckoutlabel.setVisible(true);
         }
     }
 }

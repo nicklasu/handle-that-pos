@@ -140,6 +140,11 @@
                         </ImageView>
                     </graphic>
                 </Button>
+            <Label fx:id="selfcheckoutlabel" layoutX="27.0" layoutY="55.0" text="%selfcheckout_label" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="178.0" GridPane.columnIndex="1">
                 <Button layoutX="47.0" layoutY="62.0" mnemonicParsing="false" onAction="#showHelp" prefHeight="118.0" prefWidth="129.0" styleClass="question_button" stylesheets="@main-view.css" text="?" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" />
