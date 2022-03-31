@@ -39,7 +39,16 @@ public class MainApp extends Application {
             properties.load(reader);
             language = properties.getProperty("language");
             country = properties.getProperty("country");
-        } catch (Exception ignored) {
+            reader.close();
+        } catch (IOException e) {
+            try {
+                FileWriter writer = new FileWriter(appConfigPath);
+                properties.setProperty("language", "");
+                properties.setProperty("country", "");
+                properties.store(writer, "HandleThatPos settings");
+                writer.close();
+            } catch (Exception ignored) {
+            }
         }
         this.locale = new Locale(language, country);
         Locale.setDefault(locale);
