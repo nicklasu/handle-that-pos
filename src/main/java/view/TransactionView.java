@@ -15,6 +15,7 @@ import model.classes.*;
 import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -49,36 +50,28 @@ public class TransactionView {
     private volatile AtomicBoolean customerKeyPressed = new AtomicBoolean(false);
 
     @FXML
-    public void loadMainView() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-view.fxml"));
-        fxmlLoader.setResources(mainApp.getBundle());
-        new ViewLoader(transactionAnchorPane, fxmlLoader.load());
-        ((MainView) fxmlLoader.getController()).setMainApp(this.mainApp);
-    }
-
-    @FXML
     private void confirmPayment() {
         try {
             if (this.mainApp.getEngine().getTransaction().getCustomer() == null && bonusCustomerCheckBox.isSelected()) {
                 if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) != null) {
                     this.mainApp.getEngine().getTransaction().setCustomer(customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
                     this.mainApp.getEngine().confirmTransaction(printReceipt);
-                    loadMainView();
+                    this.mainApp.showMainView();
                 } else {
                     Notifications.create()
                             .owner(transactionAnchorPane.getScene().getWindow())
-                            .title("Virhe")
-                            .text("Asiakasta ei löydy!")
+                            .title(this.mainApp.getBundle().getString("errorString"))
+                            .text(this.mainApp.getBundle().getString("customernotfound"))
                             .position(Pos.TOP_RIGHT)
                             .showError();
                 }
             } else {
                 this.mainApp.getEngine().confirmTransaction(printReceipt);
-                loadMainView();
+                this.mainApp.showMainView();
             }
         } catch (Exception e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Ei tuotteita tilauksessa!", ButtonType.CLOSE);
+            Alert alert = new Alert(Alert.AlertType.ERROR, this.mainApp.getBundle().getString("noproductsinorder"), ButtonType.CLOSE);
             alert.showAndWait();
         }
     }
@@ -87,6 +80,14 @@ public class TransactionView {
     private void confirmReceipt() {
         printReceipt = receiptCheckBox.isSelected();
         System.out.println(printReceipt);
+    }
+
+    private String generateOverviewText() {
+        return MessageFormat.format(this.mainApp.getBundle().getString("transactionoverviewtext") + "€", this.mainApp.getEngine().getTransaction().getOrder().getProductList().size(), (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))));
+    }
+
+    private String generateProductInfoText(Product product) {
+        return MessageFormat.format(this.mainApp.getBundle().getString("productinfo"), product.getId(), product.getDescription(), String.format("%.2f", (product.getPrice() / 100f)), product.getStock());
     }
 
     @FXML
@@ -105,19 +106,18 @@ public class TransactionView {
                                 if (this.mainApp.getEngine().getTransaction() != null) {
                                     if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) != null && !Objects.equals(customerTextField.getText(), "")) {
                                         this.mainApp.getEngine().getTransaction().setCustomer(customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
-                                        String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotetta hintaan " + (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))) + "€";
-                                        transactionOverviewLabel.setText(overviewText);
+                                        transactionOverviewLabel.setText(generateOverviewText());
                                         Notifications.create()
                                                 .owner(transactionAnchorPane.getScene().getWindow())
-                                                .title("Tieto")
-                                                .text("Asiakas löytyi.")
+                                                .title(this.mainApp.getBundle().getString("info"))
+                                                .text(this.mainApp.getBundle().getString("customerfound"))
                                                 .position(Pos.TOP_RIGHT)
                                                 .showConfirm();
                                     } else {
                                         Notifications.create()
                                                 .owner(transactionAnchorPane.getScene().getWindow())
-                                                .title("Virhe")
-                                                .text("Asiakasta ei löydy!")
+                                                .title(this.mainApp.getBundle().getString("errorString"))
+                                                .text(this.mainApp.getBundle().getString("customernotfound"))
                                                 .position(Pos.TOP_RIGHT)
                                                 .showError();
                                     }
@@ -182,9 +182,9 @@ public class TransactionView {
 
     private void setPaymentMethodLabelText(PaymentMethod paymentMethod) {
         if (paymentMethod == PaymentMethod.CARD) {
-            paymentMethodLabel.setText("Maksukortti");
+            paymentMethodLabel.setText(this.mainApp.getBundle().getString("creditcard"));
         } else if (paymentMethod == PaymentMethod.CASH) {
-            paymentMethodLabel.setText("Käteinen");
+            paymentMethodLabel.setText(this.mainApp.getBundle().getString("cash"));
         } else {
             paymentMethodLabel.setText("");
         }
@@ -206,8 +206,7 @@ public class TransactionView {
 
             scanListView.setItems(items);
             scanListView.setCellFactory(productListView -> new ListCellTransaction());
-            String overviewText = "Tilauksessa " + this.mainApp.getEngine().getTransaction().getOrder().getProductList().size() + " tuotetta hintaan " + (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))) + "€";
-            transactionOverviewLabel.setText(overviewText);
+            transactionOverviewLabel.setText(generateOverviewText());
             setPaymentMethodLabelText(this.mainApp.getEngine().getTransaction().getPaymentMethod());
         }
         // scanListView.setItems(items);
@@ -216,7 +215,7 @@ public class TransactionView {
                 Product product = scanListView.getSelectionModel().getSelectedItem();
                 Dialog<Void> dialog = new Dialog<>();
                 dialog.setTitle(product.getName());
-                dialog.setHeaderText("ID: " + product.getId() + "\n" + "Kuvaus: " + product.getDescription() + "\nHinta: " + String.format("%.2f", (product.getPrice() / 100f)) + "€" + " per kpl" + "\nVarastomäärä: " + product.getStock());
+                dialog.setHeaderText(generateProductInfoText(product));
                 dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
                 dialog.showAndWait();
             } catch (Exception ignored) {
@@ -231,9 +230,9 @@ public class TransactionView {
 
     @FXML
     public void showHelp() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Kuitin tulostaminen: \nVoit halutessasi tulostaa kuitin rastittamalla ”Kuitin tulostus”-valintaruudun. Napsautettuasi ”Vahvista” painikketta, voit valita, mitä tulostinta käytetään. \n\nMaksutavan valinta: \nValitse maksutapa klikkaamalla joko ”Maksukortti” tai ”Käteinen”. Oletusmaksutapa on maksukortti. \n\nBonusasiakkuuden valinta: \nBonusasiakkuuden valinta tapahtuu ”Bonusasiakas”-valintaruudun rastittamisen jälkeen. \nSyötä ilmestyvään kenttään bonusasiakkaan numero, ja asiakkuuden tulisi aktivoitua n. 2 sekunnin odottamisen jälkeen.", ButtonType.CLOSE);
-        alert.setTitle("Ohje");
-        alert.setHeaderText("Ohje");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, this.mainApp.getBundle().getString("transactionviewhelp"), ButtonType.CLOSE);
+        alert.setTitle(this.mainApp.getBundle().getString("helpString"));
+        alert.setHeaderText(this.mainApp.getBundle().getString("helpString"));
         alert.showAndWait();
     }
 }

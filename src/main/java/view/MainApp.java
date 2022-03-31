@@ -114,6 +114,7 @@ public class MainApp extends Application {
     public void showTransactionView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("transaction-view.fxml"));
+            fxmlLoader.setResources(this.bundle);
             Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
             TransactionView transactionView = fxmlLoader.getController();
