@@ -41,9 +41,9 @@
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Haku" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%search" GridPane.rowIndex="1" />
                   <TextField fx:id="searchField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onAction="#searchUser" text="Hae" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#searchUser" text="%get" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <GridPane prefHeight="264.0" prefWidth="646.0" GridPane.rowIndex="1">
@@ -69,10 +69,10 @@
                         <Insets left="20.0" right="20.0" />
                      </GridPane.margin>
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Aktiivinen työntekijä:" GridPane.rowIndex="2" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nimi:" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%active_user" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%first_name" />
                         <CheckBox fx:id="activity" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sukunimi:" GridPane.rowIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%last_name" GridPane.rowIndex="1" />
                         <Text fx:id="fName" strokeType="OUTSIDE" strokeWidth="0.0" text="Nimi" GridPane.columnIndex="1" />
                         <Text fx:id="lName" strokeType="OUTSIDE" strokeWidth="0.0" text="Sukunimi" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
@@ -93,7 +93,7 @@
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
             </ListView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ostopäätetapahtumat" GridPane.rowIndex="2">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%transactions" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="30.0" />
                </GridPane.margin>

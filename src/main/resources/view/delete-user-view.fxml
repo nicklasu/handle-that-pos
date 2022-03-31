@@ -23,12 +23,12 @@
             <RowConstraints maxHeight="368.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#deleteUser" styleClass="delete_button" stylesheets="@products-view.css" text="Poista" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#deleteUser" styleClass="delete_button" stylesheets="@products-view.css" text="%delete" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="userName" GridPane.columnIndex="1" />
-            <Label stylesheets="@main-view.css" text="Käyttäjänimi" />
+            <Label stylesheets="@main-view.css" text="%username" />
          </children>
       </GridPane>
-      <Label layoutX="14.0" layoutY="10.0" styleClass="bold_label" stylesheets="@main-view.css" text="Poista käyttäjä">
+      <Label layoutX="14.0" layoutY="10.0" styleClass="bold_label" stylesheets="@main-view.css" text="%delete_user">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

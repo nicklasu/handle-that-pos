@@ -29,6 +29,7 @@ public class UserManagementView {
         try {
             this.loader = new FXMLLoader();
             this.loader.setLocation(getClass().getResource("add-user-view.fxml"));
+            this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane = this.loader.load();
             AddUserView view = this.loader.getController();
             view.setMainApp(mainApp);
@@ -50,6 +51,7 @@ public class UserManagementView {
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("delete-user-view.fxml"));
+                this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane2 = this.loader.load();
                 DeleteUserView view = this.loader.getController();
                 view.setMainApp(mainApp);
@@ -71,6 +73,7 @@ public class UserManagementView {
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("edit-user-view.fxml"));
+                this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane3 = this.loader.load();
                 EditUserView view = this.loader.getController();
                 view.setMainApp(mainApp);
