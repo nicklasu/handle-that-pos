@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import model.classes.POSEngine;
 import model.interfaces.IPOSEngine;
 
 import java.io.IOException;
@@ -17,7 +16,6 @@ public class MainApp extends Application {
     private Stage stage;
     private IPOSEngine engine;
     private final String[] hotkeyProductNames = new String[9];
-
     public MainApp() {
         //this.engine = new POSEngine();
     }
