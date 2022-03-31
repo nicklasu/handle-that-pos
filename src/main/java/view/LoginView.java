@@ -6,7 +6,7 @@ import javafx.scene.input.KeyCode;
 
 public class LoginView {
     //Prefills the username field and password field with the manager's username and password
-    private boolean DEBUG_MODE = true;
+    private boolean DEV_MODE = true;
 
     private MainApp mainApp;
 
@@ -18,9 +18,9 @@ public class LoginView {
     private PasswordField passwordPasswordField;
 
     public void setMainApp(MainApp mainApp) {
-        devLabel.setVisible(DEBUG_MODE);
+        devLabel.setVisible(DEV_MODE);
         //Prefills the username field and password field with the manager's username and password
-        if(DEBUG_MODE) {
+        if(DEV_MODE) {
             usernameTextField.setText("testuser");
             passwordPasswordField.setText("123");
         }
