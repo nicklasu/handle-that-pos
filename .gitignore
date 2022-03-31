@@ -1,5 +1,5 @@
 target/
 **/.idea/workspace.xml
 **/.idea/tasks.xml
-hotkey.properties
+src/main/resources/hotkey.properties
 documents/
