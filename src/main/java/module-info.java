@@ -10,7 +10,7 @@ module com.example.handlethatpos {
     requires java.xml.bind;
     requires bcrypt;
     requires java.desktop;
-
+    requires javafx.swing;
     exports view;
     opens model.classes;
     opens view;

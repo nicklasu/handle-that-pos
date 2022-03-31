@@ -56,6 +56,9 @@ public class POSEngine implements IPOSEngine {
     @Transient
     private ProductDAO productDAO;
 
+    @Transient
+    private ProfileDAO profileDAO;
+
     /**
      * Data access object for transactions
      */
@@ -97,6 +100,7 @@ public class POSEngine implements IPOSEngine {
         this.customerDAO = new CustomerDAO();
         this.privilegeDAO = new PrivilegeDAO();
         this.ped = new POSEngineDAO();
+        this.profileDAO = new ProfileDAO();
         this.id = HWID.getHWID();
     }
 
@@ -264,6 +268,8 @@ public class POSEngine implements IPOSEngine {
         return this.customerDAO;
     }
 
+    @Override
+    public ProfileDAO profileDAO() {return this.profileDAO;}
     /**
      * @return product data access object
      */
