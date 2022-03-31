@@ -51,6 +51,7 @@ public class TransactionView {
     @FXML
     public void loadMainView() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-view.fxml"));
+        fxmlLoader.setResources(mainApp.getBundle());
         new ViewLoader(transactionAnchorPane, fxmlLoader.load());
         ((MainView) fxmlLoader.getController()).setMainApp(this.mainApp);
     }

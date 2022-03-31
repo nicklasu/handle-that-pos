@@ -47,6 +47,7 @@ public class OptionsView {
 
     public void loadMainView(ActionEvent event) throws IOException {
         this.loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
+        this.loader.setResources(mainApp.getBundle());
         new ViewLoader(transactionAnchorPane, this.loader.load());
         ((MainView) this.loader.getController()).setMainApp(this.mainApp);
     }
