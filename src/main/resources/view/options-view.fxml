@@ -2,14 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
@@ -61,93 +56,13 @@
                 <Button fx:id="btn1" mnemonicParsing="false" prefHeight="50.0" prefWidth="654.0" styleClass="settings_button" stylesheets="@main-view.css" text="%search_users" GridPane.rowIndex="6" />
                 <Button fx:id="btn2" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="%manage_products" />
                 <Button fx:id="btn3" mnemonicParsing="false" prefHeight="50.0" prefWidth="654.0" styleClass="settings_button" stylesheets="@main-view.css" text="%manage_users" GridPane.rowIndex="5" />
-                <Button fx:id="btn4" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="Tuotteiden haku" GridPane.rowIndex="9" />
-                <Button fx:id="btn5" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="Bonusasiakkaiden hallinta" wrapText="true" GridPane.rowIndex="10" />
-            <Button fx:id="btn6" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="Yrityksen tiedot" wrapText="true" GridPane.rowIndex="12" />
+                <Button fx:id="btn4" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="%productSearch" GridPane.rowIndex="9" />
+                <Button fx:id="btn5" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="%bonusCustomerManagement" wrapText="true" GridPane.rowIndex="10" />
+            <Button fx:id="btn6" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="%companyInformation" wrapText="true" GridPane.rowIndex="12" />
 
             </children>
         </GridPane>
-        <Pane fx:id="wrapperPane1" prefHeight="200.0" prefWidth="200.0" stylesheets="/view/products-view.css" visible="false" GridPane.columnIndex="1">
-            <children>
-                <GridPane prefHeight="767.0" prefWidth="720.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints maxHeight="702.0" minHeight="10.0" prefHeight="121.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="711.0" minHeight="10.0" prefHeight="299.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="711.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="711.0" minHeight="10.0" prefHeight="330.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <GridPane disable="true">
-                        <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="348.3333740234375" minWidth="10.0" prefWidth="193.33331298828125" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="634.0" minWidth="10.0" prefWidth="516.6666870117188" />
-                        </columnConstraints>
-                        <rowConstraints>
-                            <RowConstraints maxHeight="151.00000762939453" minHeight="0.0" prefHeight="148.33333587646484" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="492.33333587646484" minHeight="10.0" prefHeight="419.66666412353516" vgrow="SOMETIMES" />
-                        </rowConstraints>
-                        <GridPane.margin>
-                            <Insets left="30.0" right="30.0" />
-                        </GridPane.margin>
-                        <children>
-                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Haku" GridPane.rowIndex="1" />
-                        </children>
-                    </GridPane>
-                    <GridPane prefHeight="298.0" prefWidth="720.0" GridPane.rowIndex="1">
-                        <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        </columnConstraints>
-                        <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        </rowConstraints>
-                        <children>
-                            <GridPane GridPane.columnIndex="1">
-                                <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Aktiivinen työntekijä:" GridPane.rowIndex="2" />
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nimi:" />
-                                <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sukunimi:" GridPane.rowIndex="1" />
-                                <Text fx:id="fName" strokeType="OUTSIDE" strokeWidth="0.0" text="Nimi" GridPane.columnIndex="1" />
-                                <Text fx:id="lName" strokeType="OUTSIDE" strokeWidth="0.0" text="Sukunimi" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                <GridPane.margin>
-                                    <Insets left="20.0" right="20.0" />
-                                </GridPane.margin>
-                            </GridPane>
-                            <HBox alignment="CENTER" prefHeight="329.0" prefWidth="720.0">
-                                <children>
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                        <image>
-                                            <Image url="@../images/person.png" />
-                                        </image>
-                                    </ImageView>
-                                </children>
-                            </HBox>
-                        </children>
-                    </GridPane>
-                    <ListView prefHeight="418.0" prefWidth="660.0" GridPane.rowIndex="3">
-                        <GridPane.margin>
-                            <Insets left="30.0" right="30.0" />
-                        </GridPane.margin>
-                    </ListView>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ostopäätetapahtumat" GridPane.rowIndex="2">
-                        <GridPane.margin>
-                            <Insets left="30.0" />
-                        </GridPane.margin>
-                    </Text>
-                </GridPane>
-            </children>
-        </Pane>
+        <Pane fx:id="wrapperPane1" prefHeight="200.0" prefWidth="200.0" stylesheets="/view/products-view.css" visible="false" GridPane.columnIndex="1" />
         <Pane fx:id="wrapperPane" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
             <children>
                 <Text layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%optionsViewNothingSelected" textAlignment="CENTER" wrappingWidth="720.0">
