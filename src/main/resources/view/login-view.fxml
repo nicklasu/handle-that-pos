@@ -56,4 +56,9 @@
             <Image url="@../images/lock.png" />
         </ImageView>
     </HBox>
+   <Label fx:id="devLabel" text="DEVAAJA TILA PÄÄLLÄ, KIRJAUTUMISTIEDOT ESITÄYTETTY. POISTA TÄMÄ TUOTANNOSSA: LoginView.java -&gt; DEBUG_MODE = false" textFill="RED" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
 </GridPane>
