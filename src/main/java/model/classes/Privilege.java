@@ -174,9 +174,10 @@ public class Privilege {
     @Override
     public String toString() {
         String pLevel = switch (privilegeLevelIndex) {
-            case 0 -> "Myyjä";
-            case 1 -> "Myymäläpäällikkö";
-            case 2 -> "Järjestelmän ylläpitäjä";
+            case 0 -> "Itsepalvelukassa";
+            case 1 -> "Myyjä";
+            case 2 -> "Myymäläpäällikkö";
+            case 3 -> "Järjestelmän ylläpitäjä";
             default -> throw new IllegalStateException("Unexpected value");
         };
         return privilegeStart + ", " + (privilegeEnd == null ? "Ei päättymispäivää" : privilegeEnd) + ", " + pLevel;
