@@ -15,10 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainView {
@@ -58,6 +55,8 @@ public class MainView {
     private final String[] hotkeyProductIds = new String[9];
     private final ArrayList<Button> hotkeyButtons = new ArrayList<>();
     private HotkeyFileHandler hotkeyFileHandler;
+    private ResourceBundle bundle;
+
 
     public void loadTransactionView() {
         mainApp.showTransactionView();
@@ -94,8 +93,8 @@ public class MainView {
         } else {
             Notifications.create()
                     .owner(barcodeTextField.getScene().getWindow())
-                    .title("Virhe")
-                    .text("Tuotetta ei löydy tietokannasta!")
+                    .title(bundle.getString("errorString"))
+                    .text(bundle.getString("productNotFoundString"))
                     .position(Pos.TOP_RIGHT)
                     .showError();
         }
@@ -113,7 +112,9 @@ public class MainView {
 
     @FXML
     private void handleLogoutButton() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Haluatko varmasti kirjautua ulos?", ButtonType.YES, ButtonType.NO);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, bundle.getString("logoutConfirmationString"), ButtonType.YES, ButtonType.NO);
+        alert.setTitle(bundle.getString("confirmationString"));
+        alert.setHeaderText(bundle.getString("confirmationString"));
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
             this.mainApp.getEngine().logout();
@@ -127,7 +128,7 @@ public class MainView {
             setHotkeyButton(hotkeys.get(i));
             if (Objects.equals(hotkeyProductIds[i], "null") || Objects.equals(hotkeyProductIds[i], "") || Objects.equals(hotkeyProductIds[i], null)) {
                 Button hotkey = hotkeys.get(i);
-                hotkey.setText("Ei asetettu");
+                hotkey.setText(bundle.getString("hotkeyNotSetString"));
                 hotkey.setStyle("-fx-background-color: red;");
                 hotkey.setOnMouseEntered(mouseEvent -> hotkey.setStyle("-fx-background-color: darkred;"));
                 hotkey.setOnMouseExited(mouseEvent -> hotkey.setStyle("-fx-background-color: red;"));
@@ -163,9 +164,9 @@ public class MainView {
                     if (System.currentTimeMillis() - startTime > 2000) {
                         if (productId != null) {
                             TextInputDialog tid = new TextInputDialog("");
-                            tid.setTitle("Pikanäppäimen asetus");
-                            tid.setHeaderText("Pikanäppäimen oletusnimi: " + items.get(items.size() - 1).getName() + ".\nJos haluat uudelleennimetä, kirjoita alla olevaan kenttään.");
-                            tid.setContentText("Uusi nimi:");
+                            tid.setTitle(bundle.getString("hotkeySettingTitleString"));
+                            tid.setHeaderText(bundle.getString("hotkeySettingDefaultNameString") + " " + items.get(items.size() - 1).getName() + ".\n" + bundle.getString("hotkeySettingRenameString"));
+                            tid.setContentText(bundle.getString("hotkeySettingNewNameString"));
                             Optional<String> result = tid.showAndWait();
                             result.ifPresent(e -> {
                                 TextField inputField = tid.getEditor();
@@ -186,8 +187,8 @@ public class MainView {
                         } else {
                             Notifications.create()
                                     .owner(mainAnchorPane.getScene().getWindow())
-                                    .title("Huomautus!")
-                                    .text("Skannaa tuote ennen kuin yrität tallentaa sitä pikanäppäimeen!")
+                                    .title(bundle.getString("notificationString"))
+                                    .text(bundle.getString("hotkeyNoScanString"))
                                     .position(Pos.TOP_RIGHT)
                                     .show();
                         }
@@ -198,16 +199,16 @@ public class MainView {
                             } else {
                                 Notifications.create()
                                         .owner(mainAnchorPane.getScene().getWindow())
-                                        .title("Huomautus!")
-                                        .text("Pikanäppäintä ei ole asetettu.")
+                                        .title(bundle.getString("notificationString"))
+                                        .text(bundle.getString("hotkeyNotSetString"))
                                         .position(Pos.TOP_RIGHT)
                                         .show();
                             }
                         } catch (Exception e) {
                             Notifications.create()
                                     .owner(mainAnchorPane.getScene().getWindow())
-                                    .title("Huomautus!")
-                                    .text("Pikanäppäintä ei ole asetettu.")
+                                    .title(bundle.getString("notificationString"))
+                                    .text(bundle.getString("hotkeyNotSetString"))
                                     .position(Pos.TOP_RIGHT)
                                     .show();
                         }
@@ -224,9 +225,9 @@ public class MainView {
 
     @FXML
     public void showHelp() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Tuote voidaan skannata joko lukijalla tai manuaalisesti näppäimistöllä alhaalla olevaan Lue viivakoodi-kenttään. Pikanäppäimet asetetaan ensin skannaamalla tuote, minkä jälkeen näppäintä pidetään pohjassa n. 2 sekuntia.", ButtonType.CLOSE);
-        alert.setTitle("Ohje");
-        alert.setHeaderText("Ohje");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, bundle.getString("mainViewHelpString"), ButtonType.CLOSE);
+        alert.setTitle(bundle.getString("helpString"));
+        alert.setHeaderText(bundle.getString("helpString"));
         alert.showAndWait();
         barcodeTextField.requestFocus();
     }
@@ -234,25 +235,18 @@ public class MainView {
     public void negativeProductStockNotification() {
         Notifications.create()
                 .owner(mainAnchorPane.getScene().getWindow())
-                .title("Huomautus!")
-                .text("Lisätyn tuotteen varastomäärä on alle 0.")
+                .title(bundle.getString("notificationString"))
+                .text(bundle.getString("lowProductQuantityString"))
                 .position(Pos.TOP_RIGHT)
-                .show();
-    }
-
-    public final void fileNotFoundNotification() {
-        Notifications.create()
-                .title("Huomautus!")
-                .text("Pikanäppäinasetusten tiedostoa ei löytynyt. Jos haluat asettaa pikanäppäimen, aloita skannaamalla haluamasi tuote. \nTämän jälkeen pidä jotakin pikanäppäintä pohjassa yli 2 sekuntia.")
-                .position(Pos.CENTER)
                 .show();
     }
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+        bundle = mainApp.getBundle();
         feedbackProgressBar.setVisible(false);
         mainApp.getStage().setTitle(mainApp.APP_TITLE + " - " + mainApp.getEngine().getUser().getUsername());
-        hotkeyFileHandler = new HotkeyFileHandler();
+        hotkeyFileHandler = new HotkeyFileHandler(bundle);
         hotkeyFileHandler.loadHotkeys(hotkeyProductIds, mainApp.getHotkeyButtonNames());
         hotkeyButtons.add(hotkeyButton0);
         hotkeyButtons.add(hotkeyButton1);

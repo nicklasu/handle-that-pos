@@ -1,12 +1,22 @@
 package view;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import org.controlsfx.control.Notifications;
 
 import java.io.*;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class HotkeyFileHandler extends MainView {
+
+    ResourceBundle bundle;
+
+    public HotkeyFileHandler(ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
+
     /**
      * Saves hotkey preferences to hotkey.properties file
      */
@@ -22,10 +32,10 @@ public class HotkeyFileHandler extends MainView {
             props.store(writer, "Hotkey settings");
             writer.close();
         } catch (FileNotFoundException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Pikanäppäimen tallennustiedostoa ei löytynyt!", ButtonType.CLOSE);
+            Alert alert = new Alert(Alert.AlertType.ERROR, bundle.getString("fileNotFoundString"), ButtonType.CLOSE);
             alert.showAndWait();
         } catch (IOException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Pikanäppäintallennus epäonnistui!", ButtonType.CLOSE);
+            Alert alert = new Alert(Alert.AlertType.ERROR, bundle.getString("fileSavingErrorString"), ButtonType.CLOSE);
             alert.showAndWait();
         }
     }
@@ -51,8 +61,16 @@ public class HotkeyFileHandler extends MainView {
             fileNotFoundNotification();
 
         } catch (IOException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Pikanäppäinasetusten lataamisvirhe! Kokeile käynnistää sovellus uudelleen. Jos tämä ei auta, aseta pikanäppäimet uudelleen.", ButtonType.CLOSE);
+            Alert alert = new Alert(Alert.AlertType.ERROR, bundle.getString("fileLoadingErrorString"), ButtonType.CLOSE);
             alert.showAndWait();
         }
+    }
+
+    public void fileNotFoundNotification() {
+        Notifications.create()
+                .title(bundle.getString("notificationString"))
+                .text(bundle.getString("fileNotFoundOnLoadString"))
+                .position(Pos.CENTER)
+                .show();
     }
 }
