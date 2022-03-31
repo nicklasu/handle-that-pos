@@ -100,6 +100,7 @@ public class MainApp extends Application {
     public void showOptionsView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("options-view.fxml"));
+            fxmlLoader.setResources(this.bundle);
             Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
             OptionsView optionsView = fxmlLoader.getController();

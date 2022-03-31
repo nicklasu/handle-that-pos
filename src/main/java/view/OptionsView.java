@@ -60,6 +60,7 @@ public class OptionsView {
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("users-view.fxml"));
+                this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane0 = this.loader.load();
                 UsersView view = this.loader.getController();
                 view.setMainApp(mainApp);
@@ -74,6 +75,7 @@ public class OptionsView {
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("products-view.fxml"));
+                this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane2 = this.loader.load();
                 ProductManagementView view = this.loader.getController();
                 view.setMainApp(mainApp);
@@ -88,6 +90,7 @@ public class OptionsView {
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("user-management-view.fxml"));
+                this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane3 = this.loader.load();
                 UserManagementView view = this.loader.getController();
                 view.setMainApp(mainApp);

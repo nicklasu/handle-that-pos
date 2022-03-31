@@ -34,34 +34,34 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label stylesheets="@main-view.css" text="Etunimi" GridPane.rowIndex="1" />
-            <Label stylesheets="@main-view.css" text="Sukunimi" GridPane.rowIndex="2" />
-            <Label stylesheets="@main-view.css" text="Aktiivinen työntekijä" GridPane.rowIndex="6" />
+            <Label stylesheets="@main-view.css" text="%first_name" GridPane.rowIndex="1" />
+            <Label stylesheets="@main-view.css" text="%last_name" GridPane.rowIndex="2" />
+            <Label stylesheets="@main-view.css" text="%active_user" GridPane.rowIndex="6" />
             <TextField fx:id="userFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="userLastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#updateUser" stylesheets="@main-view.css" text="Muokkaa" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#updateUser" stylesheets="@main-view.css" text="%edit" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <CheckBox fx:id="activity" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <TextField fx:id="userName" GridPane.columnIndex="1" />
             <PasswordField fx:id="userPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label stylesheets="@main-view.css" text="Käyttäjänimi" />
-            <Label stylesheets="@main-view.css" text="Salasana" GridPane.rowIndex="3" />
+            <Label stylesheets="@main-view.css" text="%username" />
+            <Label stylesheets="@main-view.css" text="%password" GridPane.rowIndex="3" />
             <DatePicker fx:id="startDate" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <DatePicker fx:id="endDate" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Label stylesheets="@main-view.css" text="Käyttöoikeus" GridPane.rowIndex="4" />
-            <ChoiceBox fx:id="privilegeLevel" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-            <Label stylesheets="@main-view.css" text="Alkamisajankohta" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-            <Label stylesheets="@main-view.css" text="Päättymisajankohta" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-            <Label stylesheets="@main-view.css" text="Käyttöoikeuden taso" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-            <Button mnemonicParsing="false" onAction="#fillFields" text="Hae" GridPane.columnIndex="2" />
+            <Label stylesheets="@main-view.css" text="%privilege" GridPane.rowIndex="4" />
+            <ChoiceBox fx:id="privilegeLevelChoiceBox" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Label stylesheets="@main-view.css" text="%privilege_start" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+            <Label stylesheets="@main-view.css" text="%privilege_end" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+            <Label stylesheets="@main-view.css" text="%privilege_level" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+            <Button mnemonicParsing="false" onAction="#fillFields" text="%get" GridPane.columnIndex="2" />
             <ListView fx:id="privilegeListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <Label layoutX="14.0" layoutY="10.0" styleClass="bold_label" stylesheets="@main-view.css" text="Muokkaa käyttäjä">
+      <Label layoutX="14.0" layoutY="10.0" styleClass="bold_label" stylesheets="@main-view.css" text="%edit_user">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Button layoutX="581.0" layoutY="304.0" mnemonicParsing="false" onAction="#addToListView" text="Lisää" />
-      <Button fx:id="editBtn" layoutX="581.0" layoutY="304.0" mnemonicParsing="false" text="Tallenna" visible="false" />
+      <Button layoutX="581.0" layoutY="304.0" mnemonicParsing="false" onAction="#addToListView" text="%add" />
+      <Button fx:id="editBtn" layoutX="581.0" layoutY="304.0" mnemonicParsing="false" text="%save" visible="false" />
    </children>
 </Pane>

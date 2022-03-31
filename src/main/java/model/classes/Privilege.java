@@ -2,6 +2,7 @@ package model.classes;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ResourceBundle;
 
 /**
  * Represents a use privilege given to a user account
@@ -10,6 +11,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "Käyttöoikeus")
 public class Privilege {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", updatable = false, nullable = false)
