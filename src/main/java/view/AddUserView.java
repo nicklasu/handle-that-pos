@@ -157,8 +157,8 @@ public class AddUserView {
 
             Notifications.create()
                     .owner(saveBtn.getScene().getWindow())
-                    .title("Onnistui")
-                    .text("Käyttäjä on lisätty!")
+                    .title(this.mainApp.getBundle().getString("success"))
+                    .text(this.mainApp.getBundle().getString("user_added"))
                     .position(Pos.TOP_RIGHT)
                     .show();
             userFirstName.clear();
@@ -171,8 +171,8 @@ public class AddUserView {
             System.out.println("Error! Username is taken!");
             Notifications.create()
                     .owner(saveBtn.getScene().getWindow())
-                    .title("Virhe")
-                    .text("Käyttäjänimi on varattu!")
+                    .title(this.mainApp.getBundle().getString("errorString"))
+                    .text(this.mainApp.getBundle().getString("username_taken"))
                     .position(Pos.TOP_RIGHT)
                     .showError();
         } catch (Exception e) {

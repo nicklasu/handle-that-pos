@@ -219,8 +219,8 @@ public class EditUserView {
             privilegeList.clear();
             Notifications.create()
                     .owner(userName.getScene().getWindow())
-                    .title("Onnistui")
-                    .text("Muutokset tallennettu!")
+                    .title(this.mainApp.getBundle().getString("success"))
+                    .text(this.mainApp.getBundle().getString("userChanged"))
                     .position(Pos.TOP_RIGHT)
                     .show();
 
@@ -228,8 +228,8 @@ public class EditUserView {
             e.printStackTrace();
             Notifications.create()
                     .owner(userName.getScene().getWindow())
-                    .title("Virhe")
-                    .text("Käyttäjänimeä ei löytynyt!")
+                    .title(this.mainApp.getBundle().getString("errorString"))
+                    .text(this.mainApp.getBundle().getString("userNotFound"))
                     .position(Pos.TOP_RIGHT)
                     .showError();
         }

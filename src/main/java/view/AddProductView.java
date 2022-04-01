@@ -73,7 +73,7 @@ public class AddProductView {
             if (res) {
                 Notifications.create()
                         .owner(productBarcode.getScene().getWindow())
-                        .title("Onnistui")
+                        .title(this.mainApp.getBundle().getString("success"))
                         .text("Tuote lisättiin onnistuneesti tietokantaan!")
                         .position(Pos.TOP_RIGHT)
                         .show();
