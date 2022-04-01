@@ -89,7 +89,7 @@
                           </rowConstraints>
                            <children>
                               <Button mnemonicParsing="false" onAction="#uploadImage" text="%upload_image" />
-                              <ImageView fx:id="avatar" fitHeight="154.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                              <ImageView fx:id="avatar" fitHeight="154.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
                                  <image>
                                     <Image url="@../images/person.png" />
                                  </image>
