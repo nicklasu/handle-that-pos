@@ -50,6 +50,11 @@ public class TransactionView {
     private volatile AtomicBoolean customerKeyPressed = new AtomicBoolean(false);
 
     @FXML
+    private void loadMainView() {
+        this.mainApp.showMainView();
+    }
+
+    @FXML
     private void confirmPayment() {
         try {
             if (this.mainApp.getEngine().getTransaction().getCustomer() == null && bonusCustomerCheckBox.isSelected()) {
