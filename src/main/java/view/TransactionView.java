@@ -7,9 +7,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.chart.ScatterChart;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import model.DAOs.CustomerDAO;
 import model.classes.*;
 import org.controlsfx.control.Notifications;
@@ -42,6 +44,12 @@ public class TransactionView {
     private CheckBox bonusCustomerCheckBox;
     @FXML
     private Label paymentMethodLabel;
+    @FXML
+    private ProgressBar feedbackProgressBar;
+    @FXML
+    private Text insertCustomerText;
+    @FXML
+    private Label bonusCustomerLabel;
     private boolean printReceipt = false;
     private boolean sendReceiptEmail = false;
     private final ToggleGroup paymentButtonGroup = new ToggleGroup();
@@ -97,47 +105,64 @@ public class TransactionView {
 
     @FXML
     private void bonusCustomerCheck() {
-        if (!customerKeyPressed.get()) {
-            customerKeyPressed.set(true);
-            final AtomicBoolean running = new AtomicBoolean(false);
-            long startTime = System.currentTimeMillis();
-            Thread thread = new Thread(() -> {
-                running.set(true);
-                while (running.get()) {
-                    try {
-                        Thread.sleep(100);
-                        if ((System.currentTimeMillis() - startTime) >= 2000) {
-                            Platform.runLater(() -> {
-                                if (this.mainApp.getEngine().getTransaction() != null) {
-                                    if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) != null && !Objects.equals(customerTextField.getText(), "")) {
-                                        this.mainApp.getEngine().getTransaction().setCustomer(customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
-                                        transactionOverviewLabel.setText(generateOverviewText());
-                                        Notifications.create()
-                                                .owner(transactionAnchorPane.getScene().getWindow())
-                                                .title(this.mainApp.getBundle().getString("info"))
-                                                .text(this.mainApp.getBundle().getString("customerfound"))
-                                                .position(Pos.TOP_RIGHT)
-                                                .showConfirm();
-                                    } else {
-                                        Notifications.create()
-                                                .owner(transactionAnchorPane.getScene().getWindow())
-                                                .title(this.mainApp.getBundle().getString("errorString"))
-                                                .text(this.mainApp.getBundle().getString("customernotfound"))
-                                                .position(Pos.TOP_RIGHT)
-                                                .showError();
+        if (!Objects.equals(customerTextField.getText(), "")) {
+            if (!customerKeyPressed.get()) {
+                customerKeyPressed.set(true);
+                final AtomicBoolean running = new AtomicBoolean(false);
+                long startTime = System.currentTimeMillis();
+                feedbackProgressBar.setVisible(true);
+                Thread thread = new Thread(() -> {
+                    running.set(true);
+                    while (running.get()) {
+                        feedbackProgressBar.setProgress(Long.valueOf(System.currentTimeMillis() - startTime).doubleValue() / 2000);
+                        try {
+                            Thread.sleep(100);
+                            if ((System.currentTimeMillis() - startTime) >= 2000) {
+                                Platform.runLater(() -> {
+                                    if (this.mainApp.getEngine().getTransaction() != null) {
+                                        try {
+                                            if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) != null) {
+                                                this.mainApp.getEngine().getTransaction().setCustomer(customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
+                                                transactionOverviewLabel.setText(generateOverviewText());
+                                                bonusCustomerLabel.setText(customerTextField.getText());
+                                                customerTextField.setDisable(true);
+                                                Notifications.create()
+                                                        .owner(transactionAnchorPane.getScene().getWindow())
+                                                        .title(this.mainApp.getBundle().getString("info"))
+                                                        .text(this.mainApp.getBundle().getString("customerfound"))
+                                                        .position(Pos.TOP_RIGHT)
+                                                        .showConfirm();
+                                            } else {
+                                                Notifications.create()
+                                                        .owner(transactionAnchorPane.getScene().getWindow())
+                                                        .title(this.mainApp.getBundle().getString("errorString"))
+                                                        .text(this.mainApp.getBundle().getString("customernotfound"))
+                                                        .position(Pos.TOP_RIGHT)
+                                                        .showError();
+                                            }
+
+                                        } catch (NumberFormatException e) {
+                                            Notifications.create()
+                                                    .owner(transactionAnchorPane.getScene().getWindow())
+                                                    .title(this.mainApp.getBundle().getString("errorString"))
+                                                    .text(this.mainApp.getBundle().getString("customernotfound"))
+                                                    .position(Pos.TOP_RIGHT)
+                                                    .showError();
+                                        }
                                     }
-                                }
-                                Thread.currentThread().interrupt();
-                            });
-                            running.set(false);
-                            customerKeyPressed.set(false);
+                                    Thread.currentThread().interrupt();
+                                });
+                                running.set(false);
+                                customerKeyPressed.set(false);
+                                feedbackProgressBar.setVisible(false);
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
                     }
-                }
-            });
-            thread.start();
+                });
+                thread.start();
+            }
         }
     }
 
@@ -226,11 +251,23 @@ public class TransactionView {
             } catch (Exception ignored) {
             }
         });
+        feedbackProgressBar.setVisible(false);
         customerTextField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)
                 requestFocus();
         });
+        customerTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.matches("\\d*")) return;
+            customerTextField.setText(newValue.replaceAll("[^\\d]", ""));
+        });
         customerTextField.visibleProperty().bind(Bindings.createBooleanBinding(() -> bonusCustomerCheckBox.isSelected(), bonusCustomerCheckBox.selectedProperty()));
+        insertCustomerText.visibleProperty().bind(Bindings.createBooleanBinding(() -> bonusCustomerCheckBox.isSelected(), bonusCustomerCheckBox.selectedProperty()));
+        try{
+            bonusCustomerLabel.setText(String.valueOf(this.mainApp.getEngine().getTransaction().getCustomer().getId()));
+            bonusCustomerCheckBox.setSelected(true);
+        } catch(Exception ignored){
+
+        }
     }
 
     @FXML
