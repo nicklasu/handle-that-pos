@@ -79,8 +79,11 @@ public class UsersView {
                 }
             }
         });
+
         Profile profile = this.mainApp.getEngine().profileDAO().getAvatar(this.searchedUser);
-        insertImage(profile.getAvatar());
+        if (profile != null) {
+            insertImage(profile.getAvatar());
+        }
     }
 
     @FXML
@@ -158,23 +161,25 @@ public class UsersView {
         if (file != null) {
             try {
                 BufferedImage bufferedImage = ImageIO.read(file);
-                if(bufferedImage != null) {
+                if (bufferedImage != null) {
 
 
                     //resize bufferedImage
-                    int width = bufferedImage.getWidth();
-                    int height = bufferedImage.getHeight();
                     int newWidth = 600;
                     int newHeight = 600;
-                    BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
+                    BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
+                    Graphics2D g = resizedImage.createGraphics();
+                    g.drawImage(bufferedImage, 0, 0, newWidth, newHeight, null);
+                    g.dispose();
 
-                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+
+
+                    Image image = SwingFXUtils.toFXImage(resizedImage, null);
                     this.avatar.setImage(image);
-                    String imageEncoded = encodeImage(bufferedImage);
+                    String imageEncoded = encodeImage(resizedImage);
                     Profile profile = new Profile(this.searchedUser.getId(), imageEncoded);
                     this.mainApp.getEngine().profileDAO().saveAvatar(profile);
-                }
-                else {
+                } else {
                     Notifications.create().owner(avatar.getScene().getWindow()).title(this.mainApp.getBundle().getString("errorString")).text(this.mainApp.getBundle().getString("upload_image_error")).position(Pos.TOP_RIGHT).showError();
 
                 }
