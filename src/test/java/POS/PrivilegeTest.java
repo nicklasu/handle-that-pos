@@ -45,6 +45,6 @@ public class PrivilegeTest {
 
     @Test
     public void privilegeToStringTest() {
-        Assertions.assertEquals(privilege.toString(), new Date(time) + ", 8994-08-17, Myyjä", "Privilege toString doesn't work correctly!");
+        Assertions.assertEquals(privilege.toString(), new Date(time) + ", 8994-08-17, Itsepalvelukassa", "Privilege toString doesn't work correctly!");
     }
 }

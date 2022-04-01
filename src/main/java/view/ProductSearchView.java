@@ -140,6 +140,7 @@ public class ProductSearchView {
     private void loadEditProductView(Product product) {
         wrapperPane.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("products-view.fxml"));
+        loader.setResources(this.mainApp.getBundle());
         Pane newLoadedPane = null;
         try {
             newLoadedPane = loader.load();
