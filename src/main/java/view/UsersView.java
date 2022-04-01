@@ -165,8 +165,8 @@ public class UsersView {
 
 
                     //resize bufferedImage
-                    int newWidth = 200;
-                    int newHeight = 200;
+                    int newWidth = 600;
+                    int newHeight = 600;
                     BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
                     Graphics2D g = resizedImage.createGraphics();
                     g.drawImage(bufferedImage, 0, 0, newWidth, newHeight, null);
@@ -174,9 +174,9 @@ public class UsersView {
 
 
 
-                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                    Image image = SwingFXUtils.toFXImage(resizedImage, null);
                     this.avatar.setImage(image);
-                    String imageEncoded = encodeImage(bufferedImage);
+                    String imageEncoded = encodeImage(resizedImage);
                     Profile profile = new Profile(this.searchedUser.getId(), imageEncoded);
                     this.mainApp.getEngine().profileDAO().saveAvatar(profile);
                 } else {
