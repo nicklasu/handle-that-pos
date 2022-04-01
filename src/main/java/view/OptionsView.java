@@ -92,6 +92,10 @@ public class OptionsView {
                 alert.setHeaderText(this.mainApp.getBundle().getString("language_changed_header"));
                 alert.setContentText(this.mainApp.getBundle().getString("language_changed") + " " + languageBox.getValue() + ". " + this.mainApp.getBundle().getString("restart_to_apply"));
                 alert.show();
+                Locale locale = new Locale(lang.split("_")[0], lang.split("_")[1]);
+                Locale.setDefault(locale);
+                this.mainApp.setBundle(ResourceBundle.getBundle("TextResources", locale));
+
             } catch (Exception ignored) {
             }
         });
