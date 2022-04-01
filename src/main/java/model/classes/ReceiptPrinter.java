@@ -70,7 +70,7 @@ public class ReceiptPrinter implements Printable {
      * Helper function that is called from outside, this function calls for the print method
      * @param transaction transaction to print out
      */
-    public void actionPerformed(Transaction transaction) {
+    public boolean actionPerformed(Transaction transaction) {
         this.transaction = transaction;
         PrinterJob job = PrinterJob.getPrinterJob();
         job.setPrintable(this);
@@ -78,8 +78,10 @@ public class ReceiptPrinter implements Printable {
         if (ok) {
             try {
                 job.print();
+                return true;
             } catch (PrinterException ignored) {
             }
         }
+        return false;
     }
 }
