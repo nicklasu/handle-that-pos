@@ -58,7 +58,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = stage;
-        this.stage.setMinHeight(750);
+        this.stage.setMinHeight(760);
         this.stage.setMinWidth(1070);
         stage.setTitle(APP_TITLE);
         this.stage.getIcons().add(new Image("file:src/main/resources/images/pos.png"));
