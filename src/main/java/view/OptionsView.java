@@ -25,10 +25,6 @@ import java.util.stream.Collectors;
 public class OptionsView {
     private MainApp mainApp;
     @FXML
-    private Text fName;
-    @FXML
-    private Text lName;
-    @FXML
     private AnchorPane transactionAnchorPane;
     @FXML
     private Button btn1;
@@ -203,8 +199,6 @@ public class OptionsView {
             btn4.setDisable(true);
         }
         User user = this.mainApp.getEngine().getUser();
-        fName.setText(user.getfName());
-        lName.setText(user.getlName());
         returnBtn.requestFocus();
        /* if (this.mainApp.getEngine().getTransaction() != null) {
         }*/
