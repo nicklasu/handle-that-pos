@@ -79,8 +79,11 @@ public class UsersView {
                 }
             }
         });
+
         Profile profile = this.mainApp.getEngine().profileDAO().getAvatar(this.searchedUser);
-        insertImage(profile.getAvatar());
+        if (profile != null) {
+            insertImage(profile.getAvatar());
+        }
     }
 
     @FXML
@@ -158,7 +161,7 @@ public class UsersView {
         if (file != null) {
             try {
                 BufferedImage bufferedImage = ImageIO.read(file);
-                if(bufferedImage != null) {
+                if (bufferedImage != null) {
 
 
                     //resize bufferedImage
@@ -173,8 +176,7 @@ public class UsersView {
                     String imageEncoded = encodeImage(bufferedImage);
                     Profile profile = new Profile(this.searchedUser.getId(), imageEncoded);
                     this.mainApp.getEngine().profileDAO().saveAvatar(profile);
-                }
-                else {
+                } else {
                     Notifications.create().owner(avatar.getScene().getWindow()).title(this.mainApp.getBundle().getString("errorString")).text(this.mainApp.getBundle().getString("upload_image_error")).position(Pos.TOP_RIGHT).showError();
 
                 }
