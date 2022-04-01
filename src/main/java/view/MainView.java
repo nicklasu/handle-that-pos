@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
@@ -56,6 +57,11 @@ public class MainView {
     private Label selfcheckoutlabel;
     @FXML
     private ProgressBar feedbackProgressBar;
+    @FXML
+    private ChoiceBox<String> languageBox;
+    @FXML
+    private Text languageText;
+    private ObservableList<String> languages = FXCollections.observableArrayList("fi", "en");
     final private ObservableList<Product> items = FXCollections.observableArrayList();
     private String productId;
     private final String[] hotkeyProductIds = new String[9];
@@ -200,7 +206,8 @@ public class MainView {
                                         .position(Pos.TOP_RIGHT)
                                         .show();
                             }
-                    } } else {
+                        }
+                    } else {
                         try {
                             if (!Objects.equals(hotkeyProductIds[buttonId], "null")) {
                                 addProduct(hotkeyProductIds[buttonId]);
@@ -255,9 +262,26 @@ public class MainView {
         bundle = mainApp.getBundle();
         privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
+            languageBox.setItems(languages);
+            languageBox.setOnAction(event -> {
+                String lang = switch (languageBox.getValue()) {
+                    case "fi" -> "fi_FI";
+                    case "en" -> "en_US";
+                    default -> throw new IllegalStateException("Unexpected value: " + languageBox.getValue());
+                };
+                try {
+                    Locale locale = new Locale(lang.split("_")[0], lang.split("_")[1]);
+                    Locale.setDefault(locale);
+                    this.mainApp.setBundle(ResourceBundle.getBundle("TextResources", locale));
+                    this.mainApp.showMainView();
+                } catch (Exception ignored) {
+                }
+            });
+            languageBox.setVisible(true);
             settingsBtn.setVisible(false);
             logoutBtn.setVisible(false);
             selfcheckoutlabel.setVisible(true);
+            languageText.setVisible(true);
         }
         feedbackProgressBar.setVisible(false);
         mainApp.getStage().setTitle(mainApp.APP_TITLE + " - " + mainApp.getEngine().getUser().getUsername());
