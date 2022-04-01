@@ -69,19 +69,6 @@
                     <RowConstraints maxHeight="137.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
                     <RowConstraints maxHeight="284.0" minHeight="10.0" prefHeight="172.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-            <Label text="%paymentmethod">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-            <Label fx:id="paymentMethodLabel" text="Label">
-               <font>
-                  <Font size="19.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets left="100.0" />
-               </GridPane.margin>
-            </Label>
             <ToggleButton fx:id="cardToggleButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#selectCard" prefHeight="173.0" prefWidth="220.0" styleClass="button" stylesheets="@main-view.css" text="%creditcard" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="138.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -98,6 +85,27 @@
                      </image>
                   </ImageView>
                </graphic></ToggleButton>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="155.99998779296874" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.40001220703124" minWidth="10.0" prefWidth="154.40001220703124" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="%paymentmethod">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="paymentMethodLabel" text="Label" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
             <GridPane.margin>
                <Insets left="20.0" />
             </GridPane.margin>
@@ -113,19 +121,21 @@
                     <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
                <RowConstraints maxHeight="68.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%printreceipt" GridPane.rowIndex="1">
-               <font>
-                  <Font size="19.0" />
-               </font></Text>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%customerisbonus">
-               <font>
-                  <Font size="19.0" />
-               </font></Text>
                 <CheckBox fx:id="bonusCustomerCheckBox" mnemonicParsing="false" onAction="#requestFocus" GridPane.columnIndex="1" />
                 <CheckBox fx:id="receiptCheckBox" mnemonicParsing="false" onAction="#confirmReceipt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kuitin lähetys sähköpostiin" visible="false" GridPane.rowIndex="2" />
             <TextField fx:id="receiptEmailTextField" onKeyReleased="#sendReceiptEmail" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="customerTextField" onKeyReleased="#bonusCustomerCheck" GridPane.columnIndex="2" />
+            <Label text="%customerisbonus" wrapText="true">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label text="%printreceipt" wrapText="true" GridPane.rowIndex="1">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
             <GridPane.margin>
                <Insets left="20.0" right="20.0" />
             </GridPane.margin>
