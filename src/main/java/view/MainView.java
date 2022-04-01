@@ -273,7 +273,9 @@ public class MainView {
                     Locale locale = new Locale(lang.split("_")[0], lang.split("_")[1]);
                     Locale.setDefault(locale);
                     this.mainApp.setBundle(ResourceBundle.getBundle("TextResources", locale));
+                    System.out.println(locale.getLanguage());
                     this.mainApp.showMainView();
+
                 } catch (Exception ignored) {
                 }
             });
