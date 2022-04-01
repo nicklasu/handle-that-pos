@@ -48,13 +48,13 @@ public class POSEngineTest extends TestParent {
 
     @Test
     public void getUser() {
-        Assertions.assertEquals("Testi", testEngine.getUser().getfName(), "error getting logged in user");
+        Assertions.assertEquals("Test", testEngine.getUser().getfName(), "error getting logged in user");
     }
 
     @Test
     public void getTransaction() {
         testEngine.setTransaction(this.createTestTransaction(testEngine.getUser()));
-        Assertions.assertEquals("Testi", testEngine.getTransaction().getUser().getfName(), "Problem getting the transaction from engine");
+        Assertions.assertEquals("Test", testEngine.getTransaction().getUser().getfName(), "Problem getting the transaction from engine");
     }
 
     @Test
@@ -76,9 +76,9 @@ public class POSEngineTest extends TestParent {
     @Test
     public void privileges(){
         List<Integer> luvat = testEngine.getVerifiedPrivileges();
-        Assertions.assertEquals(0, luvat.get(0), "Getting privilegelevel has a problem");
+        Assertions.assertEquals(2, luvat.get(0), "Getting privilegelevel has a problem");
         Assertions.assertEquals("testuser",testEngine.getPrivileges().get(0).getUser().getUsername(),"getting privileges has a problem");
-        Assertions.assertEquals(0,testEngine.getPrivilegeIndexes().get(0),"Getting privilege indexes has a problem");
+        Assertions.assertEquals(2,testEngine.getPrivilegeIndexes().get(0),"Getting privilege indexes has a problem");
 
         java.sql.Date date = new Date(123);
         java.sql.Date date2 = new Date(1234);
@@ -86,6 +86,6 @@ public class POSEngineTest extends TestParent {
         a.add(new Privilege(testEngine.getUser(), date, date, PrivilegeLevel.ADMIN));
         a.add(new Privilege(testEngine.getUser(), date2, date2, PrivilegeLevel.MANAGER));
         testEngine.setPrivileges(a);
-        Assertions.assertEquals(1,testEngine.getPrivileges().get(1).getPrivilegeLevelIndex(),"problem with adding privileges");
+        Assertions.assertEquals(2,testEngine.getPrivileges().get(1).getPrivilegeLevelIndex(),"problem with adding privileges");
     }
 }
