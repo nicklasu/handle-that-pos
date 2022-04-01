@@ -28,6 +28,7 @@ public class ProductManagementView {
         Pane newLoadedPane3 = null;
         try {
             this.loader = new FXMLLoader();
+            this.loader.setResources(this.mainApp.getBundle());
             this.loader.setLocation(getClass().getResource("add-product-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane3 = this.loader.load();
@@ -48,6 +49,7 @@ public class ProductManagementView {
         Pane newLoadedPane3 = null;
         try {
             this.loader = new FXMLLoader();
+            this.loader.setResources(this.mainApp.getBundle());
             this.loader.setLocation(getClass().getResource("delete-product-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane3 = this.loader.load();
@@ -69,6 +71,7 @@ public class ProductManagementView {
         Pane newLoadedPane3 = null;
         try {
             this.loader = new FXMLLoader();
+            this.loader.setResources(this.mainApp.getBundle());
             this.loader.setLocation(getClass().getResource("edit-product-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane3 = this.loader.load();
@@ -88,6 +91,7 @@ public class ProductManagementView {
         Pane newLoadedPane = null;
         try {
             this.loader = new FXMLLoader();
+            this.loader.setResources(this.mainApp.getBundle());
             this.loader.setLocation(getClass().getResource("edit-product-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane = this.loader.load();
