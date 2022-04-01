@@ -18,7 +18,7 @@ public class EnumTests extends TestParent{
 
     @Test
     public void PrivilegeLevel(){
-        Assertions.assertEquals(0,PrivilegeLevel.USER.ordinal(),"Error in PrivilegeLevel enum");
+        Assertions.assertEquals(1,PrivilegeLevel.USER.ordinal(),"Error in PrivilegeLevel enum");
     }
 
     @Test
