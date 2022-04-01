@@ -165,13 +165,11 @@ public class UsersView {
 
 
                     //resize bufferedImage
-                    int width = bufferedImage.getWidth();
-                    int height = bufferedImage.getHeight();
                     int newWidth = 600;
                     int newHeight = 600;
                     BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
 
-                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                    Image image = SwingFXUtils.toFXImage(resizedImage, null);
                     this.avatar.setImage(image);
                     String imageEncoded = encodeImage(bufferedImage);
                     Profile profile = new Profile(this.searchedUser.getId(), imageEncoded);
