@@ -7,7 +7,7 @@
   -fx-font-family: 'Montserrat';
 }
 
-.settings_button:focused  {
+.settings_button:focused {
   -fx-border-style: solid , solid  , solid  , solid;
   -fx-border-color: #bebebe #bebebe #bebebe #bebebe;
   -fx-border-width: 1;
@@ -15,4 +15,19 @@
   -fx-text-fill: black;
   -fx-font-size: 11pt;
   -fx-font-family: 'Montserrat';
+}
+
+.label {
+  -fx-font-size: 11pt;
+}
+
+.button {
+  -fx-font-size: 11pt;
+}
+
+.bold_label {
+  -fx-font-size: 13pt;
+  -fx-font-family: 'Montserrat';
+  -fx-text-fill: #1c1c1c;
+  -fx-font-weight: bold;
 }
