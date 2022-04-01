@@ -42,7 +42,7 @@ public class LoginView {
             this.mainApp.showMainView();
         } else if (this.mainApp.getEngine().login(usernameTextField.getText(), passwordPasswordField.getText()) == 0) {
             // alert, wrong username or password
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Väärä käyttäjänimi tai salasana!", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, this.mainApp.getBundle().getString("loginError1"), ButtonType.OK);
             alert.showAndWait();
 
             if (alert.getResult() == ButtonType.OK) {
@@ -50,7 +50,7 @@ public class LoginView {
             }
 
         } else if (this.mainApp.getEngine().login(usernameTextField.getText(), passwordPasswordField.getText()) == 2) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Ei käyttöoikeuksia! Ota yhteyttä myymäläpäällikköön.", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, this.mainApp.getBundle().getString("loginError2"), ButtonType.OK);
             alert.showAndWait();
 
             if (alert.getResult() == ButtonType.OK) {

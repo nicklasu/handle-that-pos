@@ -106,6 +106,7 @@ public class MainApp extends Application {
     public void showLoginView() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login-view.fxml"));
+            fxmlLoader.setResources(this.bundle);
             Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
             LoginView loginView = fxmlLoader.getController();
