@@ -1,20 +1,25 @@
 package view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import model.classes.Privilege;
 import model.classes.User;
 
+import java.util.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 public class OptionsView {
@@ -42,8 +47,16 @@ public class OptionsView {
     @FXML
     private Button helpBtn;
     @FXML
+    private ChoiceBox<String> languageBox;
+
+    private ObservableList<String> languages = FXCollections.observableArrayList("fi", "en");
+    @FXML
     Pane wrapperPane = new Pane();
     private FXMLLoader loader;
+    private ResourceBundle bundle;
+
+    public OptionsView() {
+    }
 
     public void loadMainView(ActionEvent event) throws IOException {
         this.loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
@@ -53,6 +66,39 @@ public class OptionsView {
     }
 
     public void setMainApp(MainApp mainApp) throws IOException {
+        File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
+        Properties properties = new Properties();
+        try {
+            FileReader reader = new FileReader(appConfigPath);
+            properties.load(reader);
+            String language = properties.getProperty("language");
+            languageBox.setValue(language);
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        languageBox.setItems(languages);
+        languageBox.setOnAction(event -> {
+            String lang = switch (languageBox.getValue()) {
+                case "fi" -> "fi_FI";
+                case "en" -> "en_US";
+                default -> throw new IllegalStateException("Unexpected value: " + languageBox.getValue());
+            };
+            try {
+                FileWriter writer = new FileWriter(appConfigPath);
+                properties.setProperty("language", lang.split("_")[0]);
+                properties.setProperty("country", lang.split("_")[1]);
+                properties.store(writer, "HandleThatPos settings");
+                writer.close();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle(this.mainApp.getBundle().getString("lang_alert_title"));
+                alert.setHeaderText(this.mainApp.getBundle().getString("language_changed_header"));
+                alert.setContentText(this.mainApp.getBundle().getString("language_changed") + " " + languageBox.getValue() + ". " + this.mainApp.getBundle().getString("restart_to_apply"));
+                alert.show();
+            } catch (Exception ignored) {
+            }
+        });
         /** Change views. */
         btn1.setOnAction(e -> {
             wrapperPane.getChildren().clear();
@@ -166,12 +212,10 @@ public class OptionsView {
 
     @FXML
     public void showHelp() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Valitse tarvittava toiminto listasta vasemmalla." +
-                "\n\nTuotteiden lisääminen: Valitse 'Tuotteiden hallinta' välilehti. Klikkaa ”Lisää tuote” -painiketta ja syötä tuotteen tiedot. Varmista, että tuotteen viivakoodi on ainutlaatuinen. Napsauttaa ”Tallenna”, kun olet valmis." +
-                "\n\nTuotteen poistaminen: Valitse 'Tuotteiden hallinta', sitten 'Poista tuote'. Syötä poistettavan tuotteen tunnus ja napsauta 'Poista'. " +
-                "\n\nTuotteen muokkaus: Valitse joko 'Tuotteiden haku', sitten valitse muokattava tuote kaksoisklikkaamalla sitä. Syötä tuotteen uudet tiedot ja klikkaa ”Muokkaa”. Tai avaa 'Tuotteiden hallinta' välilehti. Valitse ”Muokkaa tuote”. Syötä muokattavan tuotteen viivakoodi ja napsauta ”Hae”. Syötä tuotteen uudet tiedot ja klikkaa ”Muokkaa”.", ButtonType.CLOSE);
-        alert.setTitle("Ohje");
-        alert.setHeaderText("Ohje");
+        bundle = mainApp.getBundle();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, bundle.getString("optionsViewHelpString"), ButtonType.CLOSE);
+        alert.setTitle(bundle.getString("helpString"));
+        alert.setHeaderText(bundle.getString("helpString"));
         alert.showAndWait();
     }
 }
