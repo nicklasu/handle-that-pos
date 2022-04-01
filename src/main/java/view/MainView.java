@@ -62,7 +62,7 @@ public class MainView {
     private final ArrayList<Button> hotkeyButtons = new ArrayList<>();
     private HotkeyFileHandler hotkeyFileHandler;
     private ResourceBundle bundle;
-
+    private List<Integer> privilegesOfUser;
 
 
     public void loadTransactionView() {
@@ -169,37 +169,38 @@ public class MainView {
                     thread.start();
                 } else if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
                     if (System.currentTimeMillis() - startTime > 2000) {
-                        if (productId != null) {
-                            TextInputDialog tid = new TextInputDialog("");
-                            tid.setTitle(bundle.getString("hotkeySettingTitleString"));
-                            tid.setHeaderText(bundle.getString("hotkeySettingDefaultNameString") + " " + items.get(items.size() - 1).getName() + ".\n" + bundle.getString("hotkeySettingRenameString"));
-                            tid.setContentText(bundle.getString("hotkeySettingNewNameString"));
-                            Optional<String> result = tid.showAndWait();
-                            result.ifPresent(e -> {
-                                TextField inputField = tid.getEditor();
-                                hotkeyProductIds[buttonId] = productId;
-                                hotkeyButtons.get(buttonId).setStyle(paymentButton.getStyle());
-                                Button hotkey = hotkeyButtons.get(buttonId);
-                                hotkey.setOnMouseEntered(mouseEvent -> hotkey.setStyle(paymentButton.getStyle()));
-                                hotkey.setOnMouseExited(mouseEvent -> hotkey.setStyle(paymentButton.getStyle()));
-                                if (!Objects.equals(inputField.getText(), "")) {
-                                    mainApp.setHotkeyButtonName(inputField.getText(), buttonId);
-                                    hotkeyButtons.get(buttonId).setText(inputField.getText());
-                                } else {
-                                    mainApp.setHotkeyButtonName(items.get(items.size() - 1).getName(), buttonId);
-                                    hotkeyButtons.get(buttonId).setText(items.get(items.size() - 1).getName());
-                                }
-                                hotkeyFileHandler.saveHotkeys(hotkeyProductIds, mainApp.getHotkeyButtonNames());
-                            });
-                        } else {
-                            Notifications.create()
-                                    .owner(mainAnchorPane.getScene().getWindow())
-                                    .title(bundle.getString("notificationString"))
-                                    .text(bundle.getString("hotkeyNoScanString"))
-                                    .position(Pos.TOP_RIGHT)
-                                    .show();
-                        }
-                    } else {
+                        if (Collections.max(privilegesOfUser) > 0) {
+                            if (productId != null) {
+                                TextInputDialog tid = new TextInputDialog("");
+                                tid.setTitle(bundle.getString("hotkeySettingTitleString"));
+                                tid.setHeaderText(bundle.getString("hotkeySettingDefaultNameString") + " " + items.get(items.size() - 1).getName() + ".\n" + bundle.getString("hotkeySettingRenameString"));
+                                tid.setContentText(bundle.getString("hotkeySettingNewNameString"));
+                                Optional<String> result = tid.showAndWait();
+                                result.ifPresent(e -> {
+                                    TextField inputField = tid.getEditor();
+                                    hotkeyProductIds[buttonId] = productId;
+                                    hotkeyButtons.get(buttonId).setStyle(paymentButton.getStyle());
+                                    Button hotkey = hotkeyButtons.get(buttonId);
+                                    hotkey.setOnMouseEntered(mouseEvent -> hotkey.setStyle(paymentButton.getStyle()));
+                                    hotkey.setOnMouseExited(mouseEvent -> hotkey.setStyle(paymentButton.getStyle()));
+                                    if (!Objects.equals(inputField.getText(), "")) {
+                                        mainApp.setHotkeyButtonName(inputField.getText(), buttonId);
+                                        hotkeyButtons.get(buttonId).setText(inputField.getText());
+                                    } else {
+                                        mainApp.setHotkeyButtonName(items.get(items.size() - 1).getName(), buttonId);
+                                        hotkeyButtons.get(buttonId).setText(items.get(items.size() - 1).getName());
+                                    }
+                                    hotkeyFileHandler.saveHotkeys(hotkeyProductIds, mainApp.getHotkeyButtonNames());
+                                });
+                            } else {
+                                Notifications.create()
+                                        .owner(mainAnchorPane.getScene().getWindow())
+                                        .title(bundle.getString("notificationString"))
+                                        .text(bundle.getString("hotkeyNoScanString"))
+                                        .position(Pos.TOP_RIGHT)
+                                        .show();
+                            }
+                    } } else {
                         try {
                             if (!Objects.equals(hotkeyProductIds[buttonId], "null")) {
                                 addProduct(hotkeyProductIds[buttonId]);
@@ -252,6 +253,12 @@ public class MainView {
         this.mainApp = mainApp;
         selfcheckoutlabel.setVisible(false);
         bundle = mainApp.getBundle();
+        privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
+        if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
+            settingsBtn.setVisible(false);
+            logoutBtn.setVisible(false);
+            selfcheckoutlabel.setVisible(true);
+        }
         feedbackProgressBar.setVisible(false);
         mainApp.getStage().setTitle(mainApp.APP_TITLE + " - " + mainApp.getEngine().getUser().getUsername());
         hotkeyFileHandler = new HotkeyFileHandler(bundle);
@@ -291,11 +298,5 @@ public class MainView {
         barcodeTextField.requestFocus();
         BooleanBinding booleanBind = Bindings.size(items).isEqualTo(0);
         paymentButton.disableProperty().bind(booleanBind);
-        List<Integer> privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
-        if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
-            settingsBtn.setVisible(false);
-            logoutBtn.setVisible(false);
-            selfcheckoutlabel.setVisible(true);
-        }
     }
 }
