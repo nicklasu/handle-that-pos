@@ -26,7 +26,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
-    <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Kirjaudu sisään" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+    <Label alignment="TOP_LEFT" contentDisplay="TOP" text="%loginMain" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
         <font>
             <Font size="37.0" />
         </font>
@@ -39,14 +39,14 @@
             <Insets />
         </opaqueInsets>
     </TextField>
-    <Label text="Käyttäjänimi" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-    <Label text="Salasana" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <Label text="%loginName" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+    <Label text="%password" GridPane.columnIndex="1" GridPane.rowIndex="3" />
     <PasswordField fx:id="passwordPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <GridPane.margin>
             <Insets left="70.0" />
         </GridPane.margin>
     </PasswordField>
-    <Button mnemonicParsing="false" onAction="#handleLoginButton" text="Kirjaudu" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+    <Button mnemonicParsing="false" onAction="#handleLoginButton" text="%loginBtn" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
         <font>
             <Font size="24.0" />
         </font>

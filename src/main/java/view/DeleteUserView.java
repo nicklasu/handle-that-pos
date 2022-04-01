@@ -28,16 +28,16 @@ public class DeleteUserView {
             if (username.equals(this.mainApp.getEngine().getUser().getUsername())) {
                 Notifications.create()
                         .owner(userName.getScene().getWindow())
-                        .title("Virhe")
-                        .text("Et voi poistaa itseäsi!")
+                        .title(this.mainApp.getBundle().getString("errorString"))
+                        .text(this.mainApp.getBundle().getString("deleteUserError2"))
                         .position(Pos.TOP_RIGHT)
                         .showError();
             } else {
                 this.mainApp.getEngine().userDAO().deleteUser(this.mainApp.getEngine().getUser());
                 Notifications.create()
                         .owner(userName.getScene().getWindow())
-                        .title("Onnistui")
-                        .text("Käyttäjä poistettu!")
+                        .title(this.mainApp.getBundle().getString("success"))
+                        .text(this.mainApp.getBundle().getString("deleteUserSuccess"))
                         .position(Pos.TOP_RIGHT)
                         .show();
             }
@@ -45,8 +45,8 @@ public class DeleteUserView {
             System.out.println(e);
             Notifications.create()
                     .owner(userName.getScene().getWindow())
-                    .title("Virhe")
-                    .text("Tapahtui virhe! Ota yhteyttä järjestelmän ylläpitäjään.")
+                    .title(this.mainApp.getBundle().getString("errorString"))
+                    .text(this.mainApp.getBundle().getString("deleteUserError"))
                     .position(Pos.TOP_RIGHT)
                     .showError();
         }
