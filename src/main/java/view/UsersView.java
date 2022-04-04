@@ -1,5 +1,6 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -41,8 +42,10 @@ public class UsersView {
     private ListView<Transaction> transactionListView;
     @FXML
     private ImageView avatar;
-
+    @FXML
+    private ProgressIndicator progressIndicator;
     private User searchedUser;
+
 
     final private ObservableList<Transaction> items = FXCollections.observableArrayList();
 
@@ -117,9 +120,24 @@ public class UsersView {
     }
 
     private void setListViewItems(User user) {
-        List<Transaction> transactions = this.mainApp.getEngine().transactionDAO().getTransactions(user);
-        this.items.addAll(transactions);
-        this.transactionListView.setItems(this.items);
+        //new thread
+        progressIndicator.setVisible(true);
+        Thread thread = new Thread(() -> {
+            try {
+                List<Transaction> transactions = this.mainApp.getEngine().transactionDAO().getTransactions(user);
+                Platform.runLater(() -> {
+                    items.clear();
+                    items.addAll(transactions);
+                    transactionListView.setItems(items);
+                    progressIndicator.setVisible(false);
+
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+
     }
 
     private void showTransactionDetails(Transaction transaction) {
