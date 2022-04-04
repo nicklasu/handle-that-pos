@@ -13,9 +13,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import model.classes.CurrencyHandler;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -61,6 +64,7 @@ public class MainView {
     private ChoiceBox<String> languageBox;
     @FXML
     private Text languageText;
+    private String currency;
     private ObservableList<String> languages = FXCollections.observableArrayList("fi", "en");
     final private ObservableList<Product> items = FXCollections.observableArrayList();
     private String productId;
@@ -116,10 +120,16 @@ public class MainView {
 
     public void setTotalPrice() {
         if (!(this.mainApp.getEngine().getTransaction() == null)) {
-            String priceInEuros = String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f)) + "€";
+
+
+            String priceInEuros = String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f)) + CurrencyHandler.getCurrency();
             this.totalPriceLabel.setText(priceInEuros);
+
+
+//            String priceInEuros = String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f)) + "€";
+//            this.totalPriceLabel.setText(priceInEuros);
         } else {
-            this.totalPriceLabel.setText("0.00€");
+            this.totalPriceLabel.setText("0.00" + CurrencyHandler.getCurrency());
         }
     }
 
@@ -258,6 +268,16 @@ public class MainView {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
+        //read from HandleThatPos.properties file and get currency propery
+//        File file = new File("src/main/resources/HandleThatPos.properties");
+//        Properties properties = new Properties();
+//        try {
+//            properties.load(new FileInputStream(file));
+//            this.currency = properties.getProperty("currency");
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         selfcheckoutlabel.setVisible(false);
         bundle = mainApp.getBundle();
         privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
@@ -332,9 +352,10 @@ public class MainView {
         });
         //check if selfcheckoutlabel is clicked 5 times in a row and if so, call handleLogoutButton() method
         selfcheckoutlabel.setOnMouseClicked(event -> {
-            if(event.getClickCount() == 5) {
+            if (event.getClickCount() == 5) {
                 handleLogoutButton();
             }
         });
+
     }
 }
