@@ -324,5 +324,11 @@ public class MainView {
         barcodeTextField.requestFocus();
         BooleanBinding booleanBind = Bindings.size(items).isEqualTo(0);
         paymentButton.disableProperty().bind(booleanBind);
+        //if barcodeTextField's length is greater than 8 characters it is trimmed to 8 characters
+        barcodeTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 8) {
+                barcodeTextField.setText(newValue.substring(0, 8));
+            }
+        });
     }
 }
