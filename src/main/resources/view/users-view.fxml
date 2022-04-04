@@ -109,11 +109,11 @@
             </Text>
             <StackPane prefHeight="481.0" prefWidth="720.0" GridPane.rowIndex="3">
                <children>
-                  <ProgressIndicator fx:id="progressIndicator" />
                   <ListView fx:id="transactionListView" maxHeight="490.0" prefHeight="468.0" prefWidth="720.0" StackPane.alignment="TOP_RIGHT">
                      <StackPane.margin>
                         <Insets />
                      </StackPane.margin></ListView>
+                  <ProgressIndicator fx:id="progressIndicator" />
                </children>
                <GridPane.margin>
                   <Insets />
