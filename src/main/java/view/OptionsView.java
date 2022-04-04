@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import model.classes.Privilege;
 import model.classes.User;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.io.File;
 import java.io.FileReader;
@@ -65,7 +66,7 @@ public class OptionsView {
         File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
         Properties properties = new Properties();
         try {
-            FileReader reader = new FileReader(appConfigPath);
+            FileReader reader = new FileReader(appConfigPath, StandardCharsets.UTF_8);
             properties.load(reader);
             String language = properties.getProperty("language");
             languageBox.setValue(language);
@@ -82,7 +83,7 @@ public class OptionsView {
                 default -> throw new IllegalStateException("Unexpected value: " + languageBox.getValue());
             };
             try {
-                FileWriter writer = new FileWriter(appConfigPath);
+                FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8);
                 properties.setProperty("language", lang.split("_")[0]);
                 properties.setProperty("country", lang.split("_")[1]);
                 properties.store(writer, "HandleThatPos settings");

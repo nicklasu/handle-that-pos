@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.GridPane;
+import model.classes.CurrencyHandler;
 import model.classes.Product;
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class ListCellTransaction extends ListCell<Product> {
                 }
             }
             this.nameLabel.setText(product.getName());
-            this.priceLabel.setText(String.format("%.2f",product.getPrice() / 100f) + "€");
+            this.priceLabel.setText(String.format("%.2f",product.getPrice() / 100f) + CurrencyHandler.getCurrency());
             setText(null);
             setGraphic(this.gridPane);
         }

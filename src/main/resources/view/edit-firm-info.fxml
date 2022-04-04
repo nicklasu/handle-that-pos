@@ -44,10 +44,10 @@
             <TextField fx:id="phoneNumberTF" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label stylesheets="@main-view.css" text="%street" GridPane.rowIndex="5" />
             <Label stylesheets="@main-view.css" text="%postalCode" GridPane.rowIndex="3" />
-            <TextField fx:id="addressTF1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="postalCodeTF" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label stylesheets="@main-view.css" text="%city" GridPane.rowIndex="4" />
-            <TextField fx:id="addressTF11" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="firmNameTF1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="cityTF" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="businessIdTF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label stylesheets="@main-view.css" text="%businessID" GridPane.rowIndex="1" />
             <Label text="%currency" GridPane.rowIndex="7" />
             <ChoiceBox fx:id="currencyBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7">

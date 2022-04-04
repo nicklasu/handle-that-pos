@@ -7,11 +7,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.GridPane;
+import model.classes.CurrencyHandler;
 import model.classes.Product;
 import model.interfaces.IOrder;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Properties;
 
 public class ProductListViewCell extends ListCell<Product> {
     @FXML
@@ -31,11 +35,20 @@ public class ProductListViewCell extends ListCell<Product> {
     private IOrder order;
     private ObservableList<Product> items;
     private int productAmount;
-
+    private String currency;
     public ProductListViewCell(MainView mainView, IOrder order, ObservableList<Product> items) {
         this.mainView = mainView;
         this.order = order;
         this.items = items;
+        File file = new File("src/main/resources/HandleThatPos.properties");
+        Properties properties = new Properties();
+        try {
+            properties.load(new FileInputStream(file));
+            this.currency = properties.getProperty("currency");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -85,6 +98,6 @@ public class ProductListViewCell extends ListCell<Product> {
     }
 
     private void productPriceSet(Product product) {
-        this.productPriceLabel.setText(String.format("%.2f", (product.getPrice() * productAmount) / 100f) + "€");
+        this.productPriceLabel.setText(String.format("%.2f", (product.getPrice() * productAmount) / 100f) + CurrencyHandler.getCurrency());
     }
 }

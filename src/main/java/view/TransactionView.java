@@ -96,7 +96,7 @@ public class TransactionView {
     }
 
     private String generateOverviewText() {
-        return MessageFormat.format(this.mainApp.getBundle().getString("transactionoverviewtext") + "€", this.mainApp.getEngine().getTransaction().getOrder().getProductList().size(), (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))));
+        return MessageFormat.format(this.mainApp.getBundle().getString("transactionoverviewtext") + CurrencyHandler.getCurrency(), this.mainApp.getEngine().getTransaction().getOrder().getProductList().size(), (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))));
     }
 
     private String generateProductInfoText(Product product) {
