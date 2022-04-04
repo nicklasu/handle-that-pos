@@ -330,5 +330,11 @@ public class MainView {
                 barcodeTextField.setText(newValue.substring(0, 8));
             }
         });
+        //check if selfcheckoutlabel is clicked 5 times in a row and if so, call handleLogoutButton() method
+        selfcheckoutlabel.setOnMouseClicked(event -> {
+            if(event.getClickCount() == 5) {
+                handleLogoutButton();
+            }
+        });
     }
 }
