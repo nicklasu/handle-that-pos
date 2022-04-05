@@ -15,6 +15,7 @@ import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -52,14 +53,14 @@ public class ProductSearchView {
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-
+        List<Integer> verifiedPrivileges = this.mainApp.getEngine().getVerifiedPrivileges();
         BooleanBinding booleanBind = input.textProperty().isEmpty();
         fetchBtn.disableProperty().bind(booleanBind);
         updateData();
         productTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if (event.getClickCount() == 2) {
+                if (event.getClickCount() == 2 && Collections.max(verifiedPrivileges) >= 2) {
                     int row = productTable.getSelectionModel().getSelectedIndex();
                     System.out.println(productTable.getSelectionModel().getSelectedIndex());
                     if (!(row < 0)) {

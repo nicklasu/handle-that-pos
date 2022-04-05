@@ -194,10 +194,9 @@ public class OptionsView {
 
 
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 2) {
-            btn1.setDisable(true);
             btn2.setDisable(true);
             btn3.setDisable(true);
-            btn4.setDisable(true);
+            btn6.setDisable(true);
         }
         User user = this.mainApp.getEngine().getUser();
         returnBtn.requestFocus();

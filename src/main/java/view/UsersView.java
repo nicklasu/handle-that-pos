@@ -7,6 +7,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -45,12 +46,19 @@ public class UsersView {
     @FXML
     private ProgressIndicator progressIndicator;
     private User searchedUser;
-
+    @FXML
+    private Button searchButton;
 
     final private ObservableList<Transaction> items = FXCollections.observableArrayList();
 
     public void setMainApp(MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
+        List<Integer> verifiedPrivileges = this.mainApp.getEngine().getVerifiedPrivileges();
+        //if user has user level privileges or less disable the search field
+        if(Collections.max(verifiedPrivileges) < 2){
+            this.searchField.setDisable(true);
+            this.searchButton.setDisable(true);
+        }
         searchField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER) searchUser();
         });
