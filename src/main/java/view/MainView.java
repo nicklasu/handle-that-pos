@@ -92,30 +92,33 @@ public class MainView {
     }
 
     private void addProduct(String productId) {
-        Product product = this.mainApp.getEngine().scanProduct(productId);
-        if (product != null) {
-            if (!items.contains(product)) {
-                items.add(product);
-            }
-            scanListView.refresh();
-            setTotalPrice();
-            for (Product p : this.mainApp.getEngine().getTransaction().getOrder().getProductList()) {
-                if (p.equals(product)) {
-                    if (p.getStock() < 0) {
-                        negativeProductStockNotification();
-                    }
-                    break;
+        if(barcodeTextField.getText().length() > 0) {
+            Product product = this.mainApp.getEngine().scanProduct(productId);
+            if (product != null) {
+                if (!items.contains(product)) {
+                    items.add(product);
                 }
+                scanListView.refresh();
+                setTotalPrice();
+                for (Product p : this.mainApp.getEngine().getTransaction().getOrder().getProductList()) {
+                    if (p.equals(product)) {
+                        if (p.getStock() < 0) {
+                            negativeProductStockNotification();
+                        }
+                        break;
+                    }
+                }
+            } else {
+                Notifications.create()
+                        .owner(barcodeTextField.getScene().getWindow())
+                        .title(bundle.getString("errorString"))
+                        .text(bundle.getString("productNotFoundString"))
+                        .position(Pos.TOP_RIGHT)
+                        .showError();
             }
-        } else {
-            Notifications.create()
-                    .owner(barcodeTextField.getScene().getWindow())
-                    .title(bundle.getString("errorString"))
-                    .text(bundle.getString("productNotFoundString"))
-                    .position(Pos.TOP_RIGHT)
-                    .showError();
         }
-        barcodeTextField.requestFocus();
+            barcodeTextField.requestFocus();
+
     }
 
     public void setTotalPrice() {
