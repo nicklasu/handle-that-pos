@@ -45,7 +45,7 @@
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%search" GridPane.rowIndex="1" />
                   <TextField fx:id="searchField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onAction="#searchUser" text="%get" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchUser" text="%get" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <GridPane prefHeight="250.0" prefWidth="720.0" GridPane.rowIndex="1">
