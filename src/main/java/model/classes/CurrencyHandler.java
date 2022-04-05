@@ -15,7 +15,11 @@ public class CurrencyHandler {
         try {
             FileInputStream input = new FileInputStream(file);
             properties.load(new InputStreamReader(input, Charset.forName("UTF-8")));
-            return properties.getProperty("currency");
+            String c = properties.getProperty("currency");
+            if(c == null) {
+                c = "€";
+            }
+            return c;
 
         } catch (Exception e) {
             e.printStackTrace();
