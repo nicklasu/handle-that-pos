@@ -10,14 +10,14 @@ public class Profile {
     @Column(name = "user_id", updatable = false, nullable = false, unique = true)
     private int id;
 
-    @Column(name="avatar")
+    @Column(name = "avatar")
     private String avatar;
 
-    public Profile(){
+    public Profile() {
 
     }
 
-    public Profile(int id, String avatar) {
+    public Profile(final int id, final String avatar) {
         this.id = id;
         this.avatar = avatar;
     }
@@ -26,7 +26,7 @@ public class Profile {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -34,7 +34,7 @@ public class Profile {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(final String avatar) {
         this.avatar = avatar;
     }
 }

@@ -13,29 +13,32 @@ public class HotkeyFileHandler extends MainView {
 
     ResourceBundle bundle;
 
-    public HotkeyFileHandler(ResourceBundle bundle) {
+    public HotkeyFileHandler(final ResourceBundle bundle) {
         this.bundle = bundle;
     }
 
     /**
      * Saves hotkey preferences to hotkey.properties file
      */
-    void saveHotkeys(String[] hotkeyProductIds, String[] hotkeyProductNames) {
+    void saveHotkeys(final String[] hotkeyProductIds, final String[] hotkeyProductNames) {
         try {
-            File configFile = new File("src/main/resources/hotkey.properties");
-            Properties props = new Properties();
+            final File configFile = new File("src/main/resources/hotkey.properties");
+            final Properties props = new Properties();
             for (int i = 0; i < hotkeyProductIds.length; i++) {
                 props.setProperty("hotkeyId" + i, String.valueOf(hotkeyProductIds[i]));
                 props.setProperty("hotkeyName" + i, String.valueOf(hotkeyProductNames[i]));
             }
-            FileWriter writer = new FileWriter(configFile);
-            props.store(writer, "Hotkey settings");
-            writer.close();
-        } catch (FileNotFoundException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, bundle.getString("fileNotFoundString"), ButtonType.CLOSE);
+            try (final FileWriter writer = new FileWriter(configFile)) {
+                props.store(writer, "Hotkey settings");
+            }
+
+        } catch (final FileNotFoundException ex) {
+            final Alert alert = new Alert(Alert.AlertType.ERROR, bundle.getString("fileNotFoundString"),
+                    ButtonType.CLOSE);
             alert.showAndWait();
-        } catch (IOException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, bundle.getString("fileSavingErrorString"), ButtonType.CLOSE);
+        } catch (final IOException ex) {
+            final Alert alert = new Alert(Alert.AlertType.ERROR, bundle.getString("fileSavingErrorString"),
+                    ButtonType.CLOSE);
             alert.showAndWait();
         }
     }
@@ -43,25 +46,25 @@ public class HotkeyFileHandler extends MainView {
     /**
      * Loads hotkey preferences from hotkey.properties file
      */
-    void loadHotkeys(String[] hotkeyProductIds, String[] hotkeyProductNames) {
-        try {
-            File configFile = new File("src/main/resources/hotkey.properties");
-            FileReader reader = new FileReader(configFile);
-            Properties props = new Properties();
+    void loadHotkeys(final String[] hotkeyProductIds, final String[] hotkeyProductNames) {
+        final File configFile = new File("src/main/resources/hotkey.properties");
+        try (final FileReader reader = new FileReader(configFile)) {
+            final Properties props = new Properties();
             props.load(reader);
             try {
                 for (int i = 0; i < hotkeyProductIds.length; i++) {
                     hotkeyProductIds[i] = props.getProperty("hotkeyId" + i);
                     hotkeyProductNames[i] = props.getProperty("hotkeyName" + i);
                 }
-            } catch (Exception ignored) {
+            } catch (final Exception b) {
+                b.printStackTrace();
             }
-            reader.close();
-        } catch (FileNotFoundException ex) {
+        } catch (final FileNotFoundException ex) {
             fileNotFoundNotification();
 
-        } catch (IOException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, bundle.getString("fileLoadingErrorString"), ButtonType.CLOSE);
+        } catch (final IOException ex) {
+            final Alert alert = new Alert(Alert.AlertType.ERROR, bundle.getString("fileLoadingErrorString"),
+                    ButtonType.CLOSE);
             alert.showAndWait();
         }
     }

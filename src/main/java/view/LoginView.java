@@ -7,8 +7,9 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 
 public class LoginView {
-    //Prefills the username field and password field with the manager's username and password
-    private boolean DEV_MODE = true;
+    // Prefills the username field and password field with the manager's username
+    // and password
+    private final boolean DEV_MODE = true;
 
     private MainApp mainApp;
 
@@ -23,10 +24,11 @@ public class LoginView {
     @FXML
     private Button loginButton;
 
-    public void setMainApp(MainApp mainApp) {
+    public void setMainApp(final MainApp mainApp) {
         devLabel.setVisible(DEV_MODE);
-        //Prefills the username field and password field with the manager's username and password
-        if(DEV_MODE) {
+        // Prefills the username field and password field with the manager's username
+        // and password
+        if (DEV_MODE) {
             usernameTextField.setText("testuser");
             passwordPasswordField.setText("123");
         }
@@ -47,13 +49,17 @@ public class LoginView {
         progressIndicator.setVisible(true);
         progressIndicator.setViewOrder(2);
         loginButton.setDisable(true);
-        loginButton.textProperty().bind(Bindings.when(progressIndicator.visibleProperty()).then(this.mainApp.getBundle().getString("logging_in")).otherwise(this.mainApp.getBundle().getString("login")));
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "default error", ButtonType.OK);
+        loginButton.textProperty()
+                .bind(Bindings.when(progressIndicator.visibleProperty())
+                        .then(this.mainApp.getBundle().getString("logging_in"))
+                        .otherwise(this.mainApp.getBundle().getString("login")));
+        final Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "default error", ButtonType.OK);
         alert.setTitle(this.mainApp.getBundle().getString("errorString"));
         alert.setHeaderText(this.mainApp.getBundle().getString("loginError"));
-        Thread thread = new Thread(() -> {
+        final Thread thread = new Thread(() -> {
             try {
-                int result = this.mainApp.getEngine().login(usernameTextField.getText(), passwordPasswordField.getText());
+                final int result = this.mainApp.getEngine().login(usernameTextField.getText(),
+                        passwordPasswordField.getText());
                 Platform.runLater(() -> {
                     if (result == 1) {
                         this.mainApp.showMainView();
@@ -84,15 +90,12 @@ public class LoginView {
                     loginButton.textProperty().unbind();
 
                 });
-            } catch(Exception e){
-                    e.printStackTrace();
-                }
-            });
+            } catch (final Exception e) {
+                e.printStackTrace();
+            }
+        });
         thread.start();
 
     }
 
 }
-
-
-

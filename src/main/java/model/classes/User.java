@@ -4,7 +4,9 @@ import javax.persistence.*;
 
 /**
  * Represents a user/employee
- * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
  */
 @Entity
 @Table(name = "Käyttäjä")
@@ -40,7 +42,8 @@ public class User {
     private String lName;
 
     /**
-     * Activity of user, used to differentiate inactive users when browsing all the users
+     * Activity of user, used to differentiate inactive users when browsing all the
+     * users
      */
     @Column(name = "Aktiivisuus")
     private int activity;
@@ -53,13 +56,15 @@ public class User {
 
     /**
      * Constructor for users
-     * @param fName first name
-     * @param lName last name
+     * 
+     * @param fName    first name
+     * @param lName    last name
      * @param username username to log in with
      * @param password password to log in with
      * @param activity whether user is active of not
      */
-    public User(String fName, String lName, String username, String password, int activity) {
+    public User(final String fName, final String lName, final String username, final String password,
+            final int activity) {
         this.fName = fName;
         this.lName = lName;
         this.username = username;
@@ -69,6 +74,7 @@ public class User {
 
     /**
      * Secondary constructor allowing id to be set
+     * 
      * @param id
      * @param fName
      * @param lName
@@ -76,7 +82,8 @@ public class User {
      * @param password
      * @param activity
      */
-    public User(int id, String fName, String lName, String username, String password, int activity) {
+    public User(final int id, final String fName, final String lName, final String username, final String password,
+            final int activity) {
         this(fName, lName, username, password, activity);
         this.id = id;
     }
@@ -91,7 +98,7 @@ public class User {
     /**
      * @param id identifier of user
      */
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -105,7 +112,7 @@ public class User {
     /**
      * @param username username of user
      */
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -119,7 +126,7 @@ public class User {
     /**
      * @param password password of user
      */
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
@@ -133,7 +140,7 @@ public class User {
     /**
      * @param fName first name of user
      */
-    public void setfName(String fName) {
+    public void setfName(final String fName) {
         this.fName = fName;
     }
 
@@ -147,7 +154,7 @@ public class User {
     /**
      * @param lName last name of user
      */
-    public void setlName(String lName) {
+    public void setlName(final String lName) {
         this.lName = lName;
     }
 
@@ -161,7 +168,7 @@ public class User {
     /**
      * @param activity activity of user
      */
-    public void setActivity(int activity) {
+    public void setActivity(final int activity) {
         this.activity = activity;
     }
 

@@ -4,13 +4,15 @@ import javax.persistence.*;
 
 /**
  * Object representing a join table mapping products to orders in the database
- * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
  */
 @Entity
 @Table(name = "Sisältyy")
 @AssociationOverrides({
         @AssociationOverride(name = "primaryKey.product", joinColumns = @JoinColumn(name = "TuoteID")),
-        @AssociationOverride(name = "primaryKey.order", joinColumns = @JoinColumn(name = "TilausID"))})
+        @AssociationOverride(name = "primaryKey.order", joinColumns = @JoinColumn(name = "TilausID")) })
 public class OrderProduct {
     /**
      * Order identifier for mapping products to
@@ -32,9 +34,10 @@ public class OrderProduct {
 
     /**
      * Sets order identifier
+     * 
      * @param primaryKey order identifier
      */
-    public void setPrimaryKey(OrderProductId primaryKey) {
+    public void setPrimaryKey(final OrderProductId primaryKey) {
         this.primaryKey = primaryKey;
     }
 
@@ -48,9 +51,10 @@ public class OrderProduct {
 
     /**
      * Sets order
+     * 
      * @param order the order
      */
-    public void setOrder(Order order) {
+    public void setOrder(final Order order) {
         getPrimaryKey().setOrder(order);
     }
 
@@ -64,9 +68,10 @@ public class OrderProduct {
 
     /**
      * Sets a product for a identifier
+     * 
      * @param product
      */
-    public void setProduct(Product product) {
+    public void setProduct(final Product product) {
         getPrimaryKey().setProduct(product);
     }
 
@@ -80,9 +85,10 @@ public class OrderProduct {
 
     /**
      * Sets amount of a product
+     * 
      * @param amount
      */
-    public void setAmount(int amount) {
+    public void setAmount(final int amount) {
         this.amount = amount;
     }
 }

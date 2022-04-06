@@ -31,28 +31,29 @@ public class ProductListViewCell extends ListCell<Product> {
     @FXML
     private GridPane gridPane;
     private FXMLLoader fxmlLoader;
-    private MainView mainView;
-    private IOrder order;
-    private ObservableList<Product> items;
+    private final MainView mainView;
+    private final IOrder order;
+    private final ObservableList<Product> items;
     private int productAmount;
     private String currency;
-    public ProductListViewCell(MainView mainView, IOrder order, ObservableList<Product> items) {
+
+    public ProductListViewCell(final MainView mainView, final IOrder order, final ObservableList<Product> items) {
         this.mainView = mainView;
         this.order = order;
         this.items = items;
-        File file = new File("src/main/resources/HandleThatPos.properties");
-        Properties properties = new Properties();
-        try {
-            properties.load(new FileInputStream(file));
+        final File file = new File("src/main/resources/HandleThatPos.properties");
+        final Properties properties = new Properties();
+        try (FileInputStream fis = new FileInputStream(file)) {
+            properties.load(fis);
             this.currency = properties.getProperty("currency");
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    protected void updateItem(Product product, boolean empty) {
+    protected void updateItem(final Product product, final boolean empty) {
         super.updateItem(product, empty);
         if (empty || product == null) {
             setText(null);
@@ -63,7 +64,7 @@ public class ProductListViewCell extends ListCell<Product> {
                 fxmlLoader.setController(this);
                 try {
                     this.fxmlLoader.load();
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -97,7 +98,8 @@ public class ProductListViewCell extends ListCell<Product> {
         }
     }
 
-    private void productPriceSet(Product product) {
-        this.productPriceLabel.setText(String.format("%.2f", (product.getPrice() * productAmount) / 100f) + CurrencyHandler.getCurrency());
+    private void productPriceSet(final Product product) {
+        this.productPriceLabel.setText(
+                String.format("%.2f", (product.getPrice() * productAmount) / 100f) + CurrencyHandler.getCurrency());
     }
 }

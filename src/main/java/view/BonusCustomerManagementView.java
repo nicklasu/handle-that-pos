@@ -10,7 +10,7 @@ public class BonusCustomerManagementView {
     private MainApp mainApp;
     private FXMLLoader loader;
 
-    public void setMainApp(MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
     }
 
@@ -28,9 +28,9 @@ public class BonusCustomerManagementView {
             this.loader.setLocation(getClass().getResource("add-bonus-customer-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane = this.loader.load();
-            AddBonusCustomerView view = this.loader.getController();
+            final AddBonusCustomerView view = this.loader.getController();
             view.setMainApp(mainApp);
-        } catch (IOException ex) {
+        } catch (final IOException ex) {
             ex.printStackTrace();
         }
         wrapperPaneBonusCustomers.getChildren().add(newLoadedPane);
@@ -44,9 +44,9 @@ public class BonusCustomerManagementView {
             this.loader.setLocation(getClass().getResource("delete-bonus-customer-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane = this.loader.load();
-            DeleteBonusCustomerView view = this.loader.getController();
+            final DeleteBonusCustomerView view = this.loader.getController();
             view.setMainApp(mainApp);
-        } catch (IOException ex) {
+        } catch (final IOException ex) {
             ex.printStackTrace();
         }
         wrapperPaneBonusCustomers.getChildren().add(newLoadedPane);

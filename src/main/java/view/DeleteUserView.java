@@ -16,15 +16,16 @@ public class DeleteUserView {
     @FXML
     private TextField userName;
 
-    public void setMainApp(MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
-        BooleanBinding booleanBind = userName.textProperty().isEmpty();
+        final BooleanBinding booleanBind = userName.textProperty().isEmpty();
         saveBtn.disableProperty().bind(booleanBind);
     }
+
     @FXML
-    private void deleteUser(){
+    private void deleteUser() {
         try {
-            String username = userName.getText();
+            final String username = userName.getText();
             if (username.equals(this.mainApp.getEngine().getUser().getUsername())) {
                 Notifications.create()
                         .owner(userName.getScene().getWindow())
@@ -41,7 +42,7 @@ public class DeleteUserView {
                         .position(Pos.TOP_RIGHT)
                         .show();
             }
-        }catch(Exception e){
+        } catch (final Exception e) {
             System.out.println(e);
             Notifications.create()
                     .owner(userName.getScene().getWindow())

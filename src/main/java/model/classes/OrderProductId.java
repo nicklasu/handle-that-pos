@@ -1,6 +1,5 @@
 package model.classes;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
@@ -10,7 +9,9 @@ import java.util.Objects;
 
 /**
  * Composite key for the join table mapping products to order in the database
- * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
  */
 @Embeddable
 public class OrderProductId implements Serializable {
@@ -35,9 +36,10 @@ public class OrderProductId implements Serializable {
 
     /**
      * sets the group of products
+     * 
      * @param order set of products
      */
-    public void setOrder(Order order) {
+    public void setOrder(final Order order) {
         this.order = order;
     }
 
@@ -51,31 +53,35 @@ public class OrderProductId implements Serializable {
 
     /**
      * Sets a single product
+     * 
      * @param product
      */
-    public void setProduct(Product product) {
+    public void setProduct(final Product product) {
         this.product = product;
     }
 
     /**
      * Overwrites the equals method
+     * 
      * @param o object to be compared
      * @return true if same objects
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
+    public boolean equals(final Object o) {
+        if (this == o)
+            return true;
 
         if (o == null || getClass() != o.getClass())
             return false;
 
-        OrderProductId that = (OrderProductId) o;
+        final OrderProductId that = (OrderProductId) o;
         return Objects.equals(order, that.order) &&
                 Objects.equals(product, that.product);
     }
 
     /**
      * Returns a hashcode for hibernate
+     * 
      * @return
      */
     @Override

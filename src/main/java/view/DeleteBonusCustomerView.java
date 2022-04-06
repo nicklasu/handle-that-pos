@@ -15,7 +15,7 @@ public class DeleteBonusCustomerView {
     @FXML
     private TextField bonusCustomerId;
 
-    public void setMainApp(MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
         bonusCustomerId.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
@@ -28,15 +28,16 @@ public class DeleteBonusCustomerView {
     private void deleteBonusCustomer() {
         bundle = mainApp.getBundle();
         try {
-            String text = bonusCustomerId.getText();
-            this.mainApp.getEngine().customerDAO().deleteCustomer(this.mainApp.getEngine().customerDAO().getCustomer(Integer.parseInt(text)));
+            final String text = bonusCustomerId.getText();
+            this.mainApp.getEngine().customerDAO()
+                    .deleteCustomer(this.mainApp.getEngine().customerDAO().getCustomer(Integer.parseInt(text)));
             Notifications.create()
                     .owner(bonusCustomerId.getScene().getWindow())
                     .title("")
                     .text(bundle.getString("bonusCustomerDeleted"))
                     .position(Pos.TOP_RIGHT)
                     .showConfirm();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Notifications.create()
                     .owner(bonusCustomerId.getScene().getWindow())
                     .title(bundle.getString("errorString"))

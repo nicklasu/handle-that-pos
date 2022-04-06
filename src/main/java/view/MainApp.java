@@ -27,27 +27,24 @@ public class MainApp extends Application {
     private ResourceBundle bundle;
 
     public MainApp() {
-        //this.engine = new POSEngine();
+        // this.engine = new POSEngine();
     }
 
     @Override
     public void init() {
-        File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
-        Properties properties = new Properties();
-        try {
-            FileReader reader = new FileReader(appConfigPath);
+        final File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
+        final Properties properties = new Properties();
+        try (final FileReader reader = new FileReader(appConfigPath)) {
             properties.load(reader);
             language = properties.getProperty("language");
             country = properties.getProperty("country");
-            reader.close();
-        } catch (IOException e) {
-            try {
-                FileWriter writer = new FileWriter(appConfigPath);
+        } catch (final IOException e) {
+            try (final FileWriter writer = new FileWriter(appConfigPath)) {
                 properties.setProperty("language", "");
                 properties.setProperty("country", "");
                 properties.store(writer, "HandleThatPos settings");
-                writer.close();
-            } catch (Exception ignored) {
+            } catch (final Exception b) {
+                b.printStackTrace();
             }
         }
         this.locale = new Locale(language, country);
@@ -56,14 +53,14 @@ public class MainApp extends Application {
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(final Stage stage) {
         this.stage = stage;
         this.stage.setMinHeight(760);
         this.stage.setMinWidth(1070);
         stage.setTitle(APP_TITLE);
         this.stage.getIcons().add(new Image("file:src/main/resources/images/pos.png"));
-        //Test
-        //showLoginView();
+        // Test
+        // showLoginView();
         showConnectToDatabaseView();
     }
 
@@ -71,76 +68,76 @@ public class MainApp extends Application {
         return hotkeyProductNames;
     }
 
-    public void setHotkeyButtonName(String hotkeyButtonName, int buttonId) {
+    public void setHotkeyButtonName(final String hotkeyButtonName, final int buttonId) {
         hotkeyProductNames[buttonId] = hotkeyButtonName;
     }
 
     private void showConnectToDatabaseView() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("connect-database-view.fxml"));
+            final FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("connect-database-view.fxml"));
             fxmlLoader.setResources(this.bundle);
-            Scene scene = new Scene(fxmlLoader.load());
+            final Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
-            ConnectDatabaseView connectDatabaseView = fxmlLoader.getController();
+            final ConnectDatabaseView connectDatabaseView = fxmlLoader.getController();
             connectDatabaseView.setMainApp(this);
             this.stage.show();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
 
     public void showMainView() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("main-view.fxml"));
+            final FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("main-view.fxml"));
             fxmlLoader.setResources(this.bundle);
-            Scene scene = new Scene(fxmlLoader.load());
+            final Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
-            MainView mainView = fxmlLoader.getController();
+            final MainView mainView = fxmlLoader.getController();
             mainView.setMainApp(this);
             this.stage.show();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
 
     public void showLoginView() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login-view.fxml"));
+            final FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("login-view.fxml"));
             fxmlLoader.setResources(this.bundle);
-            Scene scene = new Scene(fxmlLoader.load());
+            final Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
-            LoginView loginView = fxmlLoader.getController();
+            final LoginView loginView = fxmlLoader.getController();
             loginView.setMainApp(this);
             this.stage.show();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
 
     public void showOptionsView() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("options-view.fxml"));
+            final FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("options-view.fxml"));
             fxmlLoader.setResources(this.bundle);
-            Scene scene = new Scene(fxmlLoader.load());
+            final Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
-            OptionsView optionsView = fxmlLoader.getController();
+            final OptionsView optionsView = fxmlLoader.getController();
             optionsView.setMainApp(this);
             this.stage.show();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
 
     public void showTransactionView() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("transaction-view.fxml"));
+            final FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("transaction-view.fxml"));
             fxmlLoader.setResources(this.bundle);
-            Scene scene = new Scene(fxmlLoader.load());
+            final Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
-            TransactionView transactionView = fxmlLoader.getController();
+            final TransactionView transactionView = fxmlLoader.getController();
             transactionView.setMainApp(this);
             this.stage.show();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
@@ -149,7 +146,7 @@ public class MainApp extends Application {
         return this.engine;
     }
 
-    public void setEngine(IPOSEngine engine) {
+    public void setEngine(final IPOSEngine engine) {
         this.engine = engine;
     }
 
@@ -161,7 +158,7 @@ public class MainApp extends Application {
         return locale;
     }
 
-    public void setLocale(Locale locale) {
+    public void setLocale(final Locale locale) {
         this.locale = locale;
     }
 
@@ -169,11 +166,11 @@ public class MainApp extends Application {
         return bundle;
     }
 
-    public void setBundle(ResourceBundle bundle) {
+    public void setBundle(final ResourceBundle bundle) {
         this.bundle = bundle;
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         launch();
     }
 }

@@ -67,7 +67,8 @@ public class TransactionView {
         try {
             if (this.mainApp.getEngine().getTransaction().getCustomer() == null && bonusCustomerCheckBox.isSelected()) {
                 if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) != null) {
-                    this.mainApp.getEngine().getTransaction().setCustomer(customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
+                    this.mainApp.getEngine().getTransaction()
+                            .setCustomer(customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
                     this.mainApp.getEngine().confirmTransaction(printReceipt);
                     this.mainApp.showMainView();
                 } else {
@@ -82,9 +83,10 @@ public class TransactionView {
                 this.mainApp.getEngine().confirmTransaction(printReceipt);
                 this.mainApp.showMainView();
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, this.mainApp.getBundle().getString("noproductsinorder"), ButtonType.CLOSE);
+            final Alert alert = new Alert(Alert.AlertType.ERROR,
+                    this.mainApp.getBundle().getString("noproductsinorder"), ButtonType.CLOSE);
             alert.showAndWait();
         }
     }
@@ -96,52 +98,49 @@ public class TransactionView {
     }
 
     private String generateOverviewText() {
-        return MessageFormat.format(this.mainApp.getBundle().getString("transactionoverviewtext") + CurrencyHandler.getCurrency(), this.mainApp.getEngine().getTransaction().getOrder().getProductList().size(), (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))));
+        return MessageFormat.format(
+                this.mainApp.getBundle().getString("transactionoverviewtext") + CurrencyHandler.getCurrency(),
+                this.mainApp.getEngine().getTransaction().getOrder().getProductList().size(),
+                (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))));
     }
 
-    private String generateProductInfoText(Product product) {
-        return MessageFormat.format(this.mainApp.getBundle().getString("productinfo"), product.getId(), product.getDescription(), String.format("%.2f", (product.getPrice() / 100f)), product.getStock());
+    private String generateProductInfoText(final Product product) {
+        return MessageFormat.format(this.mainApp.getBundle().getString("productinfo"), product.getId(),
+                product.getDescription(), String.format("%.2f", (product.getPrice() / 100f)), product.getStock());
     }
 
     @FXML
     private void bonusCustomerCheck() {
-        if (!Objects.equals(customerTextField.getText(), "")) {
-            if (!customerKeyPressed.get()) {
-                customerKeyPressed.set(true);
-                final AtomicBoolean running = new AtomicBoolean(false);
-                long startTime = System.currentTimeMillis();
-                feedbackProgressBar.setVisible(true);
-                Thread thread = new Thread(() -> {
-                    running.set(true);
-                    while (running.get()) {
-                        feedbackProgressBar.setProgress(Long.valueOf(System.currentTimeMillis() - startTime).doubleValue() / 2000);
-                        try {
-                            Thread.sleep(100);
-                            if ((System.currentTimeMillis() - startTime) >= 2000) {
-                                Platform.runLater(() -> {
-                                    if (this.mainApp.getEngine().getTransaction() != null) {
-                                        try {
-                                            if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) != null) {
-                                                this.mainApp.getEngine().getTransaction().setCustomer(customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
-                                                transactionOverviewLabel.setText(generateOverviewText());
-                                                bonusCustomerLabel.setText(customerTextField.getText());
-                                                customerTextField.setDisable(true);
-                                                Notifications.create()
-                                                        .owner(transactionAnchorPane.getScene().getWindow())
-                                                        .title(this.mainApp.getBundle().getString("info"))
-                                                        .text(this.mainApp.getBundle().getString("customerfound"))
-                                                        .position(Pos.TOP_RIGHT)
-                                                        .showConfirm();
-                                            } else {
-                                                Notifications.create()
-                                                        .owner(transactionAnchorPane.getScene().getWindow())
-                                                        .title(this.mainApp.getBundle().getString("errorString"))
-                                                        .text(this.mainApp.getBundle().getString("customernotfound"))
-                                                        .position(Pos.TOP_RIGHT)
-                                                        .showError();
-                                            }
-
-                                        } catch (NumberFormatException e) {
+        if (!Objects.equals(customerTextField.getText(), "") && !customerKeyPressed.get()) {
+            customerKeyPressed.set(true);
+            final AtomicBoolean running = new AtomicBoolean(false);
+            final long startTime = System.currentTimeMillis();
+            feedbackProgressBar.setVisible(true);
+            final Thread thread = new Thread(() -> {
+                running.set(true);
+                while (running.get()) {
+                    feedbackProgressBar
+                            .setProgress(System.currentTimeMillis() - startTime / 2000);
+                    try {
+                        Thread.sleep(100);
+                        if ((System.currentTimeMillis() - startTime) >= 2000) {
+                            Platform.runLater(() -> {
+                                if (this.mainApp.getEngine().getTransaction() != null) {
+                                    try {
+                                        if (customerDAO.getCustomer(
+                                                Integer.parseInt(customerTextField.getText())) != null) {
+                                            this.mainApp.getEngine().getTransaction().setCustomer(customerDAO
+                                                    .getCustomer(Integer.parseInt(customerTextField.getText())));
+                                            transactionOverviewLabel.setText(generateOverviewText());
+                                            bonusCustomerLabel.setText(customerTextField.getText());
+                                            customerTextField.setDisable(true);
+                                            Notifications.create()
+                                                    .owner(transactionAnchorPane.getScene().getWindow())
+                                                    .title(this.mainApp.getBundle().getString("info"))
+                                                    .text(this.mainApp.getBundle().getString("customerfound"))
+                                                    .position(Pos.TOP_RIGHT)
+                                                    .showConfirm();
+                                        } else {
                                             Notifications.create()
                                                     .owner(transactionAnchorPane.getScene().getWindow())
                                                     .title(this.mainApp.getBundle().getString("errorString"))
@@ -149,20 +148,28 @@ public class TransactionView {
                                                     .position(Pos.TOP_RIGHT)
                                                     .showError();
                                         }
+
+                                    } catch (final NumberFormatException e) {
+                                        Notifications.create()
+                                                .owner(transactionAnchorPane.getScene().getWindow())
+                                                .title(this.mainApp.getBundle().getString("errorString"))
+                                                .text(this.mainApp.getBundle().getString("customernotfound"))
+                                                .position(Pos.TOP_RIGHT)
+                                                .showError();
                                     }
-                                    Thread.currentThread().interrupt();
-                                });
-                                running.set(false);
-                                customerKeyPressed.set(false);
-                                feedbackProgressBar.setVisible(false);
-                            }
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                                }
+                                Thread.currentThread().interrupt();
+                            });
+                            running.set(false);
+                            customerKeyPressed.set(false);
+                            feedbackProgressBar.setVisible(false);
                         }
+                    } catch (final InterruptedException e) {
+                        e.printStackTrace();
                     }
-                });
-                thread.start();
-            }
+                }
+            });
+            thread.start();
         }
     }
 
@@ -194,7 +201,8 @@ public class TransactionView {
      * @param disabledButton Button to be disabled.
      * @param enabledButton  Button to be enabled.
      */
-    private void selectPaymentMethod(PaymentMethod paymentMethod, ToggleButton disabledButton, ToggleButton enabledButton) {
+    private void selectPaymentMethod(final PaymentMethod paymentMethod, final ToggleButton disabledButton,
+            final ToggleButton enabledButton) {
         if (this.mainApp.getEngine().getTransaction() != null) {
             this.mainApp.getEngine().getTransaction().setPaymentMethod(paymentMethod);
             System.out.println(this.mainApp.getEngine().getTransaction().getPaymentMethod());
@@ -210,7 +218,7 @@ public class TransactionView {
         customerTextField.requestFocus();
     }
 
-    private void setPaymentMethodLabelText(PaymentMethod paymentMethod) {
+    private void setPaymentMethodLabelText(final PaymentMethod paymentMethod) {
         if (paymentMethod == PaymentMethod.CARD) {
             paymentMethodLabel.setText(this.mainApp.getBundle().getString("creditcard"));
         } else if (paymentMethod == PaymentMethod.CASH) {
@@ -220,7 +228,7 @@ public class TransactionView {
         }
     }
 
-    public void setMainApp(MainApp mainApp) {
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         customerDAO = this.mainApp.getEngine().customerDAO();
         cardToggleButton.setToggleGroup(paymentButtonGroup);
@@ -231,7 +239,7 @@ public class TransactionView {
             } else {
                 cashToggleButton.setDisable(true);
             }
-            List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
+            final List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
             items.addAll(products);
 
             scanListView.setItems(items);
@@ -242,13 +250,13 @@ public class TransactionView {
         // scanListView.setItems(items);
         scanListView.setOnMouseClicked(event -> {
             try {
-                Product product = scanListView.getSelectionModel().getSelectedItem();
-                Dialog<Void> dialog = new Dialog<>();
+                final Product product = scanListView.getSelectionModel().getSelectedItem();
+                final Dialog<Void> dialog = new Dialog<>();
                 dialog.setTitle(product.getName());
                 dialog.setHeaderText(generateProductInfoText(product));
                 dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
                 dialog.showAndWait();
-            } catch (Exception ignored) {
+            } catch (final Exception ignored) {
             }
         });
         feedbackProgressBar.setVisible(false);
@@ -257,25 +265,28 @@ public class TransactionView {
                 requestFocus();
         });
         customerTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.matches("\\d*")) return;
+            if (newValue.matches("\\d*"))
+                return;
             customerTextField.setText(newValue.replaceAll("[^\\d]", ""));
         });
-        customerTextField.visibleProperty().bind(Bindings.createBooleanBinding(() -> bonusCustomerCheckBox.isSelected(), bonusCustomerCheckBox.selectedProperty()));
-        insertCustomerText.visibleProperty().bind(Bindings.createBooleanBinding(() -> bonusCustomerCheckBox.isSelected(), bonusCustomerCheckBox.selectedProperty()));
-        try{
+        customerTextField.visibleProperty().bind(Bindings.createBooleanBinding(bonusCustomerCheckBox::isSelected,
+                bonusCustomerCheckBox.selectedProperty()));
+        insertCustomerText.visibleProperty().bind(Bindings.createBooleanBinding(
+                bonusCustomerCheckBox::isSelected, bonusCustomerCheckBox.selectedProperty()));
+        try {
             bonusCustomerLabel.setText(String.valueOf(this.mainApp.getEngine().getTransaction().getCustomer().getId()));
             bonusCustomerCheckBox.setSelected(true);
-        } catch(Exception ignored){
+        } catch (final Exception ignored) {
 
         }
     }
 
     @FXML
     public void showHelp() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, this.mainApp.getBundle().getString("transactionviewhelp"), ButtonType.CLOSE);
+        final Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                this.mainApp.getBundle().getString("transactionviewhelp"), ButtonType.CLOSE);
         alert.setTitle(this.mainApp.getBundle().getString("helpString"));
         alert.setHeaderText(this.mainApp.getBundle().getString("helpString"));
         alert.showAndWait();
     }
 }
-

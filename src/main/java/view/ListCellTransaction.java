@@ -22,8 +22,9 @@ public class ListCellTransaction extends ListCell<Product> {
     public ListCellTransaction() {
 
     }
+
     @Override
-    protected void updateItem(Product product, boolean empty){
+    protected void updateItem(final Product product, final boolean empty) {
         super.updateItem(product, empty);
         if (empty || product == null) {
             setText(null);
@@ -34,12 +35,12 @@ public class ListCellTransaction extends ListCell<Product> {
                 fxmlLoader.setController(this);
                 try {
                     this.fxmlLoader.load();
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     e.printStackTrace();
                 }
             }
             this.nameLabel.setText(product.getName());
-            this.priceLabel.setText(String.format("%.2f",product.getPrice() / 100f) + CurrencyHandler.getCurrency());
+            this.priceLabel.setText(String.format("%.2f", product.getPrice() / 100f) + CurrencyHandler.getCurrency());
             setText(null);
             setGraphic(this.gridPane);
         }

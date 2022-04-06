@@ -18,7 +18,7 @@ public class AddBonusCustomerView {
     @FXML
     private Label bonusCustomerLabel;
 
-    public void setMainApp(MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
         bonusCustomerId.setVisible(false);
         bonusCustomerLabel.setVisible(false);
@@ -31,7 +31,7 @@ public class AddBonusCustomerView {
 
     @FXML
     private void addBonusCustomer() {
-        Customer c = new Customer(1);
+        final Customer c = new Customer(1);
         this.mainApp.getEngine().customerDAO().addCustomer(c);
         bonusCustomerId.setText(String.valueOf(this.mainApp.getEngine().customerDAO().getCustomer(c.getId()).getId()));
         bonusCustomerId.setVisible(true);
