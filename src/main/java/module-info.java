@@ -6,15 +6,20 @@ module com.example.handlethatpos {
     requires com.dlsc.formsfx;
     requires java.persistence;
     requires org.hibernate.orm.core;
-    requires java.sql;
+    requires transitive java.sql;
     requires java.xml.bind;
     requires bcrypt;
     requires java.desktop;
+
     exports view;
+
     requires javafx.swing;
+
     opens model.classes;
     opens view;
+
     exports model.classes;
     exports model.DAOs;
+
     opens model.DAOs;
 }

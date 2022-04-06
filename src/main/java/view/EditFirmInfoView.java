@@ -79,13 +79,6 @@ public class EditFirmInfoView {
     }
 
     @FXML
-    private void editInfo() {
-        final String name = firmNameTF.getText();
-        final String phonenumber = phoneNumberTF.getText();
-        final String address = addressTF.getText();
-    }
-
-    @FXML
     private void updateInfo() {
         final String firmName = firmNameTF.getText();
 

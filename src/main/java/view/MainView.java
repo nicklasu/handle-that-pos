@@ -279,16 +279,6 @@ public class MainView {
 
     public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
-        // read from HandleThatPos.properties file and get currency propery
-        // File file = new File("src/main/resources/HandleThatPos.properties");
-        // Properties properties = new Properties();
-        // try {
-        // properties.load(new FileInputStream(file));
-        // this.currency = properties.getProperty("currency");
-        //
-        // } catch (Exception e) {
-        // e.printStackTrace();
-        // }
         selfcheckoutlabel.setVisible(false);
         bundle = mainApp.getBundle();
         privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();

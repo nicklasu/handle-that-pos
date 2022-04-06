@@ -43,7 +43,7 @@ public class EditUserView {
     @FXML
     private ChoiceBox<String> privilegeLevelChoiceBox;
     @FXML
-    private ListView privilegeListView;
+    private ListView<Privilege> privilegeListView;
 
     private List<Privilege> privileges;
 
@@ -92,34 +92,38 @@ public class EditUserView {
                     privilegeLevelChoiceBox.setValue(pLevel);
 
                 }
-                editBtn.setOnAction((action) -> {
-                    final Privilege priv = privilegeList
-                            .get(privilegeListView.getSelectionModel().getSelectedIndex());
-                    final LocalDate dateStart = startDate.getValue();
-                    priv.setPrivilegeStart(java.sql.Date.valueOf(dateStart));
-                    final LocalDate dateEnd = endDate.getValue();
-                    if (dateEnd != null) {
-                        priv.setPrivilegeEnd(java.sql.Date.valueOf(dateEnd));
-                    }
-                    final String pLevel = privilegeLevelChoiceBox.getValue();
-                    PrivilegeLevel privilegeLvl = null;
-                    if (pLevel.equals(this.mainApp.getBundle().getString("user"))) {
-                        privilegeLvl = PrivilegeLevel.USER;
-                    } else if (pLevel.equals(this.mainApp.getBundle().getString("manager"))) {
-                        privilegeLvl = PrivilegeLevel.MANAGER;
-                    } else if (pLevel.equals(this.mainApp.getBundle().getString("self_checkout"))) {
-                        privilegeLvl = PrivilegeLevel.SELF;
-                    } else if (pLevel.equals(this.mainApp.getBundle().getString("admin"))) {
-                        privilegeLvl = PrivilegeLevel.ADMIN;
-                    }
-                    priv.setPrivilegeLevel(privilegeLvl);
-                    editBtn.setVisible(false);
-                    saveBtn.setVisible(true);
-                    privilegeListView.refresh();
-                });
+                editBtnAction();
             }
         });
 
+    }
+
+    private void editBtnAction() {
+        editBtn.setOnAction((action) -> {
+            final Privilege priv = privilegeList
+                    .get(privilegeListView.getSelectionModel().getSelectedIndex());
+            final LocalDate dateStart = startDate.getValue();
+            priv.setPrivilegeStart(java.sql.Date.valueOf(dateStart));
+            final LocalDate dateEnd = endDate.getValue();
+            if (dateEnd != null) {
+                priv.setPrivilegeEnd(java.sql.Date.valueOf(dateEnd));
+            }
+            final String pLevel = privilegeLevelChoiceBox.getValue();
+            PrivilegeLevel privilegeLvl = null;
+            if (pLevel.equals(this.mainApp.getBundle().getString("user"))) {
+                privilegeLvl = PrivilegeLevel.USER;
+            } else if (pLevel.equals(this.mainApp.getBundle().getString("manager"))) {
+                privilegeLvl = PrivilegeLevel.MANAGER;
+            } else if (pLevel.equals(this.mainApp.getBundle().getString("self_checkout"))) {
+                privilegeLvl = PrivilegeLevel.SELF;
+            } else if (pLevel.equals(this.mainApp.getBundle().getString("admin"))) {
+                privilegeLvl = PrivilegeLevel.ADMIN;
+            }
+            priv.setPrivilegeLevel(privilegeLvl);
+            editBtn.setVisible(false);
+            saveBtn.setVisible(true);
+            privilegeListView.refresh();
+        });
     }
 
     void checkPrivilegeLevel(final List<Integer> privilegeInts, final ChoiceBox<String> privilegeLevel,
@@ -169,7 +173,7 @@ public class EditUserView {
         try {
             this.user = this.mainApp.getEngine().userDAO().getUser(userName.getText());
 
-            if (activity.isSelected() == true) {
+            if (activity.isSelected()) {
                 this.user.setActivity(1);
             } else {
                 this.user.setActivity(0);

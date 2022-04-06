@@ -56,34 +56,30 @@ public class LoginView {
         final Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "default error", ButtonType.OK);
         alert.setTitle(this.mainApp.getBundle().getString("errorString"));
         alert.setHeaderText(this.mainApp.getBundle().getString("loginError"));
+        loginHandlerThread(alert);
+
+    }
+
+    private void loginHandlerThread(final Alert alert) {
         final Thread thread = new Thread(() -> {
             try {
                 final int result = this.mainApp.getEngine().login(usernameTextField.getText(),
                         passwordPasswordField.getText());
                 Platform.runLater(() -> {
-                    if (result == 1) {
-                        this.mainApp.showMainView();
-                    } else if (result == 0) {
-                        alert.setContentText(this.mainApp.getBundle().getString("loginError1"));
-                        alert.showAndWait();
 
-                        if (alert.getResult() == ButtonType.OK) {
-                            alert.close();
-                        }
-                    } else if (result == 2) {
-                        alert.setContentText(this.mainApp.getBundle().getString("loginError2"));
-                        alert.showAndWait();
-
-                        if (alert.getResult() == ButtonType.OK) {
-                            alert.close();
-                        }
-                    } else {
-                        alert.setContentText(this.mainApp.getBundle().getString("loginError3"));
-                        alert.showAndWait();
-
-                        if (alert.getResult() == ButtonType.OK) {
-                            alert.close();
-                        }
+                    switch (result) {
+                        case 1:
+                            this.mainApp.showMainView();
+                            break;
+                        case 0:
+                            alertMsg(alert, "loginError1");
+                            break;
+                        case 2:
+                            alertMsg(alert, "loginError2");
+                            break;
+                        default:
+                            alertMsg(alert, "loginError3");
+                            break;
                     }
                     progressIndicator.setVisible(false);
                     loginButton.setDisable(false);
@@ -95,7 +91,15 @@ public class LoginView {
             }
         });
         thread.start();
+    }
 
+    private void alertMsg(final Alert alert, String msg) {
+        alert.setContentText(this.mainApp.getBundle().getString(msg));
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
     }
 
 }
