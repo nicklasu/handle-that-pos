@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox stylesheets="@main-view.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<HBox stylesheets="@main-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane fx:id="gridPane" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" HBox.hgrow="ALWAYS">
             <columnConstraints>
