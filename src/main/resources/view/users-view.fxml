@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UsersView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UsersView">
    <children>
       <GridPane layoutX="-1.0" layoutY="1.0" prefHeight="600.0" prefWidth="720.0">
          <columnConstraints>
@@ -109,7 +109,6 @@
             </Text>
             <StackPane prefHeight="483.0" prefWidth="720.0" GridPane.rowIndex="3">
                <children>
-                  <ProgressIndicator fx:id="progressIndicator" />
                   <ListView fx:id="transactionListView" prefHeight="350.0" prefWidth="711.0" StackPane.alignment="TOP_RIGHT">
                      <StackPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -117,6 +116,7 @@
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding></ListView>
+                  <ProgressIndicator fx:id="progressIndicator" />
                </children>
                <GridPane.margin>
                   <Insets />
