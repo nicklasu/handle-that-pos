@@ -2,13 +2,20 @@ package model.classes;
 
 import java.awt.*;
 import java.awt.print.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Locale;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 /**
  * Represents a receipt printer
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class ReceiptPrinter implements Printable {
     /**
@@ -18,7 +25,7 @@ public class ReceiptPrinter implements Printable {
 
     /**
      * Print method...
-     * 
+     *
      * @param g    Object that draws
      * @param pf   Format of the printout
      * @param page Page number
@@ -31,20 +38,50 @@ public class ReceiptPrinter implements Printable {
         final Graphics2D g2d = (Graphics2D) g;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
         if (transaction != null) {
+            String firmName = "";
+            String phoneNumber = "";
+            String businessId = "";
+            String address = "";
+            String postalCode = "";
+            String city = "";
+            String currency = "";
+            String language = "";
+            String country = "";
+            final File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
+            final Properties properties = new Properties();
+            try (final FileReader reader = new FileReader(appConfigPath, StandardCharsets.UTF_8)) {
+                properties.load(reader);
+                firmName = properties.getProperty("firmName");
+                phoneNumber = properties.getProperty("phoneNumber");
+                businessId = properties.getProperty("businessId");
+                address = properties.getProperty("address");
+                postalCode = properties.getProperty("postalCode");
+                city = properties.getProperty("city");
+                currency = properties.getProperty("currency");
+                language = properties.getProperty("language");
+                country = properties.getProperty("country");
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+
+            Locale locale = new Locale(language, country);
+            ResourceBundle bundle = ResourceBundle.getBundle("TextResources", locale);
+
+
             final Order order = transaction.getOrder();
             int nameY = 260;
             int priceY = 260;
             final List<Product> productList = order.getProductList();
-            g.drawString("Tietokonevelhot Oy", 100, 100);
-            g.drawString("Testikatu 1337, 00420 Helsinki", 100, 120);
-            g.drawString("Puh. 0201234567 y-1234567-8", 100, 140);
+            g.drawString(firmName, 100, 100);
+            g.drawString(address + ", " + postalCode + " " + city, 100, 120);
+            g.drawString(phoneNumber + " " + businessId, 100, 140);
             if (transaction.getCustomer() != null) {
-                g.drawString("Kuitti: " + order.getId() + " Asiakas: " + transaction.getCustomer().getId(), 100, 160);
+                g.drawString(bundle.getString("receipt") + ": " + order.getId() + " " + bundle.getString("customerbonus") + ": " + transaction.getCustomer().getId(), 100, 160);
             } else {
-                g.drawString("Kuitti: " + order.getId(), 100, 160);
+                g.drawString(bundle.getString("receipt") + ": " + order.getId(), 100, 160);
             }
-            g.drawString("Maksutapa: " + transaction.getPaymentMethod(), 100, 180);
-            g.drawString("Myyjä: " + transaction.getUser().getFullName(), 100, 200);
+            g.drawString(bundle.getString("paymentmethod") + " " + transaction.getPaymentMethod(), 100, 180);
+            g.drawString(bundle.getString("user") + ": " + transaction.getUser().getFullName(), 100, 200);
             g.drawString(String.valueOf(transaction.getTimestamp()), 100, 220);
             for (final Product product : productList) {
                 String productName = product.getName();
@@ -64,7 +101,7 @@ public class ReceiptPrinter implements Printable {
             } else {
                 g.drawString("BONUS: 0%", 100, (nameY + 20));
             }
-            g.drawString("Kokonaishinta: " + String.format("%.2f", (order.getTotalPrice() / 100f)) + "€", 100,
+            g.drawString(bundle.getString("price") + " " + String.format("%.2f", (order.getTotalPrice() / 100f)) + currency, 100,
                     (nameY + 40));
         }
         return PAGE_EXISTS;
@@ -73,7 +110,7 @@ public class ReceiptPrinter implements Printable {
     /**
      * Helper function that is called from outside, this function calls for the
      * print method
-     * 
+     *
      * @param transaction transaction to print out
      */
     public boolean actionPerformed(final Transaction transaction) {
