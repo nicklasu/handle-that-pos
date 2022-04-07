@@ -6,8 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -104,7 +102,7 @@ public class TransactionDAO {
         try (Session session = sessionFactory.getCurrentSession()) {
             final int userId = user.getId();
             transaction = session.beginTransaction();
-            final Query query = session.createQuery("from Transaction where user = :userId");
+            final Query<model.classes.Transaction> query = session.createQuery("from Transaction where user = :userId");
             query.setInteger("userId", userId);
             tr = query.list();
             transaction.commit();

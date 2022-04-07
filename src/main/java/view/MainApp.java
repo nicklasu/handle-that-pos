@@ -62,14 +62,12 @@ public class MainApp extends Application {
     @Override
     public void start(final Stage stage) {
         this.stage = stage;
-        this.stage.setMaximized(true);
         Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
         this.stage.setHeight(size.getHeight());
         this.stage.setWidth(size.getWidth());
+        this.stage.setMaximized(true);
         stage.setTitle(APP_TITLE);
         this.stage.getIcons().add(new Image("file:src/main/resources/images/pos.png"));
-        // Test
-        // showLoginView();
         showConnectToDatabaseView();
     }
 

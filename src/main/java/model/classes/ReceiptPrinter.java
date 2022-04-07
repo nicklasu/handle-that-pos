@@ -122,7 +122,8 @@ public class ReceiptPrinter implements Printable {
             try {
                 job.print();
                 return true;
-            } catch (final PrinterException ignored) {
+            } catch (final PrinterException e) {
+                e.printStackTrace();
             }
         }
         return false;

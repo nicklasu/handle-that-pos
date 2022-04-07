@@ -25,6 +25,10 @@ import java.util.List;
  *         Samu Luoma
  */
 public class AddUserView {
+    public static final String USER = "user";
+    public static final String MANAGER = "manager";
+    public static final String ADMIN = "admin";
+    public static final String SELF_CHECKOUT = "self_checkout";
     private MainApp mainApp;
 
     @FXML
@@ -50,7 +54,7 @@ public class AddUserView {
     @FXML
     private ChoiceBox<String> privilegeLevelChoiceBox;
     @FXML
-    private ListView privilegeListView;
+    private ListView<Privilege> privilegeListView;
 
     private final ObservableList<Privilege> privilegeList = FXCollections.observableArrayList();
 
@@ -84,19 +88,12 @@ public class AddUserView {
                         endDate.setValue(p.getPrivilegeEnd().toLocalDate());
                     }
 
-                    final String user = this.mainApp.getBundle().getString("user");
-                    final String manager = this.mainApp.getBundle().getString("manager");
-                    final String admin = this.mainApp.getBundle().getString("admin");
-                    final String self_checkout = this.mainApp.getBundle().getString("self_checkout");
+                    final String user = this.mainApp.getBundle().getString(USER);
+                    final String manager = this.mainApp.getBundle().getString(MANAGER);
+                    final String admin = this.mainApp.getBundle().getString(ADMIN);
+                    final String self_checkout = this.mainApp.getBundle().getString(SELF_CHECKOUT);
 
-                    final String pLevel = switch (p.getPrivilegeLevelIndex()) {
-                        case 0 -> self_checkout;
-                        case 1 -> user;
-                        case 2 -> manager;
-                        case 3 -> admin;
-                        default -> throw new IllegalStateException("Unexpected value");
-                    };
-                    privilegeLevelChoiceBox.setValue(pLevel);
+                    privilegeSwitch(p, user, manager, admin, self_checkout, privilegeLevelChoiceBox);
 
                 }
 
@@ -112,13 +109,13 @@ public class AddUserView {
 
                     final String pLevel = privilegeLevelChoiceBox.getValue();
                     PrivilegeLevel privilegeLvl = null;
-                    if (pLevel.equals(this.mainApp.getBundle().getString("user"))) {
+                    if (pLevel.equals(this.mainApp.getBundle().getString(USER))) {
                         privilegeLvl = PrivilegeLevel.USER;
-                    } else if (pLevel.equals(this.mainApp.getBundle().getString("manager"))) {
+                    } else if (pLevel.equals(this.mainApp.getBundle().getString(MANAGER))) {
                         privilegeLvl = PrivilegeLevel.MANAGER;
-                    } else if (pLevel.equals(this.mainApp.getBundle().getString("self_checkout"))) {
+                    } else if (pLevel.equals(this.mainApp.getBundle().getString(SELF_CHECKOUT))) {
                         privilegeLvl = PrivilegeLevel.SELF;
-                    } else if (pLevel.equals(this.mainApp.getBundle().getString("admin"))) {
+                    } else if (pLevel.equals(this.mainApp.getBundle().getString(ADMIN))) {
                         privilegeLvl = PrivilegeLevel.ADMIN;
                     }
 
@@ -130,6 +127,17 @@ public class AddUserView {
             }
         });
 
+    }
+
+    static void privilegeSwitch(Privilege p, String user, String manager, String admin, String self_checkout, ChoiceBox<String> privilegeLevelChoiceBox) {
+        final String pLevel = switch (p.getPrivilegeLevelIndex()) {
+            case 0 -> self_checkout;
+            case 1 -> user;
+            case 2 -> manager;
+            case 3 -> admin;
+            default -> throw new IllegalStateException("Unexpected value");
+        };
+        privilegeLevelChoiceBox.setValue(pLevel);
     }
 
     @FXML
@@ -186,13 +194,13 @@ public class AddUserView {
         final LocalDate dateEnd = endDate.getValue();
         final String pLevel = privilegeLevelChoiceBox.getValue();
         PrivilegeLevel privilegeLvl = null;
-        if (pLevel.equals(this.mainApp.getBundle().getString("user"))) {
+        if (pLevel.equals(this.mainApp.getBundle().getString(USER))) {
             privilegeLvl = PrivilegeLevel.USER;
-        } else if (pLevel.equals(this.mainApp.getBundle().getString("manager"))) {
+        } else if (pLevel.equals(this.mainApp.getBundle().getString(MANAGER))) {
             privilegeLvl = PrivilegeLevel.MANAGER;
-        } else if (pLevel.equals(this.mainApp.getBundle().getString("self_checkout"))) {
+        } else if (pLevel.equals(this.mainApp.getBundle().getString(SELF_CHECKOUT))) {
             privilegeLvl = PrivilegeLevel.SELF;
-        } else if (pLevel.equals(this.mainApp.getBundle().getString("admin"))) {
+        } else if (pLevel.equals(this.mainApp.getBundle().getString(ADMIN))) {
             privilegeLvl = PrivilegeLevel.ADMIN;
         }
         final Privilege privilege = new Privilege(java.sql.Date.valueOf(dateStart),
@@ -205,15 +213,15 @@ public class AddUserView {
             final DatePicker startDate) {
         ObservableList<String> availableChoices;
         if (Collections.max(privilegeInts) < 3) {
-            availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString("user"),
-                    this.mainApp.getBundle().getString("manager"), this.mainApp.getBundle().getString("self_checkout"));
+            availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString(USER),
+                    this.mainApp.getBundle().getString(MANAGER), this.mainApp.getBundle().getString(SELF_CHECKOUT));
         } else {
-            availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString("user"),
-                    this.mainApp.getBundle().getString("manager"), this.mainApp.getBundle().getString("admin"),
-                    this.mainApp.getBundle().getString("self_checkout"));
+            availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString(USER),
+                    this.mainApp.getBundle().getString(MANAGER), this.mainApp.getBundle().getString(ADMIN),
+                    this.mainApp.getBundle().getString(SELF_CHECKOUT));
         }
         privilegeLevel.setItems(availableChoices);
-        privilegeLevel.setValue(this.mainApp.getBundle().getString("user"));
+        privilegeLevel.setValue(this.mainApp.getBundle().getString(USER));
         startDate.setValue(LocalDate.now());
     }
 }

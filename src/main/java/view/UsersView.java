@@ -169,9 +169,11 @@ public class UsersView {
 
         String productsAndAmounts = "";
         final Set<OrderProduct> ops = transaction.getOrder().getOrderProducts();
+        StringBuilder sb = new StringBuilder();
         for (final OrderProduct op : ops) {
-            productsAndAmounts += op.getProduct() + " x " + op.getAmount() + "\n";
+            sb.append(op.getProduct() + " x " + op.getAmount() + "\n");
         }
+        productsAndAmounts = sb.toString();
 
         dialog.setHeaderText(transactionInformation);
         dialog.setContentText(productsAndAmounts);

@@ -197,12 +197,7 @@ public class OptionsView {
             btn3.setDisable(true);
             btn6.setDisable(true);
         }
-        final User user = this.mainApp.getEngine().getUser();
         returnBtn.requestFocus();
-        /*
-         * if (this.mainApp.getEngine().getTransaction() != null) {
-         * }
-         */
     }
 
     @FXML

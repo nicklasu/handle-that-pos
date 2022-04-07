@@ -134,9 +134,9 @@ public class POSEngine implements IPOSEngine {
                 this.user = user1;
                 privileges = privilegeDAO.getPrivileges(user1);
                 this.verifiedPrivileges = new ArrayList<>();
-                final List<Date> privilegeEndDates = privileges.stream().map(p -> p.getPrivilegeEnd())
+                final List<Date> privilegeEndDates = privileges.stream().map(Privilege::getPrivilegeEnd)
                         .collect(Collectors.toList());
-                final List<Date> privilegeStartDates = privileges.stream().map(p -> p.getPrivilegeStart())
+                final List<Date> privilegeStartDates = privileges.stream().map(Privilege::getPrivilegeStart)
                         .collect(Collectors.toList());
                 final List<Privilege> validPrivileges = new ArrayList<>();
                 for (int i = 0; i < privilegeEndDates.size(); i++) {
@@ -187,7 +187,7 @@ public class POSEngine implements IPOSEngine {
      */
     @Override
     public List<Integer> getPrivilegeIndexes() {
-        return privileges.stream().map(p -> p.getPrivilegeLevelIndex()).collect(Collectors.toList());
+        return privileges.stream().map(Privilege::getPrivilegeLevelIndex).collect(Collectors.toList());
     }
 
     /**

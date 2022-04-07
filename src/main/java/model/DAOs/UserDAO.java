@@ -66,9 +66,9 @@ public class UserDAO {
         User user = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            final Query query = session.createQuery("from User where username=:username");
+            final Query<User> query = session.createQuery("from User where username=:username");
             query.setParameter("username", username);
-            final List list = query.list();
+            final List<User> list = query.list();
             System.out.println(list);
             if (list.isEmpty()) {
                 System.out.println("Käyttäjää ei löytynyt tietokannasta.");

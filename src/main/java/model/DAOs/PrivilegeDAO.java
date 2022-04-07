@@ -46,7 +46,7 @@ public class PrivilegeDAO {
         try (Session session = sessionFactory.getCurrentSession()) {
             final int userId = user.getId();
             transaction = session.beginTransaction();
-            final Query query = session.createQuery("from Privilege where user = :userId");
+            final Query<Privilege> query = session.createQuery("from Privilege where user = :userId");
             query.setInteger("userId", userId);
             privileges = query.list();
             transaction.commit();

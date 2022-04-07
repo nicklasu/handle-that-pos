@@ -63,16 +63,13 @@ public class ProductSearchView {
         final BooleanBinding booleanBind = input.textProperty().isEmpty();
         fetchBtn.disableProperty().bind(booleanBind);
         updateData();
-        productTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(final MouseEvent event) {
-                if (event.getClickCount() == 2 && Collections.max(verifiedPrivileges) >= 2) {
-                    final int row = productTable.getSelectionModel().getSelectedIndex();
-                    System.out.println(productTable.getSelectionModel().getSelectedIndex());
-                    if (row >= 0) {
-                        final Product product = allProducts.get(row);
-                        loadEditProductView(product);
-                    }
+        productTable.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (event.getClickCount() == 2 && Collections.max(verifiedPrivileges) >= 2) {
+                final int row = productTable.getSelectionModel().getSelectedIndex();
+                System.out.println(productTable.getSelectionModel().getSelectedIndex());
+                if (row >= 0) {
+                    final Product product = allProducts.get(row);
+                    loadEditProductView(product);
                 }
             }
         });
@@ -93,11 +90,11 @@ public class ProductSearchView {
             allProducts = this.mainApp.getEngine().productDao().getAllProducts();
             filteredList = new FilteredList<>(FXCollections.observableList(allProducts));
 
-            productDescription.setCellValueFactory(new PropertyValueFactory<Product, String>("description"));
-            productId.setCellValueFactory(new PropertyValueFactory<Product, String>("id"));
-            productName.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
-            productPrice.setCellValueFactory(new PropertyValueFactory<Product, Integer>("price"));
-            productStock.setCellValueFactory(new PropertyValueFactory<Product, Integer>("stock"));
+            productDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+            productId.setCellValueFactory(new PropertyValueFactory<>("id"));
+            productName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+            productStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
             productTable.setItems(filteredList);
 
@@ -155,7 +152,7 @@ public class ProductSearchView {
             view.setMainApp(mainApp);
             view.editProductPaneFillFields(product);
         } catch (final IOException e) {
-
+            e.printStackTrace();
         }
         wrapperPane.getChildren().add(newLoadedPane);
     }

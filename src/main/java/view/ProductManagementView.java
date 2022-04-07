@@ -61,8 +61,6 @@ public class ProductManagementView {
             newLoadedPane3 = this.loader.load();
             final DeleteProductView view = this.loader.getController();
             view.setMainApp(mainApp);
-            // newLoadedPane3 =
-            // FXMLLoader.load(getClass().getResource("delete-product-view.fxml"));
         } catch (final IOException ex) {
             ex.printStackTrace();
         }
