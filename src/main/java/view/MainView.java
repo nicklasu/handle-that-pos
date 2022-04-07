@@ -27,6 +27,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *         Samu Luoma
  */
 public class MainView {
+    public static final String HOTKEY_NOT_SET_STRING = "hotkeyNotSetString";
+    public static final String NOTIFICATION_STRING = "notificationString";
     private MainApp mainApp;
     @FXML
     private AnchorPane mainAnchorPane;
@@ -165,7 +167,7 @@ public class MainView {
             if (Objects.equals(hotkeyProductIds[i], "null") || Objects.equals(hotkeyProductIds[i], "")
                     || Objects.equals(hotkeyProductIds[i], null)) {
                 final Button hotkey = hotkeys.get(i);
-                hotkey.setText(bundle.getString("hotkeyNotSetString"));
+                hotkey.setText(bundle.getString(HOTKEY_NOT_SET_STRING));
                 hotkey.setStyle("-fx-background-color: red;");
                 hotkey.setOnMouseEntered(mouseEvent -> hotkey.setStyle("-fx-background-color: darkred;"));
                 hotkey.setOnMouseExited(mouseEvent -> hotkey.setStyle("-fx-background-color: red;"));
@@ -195,7 +197,7 @@ public class MainView {
                         running.set(true);
                         while (running.get()) {
                             feedbackProgressBar.setProgress(
-                                    Long.valueOf(System.currentTimeMillis() - startTime).doubleValue() / 2000);
+                                    System.currentTimeMillis() - startTime / 2000);
                         }
                     });
                     thread.start();
@@ -229,7 +231,7 @@ public class MainView {
                             } else {
                                 Notifications.create()
                                         .owner(mainAnchorPane.getScene().getWindow())
-                                        .title(bundle.getString("notificationString"))
+                                        .title(bundle.getString(NOTIFICATION_STRING))
                                         .text(bundle.getString("hotkeyNoScanString"))
                                         .position(Pos.TOP_RIGHT)
                                         .show();
@@ -242,16 +244,16 @@ public class MainView {
                             } else {
                                 Notifications.create()
                                         .owner(mainAnchorPane.getScene().getWindow())
-                                        .title(bundle.getString("notificationString"))
-                                        .text(bundle.getString("hotkeyNotSetString"))
+                                        .title(bundle.getString(NOTIFICATION_STRING))
+                                        .text(bundle.getString(HOTKEY_NOT_SET_STRING))
                                         .position(Pos.TOP_RIGHT)
                                         .show();
                             }
                         } catch (final Exception e) {
                             Notifications.create()
                                     .owner(mainAnchorPane.getScene().getWindow())
-                                    .title(bundle.getString("notificationString"))
-                                    .text(bundle.getString("hotkeyNotSetString"))
+                                    .title(bundle.getString(NOTIFICATION_STRING))
+                                    .text(bundle.getString(HOTKEY_NOT_SET_STRING))
                                     .position(Pos.TOP_RIGHT)
                                     .show();
                         }
@@ -279,7 +281,7 @@ public class MainView {
     public void negativeProductStockNotification() {
         Notifications.create()
                 .owner(mainAnchorPane.getScene().getWindow())
-                .title(bundle.getString("notificationString"))
+                .title(bundle.getString(NOTIFICATION_STRING))
                 .text(bundle.getString("lowProductQuantityString"))
                 .position(Pos.TOP_RIGHT)
                 .show();

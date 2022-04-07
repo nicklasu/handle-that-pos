@@ -55,7 +55,7 @@ public class DeleteProductView {
                     "Poistetaanko varmasti?\n" + "Tuote: " + product.getName() + "\nKuvaus: " + product.getName());
 
             final Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
+            if (result.isPresent() && result.get() == ButtonType.OK) {
                 final boolean res = this.mainApp.getEngine().productDao().deleteProduct(productBarcode.getText());
                 System.out.println(res);
                 alert.close();

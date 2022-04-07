@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
  */
 public class DeleteBonusCustomerView {
     private MainApp mainApp;
-    private ResourceBundle bundle;
+
 
     @FXML
     private TextField bonusCustomerId;
@@ -32,6 +32,7 @@ public class DeleteBonusCustomerView {
 
     @FXML
     private void deleteBonusCustomer() {
+        ResourceBundle bundle;
         bundle = mainApp.getBundle();
         try {
             final String text = bonusCustomerId.getText();
