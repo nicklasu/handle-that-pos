@@ -13,8 +13,8 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="590.0" minHeight="10.0" prefHeight="572.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
         <ListView fx:id="scanListView" stylesheets="@main-view.css">
             <GridPane.margin>
@@ -25,10 +25,10 @@
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="234.0" minHeight="0.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="0.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="581.0" minHeight="10.0" prefHeight="173.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="173.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="173.0" vgrow="SOMETIMES" />
@@ -63,10 +63,12 @@
                     <Button fx:id="hotkeyButton3" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hotkey 3" textAlignment="CENTER" wrapText="true" />
                 </center>
             </BorderPane>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
-                <AnchorPane centerShape="false" prefWidth="220.0">
-                    <Button fx:id="logoutBtn" layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleLogoutButton" prefHeight="50.0" prefWidth="150.0" stylesheets="@main-view.css" text="%logoutString" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
-                </AnchorPane>
+            <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2">
+            <AnchorPane HBox.hgrow="ALWAYS">
+               <children>
+                       <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#handleLogoutButton" stylesheets="@main-view.css" text="%logoutString" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+               </children>
+            </AnchorPane>
             </HBox>
             <ProgressBar fx:id="feedbackProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" />
             <BorderPane GridPane.rowIndex="3">
@@ -147,13 +149,13 @@
         <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1">
             <GridPane layoutX="420.0" layoutY="125.0" prefHeight="101.0" prefWidth="193.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="327.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="365.0" minWidth="10.0" prefWidth="313.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-                <AnchorPane prefHeight="131.0" prefWidth="313.0" GridPane.columnIndex="1">
+                <AnchorPane GridPane.columnIndex="1">
                     <Button fx:id="paymentButton" mnemonicParsing="false" onAction="#loadTransactionView" prefHeight="100.0" prefWidth="200.0" styleClass="bold_button" stylesheets="@main-view.css" text="%payString" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
                 </AnchorPane>
                 <GridPane prefHeight="129.0" prefWidth="317.0">
