@@ -1,5 +1,7 @@
 package model.classes;
 
+import javafx.scene.control.Alert;
+
 import java.awt.*;
 import java.awt.print.*;
 import java.io.File;
@@ -93,7 +95,7 @@ public class ReceiptPrinter implements Printable {
                 nameY += 20;
             }
             for (final Product product : productList) {
-                g.drawString(String.format("%.2f", (product.getPrice() / 100f)) + "€", 300, priceY);
+                g.drawString(String.format("%.2f", (product.getPrice() / 100f)) + currency, 300, priceY);
                 priceY += 20;
             }
             if (transaction.getCustomer() != null && transaction.getCustomer().getCustomerLevelIndex() == 1) {
