@@ -4,11 +4,11 @@ import model.classes.*;
 import model.classes.Order;
 import org.junit.jupiter.api.*;
 
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TransactionTest extends TestParent {
     private Transaction testTransaction;
     private POSEngine pos;
+
     public TransactionTest() {
     }
 
@@ -26,21 +26,24 @@ public class TransactionTest extends TestParent {
 
     @Test
     public void getAndSetOrder() {
-        Order testOrder = this.createTestOrder(pos.getUser(),testTransaction);
+        final Order testOrder = this.createTestOrder(pos.getUser(), testTransaction);
         this.testTransaction.setOrder(testOrder);
-        Assertions.assertEquals(this.testTransaction.getOrder().getProductList().toString(), "[Suola, Sokeri]", "Error in linking order to transaction");
+        Assertions.assertEquals("[Suola, Sokeri]", this.testTransaction.getOrder().getProductList().toString(),
+                "Error in linking order to transaction");
     }
 
     @Test
     public void getAndSetCustomer() {
-        Customer testCustomer = new Customer(0);
+        final Customer testCustomer = new Customer(0);
         this.testTransaction.setCustomer(testCustomer);
-        Assertions.assertEquals(this.testTransaction.getCustomer().toString(), "Customer{id=0, customerLevelIndex=0}", "Error in handling customers with a transaction");
+        Assertions.assertEquals("Customer{id=0, customerLevelIndex=0}", this.testTransaction.getCustomer().toString(),
+                "Error in handling customers with a transaction");
     }
 
     @Test
     public void getAndSetPaymentMethod() {
         this.testTransaction.setPaymentMethod(PaymentMethod.CASH);
-        Assertions.assertEquals(this.testTransaction.getPaymentMethod(), PaymentMethod.CASH, "Error handling basic paymentmethods in transaction");
+        Assertions.assertEquals(this.testTransaction.getPaymentMethod(), PaymentMethod.CASH,
+                "Error handling basic paymentmethods in transaction");
     }
 }

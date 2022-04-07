@@ -32,12 +32,11 @@ public class POSEngineTest extends TestParent {
         testEngine.logout();
     }
 
-
-
     @Test
     public void login() {
-        Assertions.assertEquals(testEngine.login("testuser", "123"), 1, "logging in to testuser doesn't work properly!");
-        Assertions.assertEquals(testEngine.login("testuser", "asd"), 0, "logging in with wrong password works!");
+        Assertions.assertEquals(1, testEngine.login("testuser", "123"),
+                "logging in to testuser doesn't work properly!");
+        Assertions.assertEquals(0, testEngine.login("testuser", "asd"), "logging in with wrong password works!");
     }
 
     @Test
@@ -54,7 +53,8 @@ public class POSEngineTest extends TestParent {
     @Test
     public void getTransaction() {
         testEngine.setTransaction(this.createTestTransaction(testEngine.getUser()));
-        Assertions.assertEquals("Test", testEngine.getTransaction().getUser().getfName(), "Problem getting the transaction from engine");
+        Assertions.assertEquals("Test", testEngine.getTransaction().getUser().getfName(),
+                "Problem getting the transaction from engine");
     }
 
     @Test
@@ -62,7 +62,8 @@ public class POSEngineTest extends TestParent {
     public void scanProduct() {
         testEngine.scanProduct("1a");
         testEngine.scanProduct("1b");
-        Assertions.assertEquals(300, testEngine.getTransaction().getOrder().getTotalPrice(), "problems with scanning products and adding them to order");
+        Assertions.assertEquals(300, testEngine.getTransaction().getOrder().getTotalPrice(),
+                "problems with scanning products and adding them to order");
     }
 
     @Test
@@ -72,20 +73,21 @@ public class POSEngineTest extends TestParent {
         Assertions.assertNull(testEngine.getTransaction(), "Problem with confirming transaction");
     }
 
-
     @Test
-    public void privileges(){
-        List<Integer> luvat = testEngine.getVerifiedPrivileges();
+    public void privileges() {
+        final List<Integer> luvat = testEngine.getVerifiedPrivileges();
         Assertions.assertEquals(2, luvat.get(0), "Getting privilegelevel has a problem");
-        Assertions.assertEquals("testuser",testEngine.getPrivileges().get(0).getUser().getUsername(),"getting privileges has a problem");
-        Assertions.assertEquals(2,testEngine.getPrivilegeIndexes().get(0),"Getting privilege indexes has a problem");
+        Assertions.assertEquals("testuser", testEngine.getPrivileges().get(0).getUser().getUsername(),
+                "getting privileges has a problem");
+        Assertions.assertEquals(2, testEngine.getPrivilegeIndexes().get(0), "Getting privilege indexes has a problem");
 
-        java.sql.Date date = new Date(123);
-        java.sql.Date date2 = new Date(1234);
-        List<Privilege> a = new ArrayList<>();
+        final java.sql.Date date = new Date(123);
+        final java.sql.Date date2 = new Date(1234);
+        final List<Privilege> a = new ArrayList<>();
         a.add(new Privilege(testEngine.getUser(), date, date, PrivilegeLevel.ADMIN));
         a.add(new Privilege(testEngine.getUser(), date2, date2, PrivilegeLevel.MANAGER));
         testEngine.setPrivileges(a);
-        Assertions.assertEquals(2,testEngine.getPrivileges().get(1).getPrivilegeLevelIndex(),"problem with adding privileges");
+        Assertions.assertEquals(2, testEngine.getPrivileges().get(1).getPrivilegeLevelIndex(),
+                "problem with adding privileges");
     }
 }

@@ -8,7 +8,9 @@ import org.hibernate.Transaction;
 
 /**
  * Data access object for POSEngine, the device info running the software
- * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
  */
 public class POSEngineDAO {
     /**
@@ -22,7 +24,7 @@ public class POSEngineDAO {
     public POSEngineDAO() {
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.out.println("Virhe istuntotehtaan luomisessa");
             e.printStackTrace();
         }
@@ -30,15 +32,16 @@ public class POSEngineDAO {
 
     /**
      * Adds a POSEngine to the database if it does not exist there yet
+     * 
      * @param pos the engine to be added
      */
-    public void addID(POSEngine pos) {
+    public void addID(final POSEngine pos) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(pos);
             transaction.commit();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();

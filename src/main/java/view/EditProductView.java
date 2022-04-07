@@ -30,27 +30,26 @@ public class EditProductView {
     @FXML
     private Button fetchBtn;
 
-
-    public void setMainApp(MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
         productBarcode.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)
                 fillFields();
         });
-        BooleanBinding booleanBind = productBarcode.textProperty().isEmpty()
+        final BooleanBinding booleanBind = productBarcode.textProperty().isEmpty()
                 .or(productName.textProperty().isEmpty())
                 .or(productDesc.textProperty().isEmpty())
                 .or(productPrice.textProperty().isEmpty())
                 .or(productStock.textProperty().isEmpty());
         editBtn.disableProperty().bind(booleanBind);
 
-        BooleanBinding booleanBind2 = productBarcode.textProperty().isEmpty();
+        final BooleanBinding booleanBind2 = productBarcode.textProperty().isEmpty();
         fetchBtn.disableProperty().bind(booleanBind2);
 
         productPrice.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
+            public void changed(final ObservableValue<? extends String> observable, final String oldValue,
+                    final String newValue) {
                 if (!newValue.matches("\\d*")) {
                     productPrice.setText(newValue.replaceAll("[^\\d]", ""));
                 }
@@ -59,8 +58,8 @@ public class EditProductView {
 
         productStock.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue,
-                                String newValue) {
+            public void changed(final ObservableValue<? extends String> observable, final String oldValue,
+                    final String newValue) {
                 if (!newValue.matches("\\d*")) {
                     productStock.setText(newValue.replaceAll("[^-?\\d+$]", ""));
                 }
@@ -71,13 +70,13 @@ public class EditProductView {
     @FXML
     private void editProduct() {
         try {
-            String barcode = productBarcode.getText();
-            String name = productName.getText();
-            String desc = productDesc.getText();
-            int price = Integer.parseInt(productPrice.getText());
-            int stock = Integer.parseInt(productStock.getText());
-            Product product = new Product(barcode, name, desc, price, stock);
-            boolean res = this.mainApp.getEngine().productDao().updateProduct(product);
+            final String barcode = productBarcode.getText();
+            final String name = productName.getText();
+            final String desc = productDesc.getText();
+            final int price = Integer.parseInt(productPrice.getText());
+            final int stock = Integer.parseInt(productStock.getText());
+            final Product product = new Product(barcode, name, desc, price, stock);
+            final boolean res = this.mainApp.getEngine().productDao().updateProduct(product);
             if (res) {
                 Notifications.create()
                         .owner(productBarcode.getScene().getWindow())
@@ -86,7 +85,7 @@ public class EditProductView {
                         .position(Pos.TOP_RIGHT)
                         .show();
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.out.println("There was an error");
             e.printStackTrace();
         }
@@ -95,12 +94,12 @@ public class EditProductView {
     @FXML
     private void fillFields() {
         try {
-            Product product = this.mainApp.getEngine().productDao().getProduct(productBarcode.getText());
+            final Product product = this.mainApp.getEngine().productDao().getProduct(productBarcode.getText());
             productName.setText(product.getName());
             productDesc.setText(product.getDescription());
             productPrice.setText(String.valueOf(product.getPrice()));
             productStock.setText(String.valueOf(product.getStock()));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.out.println("There was an error");
             e.printStackTrace();
             Notifications.create()
@@ -112,7 +111,7 @@ public class EditProductView {
         }
     }
 
-    public void fillFieldsOnLoad(Product product) {
+    public void fillFieldsOnLoad(final Product product) {
         productBarcode.setText(product.getId());
         productName.setText(product.getName());
         productDesc.setText(product.getDescription());

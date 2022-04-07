@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import model.classes.CurrencyHandler;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
@@ -61,15 +62,15 @@ public class MainView {
     private ChoiceBox<String> languageBox;
     @FXML
     private Text languageText;
-    private ObservableList<String> languages = FXCollections.observableArrayList("fi", "en");
-    final private ObservableList<Product> items = FXCollections.observableArrayList();
+    private String currency;
+    private final ObservableList<String> languages = FXCollections.observableArrayList("fi", "en");
+    private final ObservableList<Product> items = FXCollections.observableArrayList();
     private String productId;
     private final String[] hotkeyProductIds = new String[9];
     private final ArrayList<Button> hotkeyButtons = new ArrayList<>();
     private HotkeyFileHandler hotkeyFileHandler;
     private ResourceBundle bundle;
     private List<Integer> privilegesOfUser;
-
 
     public void loadTransactionView() {
         mainApp.showTransactionView();
@@ -82,20 +83,23 @@ public class MainView {
     @FXML
     private void readBarcode() {
         productId = barcodeTextField.getText();
-        addProduct(productId);
+        if (barcodeTextField.getText().length() > 0) {
+            addProduct(productId);
+        }
         barcodeTextField.clear();
         barcodeTextField.requestFocus();
     }
 
-    private void addProduct(String productId) {
-        Product product = this.mainApp.getEngine().scanProduct(productId);
+    private void addProduct(final String productId) {
+
+        final Product product = this.mainApp.getEngine().scanProduct(productId);
         if (product != null) {
             if (!items.contains(product)) {
                 items.add(product);
             }
             scanListView.refresh();
             setTotalPrice();
-            for (Product p : this.mainApp.getEngine().getTransaction().getOrder().getProductList()) {
+            for (final Product p : this.mainApp.getEngine().getTransaction().getOrder().getProductList()) {
                 if (p.equals(product)) {
                     if (p.getStock() < 0) {
                         negativeProductStockNotification();
@@ -111,36 +115,48 @@ public class MainView {
                     .position(Pos.TOP_RIGHT)
                     .showError();
         }
+
         barcodeTextField.requestFocus();
+
     }
 
     public void setTotalPrice() {
-        if (!(this.mainApp.getEngine().getTransaction() == null)) {
-            String priceInEuros = String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f)) + "€";
+        if (this.mainApp.getEngine().getTransaction() != null) {
+
+            final String priceInEuros = String.format("%.2f",
+                    (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))
+                    + CurrencyHandler.getCurrency();
             this.totalPriceLabel.setText(priceInEuros);
+
+            // String priceInEuros = String.format("%.2f",
+            // (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() /
+            // 100f)) + "€";
+            // this.totalPriceLabel.setText(priceInEuros);
         } else {
-            this.totalPriceLabel.setText("0.00€");
+            this.totalPriceLabel.setText("0.00" + CurrencyHandler.getCurrency());
         }
     }
 
     @FXML
     private void handleLogoutButton() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, bundle.getString("logoutConfirmationString"), ButtonType.YES, ButtonType.NO);
+        final Alert alert = new Alert(Alert.AlertType.CONFIRMATION, bundle.getString("logoutConfirmationString"),
+                ButtonType.YES, ButtonType.NO);
         alert.setTitle(bundle.getString("confirmationString"));
         alert.setHeaderText(bundle.getString("confirmationString"));
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
             this.mainApp.getEngine().logout();
-            this.mainApp.getStage().setTitle(this.mainApp.APP_TITLE);
+            this.mainApp.getStage().setTitle(MainApp.APP_TITLE);
             this.mainApp.showLoginView();
         }
     }
 
-    private void addHotkeys(ArrayList<Button> hotkeys) {
+    private void addHotkeys(final ArrayList<Button> hotkeys) {
         for (int i = 0; i < hotkeys.size(); i++) {
             setHotkeyButton(hotkeys.get(i));
-            if (Objects.equals(hotkeyProductIds[i], "null") || Objects.equals(hotkeyProductIds[i], "") || Objects.equals(hotkeyProductIds[i], null)) {
-                Button hotkey = hotkeys.get(i);
+            if (Objects.equals(hotkeyProductIds[i], "null") || Objects.equals(hotkeyProductIds[i], "")
+                    || Objects.equals(hotkeyProductIds[i], null)) {
+                final Button hotkey = hotkeys.get(i);
                 hotkey.setText(bundle.getString("hotkeyNotSetString"));
                 hotkey.setStyle("-fx-background-color: red;");
                 hotkey.setOnMouseEntered(mouseEvent -> hotkey.setStyle("-fx-background-color: darkred;"));
@@ -152,24 +168,26 @@ public class MainView {
     }
 
     /**
-     * Takes existing hotkey information and uses it by adding desired products to listview and order.
+     * Takes existing hotkey information and uses it by adding desired products to
+     * listview and order.
      * Saves new hotkey information if button pressed for 2 sec or more.
      */
-    private void setHotkeyButton(Button button) {
-        int buttonId = Integer.parseInt(button.getId().replace("hotkeyButton", ""));
+    private void setHotkeyButton(final Button button) {
+        final int buttonId = Integer.parseInt(button.getId().replace("hotkeyButton", ""));
         button.addEventFilter(MouseEvent.ANY, new EventHandler<>() {
             long startTime;
             final AtomicBoolean running = new AtomicBoolean(false);
 
             @Override
-            public void handle(MouseEvent event) {
+            public void handle(final MouseEvent event) {
                 if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
                     feedbackProgressBar.setVisible(true);
                     startTime = System.currentTimeMillis();
-                    Thread thread = new Thread(() -> {
+                    final Thread thread = new Thread(() -> {
                         running.set(true);
                         while (running.get()) {
-                            feedbackProgressBar.setProgress(Long.valueOf(System.currentTimeMillis() - startTime).doubleValue() / 2000);
+                            feedbackProgressBar.setProgress(
+                                    Long.valueOf(System.currentTimeMillis() - startTime).doubleValue() / 2000);
                         }
                     });
                     thread.start();
@@ -177,16 +195,18 @@ public class MainView {
                     if (System.currentTimeMillis() - startTime > 2000) {
                         if (Collections.max(privilegesOfUser) > 0) {
                             if (productId != null) {
-                                TextInputDialog tid = new TextInputDialog("");
+                                final TextInputDialog tid = new TextInputDialog("");
                                 tid.setTitle(bundle.getString("hotkeySettingTitleString"));
-                                tid.setHeaderText(bundle.getString("hotkeySettingDefaultNameString") + " " + items.get(items.size() - 1).getName() + ".\n" + bundle.getString("hotkeySettingRenameString"));
+                                tid.setHeaderText(bundle.getString("hotkeySettingDefaultNameString") + " "
+                                        + items.get(items.size() - 1).getName() + ".\n"
+                                        + bundle.getString("hotkeySettingRenameString"));
                                 tid.setContentText(bundle.getString("hotkeySettingNewNameString"));
-                                Optional<String> result = tid.showAndWait();
+                                final Optional<String> result = tid.showAndWait();
                                 result.ifPresent(e -> {
-                                    TextField inputField = tid.getEditor();
+                                    final TextField inputField = tid.getEditor();
                                     hotkeyProductIds[buttonId] = productId;
                                     hotkeyButtons.get(buttonId).setStyle(paymentButton.getStyle());
-                                    Button hotkey = hotkeyButtons.get(buttonId);
+                                    final Button hotkey = hotkeyButtons.get(buttonId);
                                     hotkey.setOnMouseEntered(mouseEvent -> hotkey.setStyle(paymentButton.getStyle()));
                                     hotkey.setOnMouseExited(mouseEvent -> hotkey.setStyle(paymentButton.getStyle()));
                                     if (!Objects.equals(inputField.getText(), "")) {
@@ -219,7 +239,7 @@ public class MainView {
                                         .position(Pos.TOP_RIGHT)
                                         .show();
                             }
-                        } catch (Exception e) {
+                        } catch (final Exception e) {
                             Notifications.create()
                                     .owner(mainAnchorPane.getScene().getWindow())
                                     .title(bundle.getString("notificationString"))
@@ -240,7 +260,8 @@ public class MainView {
 
     @FXML
     public void showHelp() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, bundle.getString("mainViewHelpString"), ButtonType.CLOSE);
+        final Alert alert = new Alert(Alert.AlertType.INFORMATION, bundle.getString("mainViewHelpString"),
+                ButtonType.CLOSE);
         alert.setTitle(bundle.getString("helpString"));
         alert.setHeaderText(bundle.getString("helpString"));
         alert.showAndWait();
@@ -256,7 +277,7 @@ public class MainView {
                 .show();
     }
 
-    public void setMainApp(MainApp mainApp) {
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         selfcheckoutlabel.setVisible(false);
         bundle = mainApp.getBundle();
@@ -264,19 +285,19 @@ public class MainView {
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
             languageBox.setItems(languages);
             languageBox.setOnAction(event -> {
-                String lang = switch (languageBox.getValue()) {
+                final String lang = switch (languageBox.getValue()) {
                     case "fi" -> "fi_FI";
                     case "en" -> "en_US";
                     default -> throw new IllegalStateException("Unexpected value: " + languageBox.getValue());
                 };
                 try {
-                    Locale locale = new Locale(lang.split("_")[0], lang.split("_")[1]);
+                    final Locale locale = new Locale(lang.split("_")[0], lang.split("_")[1]);
                     Locale.setDefault(locale);
                     this.mainApp.setBundle(ResourceBundle.getBundle("TextResources", locale));
                     System.out.println(locale.getLanguage());
                     this.mainApp.showMainView();
 
-                } catch (Exception ignored) {
+                } catch (final Exception ignored) {
                 }
             });
             languageBox.setVisible(true);
@@ -286,7 +307,7 @@ public class MainView {
             languageText.setVisible(true);
         }
         feedbackProgressBar.setVisible(false);
-        mainApp.getStage().setTitle(mainApp.APP_TITLE + " - " + mainApp.getEngine().getUser().getUsername());
+        mainApp.getStage().setTitle(MainApp.APP_TITLE + " - " + mainApp.getEngine().getUser().getUsername());
         hotkeyFileHandler = new HotkeyFileHandler(bundle);
         hotkeyFileHandler.loadHotkeys(hotkeyProductIds, mainApp.getHotkeyButtonNames());
         hotkeyButtons.add(hotkeyButton0);
@@ -302,27 +323,43 @@ public class MainView {
         // Populate listView with already existing products from open Transaction
         if (this.mainApp.getEngine().getTransaction() != null) {
             try {
-                List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
-                for (Product product : products) {
+                final List<Product> products = this.mainApp.getEngine().getTransaction().getOrder().getProductList();
+                for (final Product product : products) {
                     if (!items.contains(product)) {
                         items.add(product);
                     }
                 }
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 System.out.println("No products in order");
             }
         }
         scanListView.setItems(items);
-        scanListView.setCellFactory(productListView -> new ProductListViewCell(this, this.mainApp.getEngine().getTransaction().getOrder(), this.items));
+        scanListView.setCellFactory(productListView -> new ProductListViewCell(this,
+                this.mainApp.getEngine().getTransaction().getOrder(), this.items));
         setTotalPrice();
-        //Pressing enter runs readBarcode()
+        // Pressing enter runs readBarcode()
         barcodeTextField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)
                 readBarcode();
         });
         items.addListener((ListChangeListener<Product>) change -> setTotalPrice());
         barcodeTextField.requestFocus();
-        BooleanBinding booleanBind = Bindings.size(items).isEqualTo(0);
+        final BooleanBinding booleanBind = Bindings.size(items).isEqualTo(0);
         paymentButton.disableProperty().bind(booleanBind);
+        // if barcodeTextField's length is greater than 8 characters it is trimmed to 8
+        // characters
+        barcodeTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.length() > 8) {
+                barcodeTextField.setText(newValue.substring(0, 8));
+            }
+        });
+        // check if selfcheckoutlabel is clicked 5 times in a row and if so, call
+        // handleLogoutButton() method
+        selfcheckoutlabel.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 5) {
+                handleLogoutButton();
+            }
+        });
+
     }
 }

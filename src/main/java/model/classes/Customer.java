@@ -4,7 +4,9 @@ import javax.persistence.*;
 
 /**
  * Represents a customer that is linked to a transaction
- * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
  */
 @Entity
 @Table(name = "Asiakas")
@@ -29,9 +31,10 @@ public class Customer {
 
     /**
      * Creates a customer with a specified customer level
+     * 
      * @param customerLevelIndex
      */
-    public Customer(int customerLevelIndex) {
+    public Customer(final int customerLevelIndex) {
         this.customerLevelIndex = customerLevelIndex;
     }
 
@@ -45,7 +48,7 @@ public class Customer {
     /**
      * @param id sets id of customer
      */
-    public void setId(int id) {
+    public void setId(final int id) {
         if (id < 0) {
             throw new RuntimeException("Customer can't have a negative ID");
         }

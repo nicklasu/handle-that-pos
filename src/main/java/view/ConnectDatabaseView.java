@@ -24,7 +24,7 @@ public class ConnectDatabaseView {
     @FXML
     private Button retryButton;
 
-    public void setMainApp(MainApp mainApp) {
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
 
         tryToConnect();
@@ -37,12 +37,10 @@ public class ConnectDatabaseView {
         connectingToDatabaseLabel.setVisible(true);
         progressIndicator.setVisible(true);
 
-        Thread t1 = new Thread(() -> {
+        final Thread t1 = new Thread(() -> {
             if (sessionFactoryCreated()) {
                 mainApp.setEngine(new POSEngine());
-                Platform.runLater(() -> {
-                    mainApp.showLoginView();
-                });
+                Platform.runLater(mainApp::showLoginView);
             } else {
                 Platform.runLater(() -> {
                     connectingToDatabaseLabel.setVisible(false);
@@ -58,7 +56,7 @@ public class ConnectDatabaseView {
     private boolean sessionFactoryCreated() {
         try {
             HibernateUtil.getSessionFactory();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.out.println("virhe istuntotehtaan luomisessa");
             return false;
         }

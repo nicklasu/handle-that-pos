@@ -14,7 +14,9 @@ import java.util.stream.Collectors;
 
 /**
  * Represents the hardware running the software
- * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
  */
 @Entity
 @Table(name = "Maksupääte")
@@ -48,34 +50,34 @@ public class POSEngine implements IPOSEngine {
      * Data access object for users
      */
     @Transient
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
 
     /**
      * Data access object for products
      */
     @Transient
-    private ProductDAO productDAO;
+    private final ProductDAO productDAO;
 
     @Transient
-    private ProfileDAO profileDAO;
+    private final ProfileDAO profileDAO;
 
     /**
      * Data access object for transactions
      */
     @Transient
-    private TransactionDAO transactionDAO;
+    private final TransactionDAO transactionDAO;
 
     /**
      * Data access object for customers
      */
     @Transient
-    private CustomerDAO customerDAO;
+    private final CustomerDAO customerDAO;
 
     /**
      * Data access object for handling privileges
      */
     @Transient
-    private PrivilegeDAO privilegeDAO;
+    private final PrivilegeDAO privilegeDAO;
 
     /**
      * Privileges for the current logged in user
@@ -90,7 +92,8 @@ public class POSEngine implements IPOSEngine {
     private List<Integer> verifiedPrivileges;
 
     /**
-     * Constructor for POSEngine, creates objects from all the needed DAO classes and generates own id
+     * Constructor for POSEngine, creates objects from all the needed DAO classes
+     * and generates own id
      */
     public POSEngine() {
         this.userDAO = new UserDAO();
@@ -114,27 +117,31 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Login a user to the POSEngine
+     * 
      * @param username
      * @param password
      * @return 0 if not found in database, 1 if ok, 2 if no privileges
      */
     @Override
-    public int login(String username, String password) {
+    public int login(final String username, final String password) {
         ped.addID(this);
-        User user = userDAO.getUser(username);
-        if (user != null) {
-            BCrypt.Result result = compare(password, user.getPassword());
+        final User user1 = userDAO.getUser(username);
+        if (user1 != null) {
+            final BCrypt.Result result = compare(password, user1.getPassword());
             System.out.println(HWID.getHWID());
             if (result.verified) {
 
-                this.user = user;
-                privileges = privilegeDAO.getPrivileges(user);
+                this.user = user1;
+                privileges = privilegeDAO.getPrivileges(user1);
                 this.verifiedPrivileges = new ArrayList<>();
-                List<Date> privilegeEndDates = privileges.stream().map(p -> p.getPrivilegeEnd()).collect(Collectors.toList());
-                List<Date> privilegeStartDates = privileges.stream().map(p -> p.getPrivilegeStart()).collect(Collectors.toList());
-                List<Privilege> validPrivileges = new ArrayList<>();
+                final List<Date> privilegeEndDates = privileges.stream().map(p -> p.getPrivilegeEnd())
+                        .collect(Collectors.toList());
+                final List<Date> privilegeStartDates = privileges.stream().map(p -> p.getPrivilegeStart())
+                        .collect(Collectors.toList());
+                final List<Privilege> validPrivileges = new ArrayList<>();
                 for (int i = 0; i < privilegeEndDates.size(); i++) {
-                    if (!privilegeStartDates.get(i).after(new Date()) && (privilegeEndDates.get(i) == null || !privilegeEndDates.get(i).before(new Date()))) {
+                    if (!privilegeStartDates.get(i).after(new Date())
+                            && (privilegeEndDates.get(i) == null || !privilegeEndDates.get(i).before(new Date()))) {
                         validPrivileges.add(privileges.get(i));
                         this.verifiedPrivileges.add(privileges.get(i).getPrivilegeLevelIndex());
                     }
@@ -160,9 +167,10 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Sets identifier
+     * 
      * @param id
      */
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -184,9 +192,10 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Sets privileges of current user
+     * 
      * @param privileges
      */
-    public void setPrivileges(List<Privilege> privileges) {
+    public void setPrivileges(final List<Privilege> privileges) {
         this.privileges = privileges;
     }
 
@@ -217,41 +226,43 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Scans a new product adding it to the current order.
+     * 
      * @param id identifier of product
      * @return the product that was scanned
      */
     @Override
-    public Product scanProduct(String id) {
+    public Product scanProduct(final String id) {
         if (this.transaction == null) {
             this.transaction = new Transaction(this.user);
         }
-        Product product = productDAO.getProduct(id);
+        final Product product = productDAO.getProduct(id);
         this.transaction.getOrder().addProductToOrder(product);
         return product;
     }
 
     /**
      * Finalizes a sales transaction and lastly sets current transaction to null
+     * 
      * @param printReceipt true if customer wants a receipt
      */
     @Override
-    public void confirmTransaction(boolean printReceipt) {
-        Date date = new Date();
-        Timestamp ts = new Timestamp(date.getTime());
+    public void confirmTransaction(final boolean printReceipt) {
+        final Date date = new Date();
+        final Timestamp ts = new Timestamp(date.getTime());
         transaction.setTimestamp(ts);
         ((Transaction) transaction).setPos(this);
         transactionDAO.addTransaction((Transaction) this.transaction);
         try {
-            ArrayList<Product> productsToUpdate = new ArrayList<>();
-            for (Product product : this.transaction.getOrder().getProductList()) {
+            final ArrayList<Product> productsToUpdate = new ArrayList<>();
+            for (final Product product : this.transaction.getOrder().getProductList()) {
                 if (!productsToUpdate.contains(product)) {
                     productsToUpdate.add(product);
                 }
             }
-            for (Product product : productsToUpdate) {
+            for (final Product product : productsToUpdate) {
                 productDAO.updateProduct(product);
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.out.println("No products in order!");
         }
         if (printReceipt) {
@@ -269,7 +280,10 @@ public class POSEngine implements IPOSEngine {
     }
 
     @Override
-    public ProfileDAO profileDAO() {return this.profileDAO;}
+    public ProfileDAO profileDAO() {
+        return this.profileDAO;
+    }
+
     /**
      * @return product data access object
      */
@@ -302,51 +316,55 @@ public class POSEngine implements IPOSEngine {
         return this.transactionDAO;
     }
 
-
     /**
      * Hashes the password with BCrypt
+     * 
      * @param password the password in normal format
      * @return hashed password
      */
-    private String hashPassword(String password) {
+    private String hashPassword(final String password) {
         return BCrypt.withDefaults().hashToString(12, password.toCharArray());
     }
 
     /**
      * Compares as hashed version and a plain version of a password
+     * 
      * @param password
      * @param hashedPassword
      * @return essentially true if matches
      */
-    private BCrypt.Result compare(String password, String hashedPassword) {
+    private BCrypt.Result compare(final String password, final String hashedPassword) {
         return BCrypt.verifyer().verify(password.toCharArray(), hashedPassword);
     }
 
     /**
      * sets transaction to input, used for tests
+     * 
      * @param testTransaction transaction object
      */
     @Override
-    public void setTransaction(Transaction testTransaction) {
+    public void setTransaction(final Transaction testTransaction) {
         this.transaction = testTransaction;
     }
 
     /**
      * creates a user
+     * 
      * @param user
      */
     @Override
-    public void addUser(User user) {
+    public void addUser(final User user) {
         user.setPassword(hashPassword(user.getPassword()));
         userDAO.createUser(user);
     }
 
     /**
      * Updates a user
+     * 
      * @param user
      */
     @Override
-    public void updateUser(User user) {
+    public void updateUser(final User user) {
         user.setPassword(hashPassword(user.getPassword()));
         userDAO.updateUser(user);
     }

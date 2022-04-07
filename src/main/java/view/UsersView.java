@@ -1,11 +1,13 @@
 package view;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -23,7 +25,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 import java.util.List;
 
@@ -41,35 +42,42 @@ public class UsersView {
     private ListView<Transaction> transactionListView;
     @FXML
     private ImageView avatar;
-
+    @FXML
+    private ProgressIndicator progressIndicator;
     private User searchedUser;
+    @FXML
+    private Button searchButton;
 
-    final private ObservableList<Transaction> items = FXCollections.observableArrayList();
+    private final ObservableList<Transaction> items = FXCollections.observableArrayList();
 
-    public void setMainApp(MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
+        final List<Integer> verifiedPrivileges = this.mainApp.getEngine().getVerifiedPrivileges();
+        // if user has user level privileges or less disable the search field
+        if (Collections.max(verifiedPrivileges) < 2) {
+            this.searchField.setDisable(true);
+            this.searchButton.setDisable(true);
+        }
         searchField.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.ENTER) searchUser();
+            if (e.getCode() == KeyCode.ENTER)
+                searchUser();
         });
         activity.setDisable(true);
         this.searchedUser = this.mainApp.getEngine().getUser();
         fName.setText(this.searchedUser.getfName());
         lName.setText(this.searchedUser.getlName());
         setListViewItems(this.searchedUser);
-        if (this.searchedUser.getActivity() == 1) {
-            activity.setSelected(true);
-        } else {
-            activity.setSelected(false);
-        }
+        final boolean act = this.searchedUser.getActivity() == 1;
+        activity.setSelected(act);
 
         transactionListView.setOnMouseClicked(event -> {
-            Transaction transaction = transactionListView.getSelectionModel().getSelectedItem();
+            final Transaction transaction = transactionListView.getSelectionModel().getSelectedItem();
             showTransactionDetails(transaction);
         });
 
         transactionListView.setCellFactory(param -> new ListCell<Transaction>() {
             @Override
-            protected void updateItem(Transaction item, boolean empty) {
+            protected void updateItem(final Transaction item, final boolean empty) {
                 super.updateItem(item, empty);
 
                 if (empty || item == null) {
@@ -80,7 +88,7 @@ public class UsersView {
             }
         });
 
-        Profile profile = this.mainApp.getEngine().profileDAO().getAvatar(this.searchedUser);
+        final Profile profile = this.mainApp.getEngine().profileDAO().getAvatar(this.searchedUser);
         if (profile != null) {
             insertImage(profile.getAvatar());
         }
@@ -90,18 +98,15 @@ public class UsersView {
     private void searchUser() {
         try {
             System.out.println("searching");
-            String username = searchField.getText();
+            final String username = searchField.getText();
             this.searchedUser = this.mainApp.getEngine().userDAO().getUser(username);
             if (this.searchedUser != null) {
                 fName.setText(this.searchedUser.getfName());
                 lName.setText(this.searchedUser.getlName());
-                if (this.searchedUser.getActivity() == 1) {
-                    activity.setSelected(true);
-                } else {
-                    activity.setSelected(false);
-                }
+                final boolean act = this.searchedUser.getActivity() == 1;
+                activity.setSelected(act);
                 setListViewItems(this.searchedUser);
-                Profile profile = this.mainApp.getEngine().profileDAO().getAvatar(this.searchedUser);
+                final Profile profile = this.mainApp.getEngine().profileDAO().getAvatar(this.searchedUser);
                 if (profile != null) {
                     insertImage(profile.getAvatar());
                 } else {
@@ -109,22 +114,38 @@ public class UsersView {
                     this.avatar.setImage(new Image(String.valueOf(getClass().getResource("/images/person.png"))));
                 }
             } else {
-                Notifications.create().owner(searchField.getScene().getWindow()).title("Virhe").text("Käyttäjänimeä ei löydy!").position(Pos.TOP_RIGHT).showError();
+                Notifications.create().owner(searchField.getScene().getWindow()).title("Virhe")
+                        .text("Käyttäjänimeä ei löydy!").position(Pos.TOP_RIGHT).showError();
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void setListViewItems(User user) {
-        List<Transaction> transactions = this.mainApp.getEngine().transactionDAO().getTransactions(user);
-        this.items.addAll(transactions);
-        this.transactionListView.setItems(this.items);
+    private void setListViewItems(final User user) {
+        // new thread
+        progressIndicator.setVisible(true);
+        final Thread thread = new Thread(() -> {
+            try {
+                final List<Transaction> transactions = this.mainApp.getEngine().transactionDAO().getTransactions(user);
+                Platform.runLater(() -> {
+                    items.clear();
+                    items.addAll(transactions);
+                    transactionListView.setItems(items);
+                    progressIndicator.setVisible(false);
+
+                });
+            } catch (final Exception e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+
     }
 
-    private void showTransactionDetails(Transaction transaction) {
+    private void showTransactionDetails(final Transaction transaction) {
 
-        Dialog<Void> dialog = new Dialog<>();
+        final Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle(Integer.toString(transaction.getId()));
 
         PaymentMethod paymentMethod;
@@ -135,11 +156,14 @@ public class UsersView {
             paymentMethod = PaymentMethod.CARD;
         }
 
-        String transactionInformation = "ID: " + transaction.getId() + "\n" + "Pvm ja kellonaika: " + transaction.getTimestamp() + "\n" + "Maksutapa: " + paymentMethod.name() + "\n" + "Myyjä: " + transaction.getUser().getFullName() + "\n" + "Maksupäätteen ID: " + transaction.getPos().getId() + "\n\n";
+        final String transactionInformation = "ID: " + transaction.getId() + "\n" + "Pvm ja kellonaika: "
+                + transaction.getTimestamp() + "\n" + "Maksutapa: " + paymentMethod.name() + "\n" + "Myyjä: "
+                + transaction.getUser().getFullName() + "\n" + "Maksupäätteen ID: " + transaction.getPos().getId()
+                + "\n\n";
 
         String productsAndAmounts = "";
-        Set<OrderProduct> ops = transaction.getOrder().getOrderProducts();
-        for (OrderProduct op : ops) {
+        final Set<OrderProduct> ops = transaction.getOrder().getOrderProducts();
+        for (final OrderProduct op : ops) {
             productsAndAmounts += op.getProduct() + " x " + op.getAmount() + "\n";
         }
 
@@ -153,59 +177,58 @@ public class UsersView {
 
     @FXML
     private void uploadImage() {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter("Image formats", "*.png");
+        final FileChooser fileChooser = new FileChooser();
+        final FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter("Image formats", "*.png");
         fileChooser.getExtensionFilters().add(fileExtensions);
         fileChooser.setTitle("Valitse kuva");
-        File file = fileChooser.showOpenDialog(null);
+        final File file = fileChooser.showOpenDialog(null);
         if (file != null) {
             try {
-                BufferedImage bufferedImage = ImageIO.read(file);
+                final BufferedImage bufferedImage = ImageIO.read(file);
                 if (bufferedImage != null) {
 
-
-                    //resize bufferedImage
-                    int newWidth = 600;
-                    int newHeight = 600;
-                    BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_ARGB);
-                    Graphics2D g = resizedImage.createGraphics();
+                    // resize bufferedImage
+                    final int newWidth = 600;
+                    final int newHeight = 600;
+                    final BufferedImage resizedImage = new BufferedImage(newWidth, newHeight,
+                            BufferedImage.TYPE_INT_ARGB);
+                    final Graphics2D g = resizedImage.createGraphics();
                     g.drawImage(bufferedImage, 0, 0, newWidth, newHeight, null);
                     g.dispose();
 
-
-
-                    Image image = SwingFXUtils.toFXImage(resizedImage, null);
+                    final Image image = SwingFXUtils.toFXImage(resizedImage, null);
                     this.avatar.setImage(image);
-                    String imageEncoded = encodeImage(resizedImage);
-                    Profile profile = new Profile(this.searchedUser.getId(), imageEncoded);
+                    final String imageEncoded = encodeImage(resizedImage);
+                    final Profile profile = new Profile(this.searchedUser.getId(), imageEncoded);
                     this.mainApp.getEngine().profileDAO().saveAvatar(profile);
                 } else {
-                    Notifications.create().owner(avatar.getScene().getWindow()).title(this.mainApp.getBundle().getString("errorString")).text(this.mainApp.getBundle().getString("upload_image_error")).position(Pos.TOP_RIGHT).showError();
+                    Notifications.create().owner(avatar.getScene().getWindow())
+                            .title(this.mainApp.getBundle().getString("errorString"))
+                            .text(this.mainApp.getBundle().getString("upload_image_error")).position(Pos.TOP_RIGHT)
+                            .showError();
 
                 }
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 e.printStackTrace();
                 System.out.println("Tapahtui virhe! Yritikö uploadata kuvaa väärässä formaatissa?");
             }
         }
     }
 
-
-    private String encodeImage(BufferedImage bufferedImage) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    private String encodeImage(final BufferedImage bufferedImage) throws IOException {
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(bufferedImage, "png", baos);
         baos.flush();
-        byte[] imageInByte = baos.toByteArray();
+        final byte[] imageInByte = baos.toByteArray();
         baos.close();
-        String encodedImage = Base64.getEncoder().encodeToString(imageInByte);
-        return encodedImage;
+        return Base64.getEncoder().encodeToString(imageInByte);
     }
 
-    private void insertImage(String encodedImage) throws IOException {
-        byte[] imageInByte2 = Base64.getDecoder().decode(encodedImage);  //decode image
-        ByteArrayInputStream bais = new ByteArrayInputStream(imageInByte2);
-        BufferedImage bufferedImage2 = ImageIO.read(bais);
-        Image image2 = SwingFXUtils.toFXImage(bufferedImage2, null);
+    private void insertImage(final String encodedImage) throws IOException {
+        final byte[] imageInByte2 = Base64.getDecoder().decode(encodedImage); // decode image
+        final ByteArrayInputStream bais = new ByteArrayInputStream(imageInByte2);
+        final BufferedImage bufferedImage2 = ImageIO.read(bais);
+        final Image image2 = SwingFXUtils.toFXImage(bufferedImage2, null);
         System.out.println("Asetetaan kuva");
         this.avatar.setImage(image2);
     }

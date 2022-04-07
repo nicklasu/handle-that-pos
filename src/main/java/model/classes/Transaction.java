@@ -7,7 +7,9 @@ import java.sql.Timestamp;
 
 /**
  * Represents a sales transaction
- * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
  */
 @Entity
 @Table(name = "Maksutapahtuma")
@@ -71,12 +73,13 @@ public class Transaction implements ITransaction {
 
     /**
      * Constructor for a new transaction
+     * 
      * @param user the logged-in user handling the transaction
      */
-    public Transaction(User user) {
+    public Transaction(final User user) {
         this.order = new Order(this);
         this.paymentMethod = PaymentMethod.CARD; // By default the payment method is credit/debit card
-        this.paymentMethodIndex = 1; //PaymentMethod.valueOf(paymentMethod.name()).ordinal();
+        this.paymentMethodIndex = 1; // PaymentMethod.valueOf(paymentMethod.name()).ordinal();
         this.customer = null; // Ei Bonsuasiakkuutta oletuksena
         this.user = user;
         this.timestamp = null;
@@ -93,7 +96,7 @@ public class Transaction implements ITransaction {
     /**
      * @param pos the device handling the transaction
      */
-    public void setPos(POSEngine pos) {
+    public void setPos(final POSEngine pos) {
         this.pos = pos;
     }
 
@@ -107,7 +110,7 @@ public class Transaction implements ITransaction {
     /**
      * @param user the user handling the transaction
      */
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
@@ -121,7 +124,7 @@ public class Transaction implements ITransaction {
     /**
      * @param timestamp time of transaction
      */
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(final Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -137,7 +140,7 @@ public class Transaction implements ITransaction {
      * @param order order consisting of products
      */
     @Override
-    public void setOrder(Order order) {
+    public void setOrder(final Order order) {
         this.order = order;
     }
 
@@ -153,7 +156,7 @@ public class Transaction implements ITransaction {
      * @param customer customer of transaction
      */
     @Override
-    public void setCustomer(Customer customer) {
+    public void setCustomer(final Customer customer) {
         this.customer = customer;
     }
 
@@ -169,7 +172,7 @@ public class Transaction implements ITransaction {
      * @param paymentMethod payment method used in the transaction
      */
     @Override
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
+    public void setPaymentMethod(final PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
         this.paymentMethodIndex = this.paymentMethod.ordinal();
     }
@@ -184,7 +187,7 @@ public class Transaction implements ITransaction {
     /**
      * @param id identifier for transaction
      */
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -198,7 +201,7 @@ public class Transaction implements ITransaction {
     /**
      * @param paymentMethodIndex payment method ordinal value
      */
-    public void setPaymentMethodIndex(int paymentMethodIndex) {
+    public void setPaymentMethodIndex(final int paymentMethodIndex) {
         this.paymentMethodIndex = paymentMethodIndex;
     }
 

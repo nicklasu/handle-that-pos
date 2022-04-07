@@ -1,12 +1,15 @@
 package view;
 
+import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 
 public class LoginView {
-    //Prefills the username field and password field with the manager's username and password
-    private boolean DEV_MODE = true;
+    // Prefills the username field and password field with the manager's username
+    // and password
+    private final boolean DEV_MODE = true;
 
     private MainApp mainApp;
 
@@ -16,11 +19,16 @@ public class LoginView {
     private Label devLabel;
     @FXML
     private PasswordField passwordPasswordField;
+    @FXML
+    private ProgressIndicator progressIndicator;
+    @FXML
+    private Button loginButton;
 
-    public void setMainApp(MainApp mainApp) {
+    public void setMainApp(final MainApp mainApp) {
         devLabel.setVisible(DEV_MODE);
-        //Prefills the username field and password field with the manager's username and password
-        if(DEV_MODE) {
+        // Prefills the username field and password field with the manager's username
+        // and password
+        if (DEV_MODE) {
             usernameTextField.setText("testuser");
             passwordPasswordField.setText("123");
         }
@@ -38,30 +46,60 @@ public class LoginView {
 
     @FXML
     private void handleLoginButton() {
-        if (this.mainApp.getEngine().login(usernameTextField.getText(), passwordPasswordField.getText()) == 1) {
-            this.mainApp.showMainView();
-        } else if (this.mainApp.getEngine().login(usernameTextField.getText(), passwordPasswordField.getText()) == 0) {
-            // alert, wrong username or password
-            Alert alert = new Alert(Alert.AlertType.ERROR, this.mainApp.getBundle().getString("loginError1"), ButtonType.OK);
-            alert.showAndWait();
+        progressIndicator.setVisible(true);
+        progressIndicator.setViewOrder(2);
+        loginButton.setDisable(true);
+        loginButton.textProperty()
+                .bind(Bindings.when(progressIndicator.visibleProperty())
+                        .then(this.mainApp.getBundle().getString("logging_in"))
+                        .otherwise(this.mainApp.getBundle().getString("login")));
+        final Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "default error", ButtonType.OK);
+        alert.setTitle(this.mainApp.getBundle().getString("errorString"));
+        alert.setHeaderText(this.mainApp.getBundle().getString("loginError"));
+        loginHandlerThread(alert);
 
-            if (alert.getResult() == ButtonType.OK) {
-                alert.close();
+    }
+
+    private void loginHandlerThread(final Alert alert) {
+        final Thread thread = new Thread(() -> {
+            try {
+                final int result = this.mainApp.getEngine().login(usernameTextField.getText(),
+                        passwordPasswordField.getText());
+                Platform.runLater(() -> {
+
+                    switch (result) {
+                        case 1:
+                            this.mainApp.showMainView();
+                            break;
+                        case 0:
+                            alertMsg(alert, "loginError1");
+                            break;
+                        case 2:
+                            alertMsg(alert, "loginError2");
+                            break;
+                        default:
+                            alertMsg(alert, "loginError3");
+                            break;
+                    }
+                    progressIndicator.setVisible(false);
+                    loginButton.setDisable(false);
+                    loginButton.textProperty().unbind();
+
+                });
+            } catch (final Exception e) {
+                e.printStackTrace();
             }
+        });
+        thread.start();
+    }
 
-        } else if (this.mainApp.getEngine().login(usernameTextField.getText(), passwordPasswordField.getText()) == 2) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, this.mainApp.getBundle().getString("loginError2"), ButtonType.OK);
-            alert.showAndWait();
+    private void alertMsg(final Alert alert, String msg) {
+        alert.setContentText(this.mainApp.getBundle().getString(msg));
+        alert.showAndWait();
 
-            if (alert.getResult() == ButtonType.OK) {
-                alert.close();
-            }
-        } else {
-            System.out.println("Muu virhe");
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
         }
     }
 
 }
-
-
-

@@ -15,6 +15,7 @@ import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -50,38 +51,37 @@ public class ProductSearchView {
 
     private Pane wrapperPane;
 
-    public void setMainApp(MainApp mainApp) {
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
-
-        BooleanBinding booleanBind = input.textProperty().isEmpty();
+        final List<Integer> verifiedPrivileges = this.mainApp.getEngine().getVerifiedPrivileges();
+        final BooleanBinding booleanBind = input.textProperty().isEmpty();
         fetchBtn.disableProperty().bind(booleanBind);
         updateData();
         productTable.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent event) {
-                if (event.getClickCount() == 2) {
-                    int row = productTable.getSelectionModel().getSelectedIndex();
+            public void handle(final MouseEvent event) {
+                if (event.getClickCount() == 2 && Collections.max(verifiedPrivileges) >= 2) {
+                    final int row = productTable.getSelectionModel().getSelectedIndex();
                     System.out.println(productTable.getSelectionModel().getSelectedIndex());
-                    if (!(row < 0)) {
-                        Product product = allProducts.get(row);
+                    if (row >= 0) {
+                        final Product product = allProducts.get(row);
                         loadEditProductView(product);
                     }
                 }
             }
         });
 
-        input.textProperty().addListener((observable, oldValue, newValue) ->
-                filteredList.setPredicate(createPredicate(newValue))
-        );
+        input.textProperty()
+                .addListener((observable, oldValue, newValue) -> filteredList.setPredicate(createPredicate(newValue)));
     }
 
     @FXML
     private void updateData() {
         try {
-            if (!(filteredList == null)) {
+            if (filteredList != null) {
                 filteredList.removeAll();
             }
-            if (!(productTable == null)) {
+            if (productTable != null) {
                 productTable.getItems().removeAll();
             }
             allProducts = this.mainApp.getEngine().productDao().getAllProducts();
@@ -97,7 +97,7 @@ public class ProductSearchView {
 
             productTable.setRowFactory(productTableView -> new TableRow<Product>() {
                 @Override
-                protected void updateItem(Product product, boolean empty) {
+                protected void updateItem(final Product product, final boolean empty) {
                     super.updateItem(product, empty);
                     if (product == null) {
                         setStyle("");
@@ -110,7 +110,7 @@ public class ProductSearchView {
                     }
                 }
             });
-        } catch (Exception e) {
+        } catch (final Exception e) {
             Notifications.create()
                     .owner(fetchBtn.getScene().getWindow())
                     .title("Virhe")
@@ -121,33 +121,34 @@ public class ProductSearchView {
         }
     }
 
-    private boolean searchFindsProduct(Product product, String searchText) {
+    private boolean searchFindsProduct(final Product product, final String searchText) {
         return (product.getName().toLowerCase().contains(searchText.toLowerCase())) ||
                 (product.getId().toLowerCase().contains(searchText.toLowerCase()));
     }
 
-    private Predicate<Product> createPredicate(String searchText) {
+    private Predicate<Product> createPredicate(final String searchText) {
         return product -> {
-            if (searchText == null || searchText.isEmpty()) return true;
+            if (searchText == null || searchText.isEmpty())
+                return true;
             return searchFindsProduct(product, searchText);
         };
     }
 
-    public void setWrapperPane(Pane wrapperPane) {
+    public void setWrapperPane(final Pane wrapperPane) {
         this.wrapperPane = wrapperPane;
     }
 
-    private void loadEditProductView(Product product) {
+    private void loadEditProductView(final Product product) {
         wrapperPane.getChildren().clear();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("products-view.fxml"));
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource("products-view.fxml"));
         loader.setResources(this.mainApp.getBundle());
         Pane newLoadedPane = null;
         try {
             newLoadedPane = loader.load();
-            ProductManagementView view = loader.getController();
+            final ProductManagementView view = loader.getController();
             view.setMainApp(mainApp);
             view.editProductPaneFillFields(product);
-        } catch (IOException e) {
+        } catch (final IOException e) {
 
         }
         wrapperPane.getChildren().add(newLoadedPane);

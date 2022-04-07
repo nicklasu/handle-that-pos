@@ -22,7 +22,7 @@ public class ProfileDAO {
     public ProfileDAO() {
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.out.println("Virhe istuntotehtaan luomisessa");
             e.printStackTrace();
         }
@@ -31,38 +31,39 @@ public class ProfileDAO {
 
     /**
      * Fetches user based on ID
+     * 
      * @param user identifier for the user
      * @return user object
      */
-    public Profile getAvatar(User user) {
+    public Profile getAvatar(final User user) {
         Transaction transaction = null;
         Profile profile = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            Query query = session.createQuery("from Profile where id = :userId");
+            final Query query = session.createQuery("from Profile where id = :userId");
             query.setInteger("userId", user.getId());
-            if(query.list().size() > 0) {
+            if (query.list().size() > 0) {
                 profile = (Profile) query.list().get(0);
             }
             transaction.commit();
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             if (transaction != null) {
                 e.printStackTrace();
-                SQLException cause = (SQLException) e.getCause();
+                final SQLException cause = (SQLException) e.getCause();
                 System.out.println(cause.getMessage());
             }
         }
         return profile;
     }
 
-    public void saveAvatar(Profile profile){
+    public void saveAvatar(final Profile profile) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
             session.saveOrUpdate(profile);
             transaction.commit();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }

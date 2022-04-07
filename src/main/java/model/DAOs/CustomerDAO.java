@@ -8,7 +8,9 @@ import org.hibernate.Transaction;
 
 /**
  * Data access object for customers
- * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
  */
 public class CustomerDAO {
     /**
@@ -22,7 +24,7 @@ public class CustomerDAO {
     public CustomerDAO() {
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.out.println("Virhe istuntotehtaan luomisessa");
             e.printStackTrace();
         }
@@ -30,17 +32,18 @@ public class CustomerDAO {
 
     /**
      * Gets a customer based on identifier number
+     * 
      * @param id the identifier number
      * @return customer with that ID
      */
-    public Customer getCustomer(int id) {
+    public Customer getCustomer(final int id) {
         Transaction transaction = null;
         Customer customer = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
             customer = session.get(Customer.class, id);
             transaction.commit();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
@@ -51,15 +54,16 @@ public class CustomerDAO {
 
     /**
      * Adds a customer to the database
+     * 
      * @param c the customer to be added
      */
-    public void addCustomer(Customer c) {
+    public void addCustomer(final Customer c) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
             session.save(c);
             transaction.commit();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();
@@ -69,15 +73,16 @@ public class CustomerDAO {
 
     /**
      * Deletes a customer from the database
+     * 
      * @param c customer to be deleted
      */
-    public void deleteCustomer(Customer c) {
+    public void deleteCustomer(final Customer c) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
             session.delete(c);
             transaction.commit();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
             if (transaction != null) {
                 transaction.rollback();

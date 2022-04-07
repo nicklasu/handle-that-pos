@@ -10,7 +10,9 @@ import java.util.Set;
 
 /**
  * Represents a set of products
- * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
  */
 @Entity
 @Table(name = "Tilaus")
@@ -18,7 +20,7 @@ public class Order implements IOrder {
     /**
      * Boolean representing the customerlevel
      */
-    private boolean bonusCustomer = false;
+    private final boolean bonusCustomer = false;
 
     /**
      * Identifier for the order
@@ -45,7 +47,7 @@ public class Order implements IOrder {
      * Maps products to order, used for user interface purposes
      */
     @Transient
-    private List<Product> productList = new ArrayList<>();
+    private final List<Product> productList = new ArrayList<>();
 
     /**
      * Total price of products in the order
@@ -61,14 +63,15 @@ public class Order implements IOrder {
 
     /**
      * Creates the order as a child of a parent object
+     * 
      * @param transaction the parent object
      */
-    public Order(Transaction transaction) {
+    public Order(final Transaction transaction) {
         this.transaction = transaction;
     }
 
     /**
-     * @return identifier of  the order
+     * @return identifier of the order
      */
     public int getId() {
         return id;
@@ -77,7 +80,7 @@ public class Order implements IOrder {
     /**
      * @param id sets identifier of the order
      */
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -91,12 +94,13 @@ public class Order implements IOrder {
     /**
      * @param transaction sets the parent object
      */
-    public void setTransaction(Transaction transaction) {
+    public void setTransaction(final Transaction transaction) {
         this.transaction = transaction;
     }
 
     /**
      * Gets the product to order mapping (database version)
+     * 
      * @return
      */
     public Set<OrderProduct> getOrderProducts() {
@@ -105,22 +109,25 @@ public class Order implements IOrder {
 
     /**
      * Sets the product to order mapping (database version)
+     * 
      * @param orderProducts
      */
-    public void setOrderProducts(Set<OrderProduct> orderProducts) {
+    public void setOrderProducts(final Set<OrderProduct> orderProducts) {
         this.orderProducts = orderProducts;
     }
 
     /**
      * Adds a product to current order
+     * 
      * @param orderProduct the product
      */
-    public void addOrderProduct(OrderProduct orderProduct) {
+    public void addOrderProduct(final OrderProduct orderProduct) {
         this.orderProducts.add(orderProduct);
     }
 
     /**
      * Gets the product to order mapping
+     * 
      * @return list of products
      */
     @Override
@@ -130,6 +137,7 @@ public class Order implements IOrder {
 
     /**
      * Fetches the total price of products in the order
+     * 
      * @return price
      */
     @Override
@@ -142,21 +150,22 @@ public class Order implements IOrder {
 
     /**
      * Adds a product to the order, creates an order if one does not exist
+     * 
      * @param product Scanned product the product to add
      * @return returns true if successful
      */
     @Override
-    public boolean addProductToOrder(Product product) {
+    public boolean addProductToOrder(final Product product) {
         if (product != null) {
             Product productToAdd = product;
             try {
                 if (!productList.contains(product)) {
-                    OrderProduct orderProduct = new OrderProduct();
+                    final OrderProduct orderProduct = new OrderProduct();
                     orderProduct.setOrder(this);
                     orderProduct.setProduct(product);
                     addOrderProduct(orderProduct);
                 } else {
-                    for (OrderProduct op : orderProducts) {
+                    for (final OrderProduct op : orderProducts) {
                         if (op.getProduct().equals(product)) {
                             op.setAmount(op.getAmount() + 1);
                             productToAdd = op.getProduct();
@@ -167,7 +176,7 @@ public class Order implements IOrder {
                 totalPrice += productToAdd.getPrice();
                 productToAdd.setStock(productToAdd.getStock() - 1);
                 return true;
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 System.out.println("Error adding a product to the order " + e);
             }
         }
@@ -176,16 +185,17 @@ public class Order implements IOrder {
 
     /**
      * removes a product from the current order
+     * 
      * @param product the product to be deleted
      * @return true if succesful
      */
     @Override
-    public boolean removeProductFromOrder(Product product) {
+    public boolean removeProductFromOrder(final Product product) {
         if (this.productList.contains(product)) {
             this.productList.remove(product);
             OrderProduct orderProductToRemove = null;
 
-            for (OrderProduct op : orderProducts) {
+            for (final OrderProduct op : orderProducts) {
                 if (op.getProduct().equals(product)) {
                     if (op.getAmount() > 1) {
                         op.setAmount(op.getAmount() - 1);
@@ -199,14 +209,16 @@ public class Order implements IOrder {
             }
             this.totalPrice -= product.getPrice();
             return true;
-        } else return false;
+        } else
+            return false;
     }
 
     /**
      * Setter for totalprice
+     * 
      * @param totalPrice price of all products in the order
      */
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(final int totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -223,11 +235,12 @@ public class Order implements IOrder {
 
     /**
      * Overwritten equals method for comparing productlists
+     * 
      * @param o input object
      * @return true if same
      */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (o == null) {
             return false;
         }

@@ -2,11 +2,12 @@ package model.classes;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ResourceBundle;
 
 /**
  * Represents a use privilege given to a user account
- * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
  */
 @Entity
 @Table(name = "Käyttöoikeus")
@@ -57,12 +58,14 @@ public class Privilege {
 
     /**
      * Constructor for creating a privilege
-     * @param user associated user account
+     * 
+     * @param user           associated user account
      * @param privilegeStart starting date of privilege
-     * @param privilegeEnd ending date of privilege
+     * @param privilegeEnd   ending date of privilege
      * @param privilegeLevel access level of privilege
      */
-    public Privilege(User user, Date privilegeStart, Date privilegeEnd, PrivilegeLevel privilegeLevel) {
+    public Privilege(final User user, final Date privilegeStart, final Date privilegeEnd,
+            final PrivilegeLevel privilegeLevel) {
         this.user = user;
         this.privilegeLevel = privilegeLevel; // Oletuksena myyjän oikeudet
         this.privilegeLevelIndex = privilegeLevel.ordinal();
@@ -71,12 +74,14 @@ public class Privilege {
     }
 
     /**
-     * Constructor for creating a privilege with no connection to a user used when showing user privileges to user
+     * Constructor for creating a privilege with no connection to a user used when
+     * showing user privileges to user
+     * 
      * @param privilegeStart starting date of privilege
-     * @param privilegeEnd ending date of privilege
+     * @param privilegeEnd   ending date of privilege
      * @param privilegeLevel access level of privilege
      */
-    public Privilege(Date privilegeStart, Date privilegeEnd, PrivilegeLevel privilegeLevel) {
+    public Privilege(final Date privilegeStart, final Date privilegeEnd, final PrivilegeLevel privilegeLevel) {
         this.privilegeLevel = privilegeLevel; // Oletuksena myyjän oikeudet
         this.privilegeLevelIndex = privilegeLevel.ordinal();
         this.privilegeStart = privilegeStart;
@@ -93,7 +98,7 @@ public class Privilege {
     /**
      * @param id identifier for a privilege
      */
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -107,7 +112,7 @@ public class Privilege {
     /**
      * @param privilegeStart starting date for a privilege
      */
-    public void setPrivilegeStart(Date privilegeStart) {
+    public void setPrivilegeStart(final Date privilegeStart) {
         this.privilegeStart = privilegeStart;
     }
 
@@ -121,7 +126,7 @@ public class Privilege {
     /**
      * @param privilegeEnd ending date for a privilege
      */
-    public void setPrivilegeEnd(Date privilegeEnd) {
+    public void setPrivilegeEnd(final Date privilegeEnd) {
         this.privilegeEnd = privilegeEnd;
     }
 
@@ -135,7 +140,7 @@ public class Privilege {
     /**
      * @param privilegeLevel Enum denoting level of access
      */
-    public void setPrivilegeLevel(PrivilegeLevel privilegeLevel) {
+    public void setPrivilegeLevel(final PrivilegeLevel privilegeLevel) {
         this.privilegeLevel = privilegeLevel;
         this.privilegeLevelIndex = this.privilegeLevel.ordinal();
     }
@@ -150,7 +155,7 @@ public class Privilege {
     /**
      * @param user the user associated with the privilege
      */
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
@@ -164,7 +169,7 @@ public class Privilege {
     /**
      * @param privilegeLevelIndex Ordinal value of Enum PrivilegeLevel
      */
-    public void setPrivilegeLevelIndex(int privilegeLevelIndex) {
+    public void setPrivilegeLevelIndex(final int privilegeLevelIndex) {
         this.privilegeLevelIndex = privilegeLevelIndex;
     }
 
@@ -173,7 +178,7 @@ public class Privilege {
      */
     @Override
     public String toString() {
-        String pLevel = switch (privilegeLevelIndex) {
+        final String pLevel = switch (privilegeLevelIndex) {
             case 0 -> "Itsepalvelukassa";
             case 1 -> "Myyjä";
             case 2 -> "Myymäläpäällikkö";

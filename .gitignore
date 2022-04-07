@@ -4,3 +4,4 @@ target/
 src/main/resources/hotkey.properties
 src/main/resources/HandleThatPos.properties
 documents/
+**/.idea/sonarlint/

@@ -6,14 +6,17 @@ import java.util.Set;
 
 /**
  * Represents a sales article
- * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and Samu Luoma
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
  */
 @Entity
 @Table(name = "Tuote")
 public class Product {
 
     /**
-     * Unique identifier for the product in string format so different kinds of barcodes work
+     * Unique identifier for the product in string format so different kinds of
+     * barcodes work
      */
     @Id
     @Column(name = "ID", updatable = false, nullable = false)
@@ -58,13 +61,14 @@ public class Product {
 
     /**
      * Constructor for a Product object
-     * @param id identifier for the product
-     * @param name name of the product
+     * 
+     * @param id          identifier for the product
+     * @param name        name of the product
      * @param description description of the product
-     * @param price price of the product
-     * @param stock amount of product in stock
+     * @param price       price of the product
+     * @param stock       amount of product in stock
      */
-    public Product(String id, String name, String description, int price, int stock) {
+    public Product(final String id, final String name, final String description, final int price, final int stock) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -74,6 +78,7 @@ public class Product {
 
     /**
      * Gets a product to order mapping
+     * 
      * @return the set
      */
     public Set<OrderProduct> getOrderProducts() {
@@ -83,15 +88,16 @@ public class Product {
     /**
      * @param orderProducts The order to product mapping
      */
-    public void setOrderProducts(Set<OrderProduct> orderProducts) {
+    public void setOrderProducts(final Set<OrderProduct> orderProducts) {
         this.orderProducts = orderProducts;
     }
 
     /**
      * Adds a connection to the order to product map
+     * 
      * @param orderProduct the connection
      */
-    public void addOrderProduct(OrderProduct orderProduct) {
+    public void addOrderProduct(final OrderProduct orderProduct) {
         this.orderProducts.add(orderProduct);
     }
 
@@ -105,7 +111,7 @@ public class Product {
     /**
      * @param id identifier of product
      */
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -119,7 +125,7 @@ public class Product {
     /**
      * @param name name of product
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -133,7 +139,7 @@ public class Product {
     /**
      * @param description description of product
      */
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -147,7 +153,7 @@ public class Product {
     /**
      * @param price price of product
      */
-    public void setPrice(int price) {
+    public void setPrice(final int price) {
         this.price = price;
     }
 
@@ -161,10 +167,9 @@ public class Product {
     /**
      * @param stock stock of product
      */
-    public void setStock(int stock) {
+    public void setStock(final int stock) {
         this.stock = stock;
     }
-
 
     /**
      * @return string format of the name of the product
@@ -176,11 +181,12 @@ public class Product {
 
     /**
      * Overwritten compare method
+     * 
      * @param o object to be compared
      * @return true if same object
      */
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (o == null) {
             return false;
         }

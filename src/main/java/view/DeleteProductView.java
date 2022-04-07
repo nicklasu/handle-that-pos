@@ -19,20 +19,20 @@ public class DeleteProductView {
     @FXML
     private Button deleteBtn;
 
-    public void setMainApp(MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
         productBarcode.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)
                 deleteProduct();
         });
-        BooleanBinding booleanBind = productBarcode.textProperty().isEmpty();
+        final BooleanBinding booleanBind = productBarcode.textProperty().isEmpty();
         deleteBtn.disableProperty().bind(booleanBind);
     }
 
     @FXML
     private void deleteProduct() {
         try {
-            Product product = this.mainApp.getEngine().productDao().getProduct(productBarcode.getText());
+            final Product product = this.mainApp.getEngine().productDao().getProduct(productBarcode.getText());
             if (product == null) {
                 System.out.println("Ei löytynyt");
                 Notifications.create()
@@ -42,14 +42,15 @@ public class DeleteProductView {
                         .position(Pos.TOP_RIGHT)
                         .showError();
             }
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Vahvistus");
             alert.setHeaderText("Vahvistus");
-            alert.setContentText("Poistetaanko varmasti?\n" + "Tuote: " + product.getName() + "\nKuvaus: " + product.getName());
+            alert.setContentText(
+                    "Poistetaanko varmasti?\n" + "Tuote: " + product.getName() + "\nKuvaus: " + product.getName());
 
-            Optional<ButtonType> result = alert.showAndWait();
+            final Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                boolean res = this.mainApp.getEngine().productDao().deleteProduct(productBarcode.getText());
+                final boolean res = this.mainApp.getEngine().productDao().deleteProduct(productBarcode.getText());
                 System.out.println(res);
                 alert.close();
                 if (res) {
@@ -70,11 +71,10 @@ public class DeleteProductView {
                             .position(Pos.TOP_RIGHT)
                             .showError();
 
-
                 }
             }
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.out.println("There was an error");
             e.printStackTrace();
         }

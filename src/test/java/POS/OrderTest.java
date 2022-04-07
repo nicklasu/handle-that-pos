@@ -4,7 +4,6 @@ import model.classes.*;
 import model.classes.Order;
 import org.junit.jupiter.api.*;
 
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class OrderTest extends TestParent {
     private Order testOrder;
@@ -19,32 +18,36 @@ public class OrderTest extends TestParent {
 
     @BeforeEach
     public void beforeEach() {
-        Product[] testProducts = new Product[]{new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100), new Product("1", "Sokeri", "Kahviin slurps", 100, 100)};
+        final Product[] testProducts = new Product[] {
+                new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100),
+                new Product("1", "Sokeri", "Kahviin slurps", 100, 100) };
         this.testOrder = new Order(new Transaction(new User()));
         this.testOrder.addProductToOrder(testProducts[0]);
         this.testOrder.addProductToOrder(testProducts[1]);
     }
 
     @Test
-    public void getAndSetTests(){
+    public void getAndSetTests() {
         this.testOrder.setId(1);
-        Assertions.assertEquals(1,this.testOrder.getId(),"Id getter or setter for order has a problem");
-        this.testOrder.setTransaction(new Transaction(new User("TEST","TEST","TEST","TEST",1)));
-        Assertions.assertEquals("TEST",this.testOrder.getTransaction().getUser().getfName(), "Error setting or getting a transaction from order");
+        Assertions.assertEquals(1, this.testOrder.getId(), "Id getter or setter for order has a problem");
+        this.testOrder.setTransaction(new Transaction(new User("TEST", "TEST", "TEST", "TEST", 1)));
+        Assertions.assertEquals("TEST", this.testOrder.getTransaction().getUser().getfName(),
+                "Error setting or getting a transaction from order");
         this.testOrder.setTotalPrice(2);
-        Assertions.assertEquals(2,this.testOrder.getTotalPrice());
-        //this.testOrder.setOrderProducts(); //TODO setorderproduct testit
-        //Assertions.assertEquals();
+        Assertions.assertEquals(2, this.testOrder.getTotalPrice());
+        // this.testOrder.setOrderProducts(); //TODO setorderproduct testit
+        // Assertions.assertEquals();
     }
 
     @Test
-    public void comparing(){
+    public void comparing() {
         Assertions.assertFalse(this.testOrder.equals(new Order()), "Error comparing orders with equals");
     }
 
     @Test
     public void getProductList() {
-        Assertions.assertEquals("[Suola, Sokeri]", this.testOrder.getProductList().toString(), "Problem in getting an order");
+        Assertions.assertEquals("[Suola, Sokeri]", this.testOrder.getProductList().toString(),
+                "Problem in getting an order");
     }
 
     @Test
@@ -55,20 +58,23 @@ public class OrderTest extends TestParent {
     @Test
     public void addProductToOrder() {
         this.testOrder.addProductToOrder(new Product("6", "Sinaappi", "Makkaran päälle jes", 300, 5));
-        Assertions.assertEquals("[Suola, Sokeri, Sinaappi]", this.testOrder.getProductList().toString(), "Problem adding a product to an order");
+        Assertions.assertEquals("[Suola, Sokeri, Sinaappi]", this.testOrder.getProductList().toString(),
+                "Problem adding a product to an order");
     }
 
     @Test
     public void removeProductFromOrder() {
         this.testOrder.removeProductFromOrder(new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100));
-        Assertions.assertEquals("[Sokeri]", this.testOrder.getProductList().toString(), "removing a product from order did not work");
+        Assertions.assertEquals("[Sokeri]", this.testOrder.getProductList().toString(),
+                "removing a product from order did not work");
     }
 
     @Test
     public void CombinationTestForOrder1() {
         this.testOrder.addProductToOrder(new Product("6", "Sinaappi", "Makkaran päälle jes", 300, 5));
         this.testOrder.removeProductFromOrder(new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100));
-        Assertions.assertEquals("[Sokeri, Sinaappi]", this.testOrder.getProductList().toString(), "Listing order of products in an order has problems");
+        Assertions.assertEquals("[Sokeri, Sinaappi]", this.testOrder.getProductList().toString(),
+                "Listing order of products in an order has problems");
     }
 
     @Test
@@ -77,12 +83,14 @@ public class OrderTest extends TestParent {
         this.testOrder.addProductToOrder(new Product("6", "Sinaappi", "Makkaran päälle jes", 300, 5));
         this.testOrder.removeProductFromOrder(new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100));
         this.testOrder.removeProductFromOrder(new Product("6", "Sinaappi", "Makkaran päälle jes", 300, 5));
-        Assertions.assertEquals(400, this.testOrder.getTotalPrice(), "Problem in getting total price of order after toying with it");
+        Assertions.assertEquals(400, this.testOrder.getTotalPrice(),
+                "Problem in getting total price of order after toying with it");
     }
 
     @Test
     public void PriceOfLots() {
-        Product[] testProducts = new Product[]{new Product("0b", "Suola", "Kananmunan päälle naminami", 200, 100)};
+        final Product[] testProducts = new Product[] {
+                new Product("0b", "Suola", "Kananmunan päälle naminami", 200, 100) };
         this.testOrder = new Order(new Transaction(new User()));
 
         for (int i = 0; i < 100; ++i) {
@@ -94,7 +102,7 @@ public class OrderTest extends TestParent {
 
     @Test
     public void GetEmptyOrder() {
-        Order emptyOrder = new Order(new Transaction(new User()));
+        final Order emptyOrder = new Order(new Transaction(new User()));
         Assertions.assertEquals(0, emptyOrder.getProductList().size(), "Error getting an empty order");
     }
 }
