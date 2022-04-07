@@ -12,6 +12,12 @@ import org.controlsfx.control.Notifications;
 
 import java.io.IOException;
 
+/**
+ * Represents the hardware running the software
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
+ */
 public class AddProductView {
     private MainApp mainApp;
     @FXML

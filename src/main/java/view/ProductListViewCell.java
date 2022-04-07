@@ -17,6 +17,12 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Properties;
 
+/**
+ * Represents the hardware running the software
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
+ */
 public class ProductListViewCell extends ListCell<Product> {
     @FXML
     private Label productNameLabel;
