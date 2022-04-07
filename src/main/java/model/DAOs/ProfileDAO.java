@@ -46,10 +46,10 @@ public class ProfileDAO {
         Profile profile = null;
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
-            final Query query = session.createQuery("from Profile where id = :userId");
+            final Query<Profile> query = session.createQuery("from Profile where id = :userId");
             query.setInteger("userId", user.getId());
-            if (query.list().isEmpty()) {
-                profile = (Profile) query.list().get(0);
+            if (!query.list().isEmpty()) {
+                profile = query.list().get(0);
             }
             transaction.commit();
 
