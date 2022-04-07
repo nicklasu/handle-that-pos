@@ -57,6 +57,8 @@ public class MainView {
     @FXML
     private Label selfcheckoutlabel;
     @FXML
+    private Label howtouselabel;
+    @FXML
     private ProgressBar feedbackProgressBar;
     @FXML
     private ChoiceBox<String> languageBox;
@@ -280,6 +282,7 @@ public class MainView {
     public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         selfcheckoutlabel.setVisible(false);
+        howtouselabel.setVisible(false);
         bundle = mainApp.getBundle();
         privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 1) {
@@ -304,6 +307,7 @@ public class MainView {
             settingsBtn.setVisible(false);
             logoutBtn.setVisible(false);
             selfcheckoutlabel.setVisible(true);
+            howtouselabel.setVisible(true);
             languageText.setVisible(true);
         }
         feedbackProgressBar.setVisible(false);
