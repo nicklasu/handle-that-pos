@@ -20,6 +20,12 @@ import org.controlsfx.control.Notifications;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Represents the hardware running the software
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
+ */
 public class MainView {
     private MainApp mainApp;
     @FXML

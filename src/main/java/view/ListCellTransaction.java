@@ -10,6 +10,12 @@ import model.classes.Product;
 
 import java.io.IOException;
 
+/**
+ * Represents the hardware running the software
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
+ */
 public class ListCellTransaction extends ListCell<Product> {
     @FXML
     private Label nameLabel;

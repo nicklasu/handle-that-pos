@@ -7,6 +7,12 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
+/**
+ * Represents the hardware running the software
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
+ */
 public class UserManagementView {
     private MainApp mainApp;
     private FXMLLoader loader;
