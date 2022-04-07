@@ -17,10 +17,7 @@ import java.util.Set;
 @Entity
 @Table(name = "Tilaus")
 public class Order implements IOrder {
-    /**
-     * Boolean representing the customerlevel
-     */
-    private final boolean bonusCustomer = false;
+
 
     /**
      * Identifier for the order
