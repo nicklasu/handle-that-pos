@@ -18,15 +18,15 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UsersView">
    <children>
-      <GridPane layoutX="-1.0" layoutY="1.0" prefHeight="800.0" prefWidth="720.0">
+      <GridPane layoutX="-1.0" layoutY="1.0" prefHeight="600.0" prefWidth="720.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="702.0" minHeight="10.0" prefHeight="48.40000839233397" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="711.0" minHeight="10.0" prefHeight="220.6000244140625" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="711.0" minHeight="20.0" prefHeight="40.20001220703125" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="711.0" minHeight="10.0" prefHeight="503.3999877929688" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="702.0" minHeight="10.0" prefHeight="68.60000495910644" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="711.0" minHeight="10.0" prefHeight="142.99999504089357" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="711.0" minHeight="20.0" prefHeight="70.39999389648438" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="711.0" minHeight="10.0" prefHeight="375.6000061035156" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <GridPane>
@@ -107,13 +107,16 @@
                   <Insets left="30.0" />
                </GridPane.margin>
             </Text>
-            <StackPane prefHeight="481.0" prefWidth="720.0" GridPane.rowIndex="3">
+            <StackPane prefHeight="483.0" prefWidth="720.0" GridPane.rowIndex="3">
                <children>
-                  <ListView fx:id="transactionListView" maxHeight="490.0" prefHeight="468.0" prefWidth="720.0" StackPane.alignment="TOP_RIGHT">
-                     <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin></ListView>
                   <ProgressIndicator fx:id="progressIndicator" />
+                  <ListView fx:id="transactionListView" prefHeight="350.0" prefWidth="711.0" StackPane.alignment="TOP_RIGHT">
+                     <StackPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </StackPane.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding></ListView>
                </children>
                <GridPane.margin>
                   <Insets />
