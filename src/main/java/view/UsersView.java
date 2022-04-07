@@ -28,6 +28,12 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Represents the hardware running the software
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
+ */
 public class UsersView {
     private MainApp mainApp;
     @FXML

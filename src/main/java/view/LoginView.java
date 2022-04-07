@@ -6,6 +6,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 
+/**
+ * Represents the hardware running the software
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
+ */
 public class LoginView {
     // Prefills the username field and password field with the manager's username
     // and password

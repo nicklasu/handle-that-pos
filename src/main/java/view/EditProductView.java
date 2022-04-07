@@ -30,6 +30,12 @@ public class EditProductView {
     @FXML
     private Button fetchBtn;
 
+    /**
+     * Represents the hardware running the software
+     * 
+     * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+     *         Samu Luoma
+     */
     public void setMainApp(final MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
         productBarcode.setOnKeyPressed(e -> {

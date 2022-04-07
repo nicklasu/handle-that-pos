@@ -8,6 +8,12 @@ import javafx.scene.control.ProgressIndicator;
 import model.classes.HibernateUtil;
 import model.classes.POSEngine;
 
+/**
+ * Represents the hardware running the software
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
+ */
 public class ConnectDatabaseView {
 
     private MainApp mainApp;

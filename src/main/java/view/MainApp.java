@@ -7,11 +7,18 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.interfaces.IPOSEngine;
 
+import java.awt.*;
 import java.io.*;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+/**
+ * Represents the hardware running the software
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
+ */
 public class MainApp extends Application {
 
     public static final String APP_TITLE = "Handle that POS";
@@ -55,8 +62,10 @@ public class MainApp extends Application {
     @Override
     public void start(final Stage stage) {
         this.stage = stage;
-        this.stage.setMinHeight(760);
-        this.stage.setMinWidth(1070);
+        this.stage.setMaximized(true);
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        this.stage.setHeight(size.getHeight());
+        this.stage.setWidth(size.getWidth());
         stage.setTitle(APP_TITLE);
         this.stage.getIcons().add(new Image("file:src/main/resources/images/pos.png"));
         // Test

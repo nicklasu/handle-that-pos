@@ -34,90 +34,78 @@
                 <Insets left="20.0" />
             </GridPane.margin>
         </ListView>
-      <GridPane GridPane.columnIndex="1">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="281.0" minHeight="10.0" prefHeight="101.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="548.0" minHeight="10.0" prefHeight="471.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-              <GridPane prefHeight="299.0" prefWidth="625.0" GridPane.rowIndex="1">
-                  <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                      <RowConstraints maxHeight="234.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="581.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="1">
-                      <center>
-                          <Button fx:id="hotkeyButton2" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hotkey 2" textAlignment="CENTER" wrapText="true" />
-                      </center>
-                  </BorderPane>
-                  <BorderPane GridPane.rowIndex="1">
-                      <center>
-                          <Button fx:id="hotkeyButton0" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hotkey 0" textAlignment="CENTER" wrapText="true" />
-                      </center>
-                  </BorderPane>
-                  <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="1">
-                      <center>
-                          <Button fx:id="hotkeyButton1" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hotkey 1" textAlignment="CENTER" wrapText="true" />
-                      </center>
-                  </BorderPane>
-                  <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                      <center>
-                          <Button fx:id="hotkeyButton5" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hoktey 5" textAlignment="CENTER" wrapText="true" />
-                      </center>
-                  </BorderPane>
-                  <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
-                      <center>
-                          <Button fx:id="hotkeyButton4" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hoktey 4" textAlignment="CENTER" wrapText="true" />
-                      </center>
-                  </BorderPane>
-                  <BorderPane GridPane.rowIndex="2" GridPane.valignment="TOP">
-                      <center>
-                          <Button fx:id="hotkeyButton3" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hotkey 3" textAlignment="CENTER" wrapText="true" />
-                      </center>
-                  </BorderPane>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" />
-                  <ProgressBar fx:id="feedbackProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <BorderPane GridPane.rowIndex="3">
-                      <center>
-                          <Button fx:id="hotkeyButton6" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" text="Hotkey 6" textAlignment="CENTER" wrapText="true" />
-                      </center>
-                  </BorderPane>
-                  <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="3">
-                      <center>
-                          <Button fx:id="hotkeyButton7" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" text="Hotkey 7" textAlignment="CENTER" wrapText="true" />
-                      </center>
-                  </BorderPane>
-                  <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="3">
-                      <center>
-                          <Button fx:id="hotkeyButton8" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" text="Hotkey 8" textAlignment="CENTER" wrapText="true" />
-                      </center>
-                  </BorderPane>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%hotkeysString">
-                      <GridPane.margin>
-                          <Insets left="30.0" />
-                      </GridPane.margin>
-                  </Text>
-                  <GridPane.margin>
-                      <Insets left="15.0" />
-                  </GridPane.margin>
-              </GridPane>
-                <AnchorPane centerShape="false" prefHeight="125.0" prefWidth="640.0">
-                    <Button fx:id="logoutBtn" contentDisplay="TOP" layoutX="461.0" layoutY="39.0" mnemonicParsing="false" onAction="#handleLogoutButton" prefHeight="31.0" prefWidth="150.0" stylesheets="@main-view.css" text="%logoutString" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="461.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="39.0" />
-               <Label fx:id="howtouselabel" layoutX="42.0" layoutY="6.0" prefHeight="100.0" prefWidth="570.0" styleClass="bold_label" stylesheets="@main-view.css" text="%howtouse1" />
+        <GridPane GridPane.columnIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="234.0" minHeight="0.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="581.0" minHeight="10.0" prefHeight="173.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="173.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="367.0" minHeight="10.0" prefHeight="173.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <center>
+                    <Button fx:id="hotkeyButton2" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hotkey 2" textAlignment="CENTER" wrapText="true" />
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.rowIndex="1">
+                <center>
+                    <Button fx:id="hotkeyButton0" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hotkey 0" textAlignment="CENTER" wrapText="true" />
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <center>
+                    <Button fx:id="hotkeyButton1" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hotkey 1" textAlignment="CENTER" wrapText="true" />
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                <center>
+                    <Button fx:id="hotkeyButton5" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hoktey 5" textAlignment="CENTER" wrapText="true" />
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                <center>
+                    <Button fx:id="hotkeyButton4" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hoktey 4" textAlignment="CENTER" wrapText="true" />
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.rowIndex="2" GridPane.valignment="TOP">
+                <center>
+                    <Button fx:id="hotkeyButton3" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" stylesheets="@main-view.css" text="Hotkey 3" textAlignment="CENTER" wrapText="true" />
+                </center>
+            </BorderPane>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+                <AnchorPane centerShape="false" prefWidth="220.0">
+                    <Button fx:id="logoutBtn" layoutX="46.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleLogoutButton" prefHeight="50.0" prefWidth="150.0" stylesheets="@main-view.css" text="%logoutString" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
                 </AnchorPane>
-         </children>
-      </GridPane>
+            </HBox>
+            <ProgressBar fx:id="feedbackProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" />
+            <BorderPane GridPane.rowIndex="3">
+                <center>
+                    <Button fx:id="hotkeyButton6" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" text="Hotkey 6" textAlignment="CENTER" wrapText="true" />
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <center>
+                    <Button fx:id="hotkeyButton7" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" text="Hotkey 7" textAlignment="CENTER" wrapText="true" />
+                </center>
+            </BorderPane>
+            <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="3">
+                <center>
+                    <Button fx:id="hotkeyButton8" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" text="Hotkey 8" textAlignment="CENTER" wrapText="true" />
+                </center>
+            </BorderPane>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%hotkeysString">
+                <GridPane.margin>
+                    <Insets left="30.0" />
+                </GridPane.margin>
+            </Text>
+            <GridPane.margin>
+                <Insets left="15.0" />
+            </GridPane.margin>
+        </GridPane>
         <GridPane prefHeight="113.0" prefWidth="640.0" GridPane.rowIndex="1">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="364.0" minWidth="10.0" prefWidth="160.0" />

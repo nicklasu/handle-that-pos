@@ -10,6 +10,12 @@ import org.hibernate.query.Query;
 
 import java.sql.SQLException;
 
+/**
+ * Represents the hardware running the software
+ * 
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ *         Samu Luoma
+ */
 public class ProfileDAO {
     /**
      * This handles the connections to database
