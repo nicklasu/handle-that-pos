@@ -17,12 +17,17 @@
   -fx-font-family: 'Montserrat';
 }
 
-.label {
+/*.label {
   -fx-font-size: 11pt;
-}
+}*/
 
 .button {
   -fx-font-size: 11pt;
+}
+
+.help_button {
+  -fx-font-size: 35pt;
+  -fx-font-weight: bold;
 }
 
 .bold_label {
