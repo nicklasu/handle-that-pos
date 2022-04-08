@@ -1,0 +1,52 @@
+.background {
+    -fx-background-color: #1F2933;
+}
+
+.button {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #F5F7FA;
+    -fx-background-color: #323F4B;
+}
+
+.label {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #F5F7FA;
+}
+
+.sum_label {
+    -fx-text-fill: #F5F7FA;
+    -fx-font-family: 'Montserrat';
+    -fx-font-size: 30pt;
+}
+
+.bold_label {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #F5F7FA;
+    -fx-font-weight: bold;
+}
+
+.bold_button {
+    -fx-font-size: 14pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #F5F7FA;
+    -fx-font-weight: bold;
+    -fx-background-color: #323F4B;
+}
+
+.question_button{
+    -fx-text-fill: #F5F7FA;
+    -fx-font-size: 40pt;
+    -fx-font-weight: bold;
+    -fx-background-color: #323F4B;
+}
+
+.list-cell {
+    -fx-control-inner-background: #616E7C;
+}
+
+.list-view {
+    -fx-control-inner-background: #616E7C;
+}

@@ -101,7 +101,9 @@ public class MainApp extends Application {
             this.stage.setScene(scene);
             final MainView mainView = fxmlLoader.getController();
             mainView.setMainApp(this);
+            scene.getStylesheets().add(getClass().getResource("main-view.css").toExternalForm()); // Set css style
             this.stage.show();
+
         } catch (final IOException e) {
             e.printStackTrace();
         }
