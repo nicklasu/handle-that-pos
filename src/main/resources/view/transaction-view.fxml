@@ -139,8 +139,8 @@
                     <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
                <RowConstraints maxHeight="68.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                 </rowConstraints>
-                <CheckBox fx:id="bonusCustomerCheckBox" mnemonicParsing="false" onAction="#requestFocus" GridPane.columnIndex="1" />
-                <CheckBox fx:id="receiptCheckBox" mnemonicParsing="false" onAction="#confirmReceipt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <CheckBox fx:id="bonusCustomerCheckBox" mnemonicParsing="false" onAction="#requestFocus" styleClass="transaction-check-box" GridPane.columnIndex="1" />
+                <CheckBox fx:id="receiptCheckBox" mnemonicParsing="false" onAction="#confirmReceipt" styleClass="transaction-check-box" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kuitin lähetys sähköpostiin" visible="false" GridPane.rowIndex="2" />
             <TextField fx:id="receiptEmailTextField" onKeyReleased="#sendReceiptEmail" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="customerTextField" onKeyReleased="#bonusCustomerCheck" GridPane.columnIndex="2" />
