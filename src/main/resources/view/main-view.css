@@ -1,28 +1,84 @@
+.background {
+    -fx-background-color: #F5F7FA;
+}
+
 .button {
-    -fx-font-size: 11pt;
+    -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #1c1c1c;
+    -fx-text-fill: #1C1C1C;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #555555;
+    -fx-border-radius: 4px;
+}
+
+.button:hover {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #1C1C1C;
+    -fx-background-color: #555555;
+    -fx-border-color: #555555;
+    -fx-border-radius: 4px;
 }
 
 .label {
+    -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #1c1c1c;
+    -fx-text-fill: #1C1C1C;
+}
+
+.sum_label {
+    -fx-text-fill: #1C1C1C;
+    -fx-font-family: 'Montserrat';
+    -fx-font-size: 30pt;
 }
 
 .bold_label {
     -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #1c1c1c;
+    -fx-text-fill: #1C1C1C;
     -fx-font-weight: bold;
 }
 
 .bold_button {
     -fx-font-size: 14pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #1c1c1c;
+    -fx-text-fill: #1C1C1C;
     -fx-font-weight: bold;
+    -fx-border-radius: 4px;
+    -fx-background-color: #FFFFFF;
 }
+
+.bold_button:hover {
+    -fx-font-size: 14pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #1C1C1C;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4px;
+    -fx-background-color: #555555;
+}
+
 .question_button{
+    -fx-text-fill: #1C1C1C;
     -fx-font-size: 40pt;
     -fx-font-weight: bold;
+    -fx-border-radius: 4px;
+    -fx-background-color: #FFFFFF;
+}
+
+.question_button:hover{
+    -fx-text-fill: #1C1C1C;
+    -fx-font-size: 40pt;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4px;
+    -fx-background-color: #555555;
+}
+
+.list-cell {
+    -fx-control-inner-background: #FFFFFF;
+    -fx-text-fill: #1C1C1C;
+}
+
+.list-view {
+    -fx-control-inner-background: #FFFFFF;
+    -fx-text-fill: #1C1C1C;
 }

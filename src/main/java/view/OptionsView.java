@@ -227,4 +227,11 @@ public class OptionsView {
         alert.setHeaderText(bundle.getString("helpString"));
         alert.showAndWait();
     }
+
+    /*private boolean darkMode = false;
+
+    @FXML
+    public void switchMode() {
+        darkMode = darkMode == false ? true : false;
+    }*/
 }

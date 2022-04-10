@@ -1,22 +1,22 @@
 .background {
-    -fx-background-color: #1F2933;
+    -fx-background-color: #181818;
 }
 
 .button {
     -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
     -fx-text-fill: #F5F7FA;
-    -fx-background-color: #323F4B;
+    -fx-background-color: #3D3D3D;
 }
 
 .label {
     -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #F5F7FA;
+    -fx-text-fill: #FFFFFF;
 }
 
 .sum_label {
-    -fx-text-fill: #F5F7FA;
+    -fx-text-fill: #FFFFFF;
     -fx-font-family: 'Montserrat';
     -fx-font-size: 30pt;
 }
@@ -24,29 +24,33 @@
 .bold_label {
     -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #F5F7FA;
+    -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
 }
 
 .bold_button {
     -fx-font-size: 14pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #F5F7FA;
+    -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
-    -fx-background-color: #323F4B;
+    -fx-border-radius: 4px;
+    -fx-background-color: #3D3D3D;
 }
 
 .question_button{
-    -fx-text-fill: #F5F7FA;
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 40pt;
     -fx-font-weight: bold;
-    -fx-background-color: #323F4B;
+    -fx-border-radius: 4px;
+    -fx-background-color: #3D3D3D;
 }
 
 .list-cell {
-    -fx-control-inner-background: #616E7C;
+    -fx-control-inner-background: #212121;
+    -fx-text-fill: #FFFFFF;
 }
 
 .list-view {
-    -fx-control-inner-background: #616E7C;
+    -fx-control-inner-background: #212121;
+    -fx-text-fill: #FFFFFF;
 }
