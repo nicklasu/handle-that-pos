@@ -1,4 +1,4 @@
-.check-box > .box {
+/*.check-box > .box {
     -fx-border-width: 4px;
     -fx-background-color: #f4f4f4;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 2);}
@@ -12,4 +12,4 @@
     -fx-border-width: 3px;
     -fx-border-style: solid;
     -fx-border-color: blue;
-}
+}*/

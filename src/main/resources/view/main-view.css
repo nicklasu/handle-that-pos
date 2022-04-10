@@ -1,28 +1,143 @@
+.background {
+    -fx-background-color: #F5F7FA;
+}
+
 .button {
-    -fx-font-size: 11pt;
+    -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #1c1c1c;
+    -fx-text-fill: #1C1C1C;
+    -fx-background-color: #FFFFFF;
+    -fx-border-radius: 4px;
+}
+
+.button:hover {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #1C1C1C;
+    -fx-background-color: #e8f2fd;
+    -fx-border-color: #1688fc;
+    -fx-border-radius: 4px;
+}
+
+.button:focused {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #F5F7FA;
+    -fx-background-color: #1688fc;
+    -fx-border-color: #1688fc;
+    -fx-border-radius: 4px;
+}
+
+.average-button {
+    -fx-border-color: #555555;
 }
 
 .label {
+    -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #1c1c1c;
+    -fx-text-fill: #1C1C1C;
+}
+
+.sum_label {
+    -fx-text-fill: #1C1C1C;
+    -fx-font-family: 'Montserrat';
+    -fx-font-size: 30pt;
 }
 
 .bold_label {
     -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #1c1c1c;
+    -fx-text-fill: #1C1C1C;
     -fx-font-weight: bold;
 }
 
 .bold_button {
     -fx-font-size: 14pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #1c1c1c;
+    -fx-text-fill: #1C1C1C;
     -fx-font-weight: bold;
+    -fx-border-radius: 4px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #555555;
 }
+
+.bold_button:hover {
+    -fx-font-size: 14pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #1C1C1C;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4px;
+    -fx-background-color: #e8f2fd;
+    -fx-border-color: #1688fc;
+}
+
 .question_button{
+    -fx-text-fill: #1C1C1C;
     -fx-font-size: 40pt;
     -fx-font-weight: bold;
+    -fx-border-radius: 4px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #555555;
+}
+
+.question_button:hover{
+    -fx-text-fill: #1C1C1C;
+    -fx-font-size: 40pt;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4px;
+    -fx-background-color: #e8f2fd;
+    -fx-border-color: #1688fc;
+}
+
+.list-cell {
+    -fx-control-inner-background: #FFFFFF;
+    -fx-text-fill: #1C1C1C;
+    -fx-cell-size: 40;
+}
+
+.list-view {
+    -fx-control-inner-background: #FFFFFF;
+    -fx-text-fill: #1C1C1C;
+}
+/* Options: */
+.options-button {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #1C1C1C;
+    -fx-background-color: #FFFFFF;
+    -fx-border-radius: 0px;
+}
+
+.options-button:hover {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #1C1C1C;
+    -fx-background-color: #e8f2fd;
+    -fx-border-color: #1688fc;
+    -fx-border-radius: 0px;
+}
+
+.options-button:focused {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #F5F7FA;
+    -fx-background-color: #1688fc;
+    -fx-border-color: #1688fc;
+    -fx-border-radius: 0px;
+}
+/* Transaction: */
+.check-box > .box {
+    -fx-border-width: 4px;
+    -fx-background-color: #f4f4f4;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 2);}
+
+.check-box > .box > .mark {
+    -fx-padding: 4.16em 4.16em 5em 5em;
+}
+
+.button:disabled {
+    -fx-border-radius: 5px;
+    -fx-border-width: 3px;
+    -fx-border-style: solid;
+    -fx-border-color: blue;
 }
