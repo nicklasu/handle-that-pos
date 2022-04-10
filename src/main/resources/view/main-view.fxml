@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainAnchorPane" prefHeight="2160" prefWidth="3840" styleClass="background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
+<AnchorPane fx:id="mainAnchorPane" prefHeight="2160" prefWidth="3840" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
     <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -106,7 +106,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <TextField fx:id="barcodeTextField" prefHeight="38.0" prefWidth="505.0" GridPane.rowIndex="1" />
-                    <Button mnemonicParsing="false" onAction="#readBarcode" prefHeight="31.0" prefWidth="60.0" text="%readString" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Button mnemonicParsing="false" onAction="#readBarcode" prefHeight="31.0" prefWidth="84.0" styleClass="average-button" text="%readString" textOverrun="CLIP" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <Label prefHeight="19.0" prefWidth="218.0" text="%readBarcodeString">
                         <opaqueInsets>
                             <Insets />
@@ -172,7 +172,7 @@
                   <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2">
                       <AnchorPane HBox.hgrow="ALWAYS">
                           <children>
-                              <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#handleLogoutButton" text="%logoutString" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                              <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#handleLogoutButton" styleClass="average-button" text="%logoutString" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
                           </children>
                       </AnchorPane>
                   </HBox>

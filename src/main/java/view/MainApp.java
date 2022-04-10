@@ -33,7 +33,7 @@ public class MainApp extends Application {
     private Locale locale;
     private ResourceBundle bundle;
 
-    private boolean darkMode = false;
+    private boolean darkMode = true;
 
     public MainApp() {
         // this.engine = new POSEngine();
@@ -138,6 +138,12 @@ public class MainApp extends Application {
             this.stage.setScene(scene);
             final OptionsView optionsView = fxmlLoader.getController();
             optionsView.setMainApp(this);
+            /* Set CSS stylesheet */
+            if (darkMode == false) {
+                scene.getStylesheets().add(getClass().getResource("main-view.css").toExternalForm()); // Set light css style
+            } else {
+                scene.getStylesheets().add(getClass().getResource("main-view-dark.css").toExternalForm()); // Set dark css style
+            }
             this.stage.show();
         } catch (final IOException e) {
             e.printStackTrace();

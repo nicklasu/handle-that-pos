@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="transactionAnchorPane" prefHeight="2160" prefWidth="3840" stylesheets="/view/options-view.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.OptionsView">
+<AnchorPane fx:id="transactionAnchorPane" prefHeight="2160" prefWidth="3840" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.OptionsView">
     <GridPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <rowConstraints>
             <RowConstraints />
@@ -56,13 +56,13 @@
             <RowConstraints />
             </rowConstraints>
             <children>
-                <Button fx:id="btn1" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="%search_users" GridPane.rowIndex="6" />
-                <Button fx:id="btn2" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="%manage_products" />
-                <Button fx:id="btn3" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="%manage_users" GridPane.rowIndex="5" />
-                <Button fx:id="btn4" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="%productSearch" GridPane.rowIndex="9" />
-                <Button fx:id="btn5" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="%bonusCustomerManagement" wrapText="true" GridPane.rowIndex="10" />
-                <Button fx:id="btn6" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="%companyInformation" wrapText="true" GridPane.rowIndex="12" />
-                <Button fx:id="btn7" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="settings_button" stylesheets="@main-view.css" text="%charts" wrapText="true" GridPane.rowIndex="13" />
+                <Button fx:id="btn1" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="options-button" text="%search_users" GridPane.rowIndex="6" />
+                <Button fx:id="btn2" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="options-button" text="%manage_products" />
+                <Button fx:id="btn3" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="options-button" text="%manage_users" GridPane.rowIndex="5" />
+                <Button fx:id="btn4" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="options-button" text="%productSearch" GridPane.rowIndex="9" />
+                <Button fx:id="btn5" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="options-button" text="%bonusCustomerManagement" wrapText="true" GridPane.rowIndex="10" />
+                <Button fx:id="btn6" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="options-button" text="%companyInformation" wrapText="true" GridPane.rowIndex="12" />
+                <Button fx:id="btn7" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="560.0" styleClass="options-button" text="%charts" wrapText="true" GridPane.rowIndex="13" />
 
             </children>
         </GridPane>
@@ -85,16 +85,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-              <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#loadMainView" prefHeight="100.0" prefWidth="200.0" styleClass="bold_button" stylesheets="@main-view.css" text="%backToMain">
+              <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#loadMainView" prefHeight="100.0" prefWidth="200.0" styleClass="bold_button" text="%backToMain">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" onAction="#showHelp" prefHeight="87.0" prefWidth="100.0" styleClass="help_button" stylesheets="@options-view.css" text="?" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="46.0" />
-               </font>
-            </Button>
+            <Button mnemonicParsing="false" onAction="#showHelp" prefHeight="87.0" prefWidth="100.0" styleClass="question_button" text="?" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
             <Label text="%language" GridPane.columnIndex="2" GridPane.valignment="TOP" />
             <ChoiceBox fx:id="languageBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.valignment="CENTER" />
          </children>

@@ -7,7 +7,6 @@
     -fx-font-family: 'Montserrat';
     -fx-text-fill: #1C1C1C;
     -fx-background-color: #FFFFFF;
-    -fx-border-color: #555555;
     -fx-border-radius: 4px;
 }
 
@@ -15,9 +14,22 @@
     -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
     -fx-text-fill: #1C1C1C;
-    -fx-background-color: #555555;
-    -fx-border-color: #555555;
+    -fx-background-color: #e8f2fd;
+    -fx-border-color: #1688fc;
     -fx-border-radius: 4px;
+}
+
+.button:focused {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #F5F7FA;
+    -fx-background-color: #1688fc;
+    -fx-border-color: #1688fc;
+    -fx-border-radius: 4px;
+}
+
+.average-button {
+    -fx-border-color: #555555;
 }
 
 .label {
@@ -46,6 +58,7 @@
     -fx-font-weight: bold;
     -fx-border-radius: 4px;
     -fx-background-color: #FFFFFF;
+    -fx-border-color: #555555;
 }
 
 .bold_button:hover {
@@ -54,7 +67,8 @@
     -fx-text-fill: #1C1C1C;
     -fx-font-weight: bold;
     -fx-border-radius: 4px;
-    -fx-background-color: #555555;
+    -fx-background-color: #e8f2fd;
+    -fx-border-color: #1688fc;
 }
 
 .question_button{
@@ -63,6 +77,7 @@
     -fx-font-weight: bold;
     -fx-border-radius: 4px;
     -fx-background-color: #FFFFFF;
+    -fx-border-color: #555555;
 }
 
 .question_button:hover{
@@ -70,15 +85,43 @@
     -fx-font-size: 40pt;
     -fx-font-weight: bold;
     -fx-border-radius: 4px;
-    -fx-background-color: #555555;
+    -fx-background-color: #e8f2fd;
+    -fx-border-color: #1688fc;
 }
 
 .list-cell {
     -fx-control-inner-background: #FFFFFF;
     -fx-text-fill: #1C1C1C;
+    -fx-cell-size: 40;
 }
 
 .list-view {
     -fx-control-inner-background: #FFFFFF;
     -fx-text-fill: #1C1C1C;
+}
+/* Options: */
+.options-button {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #1C1C1C;
+    -fx-background-color: #FFFFFF;
+    -fx-border-radius: 0px;
+}
+
+.options-button:hover {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #1C1C1C;
+    -fx-background-color: #e8f2fd;
+    -fx-border-color: #1688fc;
+    -fx-border-radius: 0px;
+}
+
+.options-button:focused {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
+    -fx-text-fill: #F5F7FA;
+    -fx-background-color: #1688fc;
+    -fx-border-color: #1688fc;
+    -fx-border-radius: 0px;
 }
