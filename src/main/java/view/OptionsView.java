@@ -50,6 +50,8 @@ public class OptionsView {
     @FXML
     private ChoiceBox<String> languageBox;
 
+    private boolean darkMode;
+
     private final ObservableList<String> languages = FXCollections.observableArrayList("fi", "en");
     @FXML
     Pane wrapperPane = new Pane();
@@ -250,12 +252,4 @@ public class OptionsView {
         alert.setHeaderText(bundle.getString("helpString"));
         alert.showAndWait();
     }
-
-    private boolean darkMode;
-
-    /*@FXML
-    public void switchMode() {
-        darkMode = mainApp.isDarkMode() == false ? true : false;
-        mainApp.setDarkMode(darkMode);
-    }*/
 }
