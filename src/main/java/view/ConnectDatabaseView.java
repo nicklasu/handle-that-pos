@@ -61,7 +61,7 @@ public class ConnectDatabaseView {
 
     private boolean sessionFactoryCreated() {
         try {
-            HibernateUtil.getSessionFactory();
+            HibernateUtil.getSessionFactory("hibernate.test.cfg.xml");
         } catch (final Exception e) {
             System.out.println("virhe istuntotehtaan luomisessa");
             return false;
