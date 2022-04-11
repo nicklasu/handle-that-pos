@@ -33,7 +33,7 @@ public class MainApp extends Application {
     private Locale locale;
     private ResourceBundle bundle;
 
-    private boolean darkMode = true;
+    private boolean darkMode;
 
     public MainApp() {
         // this.engine = new POSEngine();
@@ -200,5 +200,13 @@ public class MainApp extends Application {
 
     public static void main(final String[] args) {
         launch();
+    }
+
+    public void setDarkMode(boolean darkMode) {
+        this.darkMode = darkMode;
+    }
+
+    public boolean isDarkMode() {
+        return darkMode;
     }
 }
