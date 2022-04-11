@@ -5,6 +5,7 @@ import model.classes.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 /**
  * Data access object for customers
@@ -19,9 +20,12 @@ public class CustomerDAO {
     private SessionFactory sessionFactory = null;
 
     /**
-     * Gets an instance of sessionfactory
+     * Gets an instance of the database connection
+     * @param name name of database to use, pos for main and postesti for the test database
      */
-    public CustomerDAO() {
+    public CustomerDAO(String name) {
+        Configuration config = new Configuration();
+        config.setProperty("hibernate.connection.url", "jdbc:mysql://10.114.32.12/" + name);
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
         } catch (final Exception e) {
