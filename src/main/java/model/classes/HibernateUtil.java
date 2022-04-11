@@ -25,10 +25,10 @@ public class HibernateUtil {
     /**
      * @return instance of SessionFactory
      */
-    public static synchronized SessionFactory getSessionFactory() {
+    public static synchronized SessionFactory getSessionFactory(String file) {
 
         if (factory == null) {
-            factory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+            factory = new Configuration().configure(file).buildSessionFactory();
         }
         return factory;
     }

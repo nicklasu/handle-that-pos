@@ -5,9 +5,12 @@ import model.classes.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 import javax.persistence.PersistenceException;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -27,11 +30,12 @@ public class ProductDAO {
      * @param name name of database to use, pos for main and postesti for the test database
      */
     public ProductDAO(String name) {
-        Configuration config = new Configuration();
-        config.setProperty("hibernate.connection.url", "jdbc:mysql://10.114.32.12/" + name);
-
+        String fileName = "hibernate.cfg.xml";
+        if(name.equals("postesti")){
+            fileName = "hibernate.test.cfg.xml";
+        }
         try {
-            sessionFactory = HibernateUtil.getSessionFactory();
+            sessionFactory = HibernateUtil.getSessionFactory(fileName);
         } catch (final Exception e) {
             System.out.println("Virhe istuntotehtaan luomisessa");
             e.printStackTrace();

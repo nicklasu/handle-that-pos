@@ -35,7 +35,6 @@ public class DAOTests extends TestParent {
         Assertions.assertNull(pd.getProduct(a.getId()), "Problem with removing a product with dao");
     }
 
-
     @Test
     public void transactionDAO() {
         CustomerDAO cd = new CustomerDAO("postesti");

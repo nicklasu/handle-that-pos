@@ -24,10 +24,12 @@ public class POSEngineDAO {
      * @param name name of database to use, pos for main and postesti for the test database
      */
     public POSEngineDAO(String name) {
-        Configuration config = new Configuration();
-        config.setProperty("hibernate.connection.url", "jdbc:mysql://10.114.32.12/" + name);
+        String fileName = "hibernate.cfg.xml";
+        if(name.equals("postesti")){
+            fileName = "hibernate.test.cfg.xml";
+        }
         try {
-            sessionFactory = HibernateUtil.getSessionFactory();
+            sessionFactory = HibernateUtil.getSessionFactory(fileName);
         } catch (final Exception e) {
             System.out.println("Virhe istuntotehtaan luomisessa");
             e.printStackTrace();
