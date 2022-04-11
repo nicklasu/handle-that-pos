@@ -5,6 +5,7 @@ import model.classes.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 import javax.persistence.PersistenceException;
 import java.util.List;
@@ -23,8 +24,12 @@ public class ProductDAO {
 
     /**
      * Gets an instance of sessionfactory
+     * @param name name of database to use, pos for main and postesti for the test database
      */
-    public ProductDAO() {
+    public ProductDAO(String name) {
+        Configuration config = new Configuration();
+        config.setProperty("hibernate.connection.url", "jdbc:mysql://10.114.32.12/" + name);
+
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
         } catch (final Exception e) {

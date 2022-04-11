@@ -91,19 +91,22 @@ public class POSEngine implements IPOSEngine {
     @Transient
     private List<Integer> verifiedPrivileges;
 
+    @Transient
+    private String nameOfDatabase = "pos";
+
     /**
      * Constructor for POSEngine, creates objects from all the needed DAO classes
      * and generates own id
      */
     public POSEngine() {
-        this.userDAO = new UserDAO();
-        this.ped = new POSEngineDAO();
-        this.productDAO = new ProductDAO();
-        this.transactionDAO = new TransactionDAO();
-        this.customerDAO = new CustomerDAO();
-        this.privilegeDAO = new PrivilegeDAO();
-        this.ped = new POSEngineDAO();
-        this.profileDAO = new ProfileDAO();
+        this.userDAO = new UserDAO(nameOfDatabase);
+        this.ped = new POSEngineDAO(nameOfDatabase);
+        this.productDAO = new ProductDAO(nameOfDatabase);
+        this.transactionDAO = new TransactionDAO(nameOfDatabase);
+        this.customerDAO = new CustomerDAO(nameOfDatabase);
+        this.privilegeDAO = new PrivilegeDAO(nameOfDatabase);
+        this.ped = new POSEngineDAO(nameOfDatabase);
+        this.profileDAO = new ProfileDAO(nameOfDatabase);
         this.id = HWID.getHWID();
     }
 

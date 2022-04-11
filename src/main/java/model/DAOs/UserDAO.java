@@ -5,6 +5,7 @@ import model.classes.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -23,8 +24,11 @@ public class UserDAO {
 
     /**
      * Gets an instance of sessionfactory
+     * @param name name of database to use, pos for main and postesti for the test database
      */
-    public UserDAO() {
+    public UserDAO(String name) {
+        Configuration config = new Configuration();
+        config.setProperty("hibernate.connection.url", "jdbc:mysql://10.114.32.12/" + name);
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
         } catch (final Exception e) {

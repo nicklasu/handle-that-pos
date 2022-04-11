@@ -24,7 +24,7 @@ public class DAOTests extends TestParent {
     @Test
     public void productDAO() {
         Product a = new Product("testID", "Runebergin torttu", "Bergin Rune nautti näitä joka päivä aamiaiseksi", 200, 1);
-        ProductDAO pd = new ProductDAO();
+        ProductDAO pd = new ProductDAO("postesti");
         Assertions.assertNull(pd.getProduct(a.getId()), "Problem with getting a non-existent product with dao");
         pd.addProduct(a);
         Assertions.assertEquals(a.toString(), pd.getProduct("testID").toString(), "Problem with adding/getting a product with dao");
@@ -38,14 +38,14 @@ public class DAOTests extends TestParent {
 
     @Test
     public void transactionDAO() {
-        CustomerDAO cd = new CustomerDAO();
+        CustomerDAO cd = new CustomerDAO("postesti");
         Customer c = new Customer(1);
         Date date = new Date();
         POSEngine posE = new POSEngine();
-        UserDAO ud = new UserDAO();
+        UserDAO ud = new UserDAO("postesti");
         String name = UUID.randomUUID().toString();
         User u = new User("junit", "tester", name, "123", 1);
-        TransactionDAO td = new TransactionDAO();
+        TransactionDAO td = new TransactionDAO("postesti");
 
         cd.addCustomer(c);
         Transaction t = createTestTransaction(u);
@@ -63,7 +63,7 @@ public class DAOTests extends TestParent {
 
     @Test
     public void userDAO(){
-        UserDAO ud = new UserDAO();
+        UserDAO ud = new UserDAO("postesti");
         String name = UUID.randomUUID().toString();
         Assertions.assertNull(ud.getUser(name), "Finding a nonexistant user should return null");
         User u = new User("junit", "tester", name, "123", 1);
@@ -78,7 +78,7 @@ public class DAOTests extends TestParent {
 
     @Test
     public void customerDAO(){
-        CustomerDAO cd = new CustomerDAO();
+        CustomerDAO cd = new CustomerDAO("postesti");
         Customer c = new Customer(1);
         Assertions.assertNull(cd.getCustomer(c.getId()));
         cd.addCustomer(c);
@@ -89,12 +89,12 @@ public class DAOTests extends TestParent {
 
     @Test
     public void PrivilegeDAO(){
-        PrivilegeDAO pd = new PrivilegeDAO();
+        PrivilegeDAO pd = new PrivilegeDAO("postesti");
         String name = UUID.randomUUID().toString();
         java.sql.Date d1 = new java.sql.Date(new Date().getTime());
         java.sql.Date d2 = new java.sql.Date(3000, Calendar.JANUARY, 28);
         User u = new User("junit", "tester", name, "123", 1);
-        UserDAO ud = new UserDAO();
+        UserDAO ud = new UserDAO("postesti");
         ud.createUser(u);
         Privilege p = new Privilege(u, d1, d2, PrivilegeLevel.MANAGER);
 

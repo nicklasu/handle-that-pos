@@ -5,6 +5,7 @@ import model.classes.POSEngine;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 /**
  * Data access object for POSEngine, the device info running the software
@@ -20,8 +21,11 @@ public class POSEngineDAO {
 
     /**
      * Gets an instance of sessionfactory
+     * @param name name of database to use, pos for main and postesti for the test database
      */
-    public POSEngineDAO() {
+    public POSEngineDAO(String name) {
+        Configuration config = new Configuration();
+        config.setProperty("hibernate.connection.url", "jdbc:mysql://10.114.32.12/" + name);
         try {
             sessionFactory = HibernateUtil.getSessionFactory();
         } catch (final Exception e) {
@@ -32,7 +36,7 @@ public class POSEngineDAO {
 
     /**
      * Adds a POSEngine to the database if it does not exist there yet
-     * 
+     *
      * @param pos the engine to be added
      */
     public void addID(final POSEngine pos) {
