@@ -6,8 +6,8 @@ import model.classes.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.hibernate.type.IntegerType;
 
 import java.util.List;
 
@@ -50,10 +50,10 @@ public class PrivilegeDAO {
         Transaction transaction = null;
         List<Privilege> privileges = null;
         try (Session session = sessionFactory.getCurrentSession()) {
-            final int userId = user.getId();
+            int userId = user.getId();
             transaction = session.beginTransaction();
-            final Query<Privilege> query = session.createQuery("from Privilege where user = :userId");
-            query.setInteger("userId", userId);
+            Query<Privilege> query = session.createQuery("from Privilege where user = :userId");
+            query.setParameter("userId", userId, IntegerType.INSTANCE);
             privileges = query.list();
             transaction.commit();
         } catch (final Exception e) {

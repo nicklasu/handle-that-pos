@@ -5,8 +5,6 @@ import model.classes.POSEngine;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
 /**
  * Data access object for POSEngine, the device info running the software
  * 

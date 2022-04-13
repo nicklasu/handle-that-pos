@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Represents the hardware running the software
@@ -190,7 +191,7 @@ public class POSEngine implements IPOSEngine {
      */
     @Override
     public List<Integer> getPrivilegeIndexes() {
-        return privileges.stream().map(Privilege::getPrivilegeLevelIndex).collect(Collectors.toList());
+        return privileges.stream().map(Privilege::getPrivilegeLevelIndex).toList();
     }
 
     /**

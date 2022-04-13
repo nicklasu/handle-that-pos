@@ -13,8 +13,6 @@ import model.classes.PrivilegeLevel;
 import model.classes.User;
 import org.controlsfx.control.Notifications;
 
-import java.io.IOException;
-
 import java.time.LocalDate;
 
 import java.util.Collections;
@@ -62,7 +60,7 @@ public class EditUserView {
 
     private final ObservableList<Privilege> privilegeList = FXCollections.observableArrayList();
 
-    public void setMainApp(final MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp)  {
         this.mainApp = mainApp;
         final BooleanBinding booleanBind = userFirstName.textProperty().isEmpty()
                 .or(userLastName.textProperty().isEmpty())

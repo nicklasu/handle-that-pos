@@ -3,6 +3,7 @@ package model.classes;
 import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -19,11 +20,13 @@ public class OrderProductId implements Serializable {
     /**
      * The order consisting of products
      */
+    @Transient
     private Order order;
 
     /**
      * A single sales article
      */
+    @Transient
     private Product product;
 
     /**

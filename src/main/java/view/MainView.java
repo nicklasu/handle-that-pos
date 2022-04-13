@@ -19,8 +19,6 @@ import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
 import javafx.scene.media.MediaPlayer;
-
-import java.io.File;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -76,7 +74,6 @@ public class MainView {
     private ChoiceBox<String> languageBox;
     @FXML
     private Text languageText;
-    private String currency;
     private final ObservableList<String> languages = FXCollections.observableArrayList("fi", "en");
     private final ObservableList<Product> items = FXCollections.observableArrayList();
     private String productId;
@@ -200,7 +197,7 @@ public class MainView {
                         running.set(true);
                         while (running.get()) {
                             feedbackProgressBar.setProgress(
-                                    System.currentTimeMillis() - startTime / 2000);
+                                    System.currentTimeMillis() - startTime /  2000.0);
                         }
                     });
                     thread.start();
@@ -271,7 +268,7 @@ public class MainView {
         });
     }
 
-    //Plays a sound when reading a barcode successful
+    //Plays a sound when reading a barcode successfully
     public void beepSound() {
         Media sound = new Media(getClass().getResource("/sound/beep.mp3").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
@@ -321,7 +318,8 @@ public class MainView {
                     System.out.println(locale.getLanguage());
                     this.mainApp.showMainView();
 
-                } catch (final Exception ignored) {
+                } catch (final Exception c) {
+                    c.printStackTrace();
                 }
             });
             languageBox.setVisible(true);
