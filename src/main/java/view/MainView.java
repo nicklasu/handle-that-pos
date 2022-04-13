@@ -12,19 +12,23 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
 import javafx.scene.text.Text;
 import model.classes.CurrencyHandler;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
+import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Represents the hardware running the software
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class MainView {
     public static final String HOTKEY_NOT_SET_STRING = "hotkeyNotSetString";
@@ -125,9 +129,8 @@ public class MainView {
                     .position(Pos.TOP_RIGHT)
                     .showError();
         }
-
+        beepSound();
         barcodeTextField.requestFocus();
-
     }
 
     public void setTotalPrice() {
@@ -268,6 +271,15 @@ public class MainView {
         });
     }
 
+    //Plays a sound when reading a barcode successful
+    public void beepSound() {
+        Media sound = new Media(getClass().getResource("/sound/beep.mp3").toExternalForm());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setOnError(()->
+                System.out.println("media error"+mediaPlayer.getError().toString()));
+        mediaPlayer.play();
+    }
+
     @FXML
     public void showHelp() {
         final Alert alert = new Alert(Alert.AlertType.INFORMATION, bundle.getString("mainViewHelpString"),
@@ -290,6 +302,7 @@ public class MainView {
     public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         selfcheckoutlabel.setVisible(false);
+        beepSound();
         howtouselabel.setVisible(false);
         bundle = mainApp.getBundle();
         privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
