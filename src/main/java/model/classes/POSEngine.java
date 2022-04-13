@@ -124,10 +124,10 @@ public class POSEngine implements IPOSEngine {
      * 
      * @param username
      * @param password
-     * @return 0 if not found in database, 1 if ok, 2 if no privileges
+     * @return WRONG_CREDENTIALS if not found in database, SUCCESS if ok, NO_PRIVILEGES if no privileges
      */
     @Override
-    public int login(final String username, final String password) {
+    public LoginStatus login(final String username, final String password) {
         ped.addID(this);
         final User user1 = userDAO.getUser(username);
         if (user1 != null) {
@@ -154,12 +154,12 @@ public class POSEngine implements IPOSEngine {
                 System.out.println(validPrivileges);
                 System.out.println(this.verifiedPrivileges);
                 if (validPrivileges.isEmpty()) {
-                    return 2;
+                    return LoginStatus.NO_PRIVILEGES;
                 }
-                return 1;
+                return LoginStatus.SUCCESS;
             }
         }
-        return 0;
+        return LoginStatus.WRONG_CREDENTIALS;
     }
 
     /**

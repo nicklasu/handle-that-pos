@@ -5,6 +5,7 @@ import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import model.classes.LoginStatus;
 
 /**
  * Represents the hardware running the software
@@ -69,18 +70,18 @@ public class LoginView {
     private void loginHandlerThread(final Alert alert) {
         final Thread thread = new Thread(() -> {
             try {
-                final int result = this.mainApp.getEngine().login(usernameTextField.getText(),
+                final LoginStatus result = this.mainApp.getEngine().login(usernameTextField.getText(),
                         passwordPasswordField.getText());
                 Platform.runLater(() -> {
 
                     switch (result) {
-                        case 1:
+                        case SUCCESS:
                             this.mainApp.showMainView();
                             break;
-                        case 0:
+                        case WRONG_CREDENTIALS:
                             alertMsg(alert, "loginError1");
                             break;
-                        case 2:
+                        case NO_PRIVILEGES:
                             alertMsg(alert, "loginError2");
                             break;
                         default:
