@@ -112,7 +112,6 @@ public class OptionsView {
             }
 
             try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8)){
-                System.out.println("Tallennetaan darkmode: " + darkMode);
                 properties.setProperty("mode", String.valueOf(darkMode));
                 properties.store(writer, "HandleThatPos settings");
                 this.mainApp.showOptionsView();
