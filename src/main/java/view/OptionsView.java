@@ -111,15 +111,14 @@ public class OptionsView {
                 darkmode.setText("Dark mode");
             }
 
-            try {
-                final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8);
+            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8)){
+                System.out.println("Tallennetaan darkmode: " + darkMode);
                 properties.setProperty("mode", String.valueOf(darkMode));
                 properties.store(writer, "HandleThatPos settings");
-                writer.close();
-                //this.mainApp.setBundle(ResourceBundle.getBundle("TextResources", locale));
                 this.mainApp.showOptionsView();
 
-            } catch (final Exception ignored) {
+            } catch (final Exception b) {
+                b.printStackTrace();
             }
         });
 
