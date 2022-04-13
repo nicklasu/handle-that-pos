@@ -7,8 +7,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
-
-import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -25,7 +23,7 @@ public class DeleteProductView {
     @FXML
     private Button deleteBtn;
 
-    public void setMainApp(final MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         productBarcode.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)

@@ -1,6 +1,6 @@
 package view;
 
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -18,7 +18,7 @@ public class ProductManagementView {
     private MainApp mainApp;
     private FXMLLoader loader;
 
-    public void setMainApp(final MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
     }
 

@@ -5,9 +5,7 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.chart.ScatterChart;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
@@ -15,8 +13,6 @@ import javafx.scene.text.Text;
 import model.DAOs.CustomerDAO;
 import model.classes.*;
 import org.controlsfx.control.Notifications;
-
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Objects;
@@ -29,6 +25,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *         Samu Luoma
  */
 public class TransactionView {
+    public static final String ERROR_STRING = "errorString";
+    public static final String CUSTOMERNOTFOUND = "customernotfound";
     private MainApp mainApp;
     @FXML
     private AnchorPane transactionAnchorPane;
@@ -80,8 +78,8 @@ public class TransactionView {
                 } else {
                     Notifications.create()
                             .owner(transactionAnchorPane.getScene().getWindow())
-                            .title(this.mainApp.getBundle().getString("errorString"))
-                            .text(this.mainApp.getBundle().getString("customernotfound"))
+                            .title(this.mainApp.getBundle().getString(ERROR_STRING))
+                            .text(this.mainApp.getBundle().getString(CUSTOMERNOTFOUND))
                             .position(Pos.TOP_RIGHT)
                             .showError();
                 }
@@ -126,7 +124,7 @@ public class TransactionView {
                 running.set(true);
                 while (running.get()) {
                     feedbackProgressBar
-                            .setProgress(System.currentTimeMillis() - startTime / 2000);
+                            .setProgress(System.currentTimeMillis() - startTime / 2000.0);
                     try {
                         Thread.sleep(100);
                         if ((System.currentTimeMillis() - startTime) >= 2000) {
@@ -149,8 +147,8 @@ public class TransactionView {
                                         } else {
                                             Notifications.create()
                                                     .owner(transactionAnchorPane.getScene().getWindow())
-                                                    .title(this.mainApp.getBundle().getString("errorString"))
-                                                    .text(this.mainApp.getBundle().getString("customernotfound"))
+                                                    .title(this.mainApp.getBundle().getString(ERROR_STRING))
+                                                    .text(this.mainApp.getBundle().getString(CUSTOMERNOTFOUND))
                                                     .position(Pos.TOP_RIGHT)
                                                     .showError();
                                         }
@@ -158,8 +156,8 @@ public class TransactionView {
                                     } catch (final NumberFormatException e) {
                                         Notifications.create()
                                                 .owner(transactionAnchorPane.getScene().getWindow())
-                                                .title(this.mainApp.getBundle().getString("errorString"))
-                                                .text(this.mainApp.getBundle().getString("customernotfound"))
+                                                .title(this.mainApp.getBundle().getString(ERROR_STRING))
+                                                .text(this.mainApp.getBundle().getString(CUSTOMERNOTFOUND))
                                                 .position(Pos.TOP_RIGHT)
                                                 .showError();
                                     }

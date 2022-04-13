@@ -16,7 +16,7 @@ public class BonusCustomerManagementView {
     private MainApp mainApp;
     private FXMLLoader loader;
 
-    public void setMainApp(final MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
     }
 

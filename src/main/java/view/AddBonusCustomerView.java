@@ -6,8 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.classes.Customer;
 
-import java.io.IOException;
-
 /**
  * Represents the hardware running the software
  * 
@@ -24,7 +22,7 @@ public class AddBonusCustomerView {
     @FXML
     private Label bonusCustomerLabel;
 
-    public void setMainApp(final MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         bonusCustomerId.setVisible(false);
         bonusCustomerLabel.setVisible(false);

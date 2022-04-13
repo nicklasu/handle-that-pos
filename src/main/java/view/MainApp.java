@@ -22,6 +22,8 @@ import java.util.ResourceBundle;
 public class MainApp extends Application {
 
     public static final String APP_TITLE = "Handle that POS";
+    public static final String MAIN_VIEW_CSS = "main-view.css";
+    public static final String MAIN_VIEW_DARK_CSS = "main-view-dark.css";
 
     private Stage stage;
     private IPOSEngine engine;
@@ -36,7 +38,6 @@ public class MainApp extends Application {
     private boolean darkMode;
 
     public MainApp() {
-        // this.engine = new POSEngine();
     }
 
     @Override
@@ -104,10 +105,10 @@ public class MainApp extends Application {
             final MainView mainView = fxmlLoader.getController();
             mainView.setMainApp(this);
             /* Set CSS stylesheet */
-            if (darkMode == false) {
-                scene.getStylesheets().add(getClass().getResource("main-view.css").toExternalForm()); // Set light css style
+            if (darkMode) {
+                scene.getStylesheets().add(getClass().getResource(MAIN_VIEW_CSS).toExternalForm()); // Set light css style
             } else {
-                scene.getStylesheets().add(getClass().getResource("main-view-dark.css").toExternalForm()); // Set dark css style
+                scene.getStylesheets().add(getClass().getResource(MAIN_VIEW_DARK_CSS).toExternalForm()); // Set dark css style
             }
             this.stage.show();
 
@@ -139,10 +140,10 @@ public class MainApp extends Application {
             final OptionsView optionsView = fxmlLoader.getController();
             optionsView.setMainApp(this);
             /* Set CSS stylesheet */
-            if (darkMode == false) {
-                scene.getStylesheets().add(getClass().getResource("main-view.css").toExternalForm()); // Set light css style
+            if (darkMode) {
+                scene.getStylesheets().add(getClass().getResource(MAIN_VIEW_CSS).toExternalForm()); // Set light css style
             } else {
-                scene.getStylesheets().add(getClass().getResource("main-view-dark.css").toExternalForm()); // Set dark css style
+                scene.getStylesheets().add(getClass().getResource(MAIN_VIEW_DARK_CSS).toExternalForm()); // Set dark css style
             }
             this.stage.show();
         } catch (final IOException e) {
@@ -159,10 +160,10 @@ public class MainApp extends Application {
             final TransactionView transactionView = fxmlLoader.getController();
             transactionView.setMainApp(this);
             /* Set CSS stylesheet */
-            if (darkMode == false) {
-                scene.getStylesheets().add(getClass().getResource("main-view.css").toExternalForm()); // Set light css style
+            if (darkMode) {
+                scene.getStylesheets().add(getClass().getResource(MAIN_VIEW_CSS).toExternalForm()); // Set light css style
             } else {
-                scene.getStylesheets().add(getClass().getResource("main-view-dark.css").toExternalForm()); // Set dark css style
+                scene.getStylesheets().add(getClass().getResource(MAIN_VIEW_DARK_CSS).toExternalForm()); // Set dark css style
             }
             this.stage.show();
         } catch (final IOException e) {

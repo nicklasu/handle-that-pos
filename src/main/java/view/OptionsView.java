@@ -102,10 +102,10 @@ public class OptionsView {
         });
 
         darkmode.setOnAction(event -> {
-            darkMode = mainApp.isDarkMode() == false ? true : false;
+            darkMode = !mainApp.isDarkMode();
             mainApp.setDarkMode(darkMode);
 
-            if (mainApp.isDarkMode() == false) {
+            if (mainApp.isDarkMode()) {
                 darkmode.setText("Light mode");
             } else {
                 darkmode.setText("Dark mode");

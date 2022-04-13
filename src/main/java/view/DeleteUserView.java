@@ -7,8 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.Notifications;
 
-import java.io.IOException;
-
 /**
  * Represents the hardware running the software
  * 
@@ -22,7 +20,7 @@ public class DeleteUserView {
     @FXML
     private TextField userName;
 
-    public void setMainApp(final MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         final BooleanBinding booleanBind = userName.textProperty().isEmpty();
         saveBtn.disableProperty().bind(booleanBind);
