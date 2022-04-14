@@ -28,7 +28,7 @@ public class UserDAO {
     public UserDAO(String name) {
         String fileName = "hibernate.cfg.xml";
         if(name.equals("postesti")){
-            fileName = "hibernate.test.cfg.xml";
+            fileName = "test.cfg.xml";
         }
         try {
             sessionFactory = HibernateUtil.getSessionFactory(fileName);

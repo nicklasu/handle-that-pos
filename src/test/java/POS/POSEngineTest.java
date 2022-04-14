@@ -1,5 +1,6 @@
 package POS;
 
+import model.classes.LoginStatus;
 import model.classes.POSEngine;
 import model.classes.Privilege;
 import model.classes.PrivilegeLevel;
@@ -34,9 +35,9 @@ public class POSEngineTest extends TestParent {
 
     @Test
     public void login() {
-        Assertions.assertEquals(1, testEngine.login("testuser", "123"),
+        Assertions.assertEquals(LoginStatus.SUCCESS, testEngine.login("testuser", "123"),
                 "logging in to testuser doesn't work properly!");
-        Assertions.assertEquals(0, testEngine.login("testuser", "asd"), "logging in with wrong password works!");
+        Assertions.assertEquals(LoginStatus.WRONG_CREDENTIALS, testEngine.login("testuser", "asd"), "logging in with wrong password works!");
     }
 
     @Test
