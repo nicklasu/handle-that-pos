@@ -38,7 +38,7 @@ public class DeleteUserView {
                         .position(Pos.TOP_RIGHT)
                         .showError();
             } else {
-                this.mainApp.getEngine().userDAO().deleteUser(mainApp.getEngine().userDAO().getUser(userName.getText()));
+                this.mainApp.getEngine().userDAO().deleteUser(mainApp.getEngine().userDAO().getUser(username));
                 Notifications.create()
                         .owner(userName.getScene().getWindow())
                         .title(this.mainApp.getBundle().getString("success"))
