@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import model.classes.Product;
@@ -53,8 +55,11 @@ public class ProductSearchView {
 
     @FXML
     private TextField input;
+    @FXML
+    private Button updateButton;
 
     private Pane wrapperPane;
+
 
     public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
@@ -122,6 +127,9 @@ public class ProductSearchView {
                         .showError();
                 e.printStackTrace();
             }
+
+        Image image = new Image(getClass().getResourceAsStream("/images/arrow-clockwise.png"), 20, 20, true, true);
+        this.updateButton.setGraphic(new ImageView(image));
         }
 
         private boolean searchFindsProduct ( final Product product, final String searchText){
