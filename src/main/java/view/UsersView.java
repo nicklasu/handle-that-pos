@@ -124,8 +124,8 @@ public class UsersView {
                     this.avatar.setImage(new Image(String.valueOf(getClass().getResource("/images/person.png"))));
                 }
             } else {
-                Notifications.create().owner(searchField.getScene().getWindow()).title("Virhe")
-                        .text("Käyttäjänimeä ei löydy!").position(Pos.TOP_RIGHT).showError();
+                Notifications.create().owner(searchField.getScene().getWindow()).title(this.mainApp.getBundle().getString("errorString"))
+                        .text(this.mainApp.getBundle().getString("usernamenotfound")).position(Pos.TOP_RIGHT).showError();
             }
         } catch (final Exception e) {
             e.printStackTrace();
@@ -166,9 +166,9 @@ public class UsersView {
             paymentMethod = PaymentMethod.CARD;
         }
 
-        final String transactionInformation = "ID: " + transaction.getId() + "\n" + "Pvm ja kellonaika: "
-                + dateFormat.format(transaction.getTimestamp()) + "\n" + "Maksutapa: " + paymentMethod.name() + "\n" + "Myyjä: "
-                + transaction.getUser().getFullName() + "\n" + "Maksupäätteen ID: " + transaction.getPos().getId()
+        final String transactionInformation = this.mainApp.getBundle().getString("productid") + " " + transaction.getId() + "\n" + this.mainApp.getBundle().getString("dateandtime") + " "
+                + dateFormat.format(transaction.getTimestamp()) + "\n" + this.mainApp.getBundle().getString("paymentmethod") + " " + paymentMethod.name() + "\n" + this.mainApp.getBundle().getString("cashier") + " "
+                + transaction.getUser().getFullName() + "\n" + this.mainApp.getBundle().getString("posid") + " " + transaction.getPos().getId()
                 + "\n\n";
 
         String productsAndAmounts = "";
@@ -192,7 +192,7 @@ public class UsersView {
         final FileChooser fileChooser = new FileChooser();
         final FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter("Image formats", "*.png");
         fileChooser.getExtensionFilters().add(fileExtensions);
-        fileChooser.setTitle("Valitse kuva");
+        fileChooser.setTitle(this.mainApp.getBundle().getString("chooseimage"));
         final File file = fileChooser.showOpenDialog(null);
         if (file != null) {
             try {
@@ -223,6 +223,10 @@ public class UsersView {
             } catch (final IOException e) {
                 e.printStackTrace();
                 System.out.println("Tapahtui virhe! Yritikö uploadata kuvaa väärässä formaatissa?");
+                Notifications.create().owner(avatar.getScene().getWindow())
+                        .title(this.mainApp.getBundle().getString("errorString"))
+                        .text(this.mainApp.getBundle().getString(this.mainApp.getBundle().getString("imageformaterror"))).position(Pos.TOP_RIGHT)
+                        .showError();
             }
         }
     }
