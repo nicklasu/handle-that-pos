@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainAnchorPane" prefHeight="2160" prefWidth="3840" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
+<AnchorPane fx:id="mainAnchorPane" prefHeight="2160" prefWidth="3840" styleClass="background" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainView">
     <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -169,13 +157,7 @@
                           <Button fx:id="hotkeyButton3" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" text="Hotkey 3" textAlignment="CENTER" wrapText="true" />
                       </center>
                   </BorderPane>
-                  <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2">
-                      <AnchorPane HBox.hgrow="ALWAYS">
-                          <children>
-                              <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#handleLogoutButton" styleClass="average-button" text="%logoutString" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
-                          </children>
-                      </AnchorPane>
-                  </HBox>
+                  <HBox alignment="CENTER_LEFT" GridPane.columnIndex="2" />
                   <ProgressBar fx:id="feedbackProgressBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="1" />
                   <BorderPane GridPane.rowIndex="3">
                       <center>
@@ -202,6 +184,22 @@
                   </GridPane.margin>
               </GridPane>
             <Label fx:id="howtouselabel" prefHeight="368.0" prefWidth="1920.0" styleClass="bold_label" text="%howtouse1" />
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1257.0" minWidth="10.0" prefWidth="1257.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="955.0" minWidth="10.0" prefWidth="663.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                      <AnchorPane GridPane.columnIndex="1">
+                          <children>
+                              <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#handleLogoutButton" styleClass="average-button" text="%logoutString" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+                          </children>
+                      </AnchorPane>
+               </children>
+            </GridPane>
          </children>
       </GridPane>
     </GridPane>
