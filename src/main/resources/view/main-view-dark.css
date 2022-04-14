@@ -35,6 +35,10 @@
     -fx-text-fill: #FFFFFF;
 }
 
+.text-area {
+    -fx-text-fill: #FFFFFF;
+}
+
 .sum_label {
     -fx-text-fill: #FFFFFF;
     -fx-font-family: 'Montserrat';
@@ -46,6 +50,11 @@
     -fx-font-family: 'Montserrat';
     -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
+}
+
+.title_label {
+    -fx-font-size: 30pt;
+    -fx-text-fill: #FFFFFF;
 }
 
 .bold_button {
@@ -68,7 +77,7 @@
 
 .question_button{
     -fx-text-fill: #FFFFFF;
-    -fx-font-size: 40pt;
+    -fx-font-size: 34pt;
     -fx-font-weight: bold;
     -fx-border-radius: 4px;
     -fx-background-color: #3D3D3D;
@@ -84,6 +93,16 @@
     -fx-control-inner-background: #212121;
     -fx-text-fill: #FFFFFF;
 }
+/* Options */
+.choice-box {
+    -fx-background-color: #474747;
+    -fx-mark-color: #bd92fc;
+}
+.choice-box > .label { -fx-text-fill: #FFFFFF; }
+.choice-box .context-menu { -fx-background-color: #474747; }
+.choice-box .menu-item:focused { -fx-background-color: #bd92fc; }
+.choice-box .menu-item > .label { -fx-text-fill: white; }
+.choice-box .menu-item:focused > .label { -fx-text-fill: black; }
 /* Transaction: */
 .transaction-check-box > .box {
     -fx-border-width: 4px;

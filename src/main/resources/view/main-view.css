@@ -20,12 +20,12 @@
 }
 
 .button:focused {
-    -fx-font-size: 13pt;
+    /*-fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
     -fx-text-fill: #F5F7FA;
     -fx-background-color: #1688fc;
     -fx-border-color: #1688fc;
-    -fx-border-radius: 4px;
+    -fx-border-radius: 4px;*/
 }
 
 .average-button {
@@ -73,7 +73,7 @@
 
 .question_button{
     -fx-text-fill: #1C1C1C;
-    -fx-font-size: 40pt;
+    -fx-font-size: 34pt;
     -fx-font-weight: bold;
     -fx-border-radius: 4px;
     -fx-background-color: #FFFFFF;
@@ -126,12 +126,12 @@
     -fx-border-radius: 0px;
 }
 /* Transaction: */
-.check-box > .box {
+.transaction-check-box > .box {
     -fx-border-width: 4px;
     -fx-background-color: #f4f4f4;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 2);}
 
-.check-box > .box > .mark {
+.transaction-check-box > .box > .mark {
     -fx-padding: 4.16em 4.16em 5em 5em;
 }
 
