@@ -5,6 +5,7 @@
       <configuration>
         <datasource-map>
           <unit-entry name="hibernate.cfg.xml" />
+          <unit-entry name="hibernate.test.cfg.xml" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
@@ -44,6 +45,8 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:win:18" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:17.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:17.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:18" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:win:18" level="project" />
     <orderEntry type="library" name="Maven: org.controlsfx:controlsfx:11.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.dlsc.formsfx:formsfx-core:11.4.2" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:5.6.5.Final" level="project" />

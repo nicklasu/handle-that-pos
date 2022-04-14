@@ -14,6 +14,7 @@ module com.example.handlethatpos {
     exports view;
 
     requires javafx.swing;
+    requires javafx.media;
 
     opens model.classes;
     opens view;

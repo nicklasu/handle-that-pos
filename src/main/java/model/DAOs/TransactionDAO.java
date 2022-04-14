@@ -5,8 +5,9 @@ import model.classes.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.hibernate.type.IntegerType;
+
 import java.util.List;
 
 /**
@@ -51,7 +52,7 @@ public class TransactionDAO {
             t.commit();
         } catch (final Exception e) {
             e.printStackTrace();
-            if (transaction != null) {
+            if (t != null) {
                 t.rollback();
             }
         }
@@ -69,7 +70,7 @@ public class TransactionDAO {
             session.remove(transaction);
             t.commit();
         } catch (final Exception e) {
-            if (transaction != null) {
+            if (t != null) {
                 t.rollback();
             }
         }
@@ -89,7 +90,7 @@ public class TransactionDAO {
             tr = session.get(model.classes.Transaction.class, transaction.getId());
             t.commit();
         } catch (final Exception e) {
-            if (transaction != null) {
+            if (t != null) {
                 t.rollback();
             }
         }
@@ -109,7 +110,7 @@ public class TransactionDAO {
             final int userId = user.getId();
             transaction = session.beginTransaction();
             final Query<model.classes.Transaction> query = session.createQuery("from Transaction where user = :userId");
-            query.setInteger("userId", userId);
+            query.setParameter("userId", userId, IntegerType.INSTANCE);
             tr = query.list();
             transaction.commit();
         } catch (final Exception e) {

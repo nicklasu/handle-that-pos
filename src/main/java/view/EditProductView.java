@@ -9,8 +9,6 @@ import javafx.scene.input.KeyCode;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
-import java.io.IOException;
-
 public class EditProductView {
     private MainApp mainApp;
     @FXML
@@ -34,7 +32,7 @@ public class EditProductView {
      * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
      *         Samu Luoma
      */
-    public void setMainApp(final MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp){
         this.mainApp = mainApp;
         productBarcode.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)

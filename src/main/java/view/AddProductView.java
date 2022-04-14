@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
-import java.io.IOException;
 
 /**
  * Represents the hardware running the software
@@ -31,7 +30,7 @@ public class AddProductView {
     @FXML
     private Button addBtn;
 
-    public void setMainApp(final MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         final BooleanBinding booleanBind = productBarcode.textProperty().isEmpty()
                 .or(productName.textProperty().isEmpty())

@@ -6,8 +6,8 @@ import model.classes.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.hibernate.type.IntegerType;
 
 import java.sql.SQLException;
 
@@ -53,7 +53,7 @@ public class ProfileDAO {
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
             final Query<Profile> query = session.createQuery("from Profile where id = :userId");
-            query.setInteger("userId", user.getId());
+            query.setParameter("userId", user.getId(), IntegerType.INSTANCE);
             if (!query.list().isEmpty()) {
                 profile = query.list().get(0);
             }

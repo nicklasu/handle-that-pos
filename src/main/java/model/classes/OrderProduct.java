@@ -10,9 +10,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "Sisältyy")
-@AssociationOverrides({
-        @AssociationOverride(name = "primaryKey.product", joinColumns = @JoinColumn(name = "TuoteID")),
-        @AssociationOverride(name = "primaryKey.order", joinColumns = @JoinColumn(name = "TilausID")) })
+@AssociationOverride(name = "primaryKey.product", joinColumns = @JoinColumn(name = "TuoteID"))
+@AssociationOverride(name = "primaryKey.order", joinColumns = @JoinColumn(name = "TilausID"))
 public class OrderProduct {
     /**
      * Order identifier for mapping products to

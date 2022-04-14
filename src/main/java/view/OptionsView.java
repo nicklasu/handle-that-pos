@@ -46,9 +46,11 @@ public class OptionsView {
     @FXML
     private Button returnBtn;
     @FXML
-    private Button helpBtn;
+    private Button darkmode;
     @FXML
     private ChoiceBox<String> languageBox;
+
+    private boolean darkMode;
 
     private final ObservableList<String> languages = FXCollections.observableArrayList("fi", "en");
     @FXML
@@ -98,6 +100,27 @@ public class OptionsView {
             } catch (final Exception ignored) {
             }
         });
+
+        darkmode.setOnAction(event -> {
+            darkMode = !mainApp.isDarkMode();
+            mainApp.setDarkMode(darkMode);
+
+            if (mainApp.isDarkMode()) {
+                darkmode.setText("Light mode");
+            } else {
+                darkmode.setText("Dark mode");
+            }
+
+            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8)){
+                properties.setProperty("mode", String.valueOf(darkMode));
+                properties.store(writer, "HandleThatPos settings");
+                this.mainApp.showOptionsView();
+
+            } catch (final Exception b) {
+                b.printStackTrace();
+            }
+        });
+
         /** Change views. */
         btn1.setOnAction(e -> {
             wrapperPane.getChildren().clear();
@@ -227,11 +250,4 @@ public class OptionsView {
         alert.setHeaderText(bundle.getString("helpString"));
         alert.showAndWait();
     }
-
-    /*private boolean darkMode = false;
-
-    @FXML
-    public void switchMode() {
-        darkMode = darkMode == false ? true : false;
-    }*/
 }

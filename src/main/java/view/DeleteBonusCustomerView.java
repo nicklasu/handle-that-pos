@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.Notifications;
 
-import java.io.IOException;
 import java.util.ResourceBundle;
 
 /**
@@ -21,7 +20,7 @@ public class DeleteBonusCustomerView {
     @FXML
     private TextField bonusCustomerId;
 
-    public void setMainApp(final MainApp mainApp) throws IOException {
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         bonusCustomerId.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {

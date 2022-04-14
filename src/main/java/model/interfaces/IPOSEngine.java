@@ -20,7 +20,7 @@ public interface IPOSEngine {
      * @return 0 if not found in database, 1 if ok, 2 if no sufficient privileges
      *         for this user
      */
-    int login(String username, String password);
+    LoginStatus login(String username, String password);
 
     /**
      * logout method

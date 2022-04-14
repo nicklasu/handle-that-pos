@@ -3,7 +3,6 @@ package view;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -21,9 +20,9 @@ import java.util.function.Predicate;
 
 /**
  * Represents the hardware running the software
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class ProductSearchView {
     private MainApp mainApp;
@@ -96,65 +95,66 @@ public class ProductSearchView {
             productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
             productStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
 
-            productTable.setItems(filteredList);
 
-            productTable.setRowFactory(productTableView -> new TableRow<Product>() {
-                @Override
-                protected void updateItem(final Product product, final boolean empty) {
-                    super.updateItem(product, empty);
-                    if (product == null) {
-                        setStyle("");
-                    } else if (product.getStock() <= 0) {
-                        setStyle("-fx-background-color: rgba(254, 97, 0, 0.5)");
-                    } else if (product.getStock() <= 50) {
-                        setStyle("-fx-background-color: rgba(255, 176, 0, 0.5)");
-                    } else {
-                        setStyle("-fx-background-color: rgba(100, 143, 255, 0.2)");
+                productTable.setItems(filteredList);
+
+                productTable.setRowFactory(productTableView -> new TableRow<Product>() {
+                    @Override
+                    protected void updateItem(final Product product, final boolean empty) {
+                        super.updateItem(product, empty);
+                        if (product == null) {
+                            setStyle("");
+                        } else if (product.getStock() <= 0) {
+                            setStyle("-fx-background-color: rgba(254, 97, 0, 0.5)");
+                        } else if (product.getStock() <= 50) {
+                            setStyle("-fx-background-color: rgba(255, 176, 0, 0.5)");
+                        } else {
+                            setStyle("-fx-background-color: rgba(100, 143, 255, 0.2)");
+                        }
                     }
-                }
-            });
-        } catch (final Exception e) {
-            Notifications.create()
-                    .owner(fetchBtn.getScene().getWindow())
-                    .title("Virhe")
-                    .text("Tapahtui virhe tuotteiden hakemisessa!")
-                    .position(Pos.TOP_RIGHT)
-                    .showError();
-            e.printStackTrace();
+                });
+            } catch( final Exception e){
+                Notifications.create()
+                        .owner(fetchBtn.getScene().getWindow())
+                        .title("Virhe")
+                        .text("Tapahtui virhe tuotteiden hakemisessa!")
+                        .position(Pos.TOP_RIGHT)
+                        .showError();
+                e.printStackTrace();
+            }
         }
-    }
 
-    private boolean searchFindsProduct(final Product product, final String searchText) {
-        return (product.getName().toLowerCase().contains(searchText.toLowerCase())) ||
-                (product.getId().toLowerCase().contains(searchText.toLowerCase()));
-    }
-
-    private Predicate<Product> createPredicate(final String searchText) {
-        return product -> {
-            if (searchText == null || searchText.isEmpty())
-                return true;
-            return searchFindsProduct(product, searchText);
-        };
-    }
-
-    public void setWrapperPane(final Pane wrapperPane) {
-        this.wrapperPane = wrapperPane;
-    }
-
-    private void loadEditProductView(final Product product) {
-        wrapperPane.getChildren().clear();
-        final FXMLLoader loader = new FXMLLoader(getClass().getResource("products-view.fxml"));
-        loader.setResources(this.mainApp.getBundle());
-        Pane newLoadedPane = null;
-        try {
-            newLoadedPane = loader.load();
-            final ProductManagementView view = loader.getController();
-            view.setMainApp(mainApp);
-            view.editProductPaneFillFields(product);
-        } catch (final IOException e) {
-            e.printStackTrace();
+        private boolean searchFindsProduct ( final Product product, final String searchText){
+            return (product.getName().toLowerCase().contains(searchText.toLowerCase())) ||
+                    (product.getId().toLowerCase().contains(searchText.toLowerCase()));
         }
-        wrapperPane.getChildren().add(newLoadedPane);
-    }
 
-}
+        private Predicate<Product> createPredicate ( final String searchText){
+            return product -> {
+                if (searchText == null || searchText.isEmpty())
+                    return true;
+                return searchFindsProduct(product, searchText);
+            };
+        }
+
+        public void setWrapperPane ( final Pane wrapperPane){
+            this.wrapperPane = wrapperPane;
+        }
+
+        private void loadEditProductView ( final Product product){
+            wrapperPane.getChildren().clear();
+            final FXMLLoader loader = new FXMLLoader(getClass().getResource("products-view.fxml"));
+            loader.setResources(this.mainApp.getBundle());
+            Pane newLoadedPane = null;
+            try {
+                newLoadedPane = loader.load();
+                final ProductManagementView view = loader.getController();
+                view.setMainApp(mainApp);
+                view.editProductPaneFillFields(product);
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+            wrapperPane.getChildren().add(newLoadedPane);
+        }
+
+    }
