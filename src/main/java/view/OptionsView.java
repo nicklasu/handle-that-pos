@@ -97,7 +97,8 @@ public class OptionsView {
                 this.mainApp.setBundle(ResourceBundle.getBundle("TextResources", locale));
                 this.mainApp.showOptionsView();
 
-            } catch (final Exception ignored) {
+            } catch (final Exception g) {
+                g.printStackTrace();
             }
         });
 
