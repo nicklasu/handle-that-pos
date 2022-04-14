@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 import java.util.Properties;
 
 import javafx.collections.FXCollections;
@@ -37,6 +38,8 @@ public class EditFirmInfoView {
     private TextField postalCodeTF;
     @FXML
     private TextField cityTF;
+    @FXML
+    private TextField bonusAmountTF;
     @FXML
     private Button saveBtn;
     @FXML
@@ -71,6 +74,7 @@ public class EditFirmInfoView {
             postalCodeTF.setText(properties.getProperty("postalCode"));
             cityTF.setText(properties.getProperty("city"));
             currencyBox.setValue(properties.getProperty("currency"));
+            bonusAmountTF.setText(properties.getProperty("bonusAmount"));
         } catch (final IOException e) {
             e.printStackTrace();
         }
@@ -100,6 +104,8 @@ public class EditFirmInfoView {
 
         final String currency = currencyBox.getValue();
 
+        final String bonusAmount = bonusAmountTF.getText();
+
         final File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
         final Properties properties = new Properties();
         try (final FileReader reader = new FileReader(appConfigPath, StandardCharsets.UTF_8)) {
@@ -112,6 +118,7 @@ public class EditFirmInfoView {
                 properties.setProperty("postalCode", postalCode);
                 properties.setProperty("city", city);
                 properties.setProperty("currency", currency);
+                properties.setProperty("bonusAmount", bonusAmount);
                 properties.store(writer, "HandleThatPos settings");
             }
             Notifications.create().owner(this.firmNameTF.getScene().getWindow()).position(Pos.TOP_RIGHT)
