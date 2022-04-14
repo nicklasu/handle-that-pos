@@ -300,7 +300,6 @@ public class MainView {
     public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         selfcheckoutlabel.setVisible(false);
-        beepSound();
         howtouselabel.setVisible(false);
         bundle = mainApp.getBundle();
         privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
