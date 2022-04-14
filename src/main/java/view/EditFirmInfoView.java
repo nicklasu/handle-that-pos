@@ -20,9 +20,9 @@ import org.controlsfx.control.Notifications;
 
 /**
  * Represents the hardware running the software
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class EditFirmInfoView {
     private MainApp mainApp;
@@ -86,6 +86,11 @@ public class EditFirmInfoView {
             }
         });
 
+        bonusAmountTF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                bonusAmountTF.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
     }
 
     @FXML
