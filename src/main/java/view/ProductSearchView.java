@@ -72,7 +72,8 @@ public class ProductSearchView {
                 final int row = productTable.getSelectionModel().getSelectedIndex();
                 System.out.println(productTable.getSelectionModel().getSelectedIndex());
                 if (row >= 0) {
-                    final Product product = allProducts.get(row);
+                    //final Product product = allProducts.get(row);
+                    final Product product = productTable.getItems().get(row);
                     loadEditProductView(product);
                 }
             }
