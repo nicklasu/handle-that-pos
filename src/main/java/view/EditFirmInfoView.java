@@ -123,7 +123,11 @@ public class EditFirmInfoView {
                 properties.setProperty("postalCode", postalCode);
                 properties.setProperty("city", city);
                 properties.setProperty("currency", currency);
-                properties.setProperty("bonusAmount", bonusAmount);
+                if (Objects.equals(bonusAmountTF.getText(), "")) {
+                    properties.setProperty("bonusAmount", bonusAmount);
+                } else {
+                    properties.setProperty("bonusAmount", "0");
+                }
                 properties.store(writer, "HandleThatPos settings");
             }
             Notifications.create().owner(this.firmNameTF.getScene().getWindow()).position(Pos.TOP_RIGHT)
