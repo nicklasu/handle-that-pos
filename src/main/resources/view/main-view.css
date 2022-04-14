@@ -51,6 +51,11 @@
     -fx-font-weight: bold;
 }
 
+.title_label {
+    -fx-font-size: 30pt;
+    -fx-text-fill: #1C1C1C;
+}
+
 .bold_button {
     -fx-font-size: 14pt;
     -fx-font-family: 'Montserrat';
@@ -82,7 +87,7 @@
 
 .question_button:hover{
     -fx-text-fill: #1C1C1C;
-    -fx-font-size: 40pt;
+    -fx-font-size: 34pt;
     -fx-font-weight: bold;
     -fx-border-radius: 4px;
     -fx-background-color: #e8f2fd;

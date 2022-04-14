@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.TextField?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UsersView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UsersView">
    <children>
       <GridPane layoutX="-1.0" layoutY="1.0" prefHeight="600.0" prefWidth="720.0">
          <columnConstraints>
@@ -24,16 +25,16 @@
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="702.0" minHeight="10.0" prefHeight="68.60000495910644" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="711.0" minHeight="10.0" prefHeight="142.99999504089357" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="711.0" minHeight="20.0" prefHeight="70.39999389648438" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="711.0" minHeight="10.0" prefHeight="375.6000061035156" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="711.0" minHeight="10.0" prefHeight="174.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="711.0" minHeight="20.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="711.0" minHeight="10.0" prefHeight="337.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <GridPane>
+            <GridPane prefHeight="67.0" prefWidth="701.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="348.3333740234375" minWidth="10.0" prefWidth="92.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="634.0" minWidth="10.0" prefWidth="513.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="634.0" minWidth="10.0" prefWidth="83.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="634.0" minWidth="10.0" prefWidth="481.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="634.0" minWidth="10.0" prefWidth="97.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="151.00000762939453" minHeight="0.0" prefHeight="148.33333587646484" vgrow="SOMETIMES" />
@@ -43,18 +44,18 @@
                   <Insets left="30.0" right="30.0" />
                </GridPane.margin>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%search" GridPane.rowIndex="1" />
+                  <Label text="%search" GridPane.rowIndex="1" />
                   <TextField fx:id="searchField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchUser" text="%get" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchUser" prefHeight="25.0" prefWidth="125.0" text="%get" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <GridPane prefHeight="250.0" prefWidth="720.0" GridPane.rowIndex="1">
+            <GridPane prefHeight="139.0" prefWidth="720.0" GridPane.rowIndex="1">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.0" minWidth="0.0" prefWidth="311.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="411.0" minWidth="10.0" prefWidth="409.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
                   <GridPane minHeight="200.0" prefHeight="258.0" prefWidth="370.0" GridPane.columnIndex="1">
@@ -71,27 +72,27 @@
                         <Insets left="20.0" right="20.0" />
                      </GridPane.margin>
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%active_user" GridPane.rowIndex="2" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%first_name" />
+                        <Label text="%active_user" GridPane.rowIndex="2" />
+                        <Label text="%first_name" />
                         <CheckBox fx:id="activity" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%last_name" GridPane.rowIndex="1" />
+                        <Label text="%last_name" GridPane.rowIndex="1" />
                         <Text fx:id="fName" strokeType="OUTSIDE" strokeWidth="0.0" text="Nimi" GridPane.columnIndex="1" />
                         <Text fx:id="lName" strokeType="OUTSIDE" strokeWidth="0.0" text="Sukunimi" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <HBox alignment="CENTER" prefHeight="201.0" prefWidth="166.0">
+                  <HBox alignment="CENTER" prefHeight="150.0" prefWidth="311.0">
                      <children>
-                        <GridPane prefHeight="235.0" prefWidth="290.0">
+                        <GridPane prefHeight="145.0" prefWidth="160.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.20001220703125" minWidth="10.0" prefWidth="122.59996795654297" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.79999542236328" minWidth="10.0" prefWidth="167.40003204345703" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="59.0" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button mnemonicParsing="false" onAction="#uploadImage" text="%upload_image" />
-                              <ImageView fx:id="avatar" fitHeight="154.0" fitWidth="217.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                              <Button mnemonicParsing="false" onAction="#uploadImage" prefHeight="25.0" prefWidth="164.0" text="%upload_image" GridPane.rowIndex="1" />
+                              <ImageView fx:id="avatar" fitHeight="126.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
                                  <image>
                                     <Image url="@../images/person.png" />
                                  </image>
@@ -116,7 +117,7 @@
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding></ListView>
-                  <ProgressIndicator fx:id="progressIndicator" />
+                  <ProgressIndicator fx:id="progressIndicator" prefHeight="340.0" prefWidth="720.0" />
                </children>
                <GridPane.margin>
                   <Insets />
