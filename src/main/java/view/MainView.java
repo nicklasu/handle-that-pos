@@ -19,6 +19,7 @@ import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
 import javafx.scene.media.MediaPlayer;
+
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -197,7 +198,7 @@ public class MainView {
                         running.set(true);
                         while (running.get()) {
                             feedbackProgressBar.setProgress(
-                                    System.currentTimeMillis() - startTime /  2000.0);
+                                    (System.currentTimeMillis() - startTime) / 2000.0);
                         }
                     });
                     thread.start();
@@ -272,8 +273,8 @@ public class MainView {
     public void beepSound() {
         Media sound = new Media(getClass().getResource("/sound/beep.mp3").toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setOnError(()->
-                System.out.println("media error"+mediaPlayer.getError().toString()));
+        mediaPlayer.setOnError(() ->
+                System.out.println("media error" + mediaPlayer.getError().toString()));
         mediaPlayer.play();
     }
 
