@@ -3,16 +3,17 @@ package model.classes;
 import model.interfaces.IOrder;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 /**
  * Represents a set of products
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 @Entity
 @Table(name = "Tilaus")
@@ -60,7 +61,7 @@ public class Order implements IOrder {
 
     /**
      * Creates the order as a child of a parent object
-     * 
+     *
      * @param transaction the parent object
      */
     public Order(final Transaction transaction) {
@@ -97,7 +98,7 @@ public class Order implements IOrder {
 
     /**
      * Gets the product to order mapping (database version)
-     * 
+     *
      * @return
      */
     public Set<OrderProduct> getOrderProducts() {
@@ -106,7 +107,7 @@ public class Order implements IOrder {
 
     /**
      * Sets the product to order mapping (database version)
-     * 
+     *
      * @param orderProducts
      */
     public void setOrderProducts(final Set<OrderProduct> orderProducts) {
@@ -115,7 +116,7 @@ public class Order implements IOrder {
 
     /**
      * Adds a product to current order
-     * 
+     *
      * @param orderProduct the product
      */
     public void addOrderProduct(final OrderProduct orderProduct) {
@@ -124,7 +125,7 @@ public class Order implements IOrder {
 
     /**
      * Gets the product to order mapping
-     * 
+     *
      * @return list of products
      */
     @Override
@@ -134,20 +135,29 @@ public class Order implements IOrder {
 
     /**
      * Fetches the total price of products in the order
-     * 
+     *
      * @return price
      */
     @Override
     public int getTotalPrice() {
         if (transaction.getCustomer() != null) {
-            return (int) (totalPrice * 0.95);
+            final File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
+            final Properties properties = new Properties();
+            try (final FileReader reader = new FileReader(appConfigPath, StandardCharsets.UTF_8)) {
+                properties.load(reader);
+                properties.getProperty("bonusAmount");
+                double bonus = 1 - (Double.parseDouble(properties.getProperty("bonusAmount")) / 100);
+                return (int) (totalPrice * bonus);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return totalPrice;
     }
 
     /**
      * Adds a product to the order, creates an order if one does not exist
-     * 
+     *
      * @param product Scanned product the product to add
      * @return returns true if successful
      */
@@ -182,7 +192,7 @@ public class Order implements IOrder {
 
     /**
      * removes a product from the current order
-     * 
+     *
      * @param product the product to be deleted
      * @return true if succesful
      */
@@ -212,7 +222,7 @@ public class Order implements IOrder {
 
     /**
      * Setter for totalprice
-     * 
+     *
      * @param totalPrice price of all products in the order
      */
     public void setTotalPrice(final int totalPrice) {
@@ -232,7 +242,7 @@ public class Order implements IOrder {
 
     /**
      * Overwritten equals method for comparing productlists
-     * 
+     *
      * @param o input object
      * @return true if same
      */
