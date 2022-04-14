@@ -4,9 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.classes.User;
 
 import java.nio.charset.StandardCharsets;
@@ -49,6 +53,8 @@ public class OptionsView {
     private Button darkmode;
     @FXML
     private ChoiceBox<String> languageBox;
+    @FXML
+    private Button aboutButton;
 
     private boolean darkMode;
 
@@ -240,6 +246,23 @@ public class OptionsView {
             btn6.setDisable(true);
         }
         returnBtn.requestFocus();
+        this.aboutButton.setOnAction(e -> {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("about-dialog-view.fxml"));
+            Parent parent = null;
+            try {
+                fxmlLoader.setResources(this.mainApp.getBundle());
+                parent = fxmlLoader.load();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+        });
     }
 
     @FXML

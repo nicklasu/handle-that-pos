@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import model.classes.*;
@@ -54,6 +55,8 @@ public class UsersView {
     private User searchedUser;
     @FXML
     private Button searchButton;
+    @FXML
+    private Button refreshButton;
 
     private final ObservableList<Transaction> items = FXCollections.observableArrayList();
     private DateFormat dateFormat;
@@ -83,6 +86,28 @@ public class UsersView {
             showTransactionDetails(transaction);
         });
 
+        fillListView();
+
+        final Profile profile = this.mainApp.getEngine().profileDAO().getAvatar(this.searchedUser);
+        if (profile != null) {
+            insertImage(profile.getAvatar());
+        }
+        this.refreshButton.setMaxHeight(20);
+        this.refreshButton.setMaxWidth(20);
+        Image image = new Image(getClass().getResourceAsStream("/images/arrow-clockwise.png"), 20, 20, true, true);
+        this.refreshButton.setGraphic(new ImageView(image));
+        this.refreshButton.setOnAction(event -> {
+            try {
+                System.out.println("Refreshing");
+                setListViewItems(this.searchedUser);
+                fillListView();
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private void fillListView() throws IOException {
         transactionListView.setCellFactory(param -> new ListCell<Transaction>() {
             @Override
             protected void updateItem(final Transaction item, final boolean empty) {
