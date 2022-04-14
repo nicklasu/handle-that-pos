@@ -25,6 +25,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.*;
 import java.util.List;
 
@@ -55,6 +56,7 @@ public class UsersView {
     private Button searchButton;
 
     private final ObservableList<Transaction> items = FXCollections.observableArrayList();
+    private DateFormat dateFormat;
 
     public void setMainApp(final MainApp mainApp) throws IOException {
         this.mainApp = mainApp;
@@ -89,7 +91,7 @@ public class UsersView {
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    setText(item.getId() + ": " + item.getTimestamp());
+                    setText(item.getId() + ": " + dateFormat.format(item.getTimestamp()));
                 }
             }
         });
@@ -98,6 +100,8 @@ public class UsersView {
         if (profile != null) {
             insertImage(profile.getAvatar());
         }
+
+        this.dateFormat = DateFormat.getDateTimeInstance();
     }
 
     @FXML
@@ -163,7 +167,7 @@ public class UsersView {
         }
 
         final String transactionInformation = "ID: " + transaction.getId() + "\n" + "Pvm ja kellonaika: "
-                + transaction.getTimestamp() + "\n" + "Maksutapa: " + paymentMethod.name() + "\n" + "Myyjä: "
+                + dateFormat.format(transaction.getTimestamp()) + "\n" + "Maksutapa: " + paymentMethod.name() + "\n" + "Myyjä: "
                 + transaction.getUser().getFullName() + "\n" + "Maksupäätteen ID: " + transaction.getPos().getId()
                 + "\n\n";
 
