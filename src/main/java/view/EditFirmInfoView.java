@@ -124,9 +124,9 @@ public class EditFirmInfoView {
                 properties.setProperty("city", city);
                 properties.setProperty("currency", currency);
                 if (Objects.equals(bonusAmountTF.getText(), "")) {
-                    properties.setProperty("bonusAmount", bonusAmount);
-                } else {
                     properties.setProperty("bonusAmount", "0");
+                } else {
+                    properties.setProperty("bonusAmount", bonusAmount);
                 }
                 properties.store(writer, "HandleThatPos settings");
             }
