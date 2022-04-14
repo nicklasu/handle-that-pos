@@ -145,9 +145,10 @@ public class Order implements IOrder {
             final Properties properties = new Properties();
             try (final FileReader reader = new FileReader(appConfigPath, StandardCharsets.UTF_8)) {
                 properties.load(reader);
-                properties.getProperty("bonusAmount");
-                double bonus = 1 - (Double.parseDouble(properties.getProperty("bonusAmount")) / 100);
-                return (int) (totalPrice * bonus);
+                if(!Objects.equals(properties.getProperty("bonusAmount"), "")) {
+                    double bonus = 1 - (Double.parseDouble(properties.getProperty("bonusAmount")) / 100);
+                    return (int) (totalPrice * bonus);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
