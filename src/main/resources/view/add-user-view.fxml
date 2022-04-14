@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddUserView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddUserView">
    <children>
       <GridPane layoutX="14.0" layoutY="35.0" prefHeight="487.0" prefWidth="667.0" stylesheets="@options-view.css">
          <columnConstraints>
@@ -29,34 +29,35 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="20.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="75.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label stylesheets="@main-view.css" text="%first_name" GridPane.rowIndex="1" />
-            <Label stylesheets="@main-view.css" text="%last_name" GridPane.rowIndex="2" />
-            <Label stylesheets="@main-view.css" text="%active_user" GridPane.rowIndex="6" />
+            <Label text="%first_name" GridPane.rowIndex="1" />
+            <Label text="%last_name" GridPane.rowIndex="2" />
+            <Label text="%active_user" GridPane.rowIndex="7" />
             <Label text="%username" />
-            <Label stylesheets="@main-view.css" text="%password" GridPane.rowIndex="3" />
+            <Label text="%password" GridPane.rowIndex="3" />
 
-            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#addUser" stylesheets="@options-view.css" text="%save" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#addUser" text="%save" GridPane.columnIndex="1" GridPane.rowIndex="8" />
 
             <TextField fx:id="userName" GridPane.columnIndex="1" />
             <TextField fx:id="userFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="userLastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <PasswordField fx:id="userPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <DatePicker fx:id="startDate" stylesheets="@options-view.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <DatePicker fx:id="endDate" stylesheets="@options-view.css" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Label stylesheets="@main-view.css" text="%privilege" GridPane.rowIndex="4" />
-            <ChoiceBox fx:id="privilegeLevelChoiceBox" prefHeight="31.0" prefWidth="157.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-            <CheckBox fx:id="activity" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label stylesheets="@main-view.css" text="%privilege_start" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-            <Label stylesheets="@main-view.css" text="%privilege_end" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-            <Label stylesheets="@main-view.css" text="%privilege_level" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-            <ListView fx:id="privilegeListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-            <Button fx:id="saveBtn2" mnemonicParsing="false" onAction="#addToListView" stylesheets="@options-view.css" text="%add" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <DatePicker fx:id="startDate" stylesheets="@options-view.css" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <DatePicker fx:id="endDate" stylesheets="@options-view.css" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label text="%privilege" GridPane.rowIndex="5" />
+            <ChoiceBox fx:id="privilegeLevelChoiceBox" prefHeight="21.0" prefWidth="152.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <CheckBox fx:id="activity" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label text="%privilege_start" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+            <Label text="%privilege_end" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+            <Label text="%privilege_level" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+            <ListView fx:id="privilegeListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+            <Button fx:id="saveBtn2" mnemonicParsing="false" onAction="#addToListView" text="%add" GridPane.columnIndex="4" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <Label layoutX="14.0" layoutY="10.0" styleClass="bold_label" stylesheets="@options-view.css" text="%add_user">

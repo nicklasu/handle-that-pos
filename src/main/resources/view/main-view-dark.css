@@ -39,6 +39,10 @@
     -fx-text-fill: #FFFFFF;
 }
 
+.text {
+    -fx-text-fill: #FFFFFF;
+}
+
 .sum_label {
     -fx-text-fill: #FFFFFF;
     -fx-font-family: 'Montserrat';
@@ -81,6 +85,14 @@
     -fx-font-weight: bold;
     -fx-border-radius: 4px;
     -fx-background-color: #3D3D3D;
+}
+
+.question_button:hover{
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 34pt;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4px;
+    -fx-background-color: #474747;
 }
 
 .list-cell {
