@@ -37,7 +37,7 @@
              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
            </rowConstraints>
             <children>
-                  <Button mnemonicParsing="false" onAction="#loadMainView" prefHeight="115.0" prefWidth="200.0" styleClass="bold_button" text="%cancel">
+                  <Button mnemonicParsing="false" onAction="#loadMainView" prefHeight="124.0" prefWidth="200.0" styleClass="bold_button" text="%cancel">
                   <GridPane.margin>
                      <Insets left="20.0" />
                   </GridPane.margin>

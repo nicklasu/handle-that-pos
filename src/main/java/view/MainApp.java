@@ -9,6 +9,7 @@ import model.interfaces.IPOSEngine;
 
 import java.awt.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -38,6 +39,7 @@ public class MainApp extends Application {
     private boolean darkMode;
 
     public MainApp() {
+
     }
 
     @Override
@@ -72,6 +74,7 @@ public class MainApp extends Application {
         stage.setTitle(APP_TITLE);
         this.stage.getIcons().add(new Image("file:src/main/resources/images/pos.png"));
         showConnectToDatabaseView();
+
     }
 
     public String[] getHotkeyButtonNames() {
@@ -105,7 +108,15 @@ public class MainApp extends Application {
             final MainView mainView = fxmlLoader.getController();
             mainView.setMainApp(this);
             /* Set CSS stylesheet */
-            if (darkMode) {
+            final File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
+            final Properties properties = new Properties();
+            try (final FileReader reader = new FileReader(appConfigPath, StandardCharsets.UTF_8)) {
+                properties.load(reader);
+                this.darkMode = Boolean.parseBoolean(properties.getProperty("mode"));
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+            if (this.darkMode) {
                 scene.getStylesheets().add(getClass().getResource(MAIN_VIEW_CSS).toExternalForm()); // Set light css style
             } else {
                 scene.getStylesheets().add(getClass().getResource(MAIN_VIEW_DARK_CSS).toExternalForm()); // Set dark css style

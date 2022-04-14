@@ -69,10 +69,10 @@
         <Pane fx:id="wrapperPane1" prefHeight="200.0" prefWidth="200.0" stylesheets="/view/products-view.css" visible="false" GridPane.columnIndex="1" />
         <Pane fx:id="wrapperPane" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
             <children>
-                <Text layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%optionsViewNothingSelected" textAlignment="CENTER" wrappingWidth="720.0">
+                <Label accessibleRole="TEXT_AREA" layoutY="281.0" styleClass="title_label" text="%optionsViewNothingSelected" textAlignment="CENTER">
                <font>
                   <Font size="32.0" />
-               </font></Text>
+               </font></Label>
             </children>
         </Pane>
       <GridPane GridPane.rowIndex="1">

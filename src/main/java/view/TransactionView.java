@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import model.DAOs.CustomerDAO;
 import model.classes.*;
 import org.controlsfx.control.Notifications;
+
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Objects;
@@ -20,9 +21,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Represents the hardware running the software
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class TransactionView {
     public static final String ERROR_STRING = "errorString";
@@ -124,7 +125,7 @@ public class TransactionView {
                 running.set(true);
                 while (running.get()) {
                     feedbackProgressBar
-                            .setProgress(System.currentTimeMillis() - startTime / 2000.0);
+                            .setProgress((System.currentTimeMillis() - startTime) / 2000.0);
                     try {
                         Thread.sleep(100);
                         if ((System.currentTimeMillis() - startTime) >= 2000) {
@@ -206,7 +207,7 @@ public class TransactionView {
      * @param enabledButton  Button to be enabled.
      */
     private void selectPaymentMethod(final PaymentMethod paymentMethod, final ToggleButton disabledButton,
-            final ToggleButton enabledButton) {
+                                     final ToggleButton enabledButton) {
         if (this.mainApp.getEngine().getTransaction() != null) {
             this.mainApp.getEngine().getTransaction().setPaymentMethod(paymentMethod);
             System.out.println(this.mainApp.getEngine().getTransaction().getPaymentMethod());
