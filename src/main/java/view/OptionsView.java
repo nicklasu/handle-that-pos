@@ -241,9 +241,9 @@ public class OptionsView {
         final List<Integer> privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
 
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 2) {
-            btn2.setDisable(true);
-            btn3.setDisable(true);
-            btn6.setDisable(true);
+            btn2.setVisible(false);
+            btn3.setVisible(false);
+            btn6.setVisible(false);
         }
         returnBtn.requestFocus();
         this.aboutButton.setOnAction(e -> {
