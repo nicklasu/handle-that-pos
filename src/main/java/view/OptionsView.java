@@ -223,18 +223,18 @@ public class OptionsView {
 
         btn7.setOnAction(e -> {
             wrapperPane.getChildren().clear();
-            Pane newLoadedPane2 = null;
+            Pane newLoadedPane = null;
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("stats-view.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
-                newLoadedPane2 = this.loader.load();
-                final ProductManagementView view = this.loader.getController();
+                newLoadedPane = this.loader.load();
+                final StatsView view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (final IOException ex) {
                 ex.printStackTrace();
             }
-            wrapperPane.getChildren().add(newLoadedPane2);
+            wrapperPane.getChildren().add(newLoadedPane);
         });
 
         this.mainApp = mainApp;
@@ -244,6 +244,7 @@ public class OptionsView {
             btn2.setDisable(true);
             btn3.setDisable(true);
             btn6.setDisable(true);
+            btn7.setDisable(true);
         }
         returnBtn.requestFocus();
         this.aboutButton.setOnAction(e -> {
