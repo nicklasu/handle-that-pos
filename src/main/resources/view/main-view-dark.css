@@ -5,7 +5,7 @@
 .button {
     -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #F5F7FA;
+    -fx-fill: #F5F7FA;
     -fx-background-color: #2e2e2e;
     -fx-border-radius: 4px;
 }
@@ -13,7 +13,7 @@
 .button:hover {
     /*-fx-font-size: 13pt;*/
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #F5F7FA;
+    -fx-fill: #F5F7FA;
     -fx-background-color: #474747;
     -fx-border-radius: 4px;
 }
@@ -36,11 +36,11 @@
 }
 
 .text-area {
-    -fx-text-fill: #FFFFFF;
+    -fx-fill: #FFFFFF;
 }
 
 .text {
-    -fx-text-fill: #FFFFFF;
+    -fx-fill: #FFFFFF;
 }
 
 .sum_label {
@@ -105,6 +105,11 @@
     -fx-control-inner-background: #212121;
     -fx-text-fill: #FFFFFF;
 }
+
+.black-text {
+    -fx-fill: black;
+}
+
 /* Options */
 .choice-box {
     -fx-background-color: #474747;
@@ -123,4 +128,8 @@
 
 .transaction-check-box > .box > .mark {
     -fx-padding: 4.16em 4.16em 5em 5em;
+}
+
+.notification-bar > .pane {
+    -fx-background-color: #212121 !important;
 }

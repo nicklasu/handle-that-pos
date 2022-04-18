@@ -128,7 +128,6 @@ public class MainView {
                     .showError();
         }
         beepSound();
-        barcodeTextField.requestFocus();
     }
 
     public void setTotalPrice() {
@@ -146,6 +145,7 @@ public class MainView {
         } else {
             this.totalPriceLabel.setText("0.00" + CurrencyHandler.getCurrency());
         }
+        barcodeTextField.requestFocus();
     }
 
     @FXML

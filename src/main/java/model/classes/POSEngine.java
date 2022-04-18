@@ -153,7 +153,7 @@ public class POSEngine implements IPOSEngine {
                 System.out.println("Valid privileges");
                 System.out.println(validPrivileges);
                 System.out.println(this.verifiedPrivileges);
-                if (validPrivileges.isEmpty()) {
+                if (validPrivileges.isEmpty() || user1.getActivity() == 0) {
                     return LoginStatus.NO_PRIVILEGES;
                 }
                 return LoginStatus.SUCCESS;
