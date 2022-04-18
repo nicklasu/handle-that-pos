@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditFirmInfoView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditFirmInfoView">
    <children>
       <GridPane layoutX="14.0" layoutY="43.0" prefHeight="411.0" prefWidth="519.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="10.0" prefWidth="194.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="325.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="10.0" prefWidth="244.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="275.0" />
          </columnConstraints>
          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -37,7 +32,7 @@
             <Label text="%phone" GridPane.rowIndex="6" />
             <Label text="%companyName" />
 
-            <Button mnemonicParsing="false" onAction="#updateInfo" text="%saveCompanyInfo" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Button mnemonicParsing="false" onAction="#updateInfo" text="%saveCompanyInfo" GridPane.columnIndex="1" GridPane.rowIndex="9" />
 
             <TextField fx:id="firmNameTF" GridPane.columnIndex="1" />
             <TextField fx:id="addressTF" GridPane.columnIndex="1" GridPane.rowIndex="5" />
@@ -49,17 +44,19 @@
             <TextField fx:id="cityTF" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="businessIdTF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="%businessID" GridPane.rowIndex="1" />
-            <Label text="%currency" GridPane.rowIndex="7" />
-            <ChoiceBox fx:id="currencyBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <Label text="%currency" GridPane.rowIndex="8" />
+            <ChoiceBox fx:id="currencyBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets left="50.0" />
                </GridPane.margin>
             </ChoiceBox>
-            <Label fx:id="currencyLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <Label fx:id="currencyLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
+            <Label text="%bonusAmount" GridPane.rowIndex="7" />
+            <TextField fx:id="bonusAmountTF" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Label layoutX="14.0" layoutY="10.0" styleClass="bold_label" text="%companyInfo">

@@ -4,9 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.classes.User;
 
 import java.nio.charset.StandardCharsets;
@@ -49,6 +53,8 @@ public class OptionsView {
     private Button darkmode;
     @FXML
     private ChoiceBox<String> languageBox;
+    @FXML
+    private Button aboutButton;
 
     private boolean darkMode;
 
@@ -217,18 +223,18 @@ public class OptionsView {
 
         btn7.setOnAction(e -> {
             wrapperPane.getChildren().clear();
-            Pane newLoadedPane2 = null;
+            Pane newLoadedPane = null;
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("stats-view.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
-                newLoadedPane2 = this.loader.load();
-                final ProductManagementView view = this.loader.getController();
+                newLoadedPane = this.loader.load();
+                final StatsView view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (final IOException ex) {
                 ex.printStackTrace();
             }
-            wrapperPane.getChildren().add(newLoadedPane2);
+            wrapperPane.getChildren().add(newLoadedPane);
         });
 
         this.mainApp = mainApp;
@@ -238,8 +244,26 @@ public class OptionsView {
             btn2.setDisable(true);
             btn3.setDisable(true);
             btn6.setDisable(true);
+            btn7.setDisable(true);
         }
         returnBtn.requestFocus();
+        this.aboutButton.setOnAction(e -> {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("about-dialog-view.fxml"));
+            Parent parent = null;
+            try {
+                fxmlLoader.setResources(this.mainApp.getBundle());
+                parent = fxmlLoader.load();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.showAndWait();
+        });
     }
 
     @FXML

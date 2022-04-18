@@ -49,6 +49,7 @@ public class ReceiptPrinter implements Printable {
             String currency = "";
             String language = "";
             String country = "";
+            String bonusAmount = "";
             final File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
             final Properties properties = new Properties();
             try (final FileReader reader = new FileReader(appConfigPath, StandardCharsets.UTF_8)) {
@@ -62,6 +63,7 @@ public class ReceiptPrinter implements Printable {
                 currency = properties.getProperty("currency");
                 language = properties.getProperty("language");
                 country = properties.getProperty("country");
+                bonusAmount = properties.getProperty("bonusAmount");
             } catch (final IOException e) {
                 e.printStackTrace();
             }
@@ -78,7 +80,7 @@ public class ReceiptPrinter implements Printable {
             g.drawString(address + ", " + postalCode + " " + city, 100, 120);
             g.drawString(phoneNumber + " " + businessId, 100, 140);
             if (transaction.getCustomer() != null) {
-                g.drawString(bundle.getString("receipt") + ": " + order.getId() + " " + bundle.getString("customerbonus") + ": " + transaction.getCustomer().getId(), 100, 160);
+                g.drawString(bundle.getString("receipt") + ": " + order.getId() + " " + bundle.getString("bonusCustomerNumber") + ": " + transaction.getCustomer().getId(), 100, 160);
             } else {
                 g.drawString(bundle.getString("receipt") + ": " + order.getId(), 100, 160);
             }
@@ -99,7 +101,7 @@ public class ReceiptPrinter implements Printable {
                 priceY += 20;
             }
             if (transaction.getCustomer() != null && transaction.getCustomer().getCustomerLevelIndex() == 1) {
-                g.drawString("BONUS -5%", 100, (nameY + 20));
+                g.drawString("BONUS -" + bonusAmount + "%", 100, (nameY + 20));
             } else {
                 g.drawString("BONUS: 0%", 100, (nameY + 20));
             }
