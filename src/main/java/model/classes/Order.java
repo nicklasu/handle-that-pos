@@ -157,6 +157,14 @@ public class Order implements IOrder {
     }
 
     /**
+     * Fetches the total value of the products in the order without taking into concideration special offers
+     * @return total price of the Order
+     */
+    public int getTotalPriceWithoutBonuses(){
+        return totalPrice;
+    }
+
+    /**
      * Adds a product to the order, creates an order if one does not exist
      *
      * @param product Scanned product the product to add

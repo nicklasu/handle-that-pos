@@ -1,16 +1,21 @@
 package view;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Tab;
 import model.classes.Product;
+import model.classes.Transaction;
 import model.classes.User;
 
-import java.util.List;
+import java.util.*;
 
 public class StatsView {
 
@@ -53,37 +58,101 @@ public class StatsView {
     @FXML
     private NumberAxis worstSellingUsersY;
 
+    @FXML
+    private ProgressIndicator progressIndicator;
+
     private MainApp mainApp;
-    private List<Product> allProducts;
-    private List<User> allUsers;
 
     public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
-        allProducts = this.mainApp.getEngine().productDao().getAllProducts();
-        allUsers = this.mainApp.getEngine().userDAO().getAllUsers();
+        System.out.println(this.mainApp.getEngine().productDao().getAllProducts().size());
+        createCharts();
     }
 
-    @FXML
-    void initialize() {
-        getProductStats();
-        getUserStats();
+    void createCharts(){
+        progressIndicator.setVisible(true);
+        final Thread thread = new Thread(() -> {
+            try {
+                List<User> allUsers = this.mainApp.getEngine().userDAO().getAllUsers();
+                List<Product> allProducts = this.mainApp.getEngine().productDao().getAllProducts();
+                List<UserWithSales> users = new ArrayList<>();
+                List<ProductWithSales> products = new ArrayList<>();
+
+                for (Product p : allProducts) {
+                    products.add(new ProductWithSales(p.getId(),p.getName(), 0));
+                }
+                
+                for (User u : allUsers) {
+                    int totalSales = 0;
+                    List<Transaction> transactions = this.mainApp.getEngine().transactionDAO().getTransactions(u);
+                    for (Transaction t: transactions) {
+                        totalSales += t.getOrder().getTotalPriceWithoutBonuses();
+                        List<Product> productsInTransaction = t.getOrder().getProductList();
+                        for (Product p : productsInTransaction) {
+                            for (ProductWithSales pws : products) {
+                                if(p.getId().equals(pws.getProductID())){
+                                    pws.increment();
+                                }
+                            }
+                        }
+                    }
+                    users.add(new UserWithSales(u.getUsername(),totalSales));
+                }
+
+                Collections.sort(products);
+                Collections.sort(users);
+
+                List<ProductWithSales> productsTop5 = new ArrayList<>();
+                List<UserWithSales> usersTop5 = new ArrayList<>();
+                List<ProductWithSales> productsBottom5 = new ArrayList<>();
+                List<UserWithSales> usersBottom5 = new ArrayList<>();
+
+                int maxUsers = Math.min(allUsers.size(), 5);
+                int maxProducts = Math.min(allProducts.size(), 5);
+
+                for (int i = 0; i < maxUsers; i++) {
+                    usersTop5.add(users.get(i));
+                    usersBottom5.add(users.get(maxUsers-i));
+                }
+                for (int i = 0; i < maxProducts; i++) {
+                    productsTop5.add(products.get(i));
+                    productsBottom5.add(products.get(maxProducts-i));
+                }
+
+
+
+                Platform.runLater(() -> {
+                    makeDataSet(productsTop5,usersTop5,productsBottom5,usersBottom5);
+                    progressIndicator.setVisible(false);
+                });
+            } catch (final Exception e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
     }
 
-    boolean getProductStats(){
-        XYChart.Series bestProducts = new XYChart.Series<>();
-        XYChart.Series worstProducts = new XYChart.Series<>();
+    void makeDataSet(List<ProductWithSales> productsTop5, List<UserWithSales> usersTop5, List<ProductWithSales> productsBottom5, List<UserWithSales> usersBottom5){
+        XYChart.Series<String, Integer> dataSet1 = new XYChart.Series<>();
+        XYChart.Series<String, Integer> dataSet2 = new XYChart.Series<>();
+        XYChart.Series<String, Integer> dataSet3 = new XYChart.Series<>();
+        XYChart.Series<String, Integer> dataSet4 = new XYChart.Series<>();
 
-        //System.out.println(allProducts.size());
+        for (int i = 0; i < productsTop5.size(); i++) {
+            dataSet1.getData().add(new XYChart.Data<>(productsTop5.get(i).getProductName(),productsTop5.get(i).getSold()));
+            dataSet2.getData().add(new XYChart.Data<>(productsBottom5.get(i).getProductName(),productsBottom5.get(i).getSold()));
+        }
+        for (int i = 0; i < usersTop5.size(); i++) {
+            dataSet3.getData().add(new XYChart.Data<>(usersTop5.get(i).getUserName(),usersTop5.get(i).getSales()));
+            dataSet4.getData().add(new XYChart.Data<>(usersTop5.get(i).getUserName(),usersBottom5.get(i).getSales()));
+        }
 
-        bestProducts.getData().add(new XYChart.Data("asd",3));
-        populateChart(bestSellingProductsChart, bestProducts);
-        populateChart(worstSellingProductsChart,worstProducts);
-        return true;
+        populateChart(bestSellingProductsChart, dataSet1);
+        populateChart(worstSellingProductsChart,dataSet2);
+        populateChart(bestSellingUsersChart,dataSet3);
+        populateChart(worstSellingUsersChart,dataSet4);
     }
 
-    boolean getUserStats(){
-        return true;
-    }
 
     boolean populateChart(BarChart<?, ?> chart, XYChart.Series data){
         try{
@@ -93,8 +162,68 @@ public class StatsView {
         }
         return false;
     }
+    
+
+    private class ProductWithSales implements Comparable<ProductWithSales>{
+        private String productID;
+        private String productName;
+        private int sold;
+        public ProductWithSales(String x, String y, int z){
+            productID = x;
+            productName = y;
+            sold = z;
+        }
+        public String getProductID() {
+            return productID;
+        }
+
+        public void increment(){
+            sold++;
+        }
+
+        public int getSold() {
+            return sold;
+        }
 
 
+        public String getProductName() {
+            return productName;
+        }
 
+        public void setProductName(String productName) {
+            this.productName = productName;
+        }
+        @Override
+        public int compareTo(ProductWithSales pws){
+            return pws.sold - this.sold;
+        }
+    }
+    private class UserWithSales implements Comparable<UserWithSales>{
+        private String userName;
+        private int sales;
+        public UserWithSales(String x, int y){
+            userName = x;
+            sales = y;
+        }
 
+        public String getUserName() {
+            return userName;
+        }
+
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+
+        public int getSales() {
+            return sales;
+        }
+
+        public void setSales(int sales) {
+            this.sales = sales;
+        }
+        @Override
+        public int compareTo(UserWithSales uws){
+            return uws.sales - this.sales;
+        }
+    }
 }
