@@ -136,12 +136,12 @@ public class StatsView {
         XYChart.Series<String, Integer> dataSet4 = new XYChart.Series<>();
 
         for (int i = 0; i < productsTop5.size(); i++) {
-            dataSet1.getData().add(new XYChart.Data<>(productsTop5.get(i).getProductName(),productsTop5.get(i).getSold()));
-            dataSet2.getData().add(new XYChart.Data<>(productsBottom5.get(i).getProductName(),productsBottom5.get(i).getSold()));
+            dataSet1.getData().add(new XYChart.Data(productsTop5.get(i).getProductID(),productsTop5.get(i).getSold()));
+            dataSet2.getData().add(new XYChart.Data(productsBottom5.get(i).getProductID(),productsBottom5.get(i).getSold()));
         }
         for (int i = 0; i < usersTop5.size(); i++) {
-            dataSet3.getData().add(new XYChart.Data<>(usersTop5.get(i).getUserName(),usersTop5.get(i).getSales()));
-            dataSet4.getData().add(new XYChart.Data<>(usersTop5.get(i).getUserName(),usersBottom5.get(i).getSales()));
+            dataSet3.getData().add(new XYChart.Data(usersTop5.get(i).getUserName(),usersTop5.get(i).getSales()));
+            dataSet4.getData().add(new XYChart.Data(usersTop5.get(i).getUserName(),usersBottom5.get(i).getSales()));
         }
 
         populateChart(bestSellingProductsChart, dataSet1);
@@ -181,7 +181,6 @@ public class StatsView {
         public int getSold() {
             return sold;
         }
-
 
         public String getProductName() {
             return productName;

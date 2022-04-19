@@ -105,6 +105,15 @@ public class MainView {
     private void addProduct(final String productId) {
 
         final Product product = this.mainApp.getEngine().scanProduct(productId);
+        if(product.getStock() <= -50){
+            Notifications.create()
+                    .owner(barcodeTextField.getScene().getWindow())
+                    .title(bundle.getString("errorString"))
+                    .text(bundle.getString("productOutOfStockString"))
+                    .position(Pos.TOP_RIGHT)
+                    .showError();
+            return;
+        }
         if (product != null) {
             if (!items.contains(product)) {
                 items.add(product);

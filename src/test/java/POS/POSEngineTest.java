@@ -20,7 +20,7 @@ public class POSEngineTest extends TestParent {
     @BeforeAll
     public void beforeAll() {
         System.out.println("POSEngine test...");
-        testEngine = new POSEngine();
+        testEngine = new POSEngine("testiengine");
     }
 
     @BeforeEach
@@ -48,13 +48,13 @@ public class POSEngineTest extends TestParent {
 
     @Test
     public void getUser() {
-        Assertions.assertEquals("Test", testEngine.getUser().getfName(), "error getting logged in user");
+        Assertions.assertEquals("tester", testEngine.getUser().getfName(), "error getting logged in user");
     }
 
     @Test
     public void getTransaction() {
         testEngine.setTransaction(this.createTestTransaction(testEngine.getUser()));
-        Assertions.assertEquals("Test", testEngine.getTransaction().getUser().getfName(),
+        Assertions.assertEquals("tester", testEngine.getTransaction().getUser().getfName(),
                 "Problem getting the transaction from engine");
     }
 
@@ -77,10 +77,10 @@ public class POSEngineTest extends TestParent {
     @Test
     public void privileges() {
         final List<Integer> luvat = testEngine.getVerifiedPrivileges();
-        Assertions.assertEquals(2, luvat.get(0), "Getting privilegelevel has a problem");
+        Assertions.assertEquals(3, luvat.get(0), "Getting privilegelevel has a problem");
         Assertions.assertEquals("testuser", testEngine.getPrivileges().get(0).getUser().getUsername(),
                 "getting privileges has a problem");
-        Assertions.assertEquals(2, testEngine.getPrivilegeIndexes().get(0), "Getting privilege indexes has a problem");
+        Assertions.assertEquals(3, testEngine.getPrivilegeIndexes().get(0), "Getting privilege indexes has a problem");
 
         final java.sql.Date date = new Date(123);
         final java.sql.Date date2 = new Date(1234);
