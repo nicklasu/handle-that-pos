@@ -112,6 +112,24 @@ public class POSEngine implements IPOSEngine {
     }
 
     /**
+     * Constructor for tests setting the database to the test database
+     * @param db
+     */
+    public POSEngine(String db){
+        nameOfDatabase = db;
+        this.userDAO = new UserDAO(nameOfDatabase);
+        this.ped = new POSEngineDAO(nameOfDatabase);
+        this.productDAO = new ProductDAO(nameOfDatabase);
+        this.transactionDAO = new TransactionDAO(nameOfDatabase);
+        this.customerDAO = new CustomerDAO(nameOfDatabase);
+        this.privilegeDAO = new PrivilegeDAO(nameOfDatabase);
+        this.ped = new POSEngineDAO(nameOfDatabase);
+        this.profileDAO = new ProfileDAO(nameOfDatabase);
+        this.id = HWID.getHWID();
+
+    }
+
+    /**
      * @return current user's privileges
      */
     @Override
