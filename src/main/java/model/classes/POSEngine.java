@@ -240,7 +240,9 @@ public class POSEngine implements IPOSEngine {
             this.transaction = new Transaction(this.user);
         }
         final Product product = productDAO.getProduct(id);
-        this.transaction.getOrder().addProductToOrder(product);
+        if(product.getStock() >= -50) {
+            this.transaction.getOrder().addProductToOrder(product);
+        }
         return product;
     }
 
