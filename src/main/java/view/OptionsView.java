@@ -25,9 +25,9 @@ import java.util.Properties;
 
 /**
  * Represents the hardware running the software
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class OptionsView {
     private MainApp mainApp;
@@ -92,12 +92,10 @@ public class OptionsView {
                 case "en" -> "en_US";
                 default -> throw new IllegalStateException("Unexpected value: " + languageBox.getValue());
             };
-            try {
-                final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8);
+            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8);) {
                 properties.setProperty("language", lang.split("_")[0]);
                 properties.setProperty("country", lang.split("_")[1]);
                 properties.store(writer, "HandleThatPos settings");
-                writer.close();
                 final Locale locale = new Locale(lang.split("_")[0], lang.split("_")[1]);
                 Locale.setDefault(locale);
                 this.mainApp.setBundle(ResourceBundle.getBundle("TextResources", locale));
@@ -118,7 +116,7 @@ public class OptionsView {
                 darkmode.setText("Dark mode");
             }
 
-            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8)){
+            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8)) {
                 properties.setProperty("mode", String.valueOf(darkMode));
                 properties.store(writer, "HandleThatPos settings");
                 this.mainApp.showOptionsView();
@@ -223,27 +221,28 @@ public class OptionsView {
 
         btn7.setOnAction(e -> {
             wrapperPane.getChildren().clear();
-            Pane newLoadedPane2 = null;
+            Pane newLoadedPane = null;
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("stats-view.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
-                newLoadedPane2 = this.loader.load();
-                final ProductManagementView view = this.loader.getController();
+                newLoadedPane = this.loader.load();
+                final StatsView view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (final IOException ex) {
                 ex.printStackTrace();
             }
-            wrapperPane.getChildren().add(newLoadedPane2);
+            wrapperPane.getChildren().add(newLoadedPane);
         });
 
         this.mainApp = mainApp;
         final List<Integer> privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
 
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 2) {
-            btn2.setVisible(false);
-            btn3.setVisible(false);
-            btn6.setVisible(false);
+            btn2.setDisable(true);
+            btn3.setDisable(true);
+            btn6.setDisable(true);
+            btn7.setDisable(true);
         }
         returnBtn.requestFocus();
         this.aboutButton.setOnAction(e -> {
@@ -268,8 +267,7 @@ public class OptionsView {
     @FXML
     public void showHelp() {
         bundle = mainApp.getBundle();
-        final Alert alert = new Alert(Alert.AlertType.INFORMATION, bundle.getString("optionsViewHelpString"),
-                ButtonType.CLOSE);
+        final Alert alert = new Alert(Alert.AlertType.INFORMATION, bundle.getString("optionsViewHelpString"), ButtonType.CLOSE);
         alert.setTitle(bundle.getString("helpString"));
         alert.setHeaderText(bundle.getString("helpString"));
         alert.showAndWait();
