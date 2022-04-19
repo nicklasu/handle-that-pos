@@ -111,6 +111,11 @@
 }
 
 /* Options */
+.table-view .column-header {
+    -fx-background-color: #212121;
+    -fx-text-fill: #FFFFFF;
+}
+
 .choice-box {
     -fx-background-color: #474747;
     -fx-mark-color: #bd92fc;

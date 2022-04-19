@@ -182,13 +182,13 @@
             <GridPane.margin>
                <Insets left="20.0" />
             </GridPane.margin></ListView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="%ordersproducts">
+            <Label styleClass="text" text="%ordersproducts">
             <font>
                <Font size="19.0" />
             </font>
             <GridPane.margin>
                <Insets left="20.0" />
-            </GridPane.margin></Text>
+            </GridPane.margin></Label>
             <Label fx:id="transactionOverviewLabel" text="Tilauksessa &quot;x&quot; tuotetta hintaan &quot;y&quot;" GridPane.rowIndex="2">
             <font>
                <Font size="19.0" />

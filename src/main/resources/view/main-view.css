@@ -11,7 +11,6 @@
 }
 
 .button:hover {
-    -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
     -fx-text-fill: #1C1C1C;
     -fx-background-color: #e8f2fd;
@@ -19,16 +18,22 @@
     -fx-border-radius: 4px;
 }
 
-.button:focused {
-    /*-fx-font-size: 13pt;
+.color_button {
+    -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
-    -fx-text-fill: #F5F7FA;
-    -fx-background-color: #1688fc;
-    -fx-border-color: #1688fc;
-    -fx-border-radius: 4px;*/
+    -fx-background-color: #5a26ea;
+    -fx-text-fill: #e8f2fd;
+}
+
+.color_button:hover {
+    -fx-font-family: 'Montserrat';
+    -fx-background-color: #311ab0;
+    -fx-text-fill: #e8f2fd;
 }
 
 .average-button {
+    -fx-font-size: 13pt;
+    -fx-font-family: 'Montserrat';
     -fx-border-color: #555555;
 }
 
