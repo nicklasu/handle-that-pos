@@ -25,9 +25,9 @@ import java.util.Properties;
 
 /**
  * Represents the hardware running the software
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class OptionsView {
     private MainApp mainApp;
@@ -92,12 +92,10 @@ public class OptionsView {
                 case "en" -> "en_US";
                 default -> throw new IllegalStateException("Unexpected value: " + languageBox.getValue());
             };
-            try {
-                final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8);
+            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8);) {
                 properties.setProperty("language", lang.split("_")[0]);
                 properties.setProperty("country", lang.split("_")[1]);
                 properties.store(writer, "HandleThatPos settings");
-                writer.close();
                 final Locale locale = new Locale(lang.split("_")[0], lang.split("_")[1]);
                 Locale.setDefault(locale);
                 this.mainApp.setBundle(ResourceBundle.getBundle("TextResources", locale));
@@ -118,7 +116,7 @@ public class OptionsView {
                 darkmode.setText("Dark mode");
             }
 
-            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8)){
+            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8)) {
                 properties.setProperty("mode", String.valueOf(darkMode));
                 properties.store(writer, "HandleThatPos settings");
                 this.mainApp.showOptionsView();
@@ -269,8 +267,7 @@ public class OptionsView {
     @FXML
     public void showHelp() {
         bundle = mainApp.getBundle();
-        final Alert alert = new Alert(Alert.AlertType.INFORMATION, bundle.getString("optionsViewHelpString"),
-                ButtonType.CLOSE);
+        final Alert alert = new Alert(Alert.AlertType.INFORMATION, bundle.getString("optionsViewHelpString"), ButtonType.CLOSE);
         alert.setTitle(bundle.getString("helpString"));
         alert.setHeaderText(bundle.getString("helpString"));
         alert.showAndWait();
