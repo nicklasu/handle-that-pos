@@ -19,9 +19,9 @@ import java.util.List;
 
 /**
  * Represents the hardware running the software
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class AddUserView {
     public static final String USER = "user";
@@ -59,11 +59,7 @@ public class AddUserView {
 
     public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
-
-        final BooleanBinding booleanBind = userFirstName.textProperty().isEmpty()
-                .or(userLastName.textProperty().isEmpty())
-                .or(userName.textProperty().isEmpty())
-                .or(userPassword.textProperty().isEmpty());
+        final BooleanBinding booleanBind = userFirstName.textProperty().isEmpty().or(userLastName.textProperty().isEmpty()).or(userName.textProperty().isEmpty()).or(userPassword.textProperty().isEmpty());
         saveBtn2.disableProperty().bind(booleanBind);
         privilegeListView.disableProperty().bind(Bindings.isEmpty(privilegeList));
         final List<Integer> privilegeInts = this.mainApp.getEngine().getVerifiedPrivileges();
@@ -78,7 +74,7 @@ public class AddUserView {
             } else if (click.getButton() == MouseButton.PRIMARY && click.getClickCount() == 2) {
                 final int index = privilegeListView.getSelectionModel().getSelectedIndex();
                 if (index >= 0) {
-                    saveBtn.setVisible(false);
+                    saveBtn2.setVisible(false);
                     editBtn.setVisible(true);
 
                     final Privilege p = privilegeList.get(index);
@@ -97,8 +93,7 @@ public class AddUserView {
                 }
 
                 editBtn.setOnAction(action -> {
-                    final Privilege priv = privilegeList
-                            .get(privilegeListView.getSelectionModel().getSelectedIndex());
+                    final Privilege priv = privilegeList.get(privilegeListView.getSelectionModel().getSelectedIndex());
                     final LocalDate dateStart = startDate.getValue();
                     priv.setPrivilegeStart(java.sql.Date.valueOf(dateStart));
                     final LocalDate dateEnd = endDate.getValue();
@@ -161,12 +156,7 @@ public class AddUserView {
                 this.mainApp.getEngine().privilegeDAO().addPrivileges(privilegeList);
             }
 
-            Notifications.create()
-                    .owner(saveBtn.getScene().getWindow())
-                    .title(this.mainApp.getBundle().getString("success"))
-                    .text(this.mainApp.getBundle().getString("user_added"))
-                    .position(Pos.TOP_RIGHT)
-                    .show();
+            Notifications.create().owner(saveBtn.getScene().getWindow()).title(this.mainApp.getBundle().getString("success")).text(this.mainApp.getBundle().getString("user_added")).position(Pos.TOP_RIGHT).show();
             userFirstName.clear();
             userLastName.clear();
             userName.clear();
@@ -175,12 +165,7 @@ public class AddUserView {
 
         } catch (final IllegalStateException p) {
             System.out.println("Error! Username is taken!");
-            Notifications.create()
-                    .owner(saveBtn.getScene().getWindow())
-                    .title(this.mainApp.getBundle().getString("errorString"))
-                    .text(this.mainApp.getBundle().getString("username_taken"))
-                    .position(Pos.TOP_RIGHT)
-                    .showError();
+            Notifications.create().owner(saveBtn.getScene().getWindow()).title(this.mainApp.getBundle().getString("errorString")).text(this.mainApp.getBundle().getString("username_taken")).position(Pos.TOP_RIGHT).showError();
         } catch (final Exception e) {
             System.out.println("There was an error");
             e.printStackTrace();
@@ -202,22 +187,17 @@ public class AddUserView {
         } else if (pLevel.equals(this.mainApp.getBundle().getString(ADMIN))) {
             privilegeLvl = PrivilegeLevel.ADMIN;
         }
-        final Privilege privilege = new Privilege(java.sql.Date.valueOf(dateStart),
-                dateEnd == null ? null : java.sql.Date.valueOf(dateEnd), privilegeLvl);
+        final Privilege privilege = new Privilege(java.sql.Date.valueOf(dateStart), dateEnd == null ? null : java.sql.Date.valueOf(dateEnd), privilegeLvl);
         privilegeList.add(privilege);
         privilegeListView.setItems(privilegeList);
     }
 
-    void checkPrivilegeLevel(final List<Integer> privilegeInts, final ChoiceBox<String> privilegeLevel,
-            final DatePicker startDate) {
+    void checkPrivilegeLevel(final List<Integer> privilegeInts, final ChoiceBox<String> privilegeLevel, final DatePicker startDate) {
         ObservableList<String> availableChoices;
         if (Collections.max(privilegeInts) < 3) {
-            availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString(USER),
-                    this.mainApp.getBundle().getString(MANAGER), this.mainApp.getBundle().getString(SELF_CHECKOUT));
+            availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString(USER), this.mainApp.getBundle().getString(MANAGER), this.mainApp.getBundle().getString(SELF_CHECKOUT));
         } else {
-            availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString(USER),
-                    this.mainApp.getBundle().getString(MANAGER), this.mainApp.getBundle().getString(ADMIN),
-                    this.mainApp.getBundle().getString(SELF_CHECKOUT));
+            availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString(USER), this.mainApp.getBundle().getString(MANAGER), this.mainApp.getBundle().getString(ADMIN), this.mainApp.getBundle().getString(SELF_CHECKOUT));
         }
         privilegeLevel.setItems(availableChoices);
         privilegeLevel.setValue(this.mainApp.getBundle().getString(USER));

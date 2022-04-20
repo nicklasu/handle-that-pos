@@ -44,6 +44,8 @@ public class EditUserView {
     @FXML
     private Button saveBtn;
     @FXML
+    private Button saveBtn2;
+    @FXML
     private Button editBtn;
     @FXML
     private DatePicker startDate;
@@ -79,7 +81,7 @@ public class EditUserView {
             } else if (click.getButton() == MouseButton.PRIMARY && click.getClickCount() == 2) {
                 final int index = privilegeListView.getSelectionModel().getSelectedIndex();
                 if (index >= 0) {
-                    saveBtn.setVisible(false);
+                    saveBtn2.setVisible(false);
                     editBtn.setVisible(true);
                     final Privilege p = privilegeList.get(index);
                     startDate.setValue(p.getPrivilegeStart().toLocalDate());
