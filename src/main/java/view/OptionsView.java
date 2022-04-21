@@ -7,12 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.classes.User;
 
+import java.awt.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.io.File;
@@ -84,7 +86,6 @@ public class OptionsView {
         } catch (final IOException e) {
             e.printStackTrace();
         }
-
         languageBox.setItems(languages);
         languageBox.setOnAction(event -> {
             final String lang = switch (languageBox.getValue()) {
@@ -92,7 +93,7 @@ public class OptionsView {
                 case "en" -> "en_US";
                 default -> throw new IllegalStateException("Unexpected value: " + languageBox.getValue());
             };
-            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8);) {
+            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8)) {
                 properties.setProperty("language", lang.split("_")[0]);
                 properties.setProperty("country", lang.split("_")[1]);
                 properties.store(writer, "HandleThatPos settings");
@@ -126,7 +127,7 @@ public class OptionsView {
             }
         });
 
-        /** Change views. */
+        /* Change views. */
         btn1.setOnAction(e -> {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane0 = null;
@@ -222,11 +223,13 @@ public class OptionsView {
         btn7.setOnAction(e -> {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane = null;
+            Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("stats-view.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane = this.loader.load();
+                newLoadedPane.setMaxSize(size.getWidth() / 1.45, size.getHeight() / 1.25);
                 final StatsView view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (final IOException ex) {
@@ -239,10 +242,10 @@ public class OptionsView {
         final List<Integer> privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
 
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 2) {
-            btn2.setDisable(true);
-            btn3.setDisable(true);
-            btn6.setDisable(true);
-            btn7.setDisable(true);
+            btn2.setVisible(false);
+            btn3.setVisible(false);
+            btn6.setVisible(false);
+            btn7.setVisible(false);
         }
         returnBtn.requestFocus();
         this.aboutButton.setOnAction(e -> {
