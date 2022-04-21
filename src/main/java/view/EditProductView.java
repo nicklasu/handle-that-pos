@@ -74,8 +74,8 @@ public class EditProductView {
             if (res) {
                 Notifications.create()
                         .owner(productBarcode.getScene().getWindow())
-                        .title("Onnistui")
-                        .text("Tuote on muokattu!")
+                        .title(this.mainApp.getBundle().getString("success"))
+                        .text(this.mainApp.getBundle().getString("productEdited"))
                         .position(Pos.TOP_RIGHT)
                         .show();
             }
@@ -98,8 +98,8 @@ public class EditProductView {
             e.printStackTrace();
             Notifications.create()
                     .owner(productBarcode.getScene().getWindow())
-                    .title("Virhe")
-                    .text("Viivakoodilla ei löytynyt tuotetta!")
+                    .title(this.mainApp.getBundle().getString("errorString"))
+                    .text(this.mainApp.getBundle().getString("productNotFoundString"))
                     .position(Pos.TOP_RIGHT)
                     .showError();
         }

@@ -122,8 +122,8 @@ public class ProductSearchView {
             } catch( final Exception e){
                 Notifications.create()
                         .owner(fetchBtn.getScene().getWindow())
-                        .title("Virhe")
-                        .text("Tapahtui virhe tuotteiden hakemisessa!")
+                        .title(this.mainApp.getBundle().getString("errorString"))
+                        .text(this.mainApp.getBundle().getString("errorGettingProducts"))
                         .position(Pos.TOP_RIGHT)
                         .showError();
                 e.printStackTrace();
