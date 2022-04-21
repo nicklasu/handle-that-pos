@@ -69,14 +69,14 @@ public class AddProductView {
                 Notifications.create()
                         .owner(productBarcode.getScene().getWindow())
                         .title(this.mainApp.getBundle().getString("success"))
-                        .text("Tuote lisättiin onnistuneesti tietokantaan!")
+                        .text(this.mainApp.getBundle().getString("productAddedToDatabase"))
                         .position(Pos.TOP_RIGHT)
                         .show();
             } else {
                 Notifications.create()
                         .owner(productBarcode.getScene().getWindow())
-                        .title("Virhe")
-                        .text("Kyseisellä viivakoodilla oleva tuote on jo tietokannassa!")
+                        .title(this.mainApp.getBundle().getString("errorString"))
+                        .text(this.mainApp.getBundle().getString("productAlreadyExists"))
                         .position(Pos.TOP_RIGHT)
                         .showError();
             }
@@ -86,8 +86,8 @@ public class AddProductView {
             e.printStackTrace();
             Notifications.create()
                     .owner(productBarcode.getScene().getWindow())
-                    .title("Virhe")
-                    .text("Tarkista syötetyt kentät!")
+                    .title(this.mainApp.getBundle().getString("errorString"))
+                    .text(this.mainApp.getBundle().getString("checkFilledFields"))
                     .position(Pos.TOP_RIGHT)
                     .showError();
         }

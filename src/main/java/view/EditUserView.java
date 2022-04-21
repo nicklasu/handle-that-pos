@@ -165,8 +165,8 @@ public class EditUserView {
             e.printStackTrace();
             Notifications.create()
                     .owner(userName.getScene().getWindow())
-                    .title("Virhe")
-                    .text("Käyttäjänimeä ei löytynyt!")
+                    .title(this.mainApp.getBundle().getString("errorString"))
+                    .text(this.mainApp.getBundle().getString("userNotFound"))
                     .position(Pos.TOP_RIGHT)
                     .showError();
         }
