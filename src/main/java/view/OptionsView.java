@@ -229,7 +229,7 @@ public class OptionsView {
                 this.loader.setLocation(getClass().getResource("stats-view.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane = this.loader.load();
-                newLoadedPane.setMaxSize(size.getWidth() / 1.45, size.getHeight() / 1.25);
+                newLoadedPane.setMaxSize(size.getWidth() * 0.7, size.getHeight() * 0.8);
                 final StatsView view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (final IOException ex) {
