@@ -12,8 +12,8 @@
             <RowConstraints maxHeight="475.0" minHeight="83.0" prefHeight="140.0" />
         </rowConstraints>
         <columnConstraints>
-            <ColumnConstraints maxWidth="638.6666870117188" minWidth="320.0" prefWidth="560.6666259765625" />
-            <ColumnConstraints minWidth="320.0" />
+            <ColumnConstraints maxWidth="560.0" minWidth="560.0" prefWidth="560.0" />
+            <ColumnConstraints maxWidth="3275.0" minWidth="3275.0" prefWidth="3275.0" />
         </columnConstraints>
         <GridPane visible="false" GridPane.columnIndex="1">
             <columnConstraints>
@@ -30,7 +30,7 @@
         </GridPane>
         <GridPane prefHeight="605.0" prefWidth="560.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints />
