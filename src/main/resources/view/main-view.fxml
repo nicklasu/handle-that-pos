@@ -82,7 +82,7 @@
                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <AnchorPane GridPane.columnIndex="1">
-                    <Button fx:id="paymentButton" mnemonicParsing="false" onAction="#loadTransactionView" prefHeight="100.0" prefWidth="200.0" styleClass="bold_button" text="%payString" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                    <Button fx:id="paymentButton" mnemonicParsing="false" onAction="#loadTransactionView" prefHeight="119.0" prefWidth="200.0" styleClass="bold_button" text="%payString" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
                 </AnchorPane>
                 <GridPane prefHeight="129.0" prefWidth="317.0">
                     <columnConstraints>
