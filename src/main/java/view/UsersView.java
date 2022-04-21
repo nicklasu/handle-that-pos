@@ -69,8 +69,11 @@ public class UsersView {
             this.searchField.setDisable(true);
             this.searchButton.setDisable(true);
         }
+
+
+
         searchField.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.ENTER)
+            if (e.getCode() == KeyCode.ENTER && !searchField.getText().isEmpty())
                 searchUser();
         });
         activity.setDisable(true);
@@ -105,6 +108,10 @@ public class UsersView {
                 e.printStackTrace();
             }
         });
+
+        //if search field is empty disable search button
+        searchButton.disableProperty().bind(searchField.textProperty().isEmpty());
+
     }
 
     private void fillListView() throws IOException {
