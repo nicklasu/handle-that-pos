@@ -224,12 +224,13 @@ public class OptionsView {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane = null;
             Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+            float res = Toolkit.getDefaultToolkit().getScreenResolution();
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("stats-view.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane = this.loader.load();
-                newLoadedPane.setMaxSize(size.getWidth() * 0.7, size.getHeight() * 0.8);
+                newLoadedPane.setMaxSize(size.getWidth() * 0.7 * (res / 100), size.getHeight() * 0.8 * (res / 100));
                 final StatsView view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (final IOException ex) {
