@@ -3,6 +3,7 @@ package view;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.interfaces.IPOSEngine;
@@ -48,16 +49,20 @@ public class MainApp extends Application {
         final Properties properties = new Properties();
         try (final FileReader reader = new FileReader(appConfigPath)) {
             properties.load(reader);
-            language = properties.getProperty("language");
-            country = properties.getProperty("country");
-        } catch (final IOException e) {
-            try (final FileWriter writer = new FileWriter(appConfigPath)) {
+            if (properties.isEmpty()) {
+                final FileWriter writer = new FileWriter(appConfigPath);
                 properties.setProperty("language", "");
                 properties.setProperty("country", "");
                 properties.store(writer, "HandleThatPos settings");
-            } catch (final Exception b) {
-                b.printStackTrace();
+                writer.close();
             }
+            language = properties.getProperty("language");
+            country = properties.getProperty("country");
+        } catch (final IOException e) {
+            this.locale = new Locale("", "");
+            this.bundle = ResourceBundle.getBundle("TextResources", locale);
+            final Alert alert = new Alert(Alert.AlertType.ERROR, bundle.getString("cantloadhandlethatpos"));
+            alert.showAndWait();
         }
         this.locale = new Locale(language, country);
         Locale.setDefault(locale);
