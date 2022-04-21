@@ -12,10 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.controlsfx.control.Notifications;
 
 /**
@@ -113,28 +110,37 @@ public class EditFirmInfoView {
 
         final File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
         final Properties properties = new Properties();
-        try (final FileReader reader = new FileReader(appConfigPath, StandardCharsets.UTF_8)) {
-            properties.load(reader);
-            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8)) {
-                properties.setProperty("firmName", firmName);
-                properties.setProperty("phoneNumber", phoneNumber);
-                properties.setProperty("businessId", businessId);
-                properties.setProperty("address", address);
-                properties.setProperty("postalCode", postalCode);
-                properties.setProperty("city", city);
-                properties.setProperty("currency", currency);
-                if (Objects.equals(bonusAmountTF.getText(), "")) {
-                    properties.setProperty("bonusAmount", "0");
-                } else {
-                    properties.setProperty("bonusAmount", bonusAmount);
+        if (firmName != null && phoneNumber != null && businessId != null && address != null && postalCode != null && city != null) {
+            try (final FileReader reader = new FileReader(appConfigPath, StandardCharsets.UTF_8)) {
+                properties.load(reader);
+                try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8)) {
+                    properties.setProperty("firmName", firmName);
+                    properties.setProperty("phoneNumber", phoneNumber);
+                    properties.setProperty("businessId", businessId);
+                    properties.setProperty("address", address);
+                    properties.setProperty("postalCode", postalCode);
+                    properties.setProperty("city", city);
+                    if (Objects.equals(currency, null)) {
+                        properties.setProperty("currency", "$");
+                    } else {
+                        properties.setProperty("currency", currency);
+                    }
+                    if (Objects.equals(bonusAmount, null)) {
+                        properties.setProperty("bonusAmount", "0");
+                    } else {
+                        properties.setProperty("bonusAmount", bonusAmount);
+                    }
+                    properties.store(writer, "HandleThatPos settings");
                 }
-                properties.store(writer, "HandleThatPos settings");
+                Notifications.create().owner(this.firmNameTF.getScene().getWindow()).position(Pos.TOP_RIGHT)
+                        .title(this.mainApp.getBundle().getString("success"))
+                        .text(this.mainApp.getBundle().getString("firmInfoUpdated")).showInformation();
+            } catch (final IOException e) {
+                e.printStackTrace();
             }
-            Notifications.create().owner(this.firmNameTF.getScene().getWindow()).position(Pos.TOP_RIGHT)
-                    .title(this.mainApp.getBundle().getString("success"))
-                    .text(this.mainApp.getBundle().getString("firmInfoUpdated")).showInformation();
-        } catch (final IOException e) {
-            e.printStackTrace();
+        } else {
+            final Alert alert = new Alert(Alert.AlertType.INFORMATION, mainApp.getBundle().getString("firmInfoNotPresent"));
+            alert.showAndWait();
         }
     }
 }
