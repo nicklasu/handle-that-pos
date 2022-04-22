@@ -12,7 +12,7 @@ import java.io.IOException;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class UserManagementView {
+public class UserManagementController {
     private MainApp mainApp;
     private FXMLLoader loader;
 
@@ -36,7 +36,7 @@ public class UserManagementView {
             this.loader.setLocation(getClass().getResource("add-user-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane = this.loader.load();
-            final AddUserView view = this.loader.getController();
+            final AddUserController view = this.loader.getController();
             view.setMainApp(mainApp);
             // newLoadedPane3 =
             // FXMLLoader.load(getClass().getResource("add-product-view.fxml"));
@@ -59,7 +59,7 @@ public class UserManagementView {
             this.loader.setLocation(getClass().getResource("delete-user-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane2 = this.loader.load();
-            final DeleteUserView view = this.loader.getController();
+            final DeleteUserController view = this.loader.getController();
             view.setMainApp(mainApp);
             // newLoadedPane3 =
             // FXMLLoader.load(getClass().getResource("delete-user-view.fxml"));
@@ -82,7 +82,7 @@ public class UserManagementView {
             this.loader.setLocation(getClass().getResource("edit-user-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane3 = this.loader.load();
-            final EditUserView view = this.loader.getController();
+            final EditUserController view = this.loader.getController();
             view.setMainApp(mainApp);
             // newLoadedPane3 =
             // FXMLLoader.load(getClass().getResource("edit-user-view.fxml"));

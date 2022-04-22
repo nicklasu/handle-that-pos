@@ -15,7 +15,7 @@ import model.classes.User;
 
 import java.util.*;
 
-public class StatsView {
+public class StatsController {
 
     @FXML
     private BarChart<?, ?> bestSellingProductsChart;

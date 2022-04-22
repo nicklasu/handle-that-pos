@@ -26,7 +26,7 @@ import java.util.function.Predicate;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  * Samu Luoma
  */
-public class ProductSearchView {
+public class ProductSearchController {
     private MainApp mainApp;
 
     private List<Product> allProducts;
@@ -157,7 +157,7 @@ public class ProductSearchView {
             Pane newLoadedPane = null;
             try {
                 newLoadedPane = loader.load();
-                final ProductManagementView view = loader.getController();
+                final ProductManagementController view = loader.getController();
                 view.setMainApp(mainApp);
                 view.editProductPaneFillFields(product);
             } catch (final IOException e) {

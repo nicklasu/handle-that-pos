@@ -15,7 +15,7 @@ import java.util.Optional;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class DeleteProductView {
+public class DeleteProductController {
     private MainApp mainApp;
 
     @FXML

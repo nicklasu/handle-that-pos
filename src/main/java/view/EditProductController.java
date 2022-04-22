@@ -9,7 +9,7 @@ import javafx.scene.input.KeyCode;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
-public class EditProductView {
+public class EditProductController {
     private MainApp mainApp;
     @FXML
     private TextField productBarcode;
