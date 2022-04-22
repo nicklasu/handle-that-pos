@@ -15,6 +15,10 @@ import model.classes.User;
 
 import java.util.*;
 
+/**
+ * Controller for stats-view.fxml.
+ * @author Lassi Piispanen
+ */
 public class StatsController {
 
     @FXML

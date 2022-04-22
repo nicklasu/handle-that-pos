@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 
 /**
- * Represents the hardware running the software
+ * Controller for bonus-customer-management-view.fxml.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma

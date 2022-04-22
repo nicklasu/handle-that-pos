@@ -16,10 +16,10 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
- * Represents the hardware running the software
- * 
+ * The JavaFX main.
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class MainApp extends Application {
 

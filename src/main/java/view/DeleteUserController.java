@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import org.controlsfx.control.Notifications;
 
 /**
- * Represents the hardware running the software
+ * Controller for delete-user-view.fxml.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma

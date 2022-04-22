@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Represents the hardware running the software
+ * Controller for add-user-view.fxml.
  *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  * Samu Luoma

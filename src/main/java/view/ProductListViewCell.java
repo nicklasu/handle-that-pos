@@ -18,7 +18,9 @@ import java.util.Collections;
 import java.util.Properties;
 
 /**
- * Represents the hardware running the software
+ * List cell controller for MainViewController.
+ * Controls list-cell.fxml.
+ * MainViewController calls this to add list-cell.fxml into the ListView.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma

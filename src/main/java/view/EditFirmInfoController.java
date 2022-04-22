@@ -16,7 +16,7 @@ import javafx.scene.control.*;
 import org.controlsfx.control.Notifications;
 
 /**
- * Represents the hardware running the software
+ * Controller for edit-firm-info.fxml.
  *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  * Samu Luoma

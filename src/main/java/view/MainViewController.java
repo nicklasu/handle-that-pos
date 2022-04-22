@@ -24,7 +24,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Represents the controller of main-view.fxml.
+ * Controller for main-view.fxml
  *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  * Samu Luoma

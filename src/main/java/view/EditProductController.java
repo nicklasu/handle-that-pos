@@ -9,6 +9,12 @@ import javafx.scene.input.KeyCode;
 import model.classes.Product;
 import org.controlsfx.control.Notifications;
 
+/**
+ * Controller for edit-product-view.fxml
+ *
+ * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
+ * Samu Luoma
+ */
 public class EditProductController {
     private MainApp mainApp;
     @FXML
@@ -26,13 +32,7 @@ public class EditProductController {
     @FXML
     private Button fetchBtn;
 
-    /**
-     * Represents the hardware running the software
-     * 
-     * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
-     *         Samu Luoma
-     */
-    public void setMainApp(final MainApp mainApp){
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         productBarcode.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)

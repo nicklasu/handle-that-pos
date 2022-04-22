@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Represents the hardware running the software
+ * Controller for options-view.fxml.
  *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  * Samu Luoma
