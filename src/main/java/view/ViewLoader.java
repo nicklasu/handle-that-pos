@@ -3,7 +3,8 @@ package view;
 import javafx.scene.layout.AnchorPane;
 
 /**
- * Represents the hardware running the software
+ * Loads views.
+ * Called in OptionsController.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma

@@ -24,12 +24,12 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Represents the hardware running the software
+ * Controller for main-view.fxml
  *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  * Samu Luoma
  */
-public class MainView {
+public class MainViewController {
     public static final String HOTKEY_NOT_SET_STRING = "hotkeyNotSetString";
     public static final String NOTIFICATION_STRING = "notificationString";
     private MainApp mainApp;
@@ -102,10 +102,15 @@ public class MainView {
         barcodeTextField.requestFocus();
     }
 
+    /**
+     * Adds product to the order
+     * Runs setTotalPrice() if product added to the order successfully
+     *
+     * @param productId Takes a string of the productId (for example "12345678").
+     */
     private void addProduct(final String productId) {
-
         final Product product = this.mainApp.getEngine().scanProduct(productId);
-        if(product.getStock() <= -50){
+        if (product.getStock() <= -50) {
             Notifications.create()
                     .owner(barcodeTextField.getScene().getWindow())
                     .title(bundle.getString("errorString"))
@@ -139,24 +144,24 @@ public class MainView {
         beepSound();
     }
 
+    /**
+     * Takes the total price of the order, formats it to the correct price, and shows it in the view.
+     */
     public void setTotalPrice() {
         if (this.mainApp.getEngine().getTransaction() != null) {
-
-            final String priceInEuros = String.format("%.2f",
+            final String formattedPrice = String.format("%.2f",
                     (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))
                     + CurrencyHandler.getCurrency();
-            this.totalPriceLabel.setText(priceInEuros);
-
-            // String priceInEuros = String.format("%.2f",
-            // (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() /
-            // 100f)) + "€";
-            // this.totalPriceLabel.setText(priceInEuros);
+            this.totalPriceLabel.setText(formattedPrice);
         } else {
             this.totalPriceLabel.setText("0.00" + CurrencyHandler.getCurrency());
         }
         barcodeTextField.requestFocus();
     }
 
+    /**
+     * Logs out of the system, when log out button is pressed.
+     */
     @FXML
     private void handleLogoutButton() {
         final Alert alert = new Alert(Alert.AlertType.CONFIRMATION, bundle.getString("logoutConfirmationString"),
@@ -171,6 +176,12 @@ public class MainView {
         }
     }
 
+    /**
+     * runs setHotkeyButton() for all the buttons.
+     * Makes the buttons red and displays a message, if the hotkey is not set
+     *
+     * @param hotkeys Takes an ArrayList of buttons as parameter.
+     */
     private void addHotkeys(final ArrayList<Button> hotkeys) {
         for (int i = 0; i < hotkeys.size(); i++) {
             setHotkeyButton(hotkeys.get(i));
@@ -188,9 +199,11 @@ public class MainView {
     }
 
     /**
-     * Takes existing hotkey information and uses it by adding desired products to
-     * listview and order.
+     * Initializes hotkey buttons for use.
+     * First, button gets an EventHandler for pressing the button.
+     * Then a thread starts running, which runs the progress bar for setting the hotkey.
      * Saves new hotkey information if button pressed for 2 sec or more.
+     * Otherwise, try to add product to order.
      */
     private void setHotkeyButton(final Button button) {
         final int buttonId = Integer.parseInt(button.getId().replace("hotkeyButton", ""));
@@ -278,9 +291,11 @@ public class MainView {
         });
     }
 
-    //Plays a sound when reading a barcode successfully
+    /**
+     * Plays a sound when reading a barcode successfully
+     */
     public void beepSound() {
-        Media sound = new Media(getClass().getResource("/sound/beep.mp3").toExternalForm());
+        Media sound = new Media(Objects.requireNonNull(getClass().getResource("/sound/beep.mp3")).toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.setOnError(() ->
                 System.out.println("media error" + mediaPlayer.getError().toString()));
@@ -392,6 +407,5 @@ public class MainView {
                 handleLogoutButton();
             }
         });
-
     }
 }

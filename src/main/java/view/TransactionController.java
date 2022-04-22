@@ -20,12 +20,12 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * Represents the hardware running the software
+ * Controller for transaction-view.fxml.
  *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  * Samu Luoma
  */
-public class TransactionView {
+public class TransactionController {
     public static final String ERROR_STRING = "errorString";
     public static final String CUSTOMERNOTFOUND = "customernotfound";
     private MainApp mainApp;

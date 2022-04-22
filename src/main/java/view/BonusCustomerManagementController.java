@@ -7,12 +7,12 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 
 /**
- * Represents the hardware running the software
+ * Controller for bonus-customer-management-view.fxml.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class BonusCustomerManagementView {
+public class BonusCustomerManagementController {
     private MainApp mainApp;
     private FXMLLoader loader;
 
@@ -34,7 +34,7 @@ public class BonusCustomerManagementView {
             this.loader.setLocation(getClass().getResource("add-bonus-customer-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane = this.loader.load();
-            final AddBonusCustomerView view = this.loader.getController();
+            final AddBonusCustomerController view = this.loader.getController();
             view.setMainApp(mainApp);
         } catch (final IOException ex) {
             ex.printStackTrace();
@@ -50,7 +50,7 @@ public class BonusCustomerManagementView {
             this.loader.setLocation(getClass().getResource("delete-bonus-customer-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane = this.loader.load();
-            final DeleteBonusCustomerView view = this.loader.getController();
+            final DeleteBonusCustomerController view = this.loader.getController();
             view.setMainApp(mainApp);
         } catch (final IOException ex) {
             ex.printStackTrace();

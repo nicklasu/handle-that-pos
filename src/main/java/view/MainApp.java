@@ -3,6 +3,7 @@ package view;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.interfaces.IPOSEngine;
@@ -15,10 +16,10 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
- * Represents the hardware running the software
- * 
+ * The JavaFX main.
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class MainApp extends Application {
 
@@ -48,16 +49,20 @@ public class MainApp extends Application {
         final Properties properties = new Properties();
         try (final FileReader reader = new FileReader(appConfigPath)) {
             properties.load(reader);
-            language = properties.getProperty("language");
-            country = properties.getProperty("country");
-        } catch (final IOException e) {
-            try (final FileWriter writer = new FileWriter(appConfigPath)) {
+            if (properties.isEmpty()) {
+                final FileWriter writer = new FileWriter(appConfigPath);
                 properties.setProperty("language", "");
                 properties.setProperty("country", "");
                 properties.store(writer, "HandleThatPos settings");
-            } catch (final Exception b) {
-                b.printStackTrace();
+                writer.close();
             }
+            language = properties.getProperty("language");
+            country = properties.getProperty("country");
+        } catch (final IOException e) {
+            this.locale = new Locale("", "");
+            this.bundle = ResourceBundle.getBundle("TextResources", locale);
+            final Alert alert = new Alert(Alert.AlertType.ERROR, bundle.getString("cantloadhandlethatpos"));
+            alert.showAndWait();
         }
         this.locale = new Locale(language, country);
         Locale.setDefault(locale);
@@ -91,8 +96,8 @@ public class MainApp extends Application {
             fxmlLoader.setResources(this.bundle);
             final Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
-            final ConnectDatabaseView connectDatabaseView = fxmlLoader.getController();
-            connectDatabaseView.setMainApp(this);
+            final ConnectDatabaseController connectDatabaseController = fxmlLoader.getController();
+            connectDatabaseController.setMainApp(this);
             this.stage.show();
         } catch (final IOException e) {
             e.printStackTrace();
@@ -105,8 +110,8 @@ public class MainApp extends Application {
             fxmlLoader.setResources(this.bundle);
             final Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
-            final MainView mainView = fxmlLoader.getController();
-            mainView.setMainApp(this);
+            final MainViewController mainViewController = fxmlLoader.getController();
+            mainViewController.setMainApp(this);
             /* Set CSS stylesheet */
             final File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
             final Properties properties = new Properties();
@@ -134,8 +139,8 @@ public class MainApp extends Application {
             fxmlLoader.setResources(this.bundle);
             final Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
-            final LoginView loginView = fxmlLoader.getController();
-            loginView.setMainApp(this);
+            final LoginController loginController = fxmlLoader.getController();
+            loginController.setMainApp(this);
             this.stage.show();
         } catch (final IOException e) {
             e.printStackTrace();
@@ -148,8 +153,8 @@ public class MainApp extends Application {
             fxmlLoader.setResources(this.bundle);
             final Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
-            final OptionsView optionsView = fxmlLoader.getController();
-            optionsView.setMainApp(this);
+            final OptionsController optionsController = fxmlLoader.getController();
+            optionsController.setMainApp(this);
             /* Set CSS stylesheet */
             if (darkMode) {
                 scene.getStylesheets().add(getClass().getResource(MAIN_VIEW_CSS).toExternalForm()); // Set light css style
@@ -168,8 +173,8 @@ public class MainApp extends Application {
             fxmlLoader.setResources(this.bundle);
             final Scene scene = new Scene(fxmlLoader.load());
             this.stage.setScene(scene);
-            final TransactionView transactionView = fxmlLoader.getController();
-            transactionView.setMainApp(this);
+            final TransactionController transactionController = fxmlLoader.getController();
+            transactionController.setMainApp(this);
             /* Set CSS stylesheet */
             if (darkMode) {
                 scene.getStylesheets().add(getClass().getResource(MAIN_VIEW_CSS).toExternalForm()); // Set light css style

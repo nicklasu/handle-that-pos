@@ -7,12 +7,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.classes.User;
 
+import java.awt.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.io.File;
@@ -24,12 +25,12 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Represents the hardware running the software
+ * Controller for options-view.fxml.
  *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  * Samu Luoma
  */
-public class OptionsView {
+public class OptionsController {
     private MainApp mainApp;
     @FXML
     private AnchorPane transactionAnchorPane;
@@ -64,14 +65,14 @@ public class OptionsView {
     private FXMLLoader loader;
     private ResourceBundle bundle;
 
-    public OptionsView() {
+    public OptionsController() {
     }
 
     public void loadMainView() throws IOException {
         this.loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
         this.loader.setResources(mainApp.getBundle());
         new ViewLoader(transactionAnchorPane, this.loader.load());
-        ((MainView) this.loader.getController()).setMainApp(this.mainApp);
+        ((MainViewController) this.loader.getController()).setMainApp(this.mainApp);
     }
 
     public void setMainApp(final MainApp mainApp) throws IOException {
@@ -84,7 +85,6 @@ public class OptionsView {
         } catch (final IOException e) {
             e.printStackTrace();
         }
-
         languageBox.setItems(languages);
         languageBox.setOnAction(event -> {
             final String lang = switch (languageBox.getValue()) {
@@ -92,7 +92,7 @@ public class OptionsView {
                 case "en" -> "en_US";
                 default -> throw new IllegalStateException("Unexpected value: " + languageBox.getValue());
             };
-            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8);) {
+            try (final FileWriter writer = new FileWriter(appConfigPath, StandardCharsets.UTF_8)) {
                 properties.setProperty("language", lang.split("_")[0]);
                 properties.setProperty("country", lang.split("_")[1]);
                 properties.store(writer, "HandleThatPos settings");
@@ -126,7 +126,7 @@ public class OptionsView {
             }
         });
 
-        /** Change views. */
+        /* Change views. */
         btn1.setOnAction(e -> {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane0 = null;
@@ -135,7 +135,7 @@ public class OptionsView {
                 this.loader.setLocation(getClass().getResource("users-view.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane0 = this.loader.load();
-                final UsersView view = this.loader.getController();
+                final UsersController view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (final IOException ex) {
                 ex.printStackTrace();
@@ -150,7 +150,7 @@ public class OptionsView {
                 this.loader.setLocation(getClass().getResource("products-view.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane2 = this.loader.load();
-                final ProductManagementView view = this.loader.getController();
+                final ProductManagementController view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (final IOException ex) {
                 ex.printStackTrace();
@@ -165,7 +165,7 @@ public class OptionsView {
                 this.loader.setLocation(getClass().getResource("user-management-view.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane3 = this.loader.load();
-                final UserManagementView view = this.loader.getController();
+                final UserManagementController view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (final IOException ex) {
                 ex.printStackTrace();
@@ -180,7 +180,7 @@ public class OptionsView {
                 this.loader.setLocation(getClass().getResource("products-search-view.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane = this.loader.load();
-                final ProductSearchView view = this.loader.getController();
+                final ProductSearchController view = this.loader.getController();
                 view.setMainApp(mainApp);
                 view.setWrapperPane(wrapperPane); // jotta voidaan siirtyä suoraan edit ikkunaan
             } catch (final IOException ex) {
@@ -196,7 +196,7 @@ public class OptionsView {
                 this.loader.setLocation(getClass().getResource("bonus-customer-management-view.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane = this.loader.load();
-                final BonusCustomerManagementView view = this.loader.getController();
+                final BonusCustomerManagementController view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (final IOException ex) {
                 ex.printStackTrace();
@@ -211,7 +211,7 @@ public class OptionsView {
                 this.loader.setLocation(getClass().getResource("edit-firm-info.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane = this.loader.load();
-                final EditFirmInfoView view = this.loader.getController();
+                final EditFirmInfoController view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (final IOException ex) {
                 ex.printStackTrace();
@@ -222,12 +222,15 @@ public class OptionsView {
         btn7.setOnAction(e -> {
             wrapperPane.getChildren().clear();
             Pane newLoadedPane = null;
+            Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+            float res = Toolkit.getDefaultToolkit().getScreenResolution();
             try {
                 this.loader = new FXMLLoader();
                 this.loader.setLocation(getClass().getResource("stats-view.fxml"));
                 this.loader.setResources(this.mainApp.getBundle());
                 newLoadedPane = this.loader.load();
-                final StatsView view = this.loader.getController();
+                newLoadedPane.setMaxSize(size.getWidth() * 0.7 * (res / 100), size.getHeight() * 0.8 * (res / 100));
+                final StatsController view = this.loader.getController();
                 view.setMainApp(mainApp);
             } catch (final IOException ex) {
                 ex.printStackTrace();
@@ -239,10 +242,10 @@ public class OptionsView {
         final List<Integer> privilegesOfUser = this.mainApp.getEngine().getVerifiedPrivileges();
 
         if (privilegesOfUser.isEmpty() || Collections.max(privilegesOfUser) < 2) {
-            btn2.setDisable(true);
-            btn3.setDisable(true);
-            btn6.setDisable(true);
-            btn7.setDisable(true);
+            btn2.setVisible(false);
+            btn3.setVisible(false);
+            btn6.setVisible(false);
+            btn7.setVisible(false);
         }
         returnBtn.requestFocus();
         this.aboutButton.setOnAction(e -> {

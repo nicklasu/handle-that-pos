@@ -10,12 +10,12 @@ import org.controlsfx.control.Notifications;
 import java.util.Optional;
 
 /**
- * Represents the hardware running the software
+ * Controller for delete-product-view.fxml.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class DeleteProductView {
+public class DeleteProductController {
     private MainApp mainApp;
 
     @FXML
@@ -41,16 +41,16 @@ public class DeleteProductView {
                 System.out.println("Ei löytynyt");
                 Notifications.create()
                         .owner(productBarcode.getScene().getWindow())
-                        .title("Virhe")
-                        .text("Tuotetta ei löytynyt!")
+                        .title(this.mainApp.getBundle().getString("errorString"))
+                        .text(this.mainApp.getBundle().getString("productNotFoundString"))
                         .position(Pos.TOP_RIGHT)
                         .showError();
             }
             final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Vahvistus");
-            alert.setHeaderText("Vahvistus");
+            alert.setTitle(this.mainApp.getBundle().getString("confirmationString"));
+            alert.setHeaderText(this.mainApp.getBundle().getString("confirmationString")); //doYouWantoToDelete
             alert.setContentText(
-                    "Poistetaanko varmasti?\n" + "Tuote: " + product.getName() + "\nKuvaus: " + product.getName());
+                    this.mainApp.getBundle().getString("doYouWantoToDelete") + "\n" + this.mainApp.getBundle().getString("product") + ": " + product.getName() + "\n" + this.mainApp.getBundle().getString("productDescription") + ": " + product.getName());
 
             final Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -61,17 +61,17 @@ public class DeleteProductView {
                     System.out.println("Löytyi");
                     Notifications.create()
                             .owner(productBarcode.getScene().getWindow())
-                            .title("Onnistui")
-                            .text("Tuote poistettiin onnistuneesti!")
+                            .title(this.mainApp.getBundle().getString("success"))
+                            .text(this.mainApp.getBundle().getString("productSuccessfullyDeleted"))
                             .position(Pos.TOP_RIGHT)
                             .show();
 
                 } else {
-                    System.out.println("Ei löytynyt");
+                    System.out.println("Ei löytynyt"); // productNotFoundString
                     Notifications.create()
                             .owner(productBarcode.getScene().getWindow())
-                            .title("Virhe")
-                            .text("Tuotetta ei löytynyt!")
+                            .title(this.mainApp.getBundle().getString("errorString"))
+                            .text(this.mainApp.getBundle().getString("productNotFoundString"))
                             .position(Pos.TOP_RIGHT)
                             .showError();
 

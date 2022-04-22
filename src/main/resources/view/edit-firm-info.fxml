@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditFirmInfoView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditFirmInfoController">
    <children>
       <GridPane layoutX="14.0" layoutY="43.0" prefHeight="411.0" prefWidth="519.0">
          <columnConstraints>
@@ -32,31 +32,31 @@
             <Label text="%phone" GridPane.rowIndex="6" />
             <Label text="%companyName" />
 
-            <Button mnemonicParsing="false" onAction="#updateInfo" text="%saveCompanyInfo" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-
             <TextField fx:id="firmNameTF" GridPane.columnIndex="1" />
+            <TextField fx:id="businessIdTF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="postalCodeTF" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="cityTF" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="addressTF" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="phoneNumberTF" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label text="%street" GridPane.rowIndex="5" />
-            <Label text="%postalCode" GridPane.rowIndex="3" />
-            <TextField fx:id="postalCodeTF" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label text="%city" GridPane.rowIndex="4" />
-            <TextField fx:id="cityTF" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="businessIdTF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="%businessID" GridPane.rowIndex="1" />
-            <Label text="%currency" GridPane.rowIndex="8" />
+            <TextField fx:id="bonusAmountTF" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <ChoiceBox fx:id="currencyBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <GridPane.margin>
                   <Insets left="50.0" />
                </GridPane.margin>
             </ChoiceBox>
+
+            <Button mnemonicParsing="false" onAction="#updateInfo" text="%saveCompanyInfo" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Label text="%street" GridPane.rowIndex="5" />
+            <Label text="%postalCode" GridPane.rowIndex="3" />
+            <Label text="%city" GridPane.rowIndex="4" />
+            <Label text="%businessID" GridPane.rowIndex="1" />
+            <Label text="%currency" GridPane.rowIndex="8" />
             <Label fx:id="currencyLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <font>
                   <Font size="17.0" />
                </font>
             </Label>
             <Label text="%bonusAmount" GridPane.rowIndex="7" />
-            <TextField fx:id="bonusAmountTF" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Label layoutX="14.0" layoutY="10.0" styleClass="bold_label" text="%companyInfo">

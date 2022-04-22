@@ -8,13 +8,18 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Tab;
+import model.classes.OrderProduct;
 import model.classes.Product;
 import model.classes.Transaction;
 import model.classes.User;
 
 import java.util.*;
 
-public class StatsView {
+/**
+ * Controller for stats-view.fxml.
+ * @author Lassi Piispanen
+ */
+public class StatsController {
 
     @FXML
     private BarChart<?, ?> bestSellingProductsChart;
@@ -85,6 +90,17 @@ public class StatsView {
                     for (Transaction t: transactions) {
                         totalSales += t.getOrder().getTotalPriceWithoutBonuses();
                         List<Product> productsInTransaction = t.getOrder().getProductList();
+
+                        final Set<OrderProduct> ops = t.getOrder().getOrderProducts();
+                        for (final OrderProduct op : ops) {
+                            //sb.append(op.getProduct() + " x " + op.getAmount() + "\n");
+                            productsInTransaction.add(op.getProduct());
+                            // op.getAmount() saa yhden transactionin yhden tuotteen määrän
+                        }
+
+
+
+
                         for (Product p : productsInTransaction) {
                             for (ProductWithSales pws : products) {
                                 if(p.getId().equals(pws.getProductID())){

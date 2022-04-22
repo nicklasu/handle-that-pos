@@ -21,12 +21,12 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Represents the hardware running the software
+ * Controller for product-search-view.fxml.
  *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  * Samu Luoma
  */
-public class ProductSearchView {
+public class ProductSearchController {
     private MainApp mainApp;
 
     private List<Product> allProducts;
@@ -122,8 +122,8 @@ public class ProductSearchView {
             } catch( final Exception e){
                 Notifications.create()
                         .owner(fetchBtn.getScene().getWindow())
-                        .title("Virhe")
-                        .text("Tapahtui virhe tuotteiden hakemisessa!")
+                        .title(this.mainApp.getBundle().getString("errorString"))
+                        .text(this.mainApp.getBundle().getString("errorGettingProducts"))
                         .position(Pos.TOP_RIGHT)
                         .showError();
                 e.printStackTrace();
@@ -157,7 +157,7 @@ public class ProductSearchView {
             Pane newLoadedPane = null;
             try {
                 newLoadedPane = loader.load();
-                final ProductManagementView view = loader.getController();
+                final ProductManagementController view = loader.getController();
                 view.setMainApp(mainApp);
                 view.editProductPaneFillFields(product);
             } catch (final IOException e) {

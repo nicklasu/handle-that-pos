@@ -7,12 +7,12 @@ import javafx.scene.control.TextField;
 import model.classes.Customer;
 
 /**
- * Represents the hardware running the software
+ * Controller for add-bonus-customer-view.fxml.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class AddBonusCustomerView {
+public class AddBonusCustomerController {
     private MainApp mainApp;
 
     @FXML

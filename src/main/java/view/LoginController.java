@@ -8,12 +8,12 @@ import javafx.scene.input.KeyCode;
 import model.classes.LoginStatus;
 
 /**
- * Represents the hardware running the software
+ * Controller for login-view.fxml.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class LoginView {
+public class LoginController {
     // Prefills the username field and password field with the manager's username
     // and password
     private final boolean DEV_MODE = true;

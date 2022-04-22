@@ -10,12 +10,14 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
- * Represents the hardware running the software
+ * Handles the hotkey file (hotkey.properties).
+ * Saves and loads hotkey information from the file.
+ * Called from MainViewController.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class HotkeyFileHandler extends MainView {
+public class HotkeyFileHandler extends MainViewController {
 
     ResourceBundle bundle;
 

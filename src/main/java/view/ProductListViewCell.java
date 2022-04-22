@@ -18,7 +18,9 @@ import java.util.Collections;
 import java.util.Properties;
 
 /**
- * Represents the hardware running the software
+ * List cell controller for MainViewController.
+ * Controls list-cell.fxml.
+ * MainViewController calls this to add list-cell.fxml into the ListView.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
@@ -37,14 +39,14 @@ public class ProductListViewCell extends ListCell<Product> {
     @FXML
     private GridPane gridPane;
     private FXMLLoader fxmlLoader;
-    private final MainView mainView;
+    private final MainViewController mainViewController;
     private final IOrder order;
     private final ObservableList<Product> items;
     private int productAmount;
     private String currency;
 
-    public ProductListViewCell(final MainView mainView, final IOrder order, final ObservableList<Product> items) {
-        this.mainView = mainView;
+    public ProductListViewCell(final MainViewController mainViewController, final IOrder order, final ObservableList<Product> items) {
+        this.mainViewController = mainViewController;
         this.order = order;
         this.items = items;
         final File file = new File("src/main/resources/HandleThatPos.properties");
@@ -87,16 +89,16 @@ public class ProductListViewCell extends ListCell<Product> {
                 } else {
                     this.items.remove(product);
                 }
-                this.mainView.setTotalPrice();
+                this.mainViewController.setTotalPrice();
             });
             this.plusButton.setOnAction(event -> {
                 this.order.addProductToOrder(product);
                 productAmount = Collections.frequency(this.order.getProductList(), product);
                 productPriceSet(product);
                 this.productAmountLabel.setText(String.valueOf(productAmount));
-                this.mainView.setTotalPrice();
+                this.mainViewController.setTotalPrice();
                 if (product.getStock() < 0) {
-                    mainView.negativeProductStockNotification();
+                    mainViewController.negativeProductStockNotification();
                 }
             });
             setText(null);

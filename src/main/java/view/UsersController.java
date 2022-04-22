@@ -13,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import model.classes.*;
@@ -31,12 +30,12 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Represents the hardware running the software
+ * Controller for users-view.fxml.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class UsersView {
+public class UsersController {
     private MainApp mainApp;
     @FXML
     private TextField searchField;
@@ -69,8 +68,11 @@ public class UsersView {
             this.searchField.setDisable(true);
             this.searchButton.setDisable(true);
         }
+
+
+
         searchField.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.ENTER)
+            if (e.getCode() == KeyCode.ENTER && !searchField.getText().isEmpty())
                 searchUser();
         });
         activity.setDisable(true);
@@ -105,6 +107,10 @@ public class UsersView {
                 e.printStackTrace();
             }
         });
+
+        //if search field is empty disable search button
+        searchButton.disableProperty().bind(searchField.textProperty().isEmpty());
+
     }
 
     private void fillListView() throws IOException {

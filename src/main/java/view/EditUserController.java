@@ -20,12 +20,12 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Represents the hardware running the software
+ * Controller for edit-user-view.fxml.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class EditUserView {
+public class EditUserController {
     public static final String USER1 = "user";
     public static final String MANAGER = "manager";
     public static final String ADMIN = "admin";
@@ -43,6 +43,8 @@ public class EditUserView {
     private CheckBox activity;
     @FXML
     private Button saveBtn;
+    @FXML
+    private Button saveBtn2;
     @FXML
     private Button editBtn;
     @FXML
@@ -79,7 +81,7 @@ public class EditUserView {
             } else if (click.getButton() == MouseButton.PRIMARY && click.getClickCount() == 2) {
                 final int index = privilegeListView.getSelectionModel().getSelectedIndex();
                 if (index >= 0) {
-                    saveBtn.setVisible(false);
+                    saveBtn2.setVisible(false);
                     editBtn.setVisible(true);
                     final Privilege p = privilegeList.get(index);
                     startDate.setValue(p.getPrivilegeStart().toLocalDate());
@@ -91,7 +93,7 @@ public class EditUserView {
                     final String admin = this.mainApp.getBundle().getString(ADMIN);
                     final String self_checkout = this.mainApp.getBundle().getString(SELF_CHECKOUT);
 
-                    AddUserView.privilegeSwitch(p, user1, manager, admin, self_checkout, privilegeLevelChoiceBox);
+                    AddUserController.privilegeSwitch(p, user1, manager, admin, self_checkout, privilegeLevelChoiceBox);
 
                 }
                 editBtnAction();
@@ -163,8 +165,8 @@ public class EditUserView {
             e.printStackTrace();
             Notifications.create()
                     .owner(userName.getScene().getWindow())
-                    .title("Virhe")
-                    .text("Käyttäjänimeä ei löytynyt!")
+                    .title(this.mainApp.getBundle().getString("errorString"))
+                    .text(this.mainApp.getBundle().getString("userNotFound"))
                     .position(Pos.TOP_RIGHT)
                     .showError();
         }

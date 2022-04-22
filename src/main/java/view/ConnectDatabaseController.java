@@ -9,12 +9,12 @@ import model.classes.HibernateUtil;
 import model.classes.POSEngine;
 
 /**
- * Represents the hardware running the software
+ * Controller for connect-database-view.fxml.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class ConnectDatabaseView {
+public class ConnectDatabaseController {
 
     private MainApp mainApp;
 
