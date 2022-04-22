@@ -8,7 +8,7 @@ import org.controlsfx.control.Notifications;
 import java.util.ResourceBundle;
 
 /**
- * Represents the hardware running the software
+ * Controller for delete-bonus-customer-view.fxml
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma

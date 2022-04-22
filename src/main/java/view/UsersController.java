@@ -30,7 +30,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Represents the hardware running the software
+ * Controller for users-view.fxml.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma

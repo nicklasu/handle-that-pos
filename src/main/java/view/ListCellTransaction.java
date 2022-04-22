@@ -11,7 +11,9 @@ import model.classes.Product;
 import java.io.IOException;
 
 /**
- * Represents the hardware running the software
+ * Is the list cell controller of the ListView in TransactionController.
+ * Called from TransactionController.
+ * Loads list-cell-transaction.fxml in the cells.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma

@@ -9,7 +9,7 @@ import model.classes.Product;
 import java.io.IOException;
 
 /**
- * Represents the hardware running the software
+ * Controller for products-view.fxml.
  * 
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
