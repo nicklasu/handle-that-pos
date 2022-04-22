@@ -13,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import model.classes.*;
@@ -36,7 +35,7 @@ import java.util.List;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class UsersView {
+public class UsersController {
     private MainApp mainApp;
     @FXML
     private TextField searchField;

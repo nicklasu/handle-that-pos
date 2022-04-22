@@ -12,7 +12,7 @@ import model.classes.Customer;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class AddBonusCustomerView {
+public class AddBonusCustomerController {
     private MainApp mainApp;
 
     @FXML

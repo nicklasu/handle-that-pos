@@ -3,8 +3,8 @@ package view;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 
-public class AboutDialogView {
-    public AboutDialogView(){
+public class AboutDialogController {
+    public AboutDialogController(){
     }
     @FXML
     private void phosphor(){

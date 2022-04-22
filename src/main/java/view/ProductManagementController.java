@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class ProductManagementView {
+public class ProductManagementController {
     private MainApp mainApp;
     private FXMLLoader loader;
 
@@ -38,7 +38,7 @@ public class ProductManagementView {
             this.loader.setLocation(getClass().getResource("add-product-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane3 = this.loader.load();
-            final AddProductView view = this.loader.getController();
+            final AddProductController view = this.loader.getController();
             view.setMainApp(mainApp);
         } catch (final IOException ex) {
             ex.printStackTrace();
@@ -59,7 +59,7 @@ public class ProductManagementView {
             this.loader.setLocation(getClass().getResource("delete-product-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane3 = this.loader.load();
-            final DeleteProductView view = this.loader.getController();
+            final DeleteProductController view = this.loader.getController();
             view.setMainApp(mainApp);
         } catch (final IOException ex) {
             ex.printStackTrace();
@@ -80,7 +80,7 @@ public class ProductManagementView {
             this.loader.setLocation(getClass().getResource("edit-product-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane3 = this.loader.load();
-            final EditProductView view = this.loader.getController();
+            final EditProductController view = this.loader.getController();
             view.setMainApp(mainApp);
         } catch (final IOException ex) {
             ex.printStackTrace();
@@ -100,7 +100,7 @@ public class ProductManagementView {
             this.loader.setLocation(getClass().getResource("edit-product-view.fxml"));
             this.loader.setResources(this.mainApp.getBundle());
             newLoadedPane = this.loader.load();
-            final EditProductView view = this.loader.getController();
+            final EditProductController view = this.loader.getController();
             view.setMainApp(mainApp);
             view.fillFieldsOnLoad(product);
         } catch (final IOException ex) {

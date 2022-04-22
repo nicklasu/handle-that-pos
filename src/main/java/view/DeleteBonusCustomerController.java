@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class DeleteBonusCustomerView {
+public class DeleteBonusCustomerController {
     private MainApp mainApp;
 
 

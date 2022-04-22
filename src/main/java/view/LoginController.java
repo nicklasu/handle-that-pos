@@ -13,7 +13,7 @@ import model.classes.LoginStatus;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class LoginView {
+public class LoginController {
     // Prefills the username field and password field with the manager's username
     // and password
     private final boolean DEV_MODE = true;

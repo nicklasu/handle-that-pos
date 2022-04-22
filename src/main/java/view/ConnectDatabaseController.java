@@ -14,7 +14,7 @@ import model.classes.POSEngine;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class ConnectDatabaseView {
+public class ConnectDatabaseController {
 
     private MainApp mainApp;
 

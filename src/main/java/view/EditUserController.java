@@ -25,7 +25,7 @@ import java.util.List;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class EditUserView {
+public class EditUserController {
     public static final String USER1 = "user";
     public static final String MANAGER = "manager";
     public static final String ADMIN = "admin";
@@ -93,7 +93,7 @@ public class EditUserView {
                     final String admin = this.mainApp.getBundle().getString(ADMIN);
                     final String self_checkout = this.mainApp.getBundle().getString(SELF_CHECKOUT);
 
-                    AddUserView.privilegeSwitch(p, user1, manager, admin, self_checkout, privilegeLevelChoiceBox);
+                    AddUserController.privilegeSwitch(p, user1, manager, admin, self_checkout, privilegeLevelChoiceBox);
 
                 }
                 editBtnAction();

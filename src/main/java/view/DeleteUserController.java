@@ -13,7 +13,7 @@ import org.controlsfx.control.Notifications;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
-public class DeleteUserView {
+public class DeleteUserController {
     private MainApp mainApp;
     @FXML
     private Button saveBtn;

@@ -21,7 +21,7 @@ import org.controlsfx.control.Notifications;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  * Samu Luoma
  */
-public class EditFirmInfoView {
+public class EditFirmInfoController {
     private MainApp mainApp;
     @FXML
     private TextField firmNameTF;

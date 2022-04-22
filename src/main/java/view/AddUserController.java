@@ -23,7 +23,7 @@ import java.util.List;
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  * Samu Luoma
  */
-public class AddUserView {
+public class AddUserController {
     public static final String USER = "user";
     public static final String MANAGER = "manager";
     public static final String ADMIN = "admin";
