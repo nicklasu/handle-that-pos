@@ -19,14 +19,11 @@
 }
 
 .color_button {
-    -fx-font-size: 13pt;
-    -fx-font-family: 'Montserrat';
     -fx-background-color: #5a26ea;
     -fx-text-fill: #e8f2fd;
 }
 
 .color_button:hover {
-    -fx-font-family: 'Montserrat';
     -fx-background-color: #311ab0;
     -fx-text-fill: #e8f2fd;
 }
