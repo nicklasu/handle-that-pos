@@ -29,6 +29,16 @@
 .average-button {
 }
 
+.color_button {
+    -fx-background-color: #bd92fc;
+    -fx-text-fill: #181818;
+}
+
+.color_button:hover {
+    -fx-background-color: #bd92fc;
+    -fx-text-fill: #181818;
+}
+
 .label {
     -fx-font-size: 13pt;
     -fx-font-family: 'Montserrat';
@@ -37,10 +47,12 @@
 
 .text-area {
     -fx-fill: #FFFFFF;
+    -fx-font-family: 'Montserrat';
 }
 
 .text {
     -fx-fill: #FFFFFF;
+    -fx-font-family: 'Montserrat';
 }
 
 .sum_label {
@@ -111,6 +123,11 @@
 }
 
 /* Options */
+.table-view .column-header {
+    -fx-background-color: #212121;
+    -fx-text-fill: #FFFFFF;
+}
+
 .choice-box {
     -fx-background-color: #474747;
     -fx-mark-color: #bd92fc;

@@ -15,9 +15,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UsersController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UsersController">
    <children>
       <GridPane layoutX="-1.0" layoutY="1.0" prefHeight="850.0" prefWidth="720.0">
          <columnConstraints>
@@ -76,23 +77,29 @@
                         <Label text="%first_name" />
                         <CheckBox fx:id="activity" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="%last_name" GridPane.rowIndex="1" />
-                        <Text fx:id="fName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Nimi" GridPane.columnIndex="1" />
-                        <Text fx:id="lName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Sukunimi" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Text fx:id="fName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Nimi" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Text>
+                        <Text fx:id="lName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Sukunimi" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Text>
                      </children>
                   </GridPane>
                   <HBox alignment="CENTER" prefHeight="150.0" prefWidth="311.0">
                      <children>
                         <GridPane prefHeight="145.0" prefWidth="160.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.79999542236328" minWidth="10.0" prefWidth="167.40003204345703" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="169.79999542236328" minWidth="10.0" prefWidth="167.40003204345703" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="108.0" valignment="TOP" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="59.0" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button mnemonicParsing="false" onAction="#uploadImage" prefHeight="25.0" prefWidth="164.0" text="%upload_image" GridPane.rowIndex="1" />
-                              <ImageView fx:id="avatar" fitHeight="126.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                              <Button mnemonicParsing="false" onAction="#uploadImage" prefHeight="25.0" prefWidth="164.0" styleClass="color_button" text="%upload_image" GridPane.rowIndex="1" />
+                              <ImageView fx:id="avatar" fitHeight="126.0" fitWidth="191.0" pickOnBounds="true" preserveRatio="true" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
                                  <image>
                                     <Image url="@../images/person.png" />
                                  </image>
@@ -107,6 +114,9 @@
                <GridPane.margin>
                   <Insets left="50.0" />
                </GridPane.margin>
+               <font>
+                  <Font size="13.0" />
+               </font>
             </Text>
             <StackPane prefHeight="483.0" prefWidth="720.0" GridPane.rowIndex="3">
                <children>

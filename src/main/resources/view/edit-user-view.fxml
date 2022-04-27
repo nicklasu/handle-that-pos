@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" stylesheets="@options-view.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditUserController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" stylesheets="@options-view.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditUserController">
    <children>
       <GridPane layoutX="14.0" layoutY="35.0" prefHeight="487.0" prefWidth="667.0">
          <columnConstraints>
@@ -40,7 +40,7 @@
             <Label stylesheets="@options-view.css" text="%active_user" GridPane.rowIndex="6" />
             <TextField fx:id="userFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="userLastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#updateUser" stylesheets="@options-view.css" text="%edit" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#updateUser" styleClass="color_button" text="%edit" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <CheckBox fx:id="activity" mnemonicParsing="false" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <TextField fx:id="userName" GridPane.columnIndex="1" />
             <PasswordField fx:id="userPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />

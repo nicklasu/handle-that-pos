@@ -16,7 +16,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="861.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddUserController">
    <children>
-      <GridPane layoutX="14.0" layoutY="35.0" prefHeight="487.0" prefWidth="667.0" stylesheets="@options-view.css">
+      <GridPane layoutX="14.0" layoutY="35.0" prefHeight="487.0" prefWidth="667.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="133.0" minWidth="10.0" prefWidth="132.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="172.0" minWidth="10.0" prefWidth="148.0" />
@@ -42,7 +42,7 @@
             <Label text="%username" />
             <Label text="%password" GridPane.rowIndex="3" />
 
-            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#addUser" text="%save" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#addUser" styleClass="color_button" text="%save" GridPane.columnIndex="1" GridPane.rowIndex="8" />
 
             <TextField fx:id="userName" GridPane.columnIndex="1" />
             <TextField fx:id="userFirstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />

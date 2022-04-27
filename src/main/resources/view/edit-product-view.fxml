@@ -36,7 +36,7 @@
                 <TextField fx:id="productDesc" prefHeight="31.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="productPrice" prefHeight="31.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <TextField fx:id="productStock" prefHeight="31.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editProduct" text="%edit" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editProduct" styleClass="color_button" text="%edit" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Button fx:id="fetchBtn" mnemonicParsing="false" onAction="#fillFields" text="%get" GridPane.columnIndex="2" />
             </children>
         </GridPane>
