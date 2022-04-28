@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 
 /**
  * Generates a unique hardware ID from the machine that is running the software
- * 
+ * Modified version of https://github.com/Kqnth/Java-HWID/blob/master/HWID.java
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  *         Samu Luoma
  */
