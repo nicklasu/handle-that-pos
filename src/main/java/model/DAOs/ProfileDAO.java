@@ -45,7 +45,7 @@ public class ProfileDAO {
      * Fetches user based on ID
      * 
      * @param user identifier for the user
-     * @return user object
+     * @return profile object
      */
     public Profile getAvatar(final User user) {
         Transaction transaction = null;
@@ -69,6 +69,10 @@ public class ProfileDAO {
         return profile;
     }
 
+    /**
+     * Saves profile to database
+     * @param profile Profile
+     */
     public void saveAvatar(final Profile profile) {
         Transaction transaction = null;
         try (Session session = sessionFactory.getCurrentSession()) {

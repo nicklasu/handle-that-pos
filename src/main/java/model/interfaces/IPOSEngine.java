@@ -130,5 +130,10 @@ public interface IPOSEngine {
      */
     void updateUser(User user);
 
+    /**
+     * Gets ProfileDAO
+     *
+     * @return the data access object
+     */
     ProfileDAO profileDAO();
 }
