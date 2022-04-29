@@ -12,6 +12,9 @@ import javax.persistence.*;
 @Table(name = "Käyttäjä")
 public class User {
 
+    /**
+     * Unique identifier of the User
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", updatable = false, nullable = false)

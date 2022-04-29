@@ -15,6 +15,9 @@ import java.sql.Timestamp;
 @Table(name = "Maksutapahtuma")
 public class Transaction implements ITransaction {
 
+    /**
+     * Unique identifier of the Transaction
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")

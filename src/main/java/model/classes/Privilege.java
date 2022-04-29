@@ -13,6 +13,9 @@ import java.sql.Date;
 @Table(name = "Käyttöoikeus")
 public class Privilege {
 
+    /**
+     * Unique identifier of the privilege
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", updatable = false, nullable = false)
