@@ -74,9 +74,9 @@ public class TransactionController {
                 if (customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())) != null) {
                     this.mainApp.getEngine().getTransaction()
                             .setCustomer(customerDAO.getCustomer(Integer.parseInt(customerTextField.getText())));
-                    this.mainApp.getStage().setIconified(true);
+                    if(printReceipt) this.mainApp.getStage().setIconified(true);
                     this.mainApp.getEngine().confirmTransaction(printReceipt);
-                    this.mainApp.getStage().setIconified(false);
+                    if(printReceipt) this.mainApp.getStage().setIconified(false);
                     this.mainApp.showMainView();
                 } else {
                     Notifications.create()
@@ -87,9 +87,9 @@ public class TransactionController {
                             .showError();
                 }
             } else {
-                this.mainApp.getStage().setIconified(true);
+                if(printReceipt) this.mainApp.getStage().setIconified(true);
                 this.mainApp.getEngine().confirmTransaction(printReceipt);
-                this.mainApp.getStage().setIconified(false);
+                if(printReceipt) this.mainApp.getStage().setIconified(false);
                 this.mainApp.showMainView();
             }
         } catch (final Exception e) {
