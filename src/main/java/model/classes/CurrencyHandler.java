@@ -16,6 +16,10 @@ public class CurrencyHandler {
     private CurrencyHandler() {
     }
 
+    /**
+     * Returns currency as a String from properties file
+     * @return String
+     */
     public static String getCurrency() {
         final File file = new File("src/main/resources/HandleThatPos.properties");
         final Properties properties = new Properties();
