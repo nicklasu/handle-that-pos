@@ -2,11 +2,15 @@ package model.DAOs;
 
 import model.classes.HibernateUtil;
 import model.classes.User;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -87,6 +91,37 @@ public class UserDAO {
             }
         }
         return user;
+    }
+
+    /**
+     * Returns total value of sales by a specified user
+     * @param u User object
+     * @return int price of products in all transactions tied to parameter User
+     */
+    public int getSalesValueOfUser(User u) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            int toBeReturned = 0;
+            transaction = session.beginTransaction();
+            String sql = "SELECT Hinta FROM Tuote " +
+                    "INNER JOIN Sisältyy ON Tuote.ID = Sisältyy.TuoteID " +
+                    "INNER JOIN Tilaus ON Tilaus.ID = Sisältyy.TilausID " +
+                    "INNER JOIN Maksutapahtuma ON Maksutapahtuma.KäyttäjäID = " +
+                    "'" + u.getId()+ "'";
+            SQLQuery query = session.createSQLQuery(sql);
+            List<Object[]> rows = query.list();
+
+
+            for(final Object o : rows) {
+                toBeReturned += (Integer) o;
+            }
+            return toBeReturned;
+        } catch (final Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return 0;
     }
 
     /**

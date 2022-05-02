@@ -2,11 +2,13 @@ package model.DAOs;
 
 import model.classes.HibernateUtil;
 import model.classes.Product;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.PersistenceException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -125,6 +127,32 @@ public class ProductDAO {
             }
             return false;
         }
+    }
+
+    /**
+     *
+     * @return list of product objects
+     */
+    public List<String> getSoldProductIDs() {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            List<String> toBeReturned = new ArrayList<>();
+            transaction = session.beginTransaction();
+            String sql = "SELECT * FROM Tuote INNER JOIN Sisältyy ON Tuote.ID = Sisältyy.TuoteID";
+            SQLQuery query = session.createSQLQuery(sql);
+            List<Object[]> rows = query.list();
+
+            for (Object[] row:rows) {
+                toBeReturned.add(row[0].toString());
+            }
+
+            return toBeReturned;
+        } catch (final Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+        return null;
     }
 
     /**
