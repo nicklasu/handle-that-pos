@@ -16,7 +16,7 @@ import model.classes.LoginStatus;
 public class LoginController {
     // Prefills the username field and password field with the manager's username
     // and password
-    private final boolean DEV_MODE = true;
+    private final boolean DEV_MODE = false;
 
     private MainApp mainApp;
 
