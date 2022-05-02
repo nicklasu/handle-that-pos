@@ -80,36 +80,20 @@ public class StatsController {
                 List<UserWithSales> users = new ArrayList<>();
                 List<ProductWithSales> products = new ArrayList<>();
 
-                for (Product p : allProducts) {
-                    products.add(new ProductWithSales(p.getId(),p.getName(), 0));
+                for (User u:allUsers){
+                    int salesValue = this.mainApp.getEngine().userDAO().getSalesValueOfUser(u);
+                    users.add(new UserWithSales(u.getUsername(),salesValue));
                 }
-                
-                for (User u : allUsers) {
+
+                List<String> arr = this.mainApp.getEngine().productDao().getSoldProductIDs();
+                for (Product p : allProducts) {
                     int totalSales = 0;
-                    List<Transaction> transactions = this.mainApp.getEngine().transactionDAO().getTransactions(u);
-                    for (Transaction t: transactions) {
-                        totalSales += t.getOrder().getTotalPriceWithoutBonuses();
-                        List<Product> productsInTransaction = t.getOrder().getProductList();
-
-                        final Set<OrderProduct> ops = t.getOrder().getOrderProducts();
-                        for (final OrderProduct op : ops) {
-                            //sb.append(op.getProduct() + " x " + op.getAmount() + "\n");
-                            productsInTransaction.add(op.getProduct());
-                            // op.getAmount() saa yhden transactionin yhden tuotteen määrän
-                        }
-
-
-
-
-                        for (Product p : productsInTransaction) {
-                            for (ProductWithSales pws : products) {
-                                if(p.getId().equals(pws.getProductID())){
-                                    pws.increment();
-                                }
-                            }
+                    for (int i = 0; i < arr.size(); i++) {
+                        if (arr.get(i).equals(p.getId())){
+                            totalSales += p.getPrice();
                         }
                     }
-                    users.add(new UserWithSales(u.getUsername(),totalSales));
+                    products.add(new ProductWithSales(p.getId(),p.getName(), totalSales));
                 }
 
                 Collections.sort(products);
@@ -125,14 +109,12 @@ public class StatsController {
 
                 for (int i = 0; i < maxUsers; i++) {
                     usersTop5.add(users.get(i));
-                    usersBottom5.add(users.get(maxUsers-i));
+                    usersBottom5.add(users.get(users.size()-(i+1)));
                 }
                 for (int i = 0; i < maxProducts; i++) {
                     productsTop5.add(products.get(i));
-                    productsBottom5.add(products.get(maxProducts-i));
+                    productsBottom5.add(products.get(products.size()-(i+1)));
                 }
-
-
 
                 Platform.runLater(() -> {
                     makeDataSet(productsTop5,usersTop5,productsBottom5,usersBottom5);
@@ -156,8 +138,8 @@ public class StatsController {
             dataSet2.getData().add(new XYChart.Data(productsBottom5.get(i).getProductID(),productsBottom5.get(i).getSold()));
         }
         for (int i = 0; i < usersTop5.size(); i++) {
-            dataSet3.getData().add(new XYChart.Data(usersTop5.get(i).getUserName(),usersTop5.get(i).getSales()));
-            dataSet4.getData().add(new XYChart.Data(usersTop5.get(i).getUserName(),usersBottom5.get(i).getSales()));
+            dataSet3.getData().add(new XYChart.Data(usersTop5.get(i).getUserName(),usersTop5.get(i).getSales()/100.00));
+            dataSet4.getData().add(new XYChart.Data(usersBottom5.get(i).getUserName(),usersBottom5.get(i).getSales()/100.00));
         }
 
         populateChart(bestSellingProductsChart, dataSet1);
@@ -169,6 +151,7 @@ public class StatsController {
 
     boolean populateChart(BarChart<?, ?> chart, XYChart.Series data){
         try{
+            chart.getXAxis().setAnimated(false);
             chart.getData().addAll(data);
         }catch (Exception e){
             e.printStackTrace();
@@ -188,10 +171,6 @@ public class StatsController {
         }
         public String getProductID() {
             return productID;
-        }
-
-        public void increment(){
-            sold++;
         }
 
         public int getSold() {
