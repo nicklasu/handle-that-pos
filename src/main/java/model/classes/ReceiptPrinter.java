@@ -100,7 +100,7 @@ public class ReceiptPrinter implements Printable {
                 g.drawString(String.format("%.2f", (product.getPrice() / 100f)) + currency, 300, priceY);
                 priceY += 20;
             }
-            if (transaction.getCustomer() != null && transaction.getCustomer().getCustomerLevelIndex() == 1) {
+            if (transaction.getCustomer() != null) {
                 g.drawString("BONUS -" + bonusAmount + "%", 100, (nameY + 20));
             } else {
                 g.drawString("BONUS: 0%", 100, (nameY + 20));
