@@ -11,7 +11,7 @@
 
 <Pane fx:id="fillFields" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EditProductController">
     <children>
-        <GridPane layoutX="14.0" layoutY="49.0" prefHeight="333.0" prefWidth="424.0">
+        <GridPane layoutX="14.0" layoutY="49.0" prefHeight="333.0" prefWidth="484.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="229.0" minWidth="10.0" prefWidth="229.0" />
@@ -37,7 +37,7 @@
                 <TextField fx:id="productPrice" prefHeight="31.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <TextField fx:id="productStock" prefHeight="31.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editProduct" styleClass="color_button" text="%edit" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button fx:id="fetchBtn" mnemonicParsing="false" onAction="#fillFields" text="%get" GridPane.columnIndex="2" />
+            <Button fx:id="fetchBtn" mnemonicParsing="false" onAction="#fillFields" prefHeight="25.0" prefWidth="106.0" text="%get" GridPane.columnIndex="2" />
             </children>
         </GridPane>
       <Label layoutX="14.0" layoutY="14.0" styleClass="bold_label" text="%edit_product">

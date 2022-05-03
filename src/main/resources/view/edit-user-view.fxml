@@ -53,9 +53,9 @@
             <Label text="%privilege_start" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.valignment="TOP" />
             <Label text="%privilege_end" GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.valignment="TOP" />
             <Label text="%privilege_level" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-            <Button mnemonicParsing="false" onAction="#fillFields" text="%get" GridPane.columnIndex="2" />
+            <Button mnemonicParsing="false" onAction="#fillFields" prefHeight="25.0" prefWidth="94.0" text="%get" GridPane.columnIndex="2" />
             <ListView fx:id="privilegeListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
-            <Button fx:id="saveBtn2" mnemonicParsing="false" onAction="#addToListView" prefHeight="31.0" prefWidth="57.0" text="%add" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Button fx:id="saveBtn2" mnemonicParsing="false" onAction="#addToListView" prefHeight="31.0" prefWidth="86.0" text="%add" GridPane.columnIndex="4" GridPane.rowIndex="4" />
             <Button fx:id="editBtn" mnemonicParsing="false" text="%save" visible="false" GridPane.columnIndex="4" GridPane.rowIndex="4" />
          </children>
       </GridPane>
