@@ -20,14 +20,6 @@ public class DAOTests extends TestParent {
         System.out.println("DAO tests...");
     }
 
-    @Test
-    public void lassinTesti(){
-        ProductDAO pd = new ProductDAO("postesti");
-        System.out.println(pd.getSoldProductIDs().size());
-        UserDAO ud = new UserDAO("postesti");
-        System.out.println(ud.getSalesValueOfUser(ud.getUser("testuser")));
-    }
-
 
     @Test
     public void productDAO() {
