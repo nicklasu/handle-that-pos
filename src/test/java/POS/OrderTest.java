@@ -30,7 +30,7 @@ public class OrderTest extends TestParent {
     }
 
     /***
-     * Tests if id getter or setter for order has a problem.
+     * Tests id getter or setter for the order.
      */
     @Test
     public void getAndSetTests() {
