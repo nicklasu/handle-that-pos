@@ -45,6 +45,13 @@ public class ProductListViewCell extends ListCell<Product> {
     private int productAmount;
     private String currency;
 
+    /**
+     * Initializes the cell of ListView containing products
+     *
+     * @param mainViewController Controller of Main View
+     * @param order IOrder
+     * @param items ObservableList<Product>
+     */
     public ProductListViewCell(final MainViewController mainViewController, final IOrder order, final ObservableList<Product> items) {
         this.mainViewController = mainViewController;
         this.order = order;
@@ -60,6 +67,13 @@ public class ProductListViewCell extends ListCell<Product> {
         }
     }
 
+    /**
+     * Overridden updateItem method to format the cell.
+     * Adds two labels and two buttons to the listview cell.
+     *
+     * @param product
+     * @param empty
+     */
     @Override
     protected void updateItem(final Product product, final boolean empty) {
         super.updateItem(product, empty);
@@ -106,6 +120,11 @@ public class ProductListViewCell extends ListCell<Product> {
         }
     }
 
+    /**
+     * Formats products price according to its amount
+     *
+     * @param product
+     */
     private void productPriceSet(final Product product) {
         this.productPriceLabel.setText(
                 String.format("%.2f", (product.getPrice() * productAmount) / 100f) + CurrencyHandler.getCurrency());
