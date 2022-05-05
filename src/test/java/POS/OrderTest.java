@@ -54,7 +54,7 @@ public class OrderTest extends TestParent {
     }
 
     /***
-     * Tests getting an order.
+     * Tests that getting an order works correctly.
      */
     @Test
     public void getProductList() {
@@ -131,7 +131,7 @@ public class OrderTest extends TestParent {
     }
 
     /***
-     * Tests getting an empty order.
+     * Tests that getting an empty order works correctly.
      */
     @Test
     public void GetEmptyOrder() {
