@@ -113,6 +113,11 @@ public class UsersController {
 
     }
 
+    /**
+     * Formats transactionListView to handle Transaction items
+     *
+     * @throws IOException
+     */
     private void fillListView() throws IOException {
         transactionListView.setCellFactory(param -> new ListCell<Transaction>() {
             @Override
@@ -135,6 +140,9 @@ public class UsersController {
         this.dateFormat = DateFormat.getDateTimeInstance();
     }
 
+    /**
+     * Method to search user
+     */
     @FXML
     private void searchUser() {
         try {
@@ -163,6 +171,11 @@ public class UsersController {
         }
     }
 
+    /**
+     * Sets items to transactionListView depending on the searched user
+     *
+     * @param user
+     */
     private void setListViewItems(final User user) {
         // new thread
         progressIndicator.setVisible(true);
@@ -184,6 +197,11 @@ public class UsersController {
 
     }
 
+    /**
+     * Shows dialog with details of given Transaction
+     *
+     * @param transaction
+     */
     private void showTransactionDetails(final Transaction transaction) {
 
         final Dialog<Void> dialog = new Dialog<>();
@@ -218,6 +236,9 @@ public class UsersController {
 
     }
 
+    /**
+     * Uploads image to database
+     */
     @FXML
     private void uploadImage() {
         final FileChooser fileChooser = new FileChooser();
@@ -262,6 +283,12 @@ public class UsersController {
         }
     }
 
+    /**
+     * Encodes image as Base64 string
+     * @param bufferedImage
+     * @return String Base64 encoded String
+     * @throws IOException
+     */
     private String encodeImage(final BufferedImage bufferedImage) throws IOException {
         final ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ImageIO.write(bufferedImage, "png", baos);
@@ -271,6 +298,12 @@ public class UsersController {
         return Base64.getEncoder().encodeToString(imageInByte);
     }
 
+    /**
+     * Inserts image to view
+     *
+     * @param encodedImage
+     * @throws IOException
+     */
     private void insertImage(final String encodedImage) throws IOException {
         final byte[] imageInByte2 = Base64.getDecoder().decode(encodedImage); // decode image
         final ByteArrayInputStream bais = new ByteArrayInputStream(imageInByte2);

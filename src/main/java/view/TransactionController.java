@@ -62,11 +62,17 @@ public class TransactionController {
     private CustomerDAO customerDAO = null;
     private volatile AtomicBoolean customerKeyPressed = new AtomicBoolean(false);
 
+    /**
+     * Loads Main View
+     */
     @FXML
     private void loadMainView() {
         this.mainApp.showMainView();
     }
 
+    /**
+     * Action for confirm transaction button
+     */
     @FXML
     private void confirmPayment() {
         try {
@@ -100,12 +106,19 @@ public class TransactionController {
         }
     }
 
+    /**
+     * Sets printReceipt boolean value depending on receiptCheckBox
+     */
     @FXML
     private void confirmReceipt() {
         printReceipt = receiptCheckBox.isSelected();
-        System.out.println(printReceipt);
     }
 
+    /**
+     * Generates overview text of transactions products
+     *
+     * @return String
+     */
     private String generateOverviewText() {
         return MessageFormat.format(
                 this.mainApp.getBundle().getString("transactionoverviewtext") + CurrencyHandler.getCurrency(),
@@ -113,11 +126,20 @@ public class TransactionController {
                 (String.format("%.2f", (this.mainApp.getEngine().getTransaction().getOrder().getTotalPrice() / 100f))));
     }
 
+    /**
+     * Generates product info text
+     *
+     * @param product
+     * @return String
+     */
     private String generateProductInfoText(final Product product) {
         return MessageFormat.format(this.mainApp.getBundle().getString("productinfo"), product.getId(),
                 product.getDescription(), String.format("%.2f", (product.getPrice() / 100f)), product.getStock());
     }
 
+    /**
+     * Checks if customer is bonus customer
+     */
     @FXML
     private void bonusCustomerCheck() {
         if (!Objects.equals(customerTextField.getText(), "") && !customerKeyPressed.get()) {
@@ -182,22 +204,29 @@ public class TransactionController {
         }
     }
 
+    /**
+     * Sets sendReceiptEmail boolean value
+     */
     @FXML
     private void sendReceiptEmail() {
         if (!receiptEmailTextField.getText().equals("")) {
             sendReceiptEmail = true;
-            System.out.println(receiptEmailTextField.getText());
         } else {
             sendReceiptEmail = false;
         }
-        System.out.println(sendReceiptEmail);
     }
 
+    /**
+     * Action for Cash button
+     */
     @FXML
     private void selectCash() {
         selectPaymentMethod(PaymentMethod.CASH, cashToggleButton, cardToggleButton);
     }
 
+    /**
+     * Action for Card button
+     */
     @FXML
     private void selectCard() {
         selectPaymentMethod(PaymentMethod.CARD, cardToggleButton, cashToggleButton);
@@ -222,6 +251,9 @@ public class TransactionController {
         setPaymentMethodLabelText(paymentMethod);
     }
 
+    /**
+     * Requests focus for customerTextField
+     */
     @FXML
     private void requestFocus() {
         customerTextField.requestFocus();
@@ -290,6 +322,9 @@ public class TransactionController {
         }
     }
 
+    /**
+     * Action for Help button
+     */
     @FXML
     public void showHelp() {
         final Alert alert = new Alert(Alert.AlertType.INFORMATION,
