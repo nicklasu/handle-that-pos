@@ -27,7 +27,6 @@ public class UserManagementController {
      * Switch to add-product-view.fxml
      */
     public void addUserPane() throws IOException {
-
         System.out.println("add user button was pressed");
         wrapperPaneUsers.getChildren().clear();
         Pane newLoadedPane = null;
@@ -38,8 +37,6 @@ public class UserManagementController {
             newLoadedPane = this.loader.load();
             final AddUserController view = this.loader.getController();
             view.setMainApp(mainApp);
-            // newLoadedPane3 =
-            // FXMLLoader.load(getClass().getResource("add-product-view.fxml"));
         } catch (final IOException ex) {
             ex.printStackTrace();
         }
@@ -50,7 +47,6 @@ public class UserManagementController {
      * Switch to delete-user-view.fxml
      */
     public void deleteUserPane() throws IOException {
-
         System.out.println("delete user button was pressed");
         wrapperPaneUsers.getChildren().clear();
         Pane newLoadedPane2 = null;
@@ -61,8 +57,6 @@ public class UserManagementController {
             newLoadedPane2 = this.loader.load();
             final DeleteUserController view = this.loader.getController();
             view.setMainApp(mainApp);
-            // newLoadedPane3 =
-            // FXMLLoader.load(getClass().getResource("delete-user-view.fxml"));
         } catch (final IOException ex) {
             ex.printStackTrace();
         }
@@ -73,7 +67,6 @@ public class UserManagementController {
      * Switch to edit-user-view.fxml
      */
     public void editUserPane() throws IOException {
-
         System.out.println("edit user button was pressed");
         wrapperPaneUsers.getChildren().clear();
         Pane newLoadedPane3 = null;
@@ -84,8 +77,6 @@ public class UserManagementController {
             newLoadedPane3 = this.loader.load();
             final EditUserController view = this.loader.getController();
             view.setMainApp(mainApp);
-            // newLoadedPane3 =
-            // FXMLLoader.load(getClass().getResource("edit-user-view.fxml"));
         } catch (final IOException ex) {
             ex.printStackTrace();
         }
