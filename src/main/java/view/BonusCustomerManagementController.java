@@ -8,9 +8,10 @@ import java.io.IOException;
 
 /**
  * Controller for bonus-customer-management-view.fxml.
- * 
+ * Changes between two views; add-bonus-customer-view.fxml and delete-bonus-customer-view.fxml
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class BonusCustomerManagementController {
     private MainApp mainApp;
@@ -42,6 +43,9 @@ public class BonusCustomerManagementController {
         wrapperPaneBonusCustomers.getChildren().add(newLoadedPane);
     }
 
+    /**
+     * Switch to delete-bonus-customer-view.fxml
+     */
     public void deleteBonusCustomerPane() {
         wrapperPaneBonusCustomers.getChildren().clear();
         Pane newLoadedPane = null;

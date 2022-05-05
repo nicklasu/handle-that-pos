@@ -31,6 +31,11 @@ public class ListCellTransaction extends ListCell<Product> {
 
     }
 
+    /**
+     * Adds a new item to the list.
+     * @param product The product to be added.
+     * @param empty Verification call.
+     */
     @Override
     protected void updateItem(final Product product, final boolean empty) {
         super.updateItem(product, empty);

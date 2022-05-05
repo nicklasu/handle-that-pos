@@ -9,14 +9,12 @@ import java.util.ResourceBundle;
 
 /**
  * Controller for delete-bonus-customer-view.fxml
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class DeleteBonusCustomerController {
     private MainApp mainApp;
-
-
     @FXML
     private TextField bonusCustomerId;
 
@@ -29,6 +27,10 @@ public class DeleteBonusCustomerController {
         });
     }
 
+    /**
+     * Tries to delete BonusCustomer from database.
+     * If it can't find the user, display error notification.
+     */
     @FXML
     private void deleteBonusCustomer() {
         ResourceBundle bundle;

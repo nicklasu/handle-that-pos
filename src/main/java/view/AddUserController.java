@@ -64,7 +64,6 @@ public class AddUserController {
         privilegeListView.disableProperty().bind(Bindings.isEmpty(privilegeList));
         final List<Integer> privilegeInts = this.mainApp.getEngine().getVerifiedPrivileges();
         checkPrivilegeLevel(privilegeInts, privilegeLevelChoiceBox, startDate);
-
         privilegeListView.setOnMouseClicked(click -> {
             if (click.getButton() == MouseButton.SECONDARY) {
                 final int index = privilegeListView.getSelectionModel().getSelectedIndex();
@@ -76,20 +75,16 @@ public class AddUserController {
                 if (index >= 0) {
                     saveBtn2.setVisible(false);
                     editBtn.setVisible(true);
-
                     final Privilege p = privilegeList.get(index);
                     startDate.setValue(p.getPrivilegeStart().toLocalDate());
                     if (p.getPrivilegeEnd() != null) {
                         endDate.setValue(p.getPrivilegeEnd().toLocalDate());
                     }
-
                     final String user = this.mainApp.getBundle().getString(USER);
                     final String manager = this.mainApp.getBundle().getString(MANAGER);
                     final String admin = this.mainApp.getBundle().getString(ADMIN);
                     final String self_checkout = this.mainApp.getBundle().getString(SELF_CHECKOUT);
-
                     privilegeSwitch(p, user, manager, admin, self_checkout, privilegeLevelChoiceBox);
-
                 }
 
                 editBtn.setOnAction(action -> {
@@ -100,7 +95,6 @@ public class AddUserController {
                     if (dateEnd != null) {
                         priv.setPrivilegeEnd(java.sql.Date.valueOf(dateEnd));
                     }
-
                     final String pLevel = privilegeLevelChoiceBox.getValue();
                     PrivilegeLevel privilegeLvl = null;
                     if (pLevel.equals(this.mainApp.getBundle().getString(USER))) {
@@ -112,7 +106,6 @@ public class AddUserController {
                     } else if (pLevel.equals(this.mainApp.getBundle().getString(ADMIN))) {
                         privilegeLvl = PrivilegeLevel.ADMIN;
                     }
-
                     priv.setPrivilegeLevel(privilegeLvl);
                     editBtn.setVisible(false);
                     saveBtn.setVisible(true);
@@ -120,7 +113,6 @@ public class AddUserController {
                 });
             }
         });
-
     }
 
     static void privilegeSwitch(Privilege p, String user, String manager, String admin, String self_checkout, ChoiceBox<String> privilegeLevelChoiceBox) {
@@ -134,6 +126,10 @@ public class AddUserController {
         privilegeLevelChoiceBox.setValue(pLevel);
     }
 
+    /**
+     * Adds user to database.
+     * Called with the "save" -button from add-user-view.fxml.
+     */
     @FXML
     private void addUser() {
         try {
@@ -155,19 +151,15 @@ public class AddUserController {
                 this.mainApp.getEngine().addUser(user);
                 this.mainApp.getEngine().privilegeDAO().addPrivileges(privilegeList);
             }
-
             Notifications.create().owner(saveBtn.getScene().getWindow()).title(this.mainApp.getBundle().getString("success")).text(this.mainApp.getBundle().getString("user_added")).position(Pos.TOP_RIGHT).show();
             userFirstName.clear();
             userLastName.clear();
             userName.clear();
             userPassword.clear();
             privilegeList.clear();
-
         } catch (final IllegalStateException p) {
-            System.out.println("Error! Username is taken!");
             Notifications.create().owner(saveBtn.getScene().getWindow()).title(this.mainApp.getBundle().getString("errorString")).text(this.mainApp.getBundle().getString("username_taken")).position(Pos.TOP_RIGHT).showError();
         } catch (final Exception e) {
-            System.out.println("There was an error");
             e.printStackTrace();
         }
     }

@@ -9,15 +9,14 @@ import model.classes.LoginStatus;
 
 /**
  * Controller for login-view.fxml.
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class LoginController {
     // Prefills the username field and password field with the manager's username
     // and password
     private final boolean DEV_MODE = false;
-
     private MainApp mainApp;
 
     @FXML
@@ -39,7 +38,6 @@ public class LoginController {
             usernameTextField.setText("testuser");
             passwordPasswordField.setText("123");
         }
-
         this.mainApp = mainApp;
         passwordPasswordField.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.ENTER)
@@ -51,6 +49,10 @@ public class LoginController {
         });
     }
 
+    /**
+     * Tries to login to the system.
+     * Shows error message according to what is the problem in loginHandlerThread (Called from here).
+     */
     @FXML
     private void handleLoginButton() {
         progressIndicator.setVisible(true);
@@ -64,7 +66,6 @@ public class LoginController {
         alert.setTitle(this.mainApp.getBundle().getString("errorString"));
         alert.setHeaderText(this.mainApp.getBundle().getString("loginError"));
         loginHandlerThread(alert);
-
     }
 
     private void loginHandlerThread(final Alert alert) {
@@ -73,7 +74,6 @@ public class LoginController {
                 final LoginStatus result = this.mainApp.getEngine().login(usernameTextField.getText(),
                         passwordPasswordField.getText());
                 Platform.runLater(() -> {
-
                     switch (result) {
                         case SUCCESS:
                             this.mainApp.showMainView();
