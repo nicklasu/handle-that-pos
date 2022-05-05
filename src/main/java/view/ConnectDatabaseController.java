@@ -32,10 +32,12 @@ public class ConnectDatabaseController {
 
     public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
-
         tryToConnect();
     }
 
+    /**
+     * Tries to connect to database, and displays "retry" -button if it fails after trying for a while.
+     */
     @FXML
     private void tryToConnect() {
         retryButton.setVisible(false);
@@ -63,7 +65,6 @@ public class ConnectDatabaseController {
         try {
             HibernateUtil.getSessionFactory("hibernate.cfg.xml");
         } catch (final Exception e) {
-            System.out.println("virhe istuntotehtaan luomisessa");
             return false;
         }
         return true;

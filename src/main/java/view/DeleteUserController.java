@@ -26,6 +26,10 @@ public class DeleteUserController {
         saveBtn.disableProperty().bind(booleanBind);
     }
 
+    /**
+     * Deletes user from database.
+     * Called with "Delete" -button from delete-user-view.fxml.
+     */
     @FXML
     private void deleteUser() {
         try {

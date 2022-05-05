@@ -11,9 +11,9 @@ import org.controlsfx.control.Notifications;
 
 /**
  * Controller for add-product-view.fxml.
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class AddProductController {
     private MainApp mainApp;
@@ -38,26 +38,25 @@ public class AddProductController {
                 .or(productPrice.textProperty().isEmpty())
                 .or(productStock.textProperty().isEmpty());
         addBtn.disableProperty().bind(booleanBind);
-
         productPrice.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 productPrice.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
-
         productStock.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 productStock.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
-
     }
 
+    /**
+     * Saves the product to the database.
+     * Called with the "Save" -button from add-product-view.fxml.
+     */
     @FXML
     private void saveProduct() {
-
         try {
-
             final String barcode = productBarcode.getText();
             final String name = productName.getText();
             final String desc = productDesc.getText();
@@ -82,7 +81,6 @@ public class AddProductController {
             }
 
         } catch (final Exception e) {
-            System.out.println("There was an error");
             e.printStackTrace();
             Notifications.create()
                     .owner(productBarcode.getScene().getWindow())
@@ -92,5 +90,4 @@ public class AddProductController {
                     .showError();
         }
     }
-
 }

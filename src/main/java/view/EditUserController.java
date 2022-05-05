@@ -21,9 +21,9 @@ import java.util.List;
 
 /**
  * Controller for edit-user-view.fxml.
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 public class EditUserController {
     public static final String USER1 = "user";
@@ -55,14 +55,11 @@ public class EditUserController {
     private ChoiceBox<String> privilegeLevelChoiceBox;
     @FXML
     private ListView<Privilege> privilegeListView;
-
     private List<Privilege> privileges;
-
     private User user = null;
-
     private final ObservableList<Privilege> privilegeList = FXCollections.observableArrayList();
 
-    public void setMainApp(final MainApp mainApp)  {
+    public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         final BooleanBinding booleanBind = userFirstName.textProperty().isEmpty()
                 .or(userLastName.textProperty().isEmpty())
@@ -70,7 +67,6 @@ public class EditUserController {
                 .or(userPassword.textProperty().isEmpty());
         saveBtn.disableProperty().bind(booleanBind);
         final List<Integer> privilegeInts = this.mainApp.getEngine().getVerifiedPrivileges();
-        System.out.println(privilegeInts);
         checkPrivilegeLevel(privilegeInts, privilegeLevelChoiceBox, startDate);
         privilegeListView.setOnMouseClicked(click -> {
             if (click.getButton() == MouseButton.SECONDARY) {
@@ -92,9 +88,7 @@ public class EditUserController {
                     final String manager = this.mainApp.getBundle().getString(MANAGER);
                     final String admin = this.mainApp.getBundle().getString(ADMIN);
                     final String self_checkout = this.mainApp.getBundle().getString(SELF_CHECKOUT);
-
                     AddUserController.privilegeSwitch(p, user1, manager, admin, self_checkout, privilegeLevelChoiceBox);
-
                 }
                 editBtnAction();
             }
@@ -130,8 +124,14 @@ public class EditUserController {
         });
     }
 
+    /**
+     * Checks the privileges of the user, and displays the user-appropriate options for editing user.
+     * @param privilegeInts Takes the currently logged in user privilege level and uses it for showing correct options.
+     * @param privilegeLevel This is a ChoiceBox for available privilegelevels in the fxml.
+     * @param startDate Checks the current date, so it can be autofilled to the fxml.
+     */
     void checkPrivilegeLevel(final List<Integer> privilegeInts, final ChoiceBox<String> privilegeLevel,
-            final DatePicker startDate) {
+                             final DatePicker startDate) {
         ObservableList<String> availableChoices;
         if (Collections.max(privilegeInts) < 3) {
             availableChoices = FXCollections.observableArrayList(this.mainApp.getBundle().getString(USER1),
@@ -146,6 +146,10 @@ public class EditUserController {
         startDate.setValue(LocalDate.now());
     }
 
+    /**
+     * Called with the search button from fxml.
+     * It searches user with username and fills the correct information to fxml from database.
+     */
     @FXML
     private void fillFields() {
         try {
@@ -156,11 +160,9 @@ public class EditUserController {
             userLastName.setText(user.getlName());
             final boolean act = user.getActivity() == 0;
             activity.setSelected(act);
-
             privileges = this.mainApp.getEngine().privilegeDAO().getPrivileges(user);
             privilegeList.addAll(privileges);
             privilegeListView.setItems(privilegeList);
-
         } catch (final Exception e) {
             e.printStackTrace();
             Notifications.create()
@@ -172,11 +174,13 @@ public class EditUserController {
         }
     }
 
+    /**
+     * Update the user in database with the information from the fxml.
+     */
     @FXML
     private void updateUser() {
         try {
             this.user = this.mainApp.getEngine().userDAO().getUser(userName.getText());
-
             if (activity.isSelected()) {
                 this.user.setActivity(1);
             } else {
@@ -191,19 +195,16 @@ public class EditUserController {
             final String password = userPassword.getText();
             user.setPassword(password);
             this.mainApp.getEngine().updateUser(user);
-
-            for (Iterator<Privilege> iterator = privileges.iterator(); iterator.hasNext();) {
-                for (int j = 0; j < privilegeList.size(); j++) {
-                    if (iterator.hasNext() && iterator.next().getId() == privilegeList.get(j).getId()) {
+            for (Iterator<Privilege> iterator = privileges.iterator(); iterator.hasNext(); ) {
+                for (Privilege privilege : privilegeList) {
+                    if (iterator.hasNext() && iterator.next().getId() == privilege.getId()) {
                         iterator.remove();
                     }
                 }
             }
-
             if (!privileges.isEmpty()) {
                 this.mainApp.getEngine().privilegeDAO().deletePrivileges(privileges);
             }
-
             this.mainApp.getEngine().privilegeDAO().updatePrivileges(privilegeList);
             userFirstName.clear();
             userLastName.clear();
@@ -216,7 +217,6 @@ public class EditUserController {
                     .text(this.mainApp.getBundle().getString("userChanged"))
                     .position(Pos.TOP_RIGHT)
                     .show();
-
         } catch (final Exception e) {
             e.printStackTrace();
             Notifications.create()

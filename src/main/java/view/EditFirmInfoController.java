@@ -110,6 +110,7 @@ public class EditFirmInfoController {
 
         final File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
         final Properties properties = new Properties();
+        //Checks so that if any of the text fields is null, it doesn't crash the program :D
         if (firmName != null && phoneNumber != null && businessId != null && address != null && postalCode != null && city != null) {
             try (final FileReader reader = new FileReader(appConfigPath, StandardCharsets.UTF_8)) {
                 properties.load(reader);

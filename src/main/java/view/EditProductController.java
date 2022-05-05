@@ -44,16 +44,13 @@ public class EditProductController {
                 .or(productPrice.textProperty().isEmpty())
                 .or(productStock.textProperty().isEmpty());
         editBtn.disableProperty().bind(booleanBind);
-
         final BooleanBinding booleanBind2 = productBarcode.textProperty().isEmpty();
         fetchBtn.disableProperty().bind(booleanBind2);
-
         productPrice.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 productPrice.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
-
         productStock.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 productStock.setText(newValue.replaceAll("[^-?\\d+$]", ""));
@@ -80,7 +77,6 @@ public class EditProductController {
                         .show();
             }
         } catch (final Exception e) {
-            System.out.println("There was an error");
             e.printStackTrace();
         }
     }
@@ -94,7 +90,6 @@ public class EditProductController {
             productPrice.setText(String.valueOf(product.getPrice()));
             productStock.setText(String.valueOf(product.getStock()));
         } catch (final Exception e) {
-            System.out.println("There was an error");
             e.printStackTrace();
             Notifications.create()
                     .owner(productBarcode.getScene().getWindow())

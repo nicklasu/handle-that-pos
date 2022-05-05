@@ -17,32 +17,32 @@ import java.util.ResourceBundle;
 
 /**
  * The JavaFX main.
- *
+ * Has methods, that get called when the desired view is needed.
+ * If I wanted to load main-view.fxml, I would call showMainView for example.
+ * Views call the controllers they want to use (for example MainViewController).
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
  * Samu Luoma
  */
 public class MainApp extends Application {
-
     public static final String APP_TITLE = "Handle that POS";
     public static final String MAIN_VIEW_CSS = "main-view.css";
     public static final String MAIN_VIEW_DARK_CSS = "main-view-dark.css";
-
     private Stage stage;
     private IPOSEngine engine;
     private final String[] hotkeyProductNames = new String[9];
-
     private String language = "";
     private String country = "";
-
     private Locale locale;
     private ResourceBundle bundle;
-
     private boolean darkMode;
 
     public MainApp() {
 
     }
 
+    /**
+     * Init gets called before start and in this app deals with getting localization settings from the .properties file.
+     */
     @Override
     public void init() {
         final File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
@@ -69,6 +69,11 @@ public class MainApp extends Application {
         this.bundle = ResourceBundle.getBundle("TextResources", locale);
     }
 
+    /**
+     * Sets the size of the window according to the resolution of the system.
+     * Shows the databaseConnection view after setting the other parts.
+     * @param stage Takes the stage.
+     */
     @Override
     public void start(final Stage stage) {
         this.stage = stage;
@@ -79,7 +84,6 @@ public class MainApp extends Application {
         stage.setTitle(APP_TITLE);
         this.stage.getIcons().add(new Image("file:src/main/resources/images/pos.png"));
         showConnectToDatabaseView();
-
     }
 
     public String[] getHotkeyButtonNames() {
@@ -127,7 +131,6 @@ public class MainApp extends Application {
                 scene.getStylesheets().add(getClass().getResource(MAIN_VIEW_DARK_CSS).toExternalForm()); // Set dark css style
             }
             this.stage.show();
-
         } catch (final IOException e) {
             e.printStackTrace();
         }
