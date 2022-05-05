@@ -11,6 +11,11 @@ import java.sql.Date;
 
 import static model.classes.PrivilegeLevel.USER;
 
+/**
+ * Tests that the Privilege class works correctly.
+ *
+ * @Author Nicklas Sundell
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PrivilegeTest {
     private Privilege privilege;
@@ -22,6 +27,9 @@ public class PrivilegeTest {
         privilege = new Privilege();
     }
 
+    /**
+     * Test the set part of the privilege, so it gives the correct values in Assertions.
+     */
     @Test
     public void privilegeSetGetTest() {
         time = System.currentTimeMillis();
@@ -43,6 +51,9 @@ public class PrivilegeTest {
         Assertions.assertEquals(0, privilege.getPrivilegeLevelIndex(), "PrivilegeLevelIndex is incorrect!");
     }
 
+    /**
+     * Tests the toString of the Privilege.
+     */
     @Test
     public void privilegeToStringTest() {
         Assertions.assertEquals(privilege.toString(), new Date(time) + ", 8994-08-17, Itsepalvelukassa",
