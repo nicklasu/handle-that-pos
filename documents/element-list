@@ -1,0 +1,5 @@
+module:com.example.handlethatpos
+model.classes
+model.DAOs
+model.interfaces
+view
