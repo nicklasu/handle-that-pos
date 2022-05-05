@@ -60,7 +60,10 @@ public class ProductSearchController {
 
     private Pane wrapperPane;
 
-
+    /**
+     * Sets the mainApp to the one given in the parameter.
+     * @param mainApp the mainApp to set
+     */
     public void setMainApp(final MainApp mainApp) {
         this.mainApp = mainApp;
         final List<Integer> verifiedPrivileges = this.mainApp.getEngine().getVerifiedPrivileges();
@@ -83,6 +86,9 @@ public class ProductSearchController {
                 .addListener((observable, oldValue, newValue) -> filteredList.setPredicate(createPredicate(newValue)));
     }
 
+    /**
+     * Updates the data in the table.
+     */
     @FXML
     private void updateData() {
         try {
@@ -133,12 +139,25 @@ public class ProductSearchController {
         this.updateButton.setGraphic(new ImageView(image));
         }
 
+    /**
+     *  Handles searching for products
+     * @param product product to be edited
+     * @param searchText text to search for
+     * @return
+     */
+
         private boolean searchFindsProduct ( final Product product, final String searchText){
             return (product.getName().toLowerCase().contains(searchText.toLowerCase())) ||
                     (product.getId().toLowerCase().contains(searchText.toLowerCase()));
         }
 
-        private Predicate<Product> createPredicate ( final String searchText){
+    /**
+     *  Creates a predicate to filter the products
+     * @param searchText the text to search for
+     * @return
+     */
+
+    private Predicate<Product> createPredicate ( final String searchText){
             return product -> {
                 if (searchText == null || searchText.isEmpty())
                     return true;
@@ -146,10 +165,18 @@ public class ProductSearchController {
             };
         }
 
+    /**
+     * Sets wrapper pane to the one given in the parameter.
+     * @param wrapperPane the wrapper pane to set
+     */
         public void setWrapperPane ( final Pane wrapperPane){
             this.wrapperPane = wrapperPane;
         }
 
+    /**
+     * Loads edit product view. This occurs when a product is double clicked on the table.
+     * @param product The product to be edited.
+     */
         private void loadEditProductView ( final Product product){
             wrapperPane.getChildren().clear();
             final FXMLLoader loader = new FXMLLoader(getClass().getResource("products-view.fxml"));
