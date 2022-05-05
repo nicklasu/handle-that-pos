@@ -22,7 +22,7 @@ public class CustomerTest extends TestParent {
     }
 
     /**
-     * Test for creating a new customer with customer level index 0
+     * Test for creating a new customer with customer level index 0.
      */
     @BeforeEach
     public void setUp() {
@@ -30,7 +30,7 @@ public class CustomerTest extends TestParent {
     }
 
     /**
-     * Test of setId method, of class Customer.
+     * Test of setId method, of class Customer. Test if the id is set correctly.
      */
     @Test
     public void setId() {
@@ -39,7 +39,7 @@ public class CustomerTest extends TestParent {
     }
 
     /**
-     * Test of getId method, of class Customer.
+     * Test of getId method, of class Customer. Test if the id is correct.
      */
     @Test
     public void getId() {
@@ -48,7 +48,7 @@ public class CustomerTest extends TestParent {
     }
 
     /**
-     * Test of getCustomerLevelIndex method, of class Customer.
+     * Test of getCustomerLevelIndex method, of class Customer. Test if the customer level index is correct.
      */
     @Test
     public void getCustomerLevelIndex() {
@@ -56,7 +56,7 @@ public class CustomerTest extends TestParent {
     }
 
     /**
-     * Test of toStringTest method, of class Customer.
+     * Test of toStringTest method, of class Customer. Test if the toString method returns the correct string.
      */
     @Test
     public void toStringTest() {
