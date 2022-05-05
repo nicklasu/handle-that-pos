@@ -15,9 +15,9 @@ import java.util.stream.Stream;
 
 /**
  * Represents the hardware running the software
- * 
+ *
  * @author Nicklas Sundell, Anna Raevskaia, Lassi Piispanen, Antti Taponen and
- *         Samu Luoma
+ * Samu Luoma
  */
 @Entity
 @Table(name = "Maksupääte")
@@ -113,9 +113,10 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Constructor for tests setting the database to the test database
+     *
      * @param db
      */
-    public POSEngine(String db){
+    public POSEngine(String db) {
         nameOfDatabase = db;
         this.userDAO = new UserDAO(nameOfDatabase);
         this.ped = new POSEngineDAO(nameOfDatabase);
@@ -139,7 +140,7 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Login a user to the POSEngine
-     * 
+     *
      * @param username
      * @param password
      * @return WRONG_CREDENTIALS if not found in database, SUCCESS if ok, NO_PRIVILEGES if no privileges
@@ -156,14 +157,11 @@ public class POSEngine implements IPOSEngine {
                 this.user = user1;
                 privileges = privilegeDAO.getPrivileges(user1);
                 this.verifiedPrivileges = new ArrayList<>();
-                final List<Date> privilegeEndDates = privileges.stream().map(Privilege::getPrivilegeEnd)
-                        .collect(Collectors.toList());
-                final List<Date> privilegeStartDates = privileges.stream().map(Privilege::getPrivilegeStart)
-                        .collect(Collectors.toList());
+                final List<Date> privilegeEndDates = privileges.stream().map(Privilege::getPrivilegeEnd).collect(Collectors.toList());
+                final List<Date> privilegeStartDates = privileges.stream().map(Privilege::getPrivilegeStart).collect(Collectors.toList());
                 final List<Privilege> validPrivileges = new ArrayList<>();
                 for (int i = 0; i < privilegeEndDates.size(); i++) {
-                    if (!privilegeStartDates.get(i).after(new Date())
-                            && (privilegeEndDates.get(i) == null || !privilegeEndDates.get(i).before(new Date()))) {
+                    if (!privilegeStartDates.get(i).after(new Date()) && (privilegeEndDates.get(i) == null || !privilegeEndDates.get(i).before(new Date()))) {
                         validPrivileges.add(privileges.get(i));
                         this.verifiedPrivileges.add(privileges.get(i).getPrivilegeLevelIndex());
                     }
@@ -189,7 +187,7 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Sets identifier
-     * 
+     *
      * @param id
      */
     public void setId(final String id) {
@@ -214,7 +212,7 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Sets privileges of current user
-     * 
+     *
      * @param privileges
      */
     public void setPrivileges(final List<Privilege> privileges) {
@@ -248,7 +246,7 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Scans a new product adding it to the current order.
-     * 
+     *
      * @param id identifier of product
      * @return the product that was scanned
      */
@@ -258,7 +256,7 @@ public class POSEngine implements IPOSEngine {
             this.transaction = new Transaction(this.user);
         }
         final Product product = productDAO.getProduct(id);
-        if(product.getStock() >= -50) {
+        if (product.getStock() >= -50) {
             this.transaction.getOrder().addProductToOrder(product);
         }
         return product;
@@ -266,7 +264,7 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Finalizes a sales transaction and lastly sets current transaction to null
-     * 
+     *
      * @param printReceipt true if customer wants a receipt
      */
     @Override
@@ -342,7 +340,7 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Hashes the password with BCrypt
-     * 
+     *
      * @param password the password in normal format
      * @return hashed password
      */
@@ -352,7 +350,7 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Compares as hashed version and a plain version of a password
-     * 
+     *
      * @param password
      * @param hashedPassword
      * @return essentially true if matches
@@ -363,7 +361,7 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * sets transaction to input, used for tests
-     * 
+     *
      * @param testTransaction transaction object
      */
     @Override
@@ -373,7 +371,7 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * creates a user
-     * 
+     *
      * @param user
      */
     @Override
@@ -384,7 +382,7 @@ public class POSEngine implements IPOSEngine {
 
     /**
      * Updates a user
-     * 
+     *
      * @param user
      */
     @Override
@@ -398,11 +396,6 @@ public class POSEngine implements IPOSEngine {
      */
     @Override
     public String toString() {
-        return "POSEngine{" +
-                "transaction=" + transaction +
-                ", user=" + user +
-                ", userDAO=" + userDAO +
-                ", productDAO=" + productDAO +
-                '}';
+        return "POSEngine{" + "transaction=" + transaction + ", user=" + user + ", userDAO=" + userDAO + ", productDAO=" + productDAO + '}';
     }
 }

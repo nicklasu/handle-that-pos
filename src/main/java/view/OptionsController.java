@@ -68,6 +68,9 @@ public class OptionsController {
     public OptionsController() {
     }
 
+    /**
+        Loads the main view of the application.
+     */
     public void loadMainView() throws IOException {
         this.loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
         this.loader.setResources(mainApp.getBundle());
@@ -75,6 +78,10 @@ public class OptionsController {
         ((MainViewController) this.loader.getController()).setMainApp(this.mainApp);
     }
 
+    /**
+     * Sets the mainApp. Handles the language change, darkmode change and switching to all the other views.
+     * @param mainApp The mainApp.
+     */
     public void setMainApp(final MainApp mainApp) throws IOException {
         final File appConfigPath = new File("src/main/resources/HandleThatPos.properties");
         final Properties properties = new Properties();
@@ -267,6 +274,9 @@ public class OptionsController {
         });
     }
 
+    /**
+        Creates a help dialog with the help text.
+    */
     @FXML
     public void showHelp() {
         bundle = mainApp.getBundle();
