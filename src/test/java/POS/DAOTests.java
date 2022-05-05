@@ -10,6 +10,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * Test class for Data Access Objects
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DAOTests extends TestParent {
     public DAOTests() {
@@ -20,7 +23,10 @@ public class DAOTests extends TestParent {
         System.out.println("DAO tests...");
     }
 
-
+    /**
+     * Test for ProductDAO
+     * Creates new instance of ProductDAO and tests if getting, setting and deleting product from database works
+     */
     @Test
     public void productDAO() {
         Product a = new Product("testID", "Runebergin torttu", "Bergin Rune nautti näitä joka päivä aamiaiseksi", 200, 1);
@@ -35,6 +41,12 @@ public class DAOTests extends TestParent {
         Assertions.assertNull(pd.getProduct(a.getId()), "Problem with removing a product with dao");
     }
 
+
+    /**
+     * Test for TransactionDAO
+     * Creates new instance of TransactionDAO and tests if getting, setting and deleting transaction from database works.
+     * Adding transaction is handled with engines confirmTransaction method.
+     */
     @Test
     public void transactionDAO() {
         CustomerDAO cd = new CustomerDAO("postesti");
@@ -60,6 +72,10 @@ public class DAOTests extends TestParent {
         Assertions.assertNull(td.getTransaction(t), "Error removing a transaction with dao");
     }
 
+    /**
+     * Test for UserDAO
+     * Creates new instance of UserDAO and tests if getting, setting and deleting user from database works
+     */
     @Test
     public void userDAO(){
         UserDAO ud = new UserDAO("postesti");
@@ -75,6 +91,10 @@ public class DAOTests extends TestParent {
         Assertions.assertNull(ud.getUser(name), "Deleting user does not work");
     }
 
+    /**
+     * Test for CustomerDAO
+     * Creates new instance of CustomerDAO and tests if getting, setting and deleting customer from database works
+     */
     @Test
     public void customerDAO(){
         CustomerDAO cd = new CustomerDAO("postesti");
@@ -86,6 +106,10 @@ public class DAOTests extends TestParent {
         Assertions.assertNull(cd.getCustomer(c.getId()),"Deleting a customer has problems");
     }
 
+    /**
+     * Test for PrivilegeDAO
+     * Creates new instance of PrivilegeDAO and tests if getting, setting and deleting privilege from database works.
+     */
     @Test
     public void PrivilegeDAO(){
         PrivilegeDAO pd = new PrivilegeDAO("postesti");

@@ -10,6 +10,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Test class for POSEngine class
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class POSEngineTest extends TestParent {
     private POSEngine testEngine;
@@ -17,22 +20,34 @@ public class POSEngineTest extends TestParent {
     public POSEngineTest() {
     }
 
+    /**
+     * Creates new instance of POSEngine class before all tests
+     */
     @BeforeAll
     public void beforeAll() {
         System.out.println("POSEngine test...");
         testEngine = new POSEngine("testiengine");
     }
 
+    /**
+     * Login before each test
+     */
     @BeforeEach
     public void setUp() {
         testEngine.login("testuser", "123");
     }
 
+    /**
+     * Logout after each test
+     */
     @AfterEach
     public void logoutAfterEach() {
         testEngine.logout();
     }
 
+    /**
+     * Test for POSEngine's login()
+     */
     @Test
     public void login() {
         Assertions.assertEquals(LoginStatus.SUCCESS, testEngine.login("testuser", "123"),
@@ -40,17 +55,26 @@ public class POSEngineTest extends TestParent {
         Assertions.assertEquals(LoginStatus.WRONG_CREDENTIALS, testEngine.login("testuser", "asd"), "logging in with wrong password works!");
     }
 
+    /**
+     * Test for POSEngine's logout()
+     */
     @Test
     public void logout() {
         testEngine.logout();
         Assertions.assertNull(testEngine.getUser(), "problem with logging out");
     }
 
+    /**
+     * Test for POSEngine's getUser()
+     */
     @Test
     public void getUser() {
         Assertions.assertEquals("tester", testEngine.getUser().getfName(), "error getting logged in user");
     }
 
+    /**
+     * Test for POSEngine's getTransaction()
+     */
     @Test
     public void getTransaction() {
         testEngine.setTransaction(this.createTestTransaction(testEngine.getUser()));
@@ -58,8 +82,10 @@ public class POSEngineTest extends TestParent {
                 "Problem getting the transaction from engine");
     }
 
+    /**
+     * Test for POSEngine's scanProduct()
+     */
     @Test
-
     public void scanProduct() {
         testEngine.scanProduct("1a");
         testEngine.scanProduct("1b");
@@ -67,6 +93,9 @@ public class POSEngineTest extends TestParent {
                 "problems with scanning products and adding them to order");
     }
 
+    /**
+     * Test for POSEngine's confirmTransaction()
+     */
     @Test
     public void confirmTransaction() {
         testEngine.setTransaction(createTestTransaction(testEngine.getUser()));
@@ -74,6 +103,10 @@ public class POSEngineTest extends TestParent {
         Assertions.assertNull(testEngine.getTransaction(), "Problem with confirming transaction");
     }
 
+    /**
+     * Test for POSEngine's privileges()
+     * Tests if getting and setting privileges for user works
+     */
     @Test
     public void privileges() {
         final List<Integer> luvat = testEngine.getVerifiedPrivileges();
