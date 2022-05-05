@@ -16,6 +16,9 @@ public class OrderTest extends TestParent {
         System.out.println("Order test...");
     }
 
+    /***
+     * Initializes testProducts array (order) and fills it with products objects.
+     */
     @BeforeEach
     public void beforeEach() {
         final Product[] testProducts = new Product[] {
@@ -26,6 +29,9 @@ public class OrderTest extends TestParent {
         this.testOrder.addProductToOrder(testProducts[1]);
     }
 
+    /***
+     * Tests if id getter or setter for order has a problem.
+     */
     @Test
     public void getAndSetTests() {
         this.testOrder.setId(1);
@@ -39,22 +45,34 @@ public class OrderTest extends TestParent {
         // Assertions.assertEquals();
     }
 
+    /***
+     * Tests comparing order with equals.
+     */
     @Test
     public void comparing() {
         Assertions.assertFalse(this.testOrder.equals(new Order()), "Error comparing orders with equals");
     }
 
+    /***
+     * Tests getting an order.
+     */
     @Test
     public void getProductList() {
         Assertions.assertEquals("[Suola, Sokeri]", this.testOrder.getProductList().toString(),
                 "Problem in getting an order");
     }
 
+    /***
+     * Tests total price of an order.
+     */
     @Test
     public void getTotalPrice() {
         Assertions.assertEquals(300, this.testOrder.getTotalPrice(), "Problem in checking total price of an order");
     }
 
+    /***
+     * Tests that a new product can be added to an order.
+     */
     @Test
     public void addProductToOrder() {
         this.testOrder.addProductToOrder(new Product("6", "Sinaappi", "Makkaran päälle jes", 300, 5));
@@ -62,6 +80,9 @@ public class OrderTest extends TestParent {
                 "Problem adding a product to an order");
     }
 
+    /***
+     * Tests that a product can be removed from an order.
+     */
     @Test
     public void removeProductFromOrder() {
         this.testOrder.removeProductFromOrder(new Product("0", "Suola", "Kananmunan päälle naminami", 200, 100));
@@ -69,6 +90,9 @@ public class OrderTest extends TestParent {
                 "removing a product from order did not work");
     }
 
+    /***
+     * Tests listing order of products in an order.
+     */
     @Test
     public void CombinationTestForOrder1() {
         this.testOrder.addProductToOrder(new Product("6", "Sinaappi", "Makkaran päälle jes", 300, 5));
@@ -77,6 +101,9 @@ public class OrderTest extends TestParent {
                 "Listing order of products in an order has problems");
     }
 
+    /***
+     * Tests getting total price of order after toying with it.
+     */
     @Test
     public void CombinationTestForOrder2() {
         this.testOrder.addProductToOrder(new Product("6", "Sinaappi", "Makkaran päälle jes", 300, 5));
@@ -87,6 +114,9 @@ public class OrderTest extends TestParent {
                 "Problem in getting total price of order after toying with it");
     }
 
+    /***
+     * Tests calculating price with large quantities of products in the order.
+     */
     @Test
     public void PriceOfLots() {
         final Product[] testProducts = new Product[] {
@@ -100,6 +130,9 @@ public class OrderTest extends TestParent {
         Assertions.assertEquals(20000, this.testOrder.getTotalPrice(), "Error handling price with large quantities");
     }
 
+    /***
+     * Tests getting an empty order.
+     */
     @Test
     public void GetEmptyOrder() {
         final Order emptyOrder = new Order(new Transaction(new User()));
