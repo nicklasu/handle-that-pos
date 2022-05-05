@@ -71,7 +71,11 @@ public class StatsController {
         createCharts();
     }
 
-    void createCharts(){
+    /**
+     * Gets product sales information and user sales information from DAO classes, sorts them into bottom five and top 5 lists
+     * and sends the lists to makeDataSet method
+     */
+    private void createCharts(){
         progressIndicator.setVisible(true);
         final Thread thread = new Thread(() -> {
             try {
@@ -127,7 +131,14 @@ public class StatsController {
         thread.start();
     }
 
-    void makeDataSet(List<ProductWithSales> productsTop5, List<UserWithSales> usersTop5, List<ProductWithSales> productsBottom5, List<UserWithSales> usersBottom5){
+    /**
+     * Gets lists of data and transforms them into the correct datatype to show on a barchart
+     * @param productsTop5 Top selling products
+     * @param usersTop5 Top selling users
+     * @param productsBottom5 Worst selling products
+     * @param usersBottom5 Worst selling users
+     */
+    private void makeDataSet(List<ProductWithSales> productsTop5, List<UserWithSales> usersTop5, List<ProductWithSales> productsBottom5, List<UserWithSales> usersBottom5){
         XYChart.Series<String, Integer> dataSet1 = new XYChart.Series<>();
         XYChart.Series<String, Integer> dataSet2 = new XYChart.Series<>();
         XYChart.Series<String, Integer> dataSet3 = new XYChart.Series<>();
@@ -149,17 +160,26 @@ public class StatsController {
     }
 
 
-    boolean populateChart(BarChart<?, ?> chart, XYChart.Series data){
+    /**
+     * Populates a chart
+     * @param chart Chart to populate
+     * @param data Data to populate the chart with
+     * @return true if success
+     */
+    private boolean populateChart(BarChart<?, ?> chart, XYChart.Series data){
         try{
             chart.getXAxis().setAnimated(false);
             chart.getData().addAll(data);
+            return true;
         }catch (Exception e){
             e.printStackTrace();
         }
         return false;
     }
-    
 
+    /**
+     * Private inner class used for combining a product and amount sold.
+     */
     private class ProductWithSales implements Comparable<ProductWithSales>{
         private String productID;
         private String productName;
@@ -189,6 +209,10 @@ public class StatsController {
             return pws.sold - this.sold;
         }
     }
+
+    /**
+     * Private inner class used for combining sales done and a user.
+     */
     private class UserWithSales implements Comparable<UserWithSales>{
         private String userName;
         private int sales;
