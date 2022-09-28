@@ -1,3 +1,7 @@
+Original version control: https://gitlab.metropolia.fi/samulu/handle-that-pos
+
+This is a backup if they decide to wipe the base.
+
 Point of sale system, developed with Java.
 “Handle that POS” is a point of sale system created primarily for executing sales transactions and storing them in a database. This project aims to be easy to use and affordable. If you want to use this system, you need an SQL database, which can be local or cloud.
 
